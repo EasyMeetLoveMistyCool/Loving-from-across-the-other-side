@@ -888,15 +888,26 @@ document.getElementById('btnDedup').addEventListener('click',function(){
 /* 收電 / 發報 */
 function pickFile(accept,cb){
   var f=document.createElement('input');
-  f.type='file'; f.accept=accept;
+  f.type='file'; f.accept=accept||'*/*';
+  f.style.cssText='position:fixed;left:-9999px;width:1px;height:1px;opacity:0';
   f.onchange=function(){
     var file=f.files&&f.files[0];
-    if(!file) return;
+    if(!file){ cleanup(); return; }
     var r=new FileReader();
-    r.onload=function(){ cb(String(r.result||''),file.name); };
-    r.readAsText(file,'utf-8');
+    r.onload=function(){
+      var t=String(r.result||'');
+      cleanup();
+      if(!t.replace(/\s/g,'')){ toast('該檔案是空的'); return; }
+      cb(t,file.name);
+    };
+    r.onerror=function(){ cleanup(); toast('讀不出這個檔案'); };
+    try{ r.readAsText(file,'utf-8'); }
+    catch(e){ cleanup(); toast('讀不出這個檔案'); }
   };
-  f.click();
+  function cleanup(){ try{ if(f.parentNode) f.parentNode.removeChild(f); }catch(e){} }
+  // 必须挂进 DOM，部分手机浏览器（含 Edge / Safari）才肯弹选择器
+  document.body.appendChild(f);
+  try{ f.click(); }catch(e){ cleanup(); toast('無法開啟檔案選擇器'); }
 }
 function download(name,text,mime){
   var blob=new Blob([text],{type:mime||'application/json;charset=utf-8'});
@@ -909,7 +920,7 @@ function stamp(){ var d=new Date();
   return d.getFullYear()+'-'+pad2(d.getMonth()+1)+'-'+pad2(d.getDate()); }
 
 document.getElementById('btnImport').addEventListener('click',function(){
-  pickFile('.json,.txt,application/json,text/plain',function(txt){
+  pickFile('.json,.txt,.csv,text/plain,application/json,*/*',function(txt){
     var lines=[];
     try{
       var j=JSON.parse(txt);
@@ -919,9 +930,12 @@ document.getElementById('btnImport').addEventListener('click',function(){
         else if(arr[i]&&arr[i].text) lines.push(arr[i].text);
       }
     }catch(e){ lines=txt.split('\n'); }
+    if(!lines.length){ toast('這個檔案裡沒有可用的電文'); return; }
     var r=addCards(lines.join('\n'));
     renderCards();
-    toast(r.dup ? ('收進 '+r.added+' 份，重複 '+r.dup+' 份已略過') : ('收進 '+r.added+' 份'));
+    if(!r.added && r.dup) toast('匣中已有這 '+r.dup+' 份，無需重收');
+    else if(r.dup) toast('收進 '+r.added+' 份，重複 '+r.dup+' 份已略過');
+    else toast('收進 '+r.added+' 份');
   });
 });
 
