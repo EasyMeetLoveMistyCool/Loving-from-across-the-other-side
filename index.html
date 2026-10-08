@@ -528,43 +528,67 @@ var Store={
   dirty:{}, timers:{},
 
   async init(){
-    try{
-      if(!navigator.storage||!navigator.storage.getDirectory) throw 0;
-      this.root=await navigator.storage.getDirectory();
-      this.dir=await this.root.getDirectoryHandle('bian',{create:true});
-      // 试探性写一次，确认真的可写
-      var t=await this.dir.getFileHandle('__probe',{create:true});
-      var w=await t.createWritable(); await w.write('1'); await w.close();
-      await t.remove();
-      this.ok=true;
-    }catch(e){ this.ok=false; }
-    if(!this.ok){ this.cache={meta:null,cards:null,chat:null,set:null}; return false; }
-
-    var defs={
+    var DEFS={
       meta:function(){return {v:1,createdAt:Date.now(),issues:[]};},
       cards:function(){return {v:1,cards:[]};},
       chat:function(){return {v:1,msgs:[]};},
       set:function(){return {v:1,dMin:15,dMax:30};}
     };
-    for(var k in FILES){
-      var d=await this.read(k);
-      if(!d){ d=defs[k](); this.cache[k]=d; await this.writeNow(k,d); }
-      else this.cache[k]=d;
-    }
-    // 迁移：老数据没有 issues 字段时，从历史电讯反推出刊日
-    if(!this.cache.meta.issues){
-      this.cache.meta.issues=[];
-      var seen={}, ms=(this.cache.chat&&this.cache.chat.msgs)||[];
-      for(var i=0;i<ms.length;i++){
-        if(ms[i].who==='me'||ms[i].who==='him'){
-          var kk=dayKey(ms[i].at);
-          if(!seen[kk]){ seen[kk]=1; this.cache.meta.issues.push(kk); }
+    this.ok=false;
+    try{
+      if(!navigator.storage||!navigator.storage.getDirectory) throw 0;
+      this.root=await navigator.storage.getDirectory();
+      this.dir=await this.root.getDirectoryHandle('bian',{create:true});
+
+      // 试探性写一次，确认真的可写（remove 不支持不算失败）
+      try{
+        var t=await this.dir.getFileHandle('__probe',{create:true});
+        var w=await t.createWritable(); await w.write('1'); await w.close();
+        try{ await t.remove(); }catch(e){}
+      }catch(e){ throw e; }
+
+      // 逐个文件读，任何一个失败都不许中断整体
+      for(var k in FILES){
+        var d=null;
+        try{ d=await this.read(k); }catch(e){ d=null; }
+        if(!d || typeof d!=='object'){
+          d=DEFS[k]();
+          this.cache[k]=d;
+          try{ await this.writeNow(k,d); }
+          catch(e){ this.ok=false; break; }   // 写不进 => 内存模式
+        }else{
+          this.cache[k]=d;
         }
       }
-      this.cache.meta.issues.sort();
-      await this.writeNow('meta',this.cache.meta);
+      if(this.ok!==false){
+        // 迁移：老数据没有 issues 字段时，从历史电讯反推出刊日
+        var meta=this.cache.meta;
+        if(!meta || !meta.issues){
+          meta=meta||DEFS.meta(); meta.issues=[];
+          var seen={}, ms=(this.cache.chat&&this.cache.chat.msgs)||[];
+          for(var i=0;i<ms.length;i++){
+            if(ms[i].who==='me'||ms[i].who==='him'){
+              var kk=dayKey(ms[i].at);
+              if(!seen[kk]){ seen[kk]=1; meta.issues.push(kk); }
+            }
+          }
+          meta.issues.sort();
+          this.cache.meta=meta;
+          try{ await this.writeNow('meta',meta); }catch(e){}
+        }
+        this.ok=true;
+      }
+    }catch(e){ this.ok=false; }
+
+    // 兜底：四个槽位必须都有内存副本，绝不允许 null
+    var allOk=true;
+    for(var k2 in FILES){
+      if(!this.cache[k2] || typeof this.cache[k2]!=='object'){
+        this.cache[k2]=DEFS[k2](); allOk=false;
+      }
     }
-    return true;
+    if(!allOk) this.ok=false;
+    return this.ok;
   },
 
   async read(name){
@@ -588,19 +612,27 @@ var Store={
     await tmp.move(base);
   },
 
-  touch(name){ this.dirty[name]=true; this.sched(name); },
+  touch(name){
+    if(!this.cache[name]||typeof this.cache[name]!=='object') return;
+    this.dirty[name]=true; this.sched(name);
+  },
   sched(name){
     clearTimeout(this.timers[name]);
     this.timers[name]=setTimeout(function(){
       var s=Store;
-      s.writeNow(name,s.cache[name]).catch(function(){});
+      if(s.ok && s.cache[name] && typeof s.cache[name]==='object'){
+        try{ s.writeNow(name,s.cache[name]).catch(function(){ s.ok=false; }); }
+        catch(e){ s.ok=false; }
+      }
       delete s.dirty[name];
     },400);
   },
   async flush(){
     for(var k in this.timers){
       clearTimeout(this.timers[k]);
-      if(this.cache[k]) { try{ await this.writeNow(k,this.cache[k]); }catch(e){} }
+      if(this.ok && this.cache[k] && typeof this.cache[k]==='object'){
+        try{ await this.writeNow(k,this.cache[k]); }catch(e){}
+      }
     }
     this.timers={}; this.dirty={};
   },
@@ -612,10 +644,20 @@ var Store={
 };
 
 /* ===================== 状态 ===================== */
+function _cards(){
+  if(!Store.cache.cards||!Array.isArray(Store.cache.cards.cards)) Store.cache.cards={v:1,cards:[]};
+  return Store.cache.cards.cards;
+}
+function _msgs(){
+  if(!Store.cache.chat||!Array.isArray(Store.cache.chat.msgs)) Store.cache.chat={v:1,msgs:[]};
+  return Store.cache.chat.msgs;
+}
+function _set(){
+  if(!Store.cache.set||typeof Store.cache.set!=='object') Store.cache.set={v:1,dMin:15,dMax:30};
+  return Store.cache.set;
+}
 var S={
-  cards:function(){return (Store.cache.cards&&Store.cache.cards.cards)||[];},
-  msgs:function(){return (Store.cache.chat&&Store.cache.chat.msgs)||[];},
-  set:function(){return Store.cache.set||{v:1,dMin:15,dMax:30};},
+  cards:_cards, msgs:_msgs, set:_set,
   pendings:{}   // id -> timer
 };
 
@@ -881,7 +923,8 @@ document.getElementById('btnDedup').addEventListener('click',function(){
     seen[k]=1; out.push(c[i]);
   }
   if(!n){ toast('無重複，匣中 '+c.length+' 份各異'); return; }
-  Store.cache.cards.cards=out;
+  var cc=_cards(); cc.length=0;
+  for(var q=0;q<out.length;q++) cc.push(out[q]);
   Store.touch('cards'); renderCards(); toast('剔去 '+n+' 份，餘 '+out.length+' 份');
 });
 
@@ -967,7 +1010,8 @@ document.getElementById('bulkDo').addEventListener('click',function(){
     out.push(c[i]);
   }
   if(!n){ toast('尚未勾選'); return; }
-  Store.cache.cards.cards=out;
+  var cc2=_cards(); cc2.length=0;
+  for(var q2=0;q2<out.length;q2++) cc2.push(out[q2]);
   Store.touch('cards'); setPicking(false);
   toast('已銷燬 '+n+' 份，餘 '+out.length+' 份');
 });
@@ -1163,7 +1207,7 @@ window.addEventListener('pagehide',function(){ Store.flush(); });
 bindSet();
 
 Store.init().then(function(ok){
-  renderMasthead(); renderFlow(); renderSet();
+  renderMasthead(); renderFlow(); renderSet(); renderCards();
   if(!ok){
       '<b>試讀版</b>：非 https 环境，印刷廠（OPFS）不可用。<br>可以正常聊天、存字卡，但<b>关掉就沒了</b>。';
     Store.cache={meta:{v:1,createdAt:Date.now(),issues:[]},cards:{v:1,cards:[]},chat:{v:1,msgs:[]},set:{v:1,dMin:15,dMax:30}};
@@ -1172,6 +1216,11 @@ Store.init().then(function(ok){
     rearmAll();
   }
   renderMasthead();
+}).catch(function(e){
+  Store.ok=false;
+  Store.cache={meta:{v:1,createdAt:Date.now(),issues:[]},cards:{v:1,cards:[]},
+               chat:{v:1,msgs:[]},set:{v:1,dMin:15,dMax:30}};
+  renderMasthead(); renderFlow(); renderSet(); renderCards();
 });
 })();
 </script>
