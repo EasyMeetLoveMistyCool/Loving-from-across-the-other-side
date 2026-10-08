@@ -70,9 +70,42 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 #cbot .hint{margin-top:16px;font-size:12px;letter-spacing:.16em;color:var(--ink2)}
 
 /* ================= 版面框架 ================= */
+:root{--navh:50px}
 #paper{position:fixed;inset:0;height:100vh;height:100dvh;display:flex;flex-direction:column;
   opacity:0;transition:opacity .35s ease}
 #paper.on{opacity:1}
+
+/* 五个版面容器 */
+.sec{position:fixed;left:0;right:0;top:0;bottom:0;height:100vh;height:100dvh;
+  display:none;flex-direction:column;background:var(--paper);
+  padding-bottom:calc(var(--navh) + env(safe-area-inset-bottom))}
+.sec.on{display:flex}
+#paper.sec{opacity:1}
+
+/* 底部導覽＝本日導覽 */
+#navbar{position:fixed;left:0;right:0;bottom:0;z-index:150;
+  height:calc(var(--navh) + env(safe-area-inset-bottom));
+  padding-bottom:env(safe-area-inset-bottom);
+  display:flex;align-items:stretch;
+  border-top:3px double var(--ink);background:var(--paper)}
+#navbar .nb{flex:1 1 0;display:flex;align-items:center;justify-content:center;
+  font-size:13px;letter-spacing:.14em;color:var(--ink3);position:relative}
+#navbar .nb+.nb::before{content:"";position:absolute;left:0;top:22%;bottom:22%;
+  width:1px;background:var(--rule2)}
+#navbar .nb.on{color:var(--red)}
+#navbar .nb.on::after{content:"";position:absolute;left:18%;right:18%;top:5px;
+  height:2px;background:var(--red)}
+
+/* 操作栏（九个） */
+.opbar{flex:0 0 auto;display:flex;gap:0;overflow-x:auto;-webkit-overflow-scrolling:touch;
+  border-top:1px solid var(--rule2);background:var(--paper)}
+.opbar::-webkit-scrollbar{display:none}
+.opbar .op{flex:0 0 auto;min-width:56px;padding:9px 8px 8px;text-align:center;
+  font-size:11px;letter-spacing:.1em;color:var(--ink2);white-space:nowrap}
+.opbar .op .gi{display:block;font-size:15px;line-height:1.3;color:var(--ink)}
+.opbar .op:active{background:rgba(59,42,24,.07)}
+.opbar .op:active .gi,.opbar .op:active{color:var(--red)}
+.opbar .op.dim .gi{color:var(--ink3)}
 
 /* 报头 */
 .masthead{flex:0 0 auto;padding:calc(env(safe-area-inset-top) + 9px) 16px 7px;text-align:center;
@@ -128,7 +161,7 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 
 /* 输入栏 */
 .press{flex:0 0 auto;display:flex;align-items:flex-end;gap:10px;
-  padding:9px 14px calc(env(safe-area-inset-bottom) + 9px);
+  padding:9px 14px 9px;
   border-top:3px double var(--ink)}
 .press textarea{flex:1 1 auto;min-height:40px;max-height:118px;font-size:16px;line-height:1.5;
   padding:9px 11px;border:1px solid var(--rule2);border-radius:2px;resize:none;
@@ -143,7 +176,7 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 .stampbtn[disabled]{opacity:.35}
 
 /* ================= 字卡页 / 设置页 ================= */
-#cardsPage,#setPage,#laiGaoPage,#picsPage,#actsPage,#musicPage{position:fixed;inset:0;z-index:200;
+#cardsPage,#setPage,#laiGaoPage,#picsPage,#actsPage,#musicPage{position:fixed;inset:0;z-index:250;
   height:100vh;height:100dvh;background:var(--paper);display:none;flex-direction:column}
 #cardsPage.on,#setPage.on,#laiGaoPage.on,#picsPage.on,#actsPage.on,#musicPage.on{display:flex}
 .sheet-hd{flex:0 0 auto;padding:calc(env(safe-area-inset-top) + 12px) 16px 10px;
@@ -259,13 +292,6 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 .btnline button:active{background:rgba(59,42,24,.06)}
 .btnline.danger button{color:var(--red);border-color:var(--red)}
 
-/* 号外横幅（OPFS 不可用） */
-#banner{position:fixed;left:10px;right:10px;bottom:calc(env(safe-area-inset-bottom) + 10px);
-  z-index:400;background:var(--paper);border:2px solid var(--red);padding:10px 12px;
-  font-size:12px;line-height:1.7;color:var(--ink2);display:none}
-#banner.on{display:block}
-#banner .t{color:var(--red);letter-spacing:.4em;margin-right:-.4em;font-size:11px}
-#banner .x{position:absolute;right:8px;top:6px;font-size:14px;color:var(--ink3);padding:2px 6px}
 
 #toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom) + 24px);
   transform:translateX(-50%) translateY(14px);z-index:600;opacity:0;pointer-events:none;
@@ -278,7 +304,7 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 <body>
 
 <!-- ============ 主版面 ============ -->
-<div id="paper">
+<div id="paper" class="sec">
   <header class="masthead">
     <div class="mh-nav">
       <button class="btn" id="navCards">來 稿</button>
@@ -293,11 +319,56 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 
   <div id="flow"></div>
 
+  <div class="opbar" id="opbar">
+    <button class="op" data-op="photo"><span class="gi">◎</span>攝影</button>
+    <button class="op" data-op="album"><span class="gi">▤</span>影集</button>
+    <button class="op" data-op="video"><span class="gi">◐</span>隔岸對影</button>
+    <button class="op" data-op="pics"><span class="gi">❁</span>畫帖</button>
+    <button class="op" data-op="acts"><span class="gi">✧</span>往來</button>
+    <button class="op" data-op="music"><span class="gi">♫</span>唱片</button>
+    <button class="op" data-op="reply"><span class="gi">↺</span>回電</button>
+    <button class="op" data-op="stay"><span class="gi">☾</span>常駐</button>
+    <button class="op" data-op="arch"><span class="gi">▣</span>合訂本</button>
+  </div>
+
   <footer class="press">
     <textarea id="inp" rows="1" placeholder="拍发去信…"></textarea>
     <button class="stampbtn" id="send">送 出</button>
   </footer>
 </div>
+
+<!-- ============ 郵筒（写信收信） ============ -->
+<div class="sec" id="secMail">
+  <div class="sheet-hd"><h2>郵 筒</h2><div class="sub">LETTERS · 慢信，隔夜方達</div></div>
+  <div class="sheet-bd"><div class="empty">郵筒尚未啟用。<br><br>與頭版不同：<br>頭版是即時電訊，一句一句來；<br>郵筒是寫信，投進去便只剩等。</div></div>
+</div>
+
+<!-- ============ 副刊（动态） ============ -->
+<div class="sec" id="secSupp">
+  <div class="sheet-hd"><h2>副 刊</h2><div class="sub">SUPPLEMENT · 雙方皆可投稿</div></div>
+  <div class="sheet-bd"><div class="empty">副刊尚未啟用。<br><br>雙方都能發，<br>是會有人回話的版面。</div></div>
+</div>
+
+<!-- ============ 剪報（收藏） ============ -->
+<div class="sec" id="secClip">
+  <div class="sheet-hd"><h2>剪 報</h2><div class="sub">CLIPPINGS</div></div>
+  <div class="sheet-bd"><div class="empty">剪報簿空空如也。<br><br>喜歡的，剪下來存著。</div></div>
+</div>
+
+<!-- ============ 特刊（重要日） ============ -->
+<div class="sec" id="secSpecial">
+  <div class="sheet-hd"><h2>特 刊</h2><div class="sub">SPECIAL ISSUE</div></div>
+  <div class="sheet-bd"><div class="empty">尚無特刊。<br><br>重要的日子，單獨出一期。</div></div>
+</div>
+
+<!-- ============ 底部導覽＝本日導覽 ============ -->
+<nav id="navbar">
+  <button class="nb on" data-sec="paper">頭版</button>
+  <button class="nb" data-sec="secMail">郵筒</button>
+  <button class="nb" data-sec="secSupp">副刊</button>
+  <button class="nb" data-sec="secClip">剪報</button>
+  <button class="nb" data-sec="secSpecial">特刊</button>
+</nav>
 
 <!-- ============ 來稿（總門·四間屋子） ============ -->
 <div id="laiGaoPage">
@@ -443,7 +514,6 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
   </div>
 </div>
 
-<div id="banner"><button class="x" id="bannerX">×</button><div class="t">號 外</div><div id="bannerMsg"></div></div>
 <div id="toast"></div>
 
 <script>
@@ -592,7 +662,8 @@ function renderMasthead(){
     '第 '+('000'+no).slice(-3)+' 期'+(pub?'':'<b> · 待付印</b>')
     +' · '+weekCN(now)+' · <b>'+seasonCN(now)+'</b> · <b>'+WEATHER[h%WEATHER.length]+'</b>';
   document.getElementById('mhSub').textContent=
-    d.getFullYear()+'年'+(d.getMonth()+1)+'月'+d.getDate()+'日 · 定价：'+PRICE[(h>>>3)%PRICE.length];
+    d.getFullYear()+'年'+(d.getMonth()+1)+'月'+d.getDate()+'日 · 定价：'+PRICE[(h>>>3)%PRICE.length]
+    +(Store.ok?'':' · 試讀版');
 }
 
 /* ===================== 消息流 ===================== */
@@ -601,6 +672,10 @@ function renderFlow(){
   var ms=S.msgs();
   var html='';
   var prevDay=null;
+  if(!Store.ok){
+    html+='<aside class="extra"><div class="t">號 外</div>'
+      +'<div class="m">非 https 環境，印刷廠（OPFS）暫不可用。<br>當前為試讀版：可正常聊天、存字卡，<br>但關掉就沒了。</div></aside>';
+  }
   for(var i=0;i<ms.length;i++){
     var m=ms[i], dk=dayKey(m.at), lead=(dk!==prevDay);
     prevDay=dk;
@@ -624,7 +699,7 @@ function renderFlow(){
     }
   }
   if(!ms.length){
-    html='<div class="empty">本报创刊，尚无电讯。<br>写下第一句，交给对岸。</div>';
+    html+='<div class="empty">本报创刊，尚无电讯。<br>写下第一句，交给对岸。</div>';
   }
   html+='<div class="colophon">— 本 版 完 —</div>';
   box.innerHTML=html;
@@ -945,6 +1020,42 @@ function bindSet(){
   });
 }
 
+/* ===================== 底部導覽（五个版面） ===================== */
+var SECS=['paper','secMail','secSupp','secClip','secSpecial'];
+function switchSec(id){
+  SECS.forEach(function(k){ document.getElementById(k).classList.toggle('on', k===id); });
+  Array.prototype.forEach.call(document.querySelectorAll('#navbar .nb'),function(b){
+    b.classList.toggle('on', b.getAttribute('data-sec')===id);
+  });
+  if(id==='paper'){ renderMasthead(); renderFlow(); toBottom(false); }
+}
+Array.prototype.forEach.call(document.querySelectorAll('#navbar .nb'),function(b){
+  b.addEventListener('click',function(){ switchSec(b.getAttribute('data-sec')); });
+});
+
+/* ===================== 操作栏（九个） ===================== */
+var OPS={
+  photo:['攝影','拍照，存進影集。'],
+  album:['影集','看過往拍下的相片。'],
+  video:['隔岸對影','模擬視頻通話，只顯示我這邊的畫面。'],
+  reply:['回電','我提問並給出選項，祂從中給出回應。選項由你輸入。'],
+  stay:['常駐','讓祂陪著你做某件事。'],
+  arch:['合訂本','歸檔聊天記錄，歸檔後送進舊報庫。']
+};
+var OPJUMP={pics:'picsPage',acts:'actsPage',music:'musicPage'};
+document.getElementById('opbar').addEventListener('click',function(e){
+  var b=e.target.closest?e.target.closest('[data-op]'):null;
+  if(!b) return;
+  var k=b.getAttribute('data-op');
+  if(OPJUMP[k]){                       // 畫帖 / 往來 / 唱片 → 跳來稿对应屋子
+    closeAll();
+    document.getElementById(OPJUMP[k]).classList.add('on');
+    return;
+  }
+  var o=OPS[k];
+  if(o) toast(o[0]+'：'+o[1]);
+});
+
 /* ===================== 页面切换 ===================== */
 var PAGES=['laiGaoPage','cardsPage','picsPage','actsPage','musicPage','setPage'];
 function closeAll(){ PAGES.forEach(function(p){ document.getElementById(p).classList.remove('on'); }); }
@@ -1035,19 +1146,13 @@ document.addEventListener('visibilitychange',function(){
 window.addEventListener('pagehide',function(){ Store.flush(); });
 
 /* ===================== 启动 ===================== */
-document.getElementById('bannerX').addEventListener('click',function(){
-  document.getElementById('banner').classList.remove('on');
-});
 bindSet();
 
 Store.init().then(function(ok){
   renderMasthead(); renderFlow(); renderSet();
   if(!ok){
-    document.getElementById('bannerMsg').innerHTML=
-      '印刷廠暫不可用：本页非 https 环境，OPFS 无法写入。<br>当前为试读版，字卡与电讯不会被保存。<br>请以 https 方式打开本站。';
-    document.getElementById('banner').classList.add('on');
-    // 内存兜底，仅用于预览
-    Store.cache={meta:{v:1,createdAt:Date.now()},cards:{v:1,cards:[]},chat:{v:1,msgs:[]},set:{v:1,dMin:15,dMax:30}};
+      '<b>試讀版</b>：非 https 环境，印刷廠（OPFS）不可用。<br>可以正常聊天、存字卡，但<b>关掉就沒了</b>。';
+    Store.cache={meta:{v:1,createdAt:Date.now(),issues:[]},cards:{v:1,cards:[]},chat:{v:1,msgs:[]},set:{v:1,dMin:15,dMax:30}};
     renderFlow(); renderSet(); renderCards();
   }else{
     rearmAll();
