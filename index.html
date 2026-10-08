@@ -143,9 +143,9 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 .stampbtn[disabled]{opacity:.35}
 
 /* ================= 字卡页 / 设置页 ================= */
-#cardsPage,#setPage{position:fixed;inset:0;z-index:200;height:100vh;height:100dvh;
-  background:var(--paper);display:none;flex-direction:column}
-#cardsPage.on,#setPage.on{display:flex}
+#cardsPage,#setPage,#laiGaoPage,#picsPage,#actsPage,#musicPage{position:fixed;inset:0;z-index:200;
+  height:100vh;height:100dvh;background:var(--paper);display:none;flex-direction:column}
+#cardsPage.on,#setPage.on,#laiGaoPage.on,#picsPage.on,#actsPage.on,#musicPage.on{display:flex}
 .sheet-hd{flex:0 0 auto;padding:calc(env(safe-area-inset-top) + 12px) 16px 10px;
   border-bottom:3px double var(--ink);text-align:center;position:relative}
 .sheet-hd .back{position:absolute;left:12px;top:calc(env(safe-area-inset-top) + 12px);
@@ -166,8 +166,68 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
   border-radius:999px;padding:6px 16px}
 .compose .add:active{background:rgba(156,74,50,.1)}
 
+/* 來稿目录（报纸目录式） */
+.toc{padding:8px 0}
+.tocrow{display:flex;align-items:center;gap:8px;width:100%;text-align:left;
+  padding:15px 2px;border-bottom:1px dashed var(--rule2)}
+.tocrow .nm{font-size:17px;letter-spacing:.2em;color:var(--ink)}
+.tocrow .dash{flex:1 1 auto;height:0;border-top:1px dotted var(--rule);align-self:center}
+.tocrow .en{font-family:var(--geo);font-size:9px;letter-spacing:.18em;color:var(--ink3)}
+.tocrow .en i{font-style:normal;color:var(--red)}
+.tocrow .pg{font-size:10px;color:var(--ink3);min-width:16px;text-align:right}
+.tocrow:active .nm{color:var(--red)}
+
+/* 檢字 */
+.search{display:flex;align-items:center;gap:8px;border:1px solid var(--rule);
+  padding:7px 10px;margin-bottom:12px}
+.search .ico{font-size:12px;letter-spacing:.1em;color:var(--red)}
+.search input{flex:1 1 auto;font-size:16px;min-width:0}
+.search input::placeholder{color:var(--ink3)}
+.search .clr{font-size:16px;color:var(--ink3);padding:0 4px}
+
+/* 功能条 */
+.tools{display:flex;gap:0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  margin-bottom:10px}
+.tools .tl{flex:1 1 0;font-size:12px;letter-spacing:.14em;color:var(--ink2);
+  padding:9px 0;text-align:center;border-right:1px solid var(--rule2)}
+.tools .tl:last-child{border-right:0}
+.tools .tl:active{background:rgba(59,42,24,.07);color:var(--red)}
+.tools .tl.danger{color:var(--red)}
+.tools .tl.danger:active{background:rgba(156,74,50,.12)}
+.tools .tl.on{background:rgba(156,74,50,.12);color:var(--red)}
+
+.cntbar{font-size:11px;letter-spacing:.16em;color:var(--ink3);padding:0 2px 8px;
+  font-family:var(--geo)}
+.cntbar b{font-weight:400;color:var(--red)}
+
 /* 卡片列表 */
 .carditem{display:flex;gap:10px;padding:11px 0;border-bottom:1px solid var(--rule2);align-items:flex-start}
+.carditem .ck{flex:0 0 auto;display:none}
+.carditem .ck input{-webkit-appearance:none;appearance:none;width:17px;height:17px;
+  border:1px solid var(--rule);border-radius:2px;margin-top:3px;position:relative}
+.carditem .ck input:checked{border-color:var(--red);background:var(--red)}
+.carditem .ck input:checked::after{content:"";position:absolute;left:5px;top:1px;
+  width:4px;height:9px;border:solid var(--paper);border-width:0 2px 2px 0;transform:rotate(45deg)}
+#cardList.picking .carditem .ck{display:block}
+#cardList.picking .carditem .del{display:none}
+#cardList.picking .carditem .tx{color:var(--ink3)}
+
+/* 銷燬条 */
+.bulkbar{flex:0 0 auto;display:none;align-items:center;gap:12px;
+  padding:10px 14px calc(env(safe-area-inset-bottom) + 10px);
+  border-top:3px double var(--red);background:rgba(156,74,50,.05)}
+.bulkbar.on{display:flex}
+.bulkbar .selall{display:flex;align-items:center;gap:6px;font-size:12px;letter-spacing:.1em}
+.bulkbar .selall input{-webkit-appearance:none;appearance:none;width:17px;height:17px;
+  border:1px solid var(--rule);border-radius:2px;position:relative}
+.bulkbar .selall input:checked{border-color:var(--red);background:var(--red)}
+.bulkbar .selall input:checked::after{content:"";position:absolute;left:5px;top:1px;
+  width:4px;height:9px;border:solid var(--paper);border-width:0 2px 2px 0;transform:rotate(45deg)}
+.bulkbar .n{flex:1 1 auto;font-size:11px;color:var(--ink2);font-family:var(--geo)}
+.bulkbar .do{font-size:13px;letter-spacing:.18em;color:var(--red);
+  border:1px solid var(--red);border-radius:2px;padding:7px 15px}
+.bulkbar .do:active{background:rgba(156,74,50,.14)}
+.bulkbar .cx{font-size:12px;letter-spacing:.1em;color:var(--ink3);padding:7px 4px}
 .carditem .no{flex:0 0 auto;font-family:var(--geo);font-size:10px;color:var(--ink3);
   padding-top:3px;min-width:30px}
 .carditem .tx{flex:1 1 auto;font-size:15px;line-height:1.7;word-break:break-word;
@@ -206,6 +266,13 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 #banner.on{display:block}
 #banner .t{color:var(--red);letter-spacing:.4em;margin-right:-.4em;font-size:11px}
 #banner .x{position:absolute;right:8px;top:6px;font-size:14px;color:var(--ink3);padding:2px 6px}
+
+#toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom) + 24px);
+  transform:translateX(-50%) translateY(14px);z-index:600;opacity:0;pointer-events:none;
+  background:var(--ink);color:var(--paper);font-size:13px;letter-spacing:.14em;
+  padding:11px 20px;border-radius:2px;max-width:82vw;text-align:center;line-height:1.6;
+  transition:opacity .28s ease,transform .28s ease;box-shadow:0 6px 22px rgba(20,14,8,.34)}
+#toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
 </head>
 <body>
@@ -232,24 +299,85 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
   </footer>
 </div>
 
-<!-- ============ 字卡页 ============ -->
+<!-- ============ 來稿（總門·四間屋子） ============ -->
+<div id="laiGaoPage">
+  <div class="sheet-hd">
+    <button class="back" id="lgBack">‹ 回頭版</button>
+    <h2>來 稿</h2>
+    <div class="sub">CONTRIBUTIONS</div>
+  </div>
+  <div class="sheet-bd" style="padding-top:6px">
+    <div class="toc">
+      <button class="tocrow" data-into="cardsPage">
+        <span class="nm">電 文 匣</span><span class="dash"></span>
+        <span class="en">WORDS · <i id="lgCardsN">0</i></span>
+        <span class="pg">一</span>
+      </button>
+      <button class="tocrow" data-into="picsPage">
+        <span class="nm">畫 帖</span><span class="dash"></span>
+        <span class="en">STICKERS</span><span class="pg">二</span>
+      </button>
+      <button class="tocrow" data-into="actsPage">
+        <span class="nm">往 來 簿</span><span class="dash"></span>
+        <span class="en">MOMENTS</span><span class="pg">三</span>
+      </button>
+      <button class="tocrow" data-into="musicPage">
+        <span class="nm">唱 片 架</span><span class="dash"></span>
+        <span class="en">RECORDS</span><span class="pg">四</span>
+      </button>
+    </div>
+    <div class="empty" style="padding-top:26px">四間屋子，陸續開張。</div>
+  </div>
+</div>
+
+<!-- ============ 電文匣（字卡） ============ -->
 <div id="cardsPage">
   <div class="sheet-hd">
-    <button class="back" id="cardsBack">‹ 回頭版</button>
-    <h2>來 稿</h2>
+    <button class="back" id="cardsBack">‹ 來 稿</button>
+    <h2>電 文 匣</h2>
     <div class="sub">WORDS FROM BEYOND</div>
   </div>
   <div class="sheet-bd">
     <div class="compose">
-      <textarea id="cardIn" rows="2" placeholder="写下祂会说的一句话…"></textarea>
+      <textarea id="cardIn" rows="3" placeholder="写下祂会说的一句话…&#10;支持多行，一行一份电文"></textarea>
       <div class="row">
-        <span class="cnt" id="cardCnt">共 0 則</span>
-        <button class="add" id="cardAdd">刊 登</button>
+        <span class="cnt" id="cardCnt">共 0 份</span>
+        <button class="add" id="cardAdd">存 電</button>
       </div>
     </div>
+
+    <div class="search">
+      <span class="ico">檢</span>
+      <input id="cardSearch" type="text" placeholder="檢字…">
+      <button class="clr" id="searchClr">×</button>
+    </div>
+
+    <div class="tools">
+      <button class="tl" id="btnDedup">剔重</button>
+      <button class="tl" id="btnImport">收電</button>
+      <button class="tl" id="btnExport">發報</button>
+      <button class="tl danger" id="btnBulk">銷燬</button>
+    </div>
+
+    <div class="cntbar" id="cntBar">共 0 份</div>
     <div id="cardList"></div>
   </div>
+
+  <div class="bulkbar" id="bulkBar">
+    <label class="selall"><input type="checkbox" id="selAll"><span>全選</span></label>
+    <span class="n" id="bulkN">已選 0 份</span>
+    <button class="do" id="bulkDo">銷 燬</button>
+    <button class="cx" id="bulkCancel">罷手</button>
+  </div>
 </div>
+
+<!-- ============ 畫帖 / 往來簿 / 唱片架（未開張） ============ -->
+<div id="picsPage"><div class="sheet-hd"><button class="back" data-back="1">‹ 來 稿</button><h2>畫 帖</h2><div class="sub">STICKERS</div></div>
+  <div class="sheet-bd"><div class="empty">這間屋子還沒開張。</div></div></div>
+<div id="actsPage"><div class="sheet-hd"><button class="back" data-back="1">‹ 來 稿</button><h2>往 來 簿</h2><div class="sub">MOMENTS</div></div>
+  <div class="sheet-bd"><div class="empty">這間屋子還沒開張。</div></div></div>
+<div id="musicPage"><div class="sheet-hd"><button class="back" data-back="1">‹ 來 稿</button><h2>唱 片 架</h2><div class="sub">RECORDS</div></div>
+  <div class="sheet-bd"><div class="empty">這間屋子還沒開張。</div></div></div>
 
 <!-- ============ 设置页 ============ -->
 <div id="setPage">
@@ -316,6 +444,7 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 </div>
 
 <div id="banner"><button class="x" id="bannerX">×</button><div class="t">號 外</div><div id="bannerMsg"></div></div>
+<div id="toast"></div>
 
 <script>
 (function(){
@@ -342,7 +471,7 @@ var Store={
     if(!this.ok){ this.cache={meta:null,cards:null,chat:null,set:null}; return false; }
 
     var defs={
-      meta:function(){return {v:1,createdAt:Date.now()};},
+      meta:function(){return {v:1,createdAt:Date.now(),issues:[]};},
       cards:function(){return {v:1,cards:[]};},
       chat:function(){return {v:1,msgs:[]};},
       set:function(){return {v:1,dMin:15,dMax:30};}
@@ -351,6 +480,19 @@ var Store={
       var d=await this.read(k);
       if(!d){ d=defs[k](); this.cache[k]=d; await this.writeNow(k,d); }
       else this.cache[k]=d;
+    }
+    // 迁移：老数据没有 issues 字段时，从历史电讯反推出刊日
+    if(!this.cache.meta.issues){
+      this.cache.meta.issues=[];
+      var seen={}, ms=(this.cache.chat&&this.cache.chat.msgs)||[];
+      for(var i=0;i<ms.length;i++){
+        if(ms[i].who==='me'||ms[i].who==='him'){
+          var kk=dayKey(ms[i].at);
+          if(!seen[kk]){ seen[kk]=1; this.cache.meta.issues.push(kk); }
+        }
+      }
+      this.cache.meta.issues.sort();
+      await this.writeNow('meta',this.cache.meta);
     }
     return true;
   },
@@ -419,15 +561,36 @@ function seasonCN(t){ var m=new Date(t).getMonth()+1;
 var WEATHER=['晴','多云','微风','细雨','薄阴','骤雨初歇','海雾','转凉','闷热','风起'];
 var PRICE=['一次心动','半句晚安','一枚邮票','一滴眼泪','无边无际','一声叹息','一个回头的念头','一句未曾说出口的话'];
 
+/* ===================== 出刊 / 期号 ===================== */
+function issueList(){
+  var m=Store.cache.meta;
+  if(!m) return [];
+  if(!m.issues) m.issues=[];
+  return m.issues;
+}
+// 当天只要产生过电讯（你发的或祂回的），即记为出刊一期
+function ensureIssue(){
+  var arr=issueList(), k=dayKey(Date.now());
+  if(arr.indexOf(k)>=0) return false;
+  arr.push(k); arr.sort();
+  Store.touch('meta');
+  return true;
+}
+function todayPublished(){ return issueList().indexOf(dayKey(Date.now()))>=0; }
+function issueNo(){
+  var arr=issueList(), k=dayKey(Date.now()), i=arr.indexOf(k);
+  return (i>=0) ? i+1 : arr.length+1;   // 未出刊时预告下一期
+}
+function issueTotal(){ return issueList().length; }
+
 /* ===================== 报头 ===================== */
 function renderMasthead(){
   var now=Date.now(), d=new Date(now), k=dayKey(now);
-  var base=(Store.cache.meta&&Store.cache.meta.createdAt)||now;
-  var issue=Math.floor((new Date(k+' 00:00:00').getTime()-new Date(dayKey(base)+' 00:00:00').getTime())/86400000)+1;
-  if(!(issue>=1)) issue=1;
+  var no=issueNo(), pub=todayPublished();
   var h=hash(k);
   document.getElementById('mhMeta').innerHTML=
-    '第 '+('000'+issue).slice(-3)+' 期 · '+weekCN(now)+' · <b>'+seasonCN(now)+'</b> · <b>'+WEATHER[h%WEATHER.length]+'</b>';
+    '第 '+('000'+no).slice(-3)+' 期'+(pub?'':'<b> · 待付印</b>')
+    +' · '+weekCN(now)+' · <b>'+seasonCN(now)+'</b> · <b>'+WEATHER[h%WEATHER.length]+'</b>';
   document.getElementById('mhSub').textContent=
     d.getFullYear()+'年'+(d.getMonth()+1)+'月'+d.getDate()+'日 · 定价：'+PRICE[(h>>>3)%PRICE.length];
 }
@@ -466,7 +629,7 @@ function renderFlow(){
   html+='<div class="colophon">— 本 版 完 —</div>';
   box.innerHTML=html;
 }
-window.__goCards=function(){ openCards(); };
+window.__goCards=function(){ openLaiGao(); };
 
 function toBottom(smooth){
   var box=document.getElementById('flow');
@@ -487,6 +650,8 @@ function sendMine(text){
   text=String(text||'').replace(/\s+$/,'');
   if(!text) return;
   var now=Date.now();
+  ensureIssue();
+  renderMasthead();
   S.msgs().push({id:uid('m'),who:'me',text:text,at:now});
   var w={id:uid('w'),who:'wait',at:now,dueAt:now+delayMs()};
   S.msgs().push(w);
@@ -511,8 +676,10 @@ function resolveWait(id){
   if(!c){
     ms[idx]={id:uid('x'),who:'extra',text:'本报尚未收到彼岸来稿。\n祂还没有话可说——除非你替祂写。',at:Date.now()};
   }else{
+    ensureIssue();
     ms[idx]={id:uid('m'),who:'him',text:c.text,at:Date.now(),cardId:c.id};
   }
+  renderMasthead();
   Store.touch('chat');
   renderFlow(); toBottom(true);
 }
@@ -522,60 +689,245 @@ function rearmAll(){
   for(var i=0;i<ms.length;i++){ if(ms[i].who==='wait') armWait(ms[i]); }
 }
 
-/* ===================== 字卡页 ===================== */
+/* ===================== 電文匣 ===================== */
 var confirmId=null;
-function renderCards(){
+var picking=false, picked={};
+var kw='';
+
+function norm(s){ return String(s||'').replace(/\s+$/,'').replace(/^\s+/,''); }
+function visibleCards(){
   var c=S.cards();
-  document.getElementById('cardCnt').textContent='共 '+c.length+' 則';
+  if(!kw) return c;
+  var k=kw.toLowerCase(), out=[];
+  for(var i=0;i<c.length;i++){ if(String(c[i].text).toLowerCase().indexOf(k)>=0) out.push(c[i]); }
+  return out;
+}
+
+function renderCards(){
+  var all=S.cards(), vis=visibleCards();
+  document.getElementById('cardCnt').textContent='共 '+all.length+' 份';
+  var bar=document.getElementById('cntBar');
+  bar.innerHTML = kw
+    ? '檢出 <b>'+vis.length+'</b> 份 · 共 '+all.length+' 份'
+    : '共 '+all.length+' 份';
+
   var box=document.getElementById('cardList');
-  if(!c.length){
-    box.innerHTML='<div class="empty">来稿簿空空如也。<br>写下祂会说的一句话。<br><br>不分组、不加标签，<br>一张卡就是祂的一句话。</div>';
+  box.classList.toggle('picking',picking);
+  document.getElementById('btnBulk').classList.toggle('on',picking);
+  document.getElementById('bulkBar').classList.toggle('on',picking);
+
+  if(!all.length){
+    box.innerHTML='<div class="empty">電文匣空空如也。<br>写下祂会说的一句话。<br><br>不分组、不加标签，<br>一份电文就是祂的一句话。</div>';
+    return;
+  }
+  if(!vis.length){
+    box.innerHTML='<div class="empty">檢無此字。<br>匣中沒有含「'+esc(kw)+'」的電文。</div>';
     return;
   }
   var h='';
-  for(var i=0;i<c.length;i++){
-    var it=c[i];
-    if(confirmId===it.id){
-      h+='<div class="carditem conf"><span class="no">'+('00'+(i+1)).slice(-3)+'</span>'
-        +'<span class="tx">'+esc(it.text)+'</span>'
-        +'<span class="cfm"><button data-cfmy="'+it.id+'">撤稿</button><button data-cfmn="1">留用</button></span></div>';
-    }else{
-      h+='<div class="carditem"><span class="no">'+('00'+(i+1)).slice(-3)+'</span>'
-        +'<span class="tx">'+esc(it.text)+'</span>'
-        +'<button class="del" data-del="'+it.id+'">撤稿</button></div>';
-    }
+  for(var i=0;i<vis.length;i++){
+    var it=vis[i];
+    h+='<div class="carditem">'
+      +'<label class="ck"><input type="checkbox" data-ck="'+it.id+'"'
+      +(picked[it.id]?' checked':'')+'></label>'
+      +'<span class="no">'+('00'+(i+1)).slice(-3)+'</span>'
+      +'<span class="tx">'+esc(it.text)+'</span>'
+      +'<button class="del" data-del="'+it.id+'">銷電</button></div>';
   }
   box.innerHTML=h;
+  updateBulkN();
+}
+function updateBulkN(){
+  var n=0; for(var k in picked) if(picked[k]) n++;
+  document.getElementById('bulkN').textContent='已選 '+n+' 份';
+  var sa=document.getElementById('selAll');
+  var vis=visibleCards();
+  var allOn=vis.length>0;
+  for(var i=0;i<vis.length;i++){ if(!picked[vis[i].id]){ allOn=false; break; } }
+  sa.checked=allOn;
 }
 
-document.getElementById('cardList').addEventListener('click',function(e){
-  var d=e.target.getAttribute&&e.target.getAttribute('data-del');
-  if(d){ confirmId=d; renderCards(); return; }
-  var y=e.target.getAttribute&&e.target.getAttribute('data-cfmy');
-  if(y){
-    var c=S.cards();
-    for(var i=0;i<c.length;i++){ if(c[i].id===y){ c.splice(i,1); break; } }
-    confirmId=null; Store.touch('cards'); renderCards(); return;
+/* 存電：多行，一行一份，去重，即存即落盘 */
+function addCards(text){
+  var lines=String(text||'').split('\n');
+  var have={}, c=S.cards();
+  for(var i=0;i<c.length;i++) have[norm(c[i].text)]=1;
+  var added=0, dup=0;
+  for(var j=0;j<lines.length;j++){
+    var t=norm(lines[j]);
+    if(!t) continue;
+    if(have[t]){ dup++; continue; }
+    have[t]=1;
+    c.push({id:uid('c'),text:t,at:Date.now()});
+    added++;
   }
-  if(e.target.getAttribute&&e.target.getAttribute('data-cfmn')){ confirmId=null; renderCards(); }
-});
-
+  if(added) Store.touch('cards');
+  return {added:added,dup:dup};
+}
 document.getElementById('cardAdd').addEventListener('click',function(){
   var el=document.getElementById('cardIn');
-  var t=String(el.value||'').replace(/^\s+|\s+$/g,'');
-  if(!t) return;
-  S.cards().push({id:uid('c'),text:t,at:Date.now()});
-  el.value=''; Store.touch('cards'); renderCards();
-  document.getElementById('cardIn').blur();
+  var r=addCards(el.value);
+  if(r.added||r.dup){
+    el.value=''; el.blur(); renderCards();
+    toast(r.dup ? ('存電 '+r.added+' 份，重複 '+r.dup+' 份已略過') : ('存電 '+r.added+' 份'));
+  }
 });
 
+/* 單份銷電：直接刪，無二次確認 */
+document.getElementById('cardList').addEventListener('click',function(e){
+  var g=function(n){ return e.target.getAttribute&&e.target.getAttribute(n); };
+  var d=g('data-del');
+  if(d){
+    var c=S.cards();
+    for(var i=0;i<c.length;i++){ if(c[i].id===d){ c.splice(i,1); break; } }
+    delete picked[d];
+    Store.touch('cards'); renderCards(); toast('已銷電');
+    return;
+  }
+});
+document.getElementById('cardList').addEventListener('change',function(e){
+  var id=e.target.getAttribute&&e.target.getAttribute('data-ck');
+  if(id){ picked[id]=e.target.checked; updateBulkN(); }
+});
+
+/* 檢字：輸入即篩 */
+var sIn=document.getElementById('cardSearch');
+sIn.addEventListener('input',function(){ kw=String(this.value||'').trim(); renderCards(); });
+document.getElementById('searchClr').addEventListener('click',function(){
+  sIn.value=''; kw=''; renderCards(); sIn.blur();
+});
+
+/* 剔重 */
+document.getElementById('btnDedup').addEventListener('click',function(){
+  var c=S.cards(), seen={}, out=[], n=0;
+  for(var i=0;i<c.length;i++){
+    var k=norm(c[i].text);
+    if(seen[k]){ n++; continue; }
+    seen[k]=1; out.push(c[i]);
+  }
+  if(!n){ toast('無重複，匣中 '+c.length+' 份各異'); return; }
+  Store.cache.cards.cards=out;
+  Store.touch('cards'); renderCards(); toast('剔去 '+n+' 份，餘 '+out.length+' 份');
+});
+
+/* 收電 / 發報 */
+function pickFile(accept,cb){
+  var f=document.createElement('input');
+  f.type='file'; f.accept=accept;
+  f.onchange=function(){
+    var file=f.files&&f.files[0];
+    if(!file) return;
+    var r=new FileReader();
+    r.onload=function(){ cb(String(r.result||''),file.name); };
+    r.readAsText(file,'utf-8');
+  };
+  f.click();
+}
+function download(name,text,mime){
+  var blob=new Blob([text],{type:mime||'application/json;charset=utf-8'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url; a.download=name; a.click();
+  setTimeout(function(){ URL.revokeObjectURL(url); },1500);
+}
+function stamp(){ var d=new Date();
+  return d.getFullYear()+'-'+pad2(d.getMonth()+1)+'-'+pad2(d.getDate()); }
+
+document.getElementById('btnImport').addEventListener('click',function(){
+  pickFile('.json,.txt,application/json,text/plain',function(txt){
+    var lines=[];
+    try{
+      var j=JSON.parse(txt);
+      var arr = Array.isArray(j) ? j : (j&&j.cards)||[];
+      for(var i=0;i<arr.length;i++){
+        if(typeof arr[i]==='string') lines.push(arr[i]);
+        else if(arr[i]&&arr[i].text) lines.push(arr[i].text);
+      }
+    }catch(e){ lines=txt.split('\n'); }
+    var r=addCards(lines.join('\n'));
+    renderCards();
+    toast(r.dup ? ('收進 '+r.added+' 份，重複 '+r.dup+' 份已略過') : ('收進 '+r.added+' 份'));
+  });
+});
+
+document.getElementById('btnExport').addEventListener('click',function(){
+  var c=S.cards(), n=stamp();
+  openChoices([
+    ['JSON','電文匣-'+n+'.json',JSON.stringify({v:1,exportedAt:Date.now(),count:c.length,cards:c},null,2),'application/json;charset=utf-8'],
+    ['TXT','電文匣-'+n+'.txt',c.map(function(x){return x.text;}).join('\n'),'text/plain;charset=utf-8']
+  ]);
+});
+
+/* 銷燬：全選 + 勾選，直接刪 */
+function setPicking(v){
+  picking=v;
+  if(!v) picked={};
+  renderCards();
+}
+document.getElementById('btnBulk').addEventListener('click',function(){ setPicking(!picking); });
+document.getElementById('bulkCancel').addEventListener('click',function(){ setPicking(false); });
+document.getElementById('selAll').addEventListener('change',function(){
+  var vis=visibleCards(), on=this.checked;
+  for(var i=0;i<vis.length;i++) picked[vis[i].id]=on;
+  renderCards();
+});
+document.getElementById('bulkDo').addEventListener('click',function(){
+  var n=0, c=S.cards(), out=[];
+  for(var i=0;i<c.length;i++){
+    if(picked[c[i].id]){ n++; continue; }
+    out.push(c[i]);
+  }
+  if(!n){ toast('尚未勾選'); return; }
+  Store.cache.cards.cards=out;
+  Store.touch('cards'); setPicking(false);
+  toast('已銷燬 '+n+' 份，餘 '+out.length+' 份');
+});
+
+/* 通用：二選一 + 輕提示 */
+function openChoices(list){
+  var w=document.createElement('div');
+  w.style.cssText='position:fixed;inset:0;z-index:500;display:flex;align-items:center;justify-content:center;background:rgba(20,14,8,.4)';
+  var box=document.createElement('div');
+  box.style.cssText='background:var(--paper);border:2px solid var(--red);padding:16px;min-width:230px;text-align:center';
+  var t=document.createElement('div');
+  t.style.cssText='font-size:11px;letter-spacing:.42em;margin-right:-.42em;color:var(--red);margin-bottom:13px';
+  t.textContent='號 外';
+  box.appendChild(t);
+  list.forEach(function(it){
+    var b=document.createElement('button');
+    b.style.cssText='display:block;width:100%;margin:7px 0;padding:11px;font-size:14px;letter-spacing:.16em;color:var(--ink);border:1px solid var(--rule)';
+    b.textContent=it[0];
+    b.onclick=function(){ download(it[1],it[2],it[3]); document.body.removeChild(w); toast('已發報'); };
+    box.appendChild(b);
+  });
+  var c=document.createElement('button');
+  c.style.cssText='display:block;width:100%;margin:11px 0 0;padding:8px;font-size:12px;letter-spacing:.16em;color:var(--ink3)';
+  c.textContent='罷手';
+  c.onclick=function(){ document.body.removeChild(w); };
+  box.appendChild(c);
+  w.appendChild(box);
+  w.addEventListener('click',function(e){ if(e.target===w) document.body.removeChild(w); });
+  document.body.appendChild(w);
+}
+var toastT=null;
+function toast(msg){
+  var el=document.getElementById('toast');
+  el.textContent=msg; el.classList.add('on');
+  clearTimeout(toastT);
+  toastT=setTimeout(function(){ el.classList.remove('on'); },2200);
+}
+
 /* ===================== 设置页 ===================== */
+function countWho(w){ var m=S.msgs(), n=0;
+  for(var i=0;i<m.length;i++) if(m[i].who===w) n++;
+  return n; }
 function renderSet(){
   var s=S.set();
   document.getElementById('dMin').value=s.dMin;
   document.getElementById('dMax').value=s.dMax;
   document.getElementById('storeTip').textContent = Store.ok
-    ? '存储可用：本机 OPFS（'+'/bian/'+'）。\n字卡 '+S.cards().length+' 則 · 电讯 '+S.msgs().length+' 条。'
+    ? '存储可用：本机 OPFS（/bian/）。\n電文 '+S.cards().length+' 份 · 已出刊 '+issueTotal()+' 期\n'
+      +'电讯 '+S.msgs().length+' 条（彼岸 '+countWho('him')+' · 此岸 '+countWho('me')+'）'
     : '存储不可用。请通过 https 打开本站（OPFS 需安全上下文）。\n当前为试读版，内容不会被保存。';
 }
 function bindSet(){
@@ -594,14 +946,37 @@ function bindSet(){
 }
 
 /* ===================== 页面切换 ===================== */
-function openCards(){ document.getElementById('cardsPage').classList.add('on'); renderCards(); }
-function openSet(){ document.getElementById('setPage').classList.add('on'); renderSet(); }
-document.getElementById('navCards').addEventListener('click',openCards);
+var PAGES=['laiGaoPage','cardsPage','picsPage','actsPage','musicPage','setPage'];
+function closeAll(){ PAGES.forEach(function(p){ document.getElementById(p).classList.remove('on'); }); }
+function openLaiGao(){
+  closeAll();
+  document.getElementById('lgCardsN').textContent=S.cards().length;
+  document.getElementById('laiGaoPage').classList.add('on');
+}
+function openCards(){ closeAll(); document.getElementById('cardsPage').classList.add('on'); renderCards(); }
+function openSet(){ closeAll(); document.getElementById('setPage').classList.add('on'); renderSet(); }
+
+document.getElementById('navCards').addEventListener('click',openLaiGao);
 document.getElementById('navSet').addEventListener('click',openSet);
+document.getElementById('lgBack').addEventListener('click',closeAll);
+
+// 來稿目录 → 四间屋子
+Array.prototype.forEach.call(document.querySelectorAll('.tocrow'),function(b){
+  b.addEventListener('click',function(){
+    var t=b.getAttribute('data-into');
+    closeAll();
+    document.getElementById(t).classList.add('on');
+    if(t==='cardsPage') renderCards();
+  });
+});
+// 四间屋子的返回 → 回來稿
+Array.prototype.forEach.call(document.querySelectorAll('[data-back]'),function(b){
+  b.addEventListener('click',openLaiGao);
+});
 document.getElementById('cardsBack').addEventListener('click',function(){
-  document.getElementById('cardsPage').classList.remove('on'); confirmId=null; });
-document.getElementById('setBack').addEventListener('click',function(){
-  document.getElementById('setPage').classList.remove('on'); });
+  setPicking(false); document.getElementById('cardSearch').value=''; kw=''; openLaiGao();
+});
+document.getElementById('setBack').addEventListener('click',closeAll);
 
 /* ===================== 输入 ===================== */
 var inp=document.getElementById('inp');
