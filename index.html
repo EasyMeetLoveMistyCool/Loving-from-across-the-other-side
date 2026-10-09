@@ -18,6 +18,7 @@
   --red:#9c4a32;
   --serif:"Songti SC","STSong","Noto Serif CJK SC","Source Han Serif SC","SimSun",serif;
   --geo:Georgia,"Times New Roman",serif;
+  --bg-mask:0.6;
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;overflow:hidden;overscroll-behavior:none}
@@ -25,6 +26,14 @@ body{background:var(--paper);color:var(--ink);font-family:var(--serif);
   -webkit-font-smoothing:antialiased;user-select:none;-webkit-user-select:none}
 button{font-family:inherit;color:inherit;background:none;border:0;cursor:pointer}
 input,textarea{font-family:inherit;color:inherit;background:none;border:0;outline:0;-webkit-appearance:none}
+
+/* ========== 全站背景 ========== */
+.bg-layer{position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background-size:cover;background-position:center;background-repeat:no-repeat;
+  display:none}
+.bg-layer.on{display:block}
+.bg-layer .mask{position:absolute;inset:0;background:var(--paper);opacity:0}
+body[data-has-bg="1"] .bg-layer.on .mask{opacity:var(--bg-mask)}
 
 /* ================= 封面 ================= */
 #cover{position:fixed;inset:0;z-index:300;height:100vh;height:100dvh;
@@ -59,20 +68,23 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 #ctop h1{font-size:clamp(38px,12.5vw,58px);font-weight:400;line-height:1.18;
   letter-spacing:.32em;margin-right:-.32em;color:var(--ink);
   text-shadow:0 1px 0 rgba(255,255,255,.55),0 -1px 0 rgba(59,42,24,.14),0 3px 18px rgba(156,74,50,.14)}
-#ctop .rule{width:88px;height:1px;margin:22px auto 0;position:relative;
-  background:linear-gradient(to right,transparent,var(--ink2),transparent)}
-#ctop .rule .flower{position:absolute;left:50%;top:-9px;transform:translateX(-50%);
-  background:var(--paper);padding:0 6px;font-size:12px;color:var(--red);line-height:1}
+#ctop .rule{display:flex;align-items:center;justify-content:center;gap:8px;
+  margin:22px auto 0;width:88px}
+#ctop .rule .line{flex:1 1 auto;height:1px}
+#ctop .rule .line.l{background:linear-gradient(to right,transparent,var(--ink2))}
+#ctop .rule .line.r{background:linear-gradient(to left,transparent,var(--ink2))}
+#ctop .rule .flower{font-size:12px;color:var(--red);line-height:1}
 #ctop .en{margin-top:16px;font-family:var(--geo);font-size:10px;letter-spacing:.46em;margin-right:-.46em;color:var(--ink2)}
 #ctop .cn-sub{margin-top:8px;font-size:11px;letter-spacing:.3em;margin-right:-.3em;color:var(--ink3)}
 
-/* 名字章 */
 #cover .names{position:absolute;left:0;right:0;top:44vh;z-index:3;text-align:center;pointer-events:none}
-#cover .names .pair{display:inline-flex;align-items:flex-end;gap:18px;position:relative;padding:0 6px}
+#cover .names .pair{display:inline-flex;align-items:flex-end;gap:22px;position:relative;padding:0 6px}
 #cover .names .col{display:flex;flex-direction:column;align-items:center;
   font-size:19px;line-height:1.15;letter-spacing:.06em;color:var(--ink)}
 #cover .names .col span{display:block}
-#cover .names .seal{position:absolute;right:-32px;bottom:-26px;
+#cover .names .col.left span.mid{visibility:hidden}
+#cover .names .seal{position:absolute;left:50%;bottom:-18px;
+  transform:translateX(-50%);
   width:72px;height:72px;border:2px solid rgba(156,74,50,.58);
   color:rgba(156,74,50,.68);
   display:flex;align-items:center;justify-content:center;
@@ -111,10 +123,10 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 
 :root{--navh:50px}
 #paper{position:fixed;inset:0;height:100vh;height:100dvh;display:flex;flex-direction:column;
-  opacity:0;transition:opacity .35s ease}
+  opacity:0;transition:opacity .35s ease;background:transparent}
 #paper.on{opacity:1}
 .sec{position:fixed;left:0;right:0;top:0;bottom:0;height:100vh;height:100dvh;
-  display:none;flex-direction:column;background:var(--paper);
+  display:none;flex-direction:column;background:transparent;
   padding-bottom:calc(var(--navh) + env(safe-area-inset-bottom))}
 .sec.on{display:flex}
 #paper.sec{opacity:1}
@@ -122,7 +134,7 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
   height:calc(var(--navh) + env(safe-area-inset-bottom));
   padding-bottom:env(safe-area-inset-bottom);
   display:flex;align-items:stretch;
-  border-top:3px double var(--ink);background:var(--paper)}
+  border-top:3px double var(--ink);background:transparent}
 #navbar .nb{flex:1 1 0;display:flex;align-items:center;justify-content:center;
   font-size:13px;letter-spacing:.14em;color:var(--ink3);position:relative}
 #navbar .nb+.nb::before{content:"";position:absolute;left:0;top:22%;bottom:22%;width:1px;background:var(--rule2)}
@@ -131,7 +143,8 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 
 .masthead{flex:0 0 auto;padding:calc(env(safe-area-inset-top) + 9px) 16px 7px;text-align:center;
   border-bottom:3px double var(--ink);position:relative}
-.mh-nav{display:flex;align-items:center;justify-content:space-between;height:26px;margin-bottom:5px}
+.mh-nav{display:flex;align-items:center;justify-content:space-between;height:26px;margin-bottom:5px;
+  padding:0 84px}
 .mh-nav .btn{font-size:11px;letter-spacing:.2em;color:var(--ink2);padding:4px 6px}
 .mh-nav .btn:active{color:var(--red)}
 .mh-nav .mid{font-size:11px;letter-spacing:.3em;color:var(--ink3)}
@@ -181,10 +194,9 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 .extra .go{margin-top:9px;display:inline-block;font-size:12px;letter-spacing:.18em;color:var(--red);border-bottom:1px solid var(--red);padding-bottom:2px}
 .colophon{text-align:center;padding:22px 0 6px;color:var(--ink3);font-size:10px;letter-spacing:.2em}
 
-/* 输入栏 */
 .press{flex:0 0 auto;display:flex;flex-direction:column;
   padding:0 14px;position:relative;
-  border-top:3px double var(--ink)}
+  border-top:3px double var(--ink);background:transparent}
 .press-cn{position:relative;text-align:center;font-size:10px;letter-spacing:.3em;margin-right:-.3em;
   color:var(--ink2);padding:8px 0 6px;cursor:pointer;transition:color .18s ease;
   user-select:none}
@@ -208,9 +220,8 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 .stampbtn:active{background:rgba(156,74,50,.1)}
 .stampbtn[disabled]{opacity:.35}
 
-/* 操作栏（默认收起，点击「此岸去信」展开） */
 .opbar{flex:0 0 auto;display:flex;gap:0;overflow-x:auto;-webkit-overflow-scrolling:touch;
-  border-bottom:1px solid var(--rule2);background:var(--paper);
+  border-bottom:1px solid var(--rule2);background:transparent;
   max-height:0;opacity:0;overflow-y:hidden;
   transition:max-height .28s ease,opacity .22s ease}
 .opbar.on{max-height:80px;opacity:1}
@@ -223,9 +234,8 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 .opbar .op:active .gi,.opbar .op:active{color:var(--red)}
 .opbar .op:active .gi svg{stroke:var(--red)}
 
-/* ============ 子页 ============ */
 #cardsPage,#setPage,#laiGaoPage,#picsPage,#actsPage,#musicPage{position:fixed;inset:0;z-index:250;
-  height:100vh;height:100dvh;background:var(--paper);display:none;flex-direction:column}
+  height:100vh;height:100dvh;background:transparent;display:none;flex-direction:column}
 #cardsPage.on,#setPage.on,#laiGaoPage.on,#picsPage.on,#actsPage.on,#musicPage.on{display:flex}
 .sheet-hd{flex:0 0 auto;padding:calc(env(safe-area-inset-top) + 12px) 16px 10px;
   border-bottom:3px double var(--ink);text-align:center;position:relative}
@@ -321,7 +331,6 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 .btnline button:active{background:rgba(59,42,24,.06)}
 .btnline.danger button{color:var(--red);border-color:var(--red)}
 
-/* 档案区 */
 .prof-block{margin-bottom:26px}
 .prof-block h4{font-size:13px;font-weight:400;letter-spacing:.24em;color:var(--ink);
   margin-bottom:12px}
@@ -340,6 +349,26 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
   border:0;border-bottom:0;background:none}
 .prof-fld input::placeholder{color:var(--ink3)}
 
+/* 背景区 */
+.bg-preview{width:100%;height:140px;border:2px solid var(--rule);
+  outline:1px solid var(--rule2);outline-offset:2px;
+  background:rgba(255,250,238,.35);background-size:cover;background-position:center;
+  display:flex;align-items:center;justify-content:center;color:var(--ink3);
+  font-size:12px;letter-spacing:.18em;cursor:pointer;margin-bottom:12px;
+  position:relative;overflow:hidden}
+.bg-preview .ph{position:relative;z-index:1}
+.bg-mask-row{display:flex;align-items:center;gap:12px;padding:6px 0}
+.bg-mask-row label{flex:0 0 auto;font-size:13px;color:var(--ink2);width:64px}
+.bg-mask-row input[type=range]{flex:1 1 auto;-webkit-appearance:none;appearance:none;
+  height:2px;background:var(--rule);outline:0}
+.bg-mask-row input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;
+  width:18px;height:18px;border-radius:50%;background:var(--paper);
+  border:1.5px solid var(--red);cursor:pointer}
+.bg-mask-row input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;
+  background:var(--paper);border:1.5px solid var(--red);cursor:pointer}
+.bg-mask-row .val{flex:0 0 auto;font-size:12px;color:var(--ink3);font-family:var(--geo);
+  min-width:34px;text-align:right}
+
 #toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom) + 24px);
   transform:translateX(-50%) translateY(14px);z-index:600;opacity:0;pointer-events:none;
   background:var(--ink);color:var(--paper);font-size:13px;letter-spacing:.14em;
@@ -348,7 +377,11 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 #toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
 </head>
-<body>
+<body data-has-bg="0">
+
+<div class="bg-layer" id="bgLayer">
+  <div class="mask"></div>
+</div>
 
 <div id="cover">
   <div class="art"></div>
@@ -363,15 +396,19 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 
   <div id="ctop">
     <h1>彼岸相爱</h1>
-    <div class="rule"><span class="flower">❀</span></div>
+    <div class="rule">
+      <span class="line l"></span>
+      <span class="flower">❀</span>
+      <span class="line r"></span>
+    </div>
     <div class="en">BEYOND · LOVE</div>
     <div class="cn-sub">写给对岸，一句一句</div>
   </div>
 
   <div class="names">
     <div class="pair">
-      <div class="col"><span>易</span><span>遇</span></div>
-      <div class="col"><span>夏</span><span>雾</span><span>凉</span></div>
+      <div class="col left"><span>易</span><span class="mid">·</span><span>遇</span></div>
+      <div class="col right"><span>夏</span><span>雾</span><span>凉</span></div>
       <div class="seal"><div class="t">彼岸<br>相爱</div></div>
     </div>
   </div>
@@ -584,6 +621,17 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
     </div>
 
     <div class="blk">
+      <h3>背 景</h3>
+      <div class="bg-preview" id="bgPreview"><span class="ph">點此上傳背景圖</span></div>
+      <div class="bg-mask-row">
+        <label>蒙版</label>
+        <input type="range" id="bgMask" min="0" max="100" value="60">
+        <span class="val" id="bgMaskVal">60%</span>
+      </div>
+      <div class="btnline"><button id="bgClear">移 除 背 景 圖</button></div>
+    </div>
+
+    <div class="blk">
       <h3>譯 電 時 延</h3>
       <p class="tip">你说的每一句，祂隔多久才接到。<br>在此区间内随机取值，每一次都不同。</p>
       <div class="fld">
@@ -635,7 +683,13 @@ var Store={
       cards:function(){return {v:1,cards:[]};},
       chat:function(){return {v:1,msgs:[]};},
       set:function(){return {v:1,dMin:15,dMax:30};},
-      profile:function(){return {v:1,him:{name:'',call:'',avatar:''},me:{name:'',call:'',avatar:''}};}
+      profile:function(){return {
+        v:1,
+        him:{name:'',call:'',avatar:''},
+        me:{name:'',call:'',avatar:''},
+        bg:'',
+        bgMask:60
+      };}
     };
     var root=await navigator.storage.getDirectory();
     this.dir=await root.getDirectoryHandle('bian',{create:true});
@@ -666,6 +720,8 @@ var Store={
     var prof=this.cache.profile;
     if(!prof.him) prof.him={name:'',call:'',avatar:''};
     if(!prof.me) prof.me={name:'',call:'',avatar:''};
+    if(typeof prof.bg!=='string') prof.bg='';
+    if(typeof prof.bgMask!=='number') prof.bgMask=60;
     for(var k2 in FILES){
       if(!this.cache[k2] || typeof this.cache[k2]!=='object'){
         this.cache[k2]=DEFS[k2]();
@@ -736,9 +792,11 @@ function _set(){
 }
 function _profile(){
   var p=Store.cache.profile;
-  if(!p||typeof p!=='object') p={v:1,him:{name:'',call:'',avatar:''},me:{name:'',call:'',avatar:''}};
+  if(!p||typeof p!=='object') p={v:1,him:{name:'',call:'',avatar:''},me:{name:'',call:'',avatar:''},bg:'',bgMask:60};
   if(!p.him) p.him={name:'',call:'',avatar:''};
   if(!p.me) p.me={name:'',call:'',avatar:''};
+  if(typeof p.bg!=='string') p.bg='';
+  if(typeof p.bgMask!=='number') p.bgMask=60;
   Store.cache.profile=p;
   return p;
 }
@@ -815,7 +873,7 @@ function issueTotal(){ return issueList().length; }
 
 /* ===================== 报头 ===================== */
 function renderMasthead(){
-  var now=Date.now(), d=new Date(now), k=dayKey(now);
+  var now=Date.now(), d=new Date(now);
   var no=issueNo(), pub=todayPublished();
   document.getElementById('mhMeta').innerHTML=
     '第 '+('000'+no).slice(-3)+' 期'+(pub?'':'<b> · 待付印</b>')
@@ -824,12 +882,10 @@ function renderMasthead(){
     d.getFullYear()+'年'+(d.getMonth()+1)+'月'+d.getDate()+'日 · 邮资：'+priceText(now);
 
   var p=S.profile();
-  // 祂
   var hAva=document.getElementById('mhAvaHim');
   if(p.him.avatar){ hAva.innerHTML='<img src="'+p.him.avatar+'" alt="">'; }
   else { hAva.textContent='祂'; }
   document.getElementById('mhNameHim').textContent=p.him.call||'';
-  // 我
   var mAva=document.getElementById('mhAvaMe');
   if(p.me.avatar){ mAva.innerHTML='<img src="'+p.me.avatar+'" alt="">'; }
   else { mAva.textContent='我'; }
@@ -919,6 +975,8 @@ function armWait(w){
   S.pendings[w.id]=setTimeout(function(){ resolveWait(w.id); }, left+60);
 }
 
+// 一个「wait」是起点，它的回复条数随机 1~3。
+// 用一个 batch 结构串起来：{batchId, total, done}
 function resolveWait(id){
   delete S.pendings[id];
   var ms=S.msgs(), idx=-1;
@@ -939,15 +997,14 @@ function resolveWait(id){
   for(var q=0;q<n;q++){
     picked.push(cards[Math.floor(Math.random()*cards.length)]);
   }
-
   ensureIssue();
 
+  // 第一条替换掉「译电中」
   ms[idx]={id:uid('m'),who:'him',text:picked[0].text,at:Date.now(),cardId:picked[0].id};
 
-  // 若还有后续，插入一个「静默 wait」占位
+  // 如果还有 2、3 条，在末尾插一个"静默 wait"（代表「还有话」）
   if(n>1){
-    var w0={id:uid('w'),who:'wait',at:Date.now(),dueAt:Date.now(),_silent:true};
-    ms.push(w0);
+    ms.push({id:uid('w'),who:'wait',at:Date.now(),dueAt:Date.now(),_silent:true});
   }
 
   renderMasthead();
@@ -959,16 +1016,17 @@ function resolveWait(id){
     (function step(){
       if(k>=n) return;
       setTimeout(function(){
+        // 找末尾的静默 wait，把它换成下一条消息
         var ms2=S.msgs();
-        for(var a=0;a<ms2.length;a++){
+        for(var a=ms2.length-1;a>=0;a--){
           if(ms2[a].who==='wait' && ms2[a]._silent){
             ms2[a]={id:uid('m'),who:'him',text:picked[k].text,at:Date.now(),cardId:picked[k].id};
             break;
           }
         }
+        // 如果还有下一条，补一个新的静默 wait 在末尾
         if(k+1<n){
-          var wAt=Date.now();
-          ms2.push({id:uid('w'),who:'wait',at:wAt,dueAt:wAt,_silent:true});
+          ms2.push({id:uid('w'),who:'wait',at:Date.now(),dueAt:Date.now(),_silent:true});
         }
         Store.touch('chat'); Store.flush();
         var wasBottom=nearBottom();
@@ -1133,11 +1191,7 @@ function pickImage(cb){
     var file=f.files&&f.files[0];
     if(!file){ cleanup(); return; }
     var r=new FileReader();
-    r.onload=function(){
-      var t=String(r.result||'');
-      cleanup();
-      cb(t);
-    };
+    r.onload=function(){ cleanup(); cb(String(r.result||'')); };
     r.onerror=function(){ cleanup(); toast('讀不出這張圖'); };
     try{ r.readAsDataURL(file); }
     catch(e){ cleanup(); toast('讀不出這張圖'); }
@@ -1242,24 +1296,53 @@ function toast(msg){
   toastT=setTimeout(function(){ el.classList.remove('on'); },2200);
 }
 
-/* ===================== 档案 ===================== */
+/* ===================== 档案 / 背景 ===================== */
 function renderProfile(){
   var p=S.profile();
-  // 预览
   var ah=document.getElementById('profAvaHim');
   if(p.him.avatar){ ah.innerHTML='<img src="'+p.him.avatar+'" alt="">'; }
   else { ah.innerHTML='<span>祂</span>'; }
   var am=document.getElementById('profAvaMe');
   if(p.me.avatar){ am.innerHTML='<img src="'+p.me.avatar+'" alt="">'; }
   else { am.innerHTML='<span>我</span>'; }
-  // 输入框
+
   var nh=document.getElementById('profNameHim'), ch=document.getElementById('profCallHim');
   var nm=document.getElementById('profNameMe'),  cm=document.getElementById('profCallMe');
-  if(nh && nh.value===p.him.name ? false : true){} // no-op
   if(document.activeElement!==nh) nh.value=p.him.name||'';
   if(document.activeElement!==ch) ch.value=p.him.call||'';
   if(document.activeElement!==nm) nm.value=p.me.name||'';
   if(document.activeElement!==cm) cm.value=p.me.call||'';
+}
+function renderBackground(){
+  var p=S.profile();
+  var pv=document.getElementById('bgPreview');
+  var slider=document.getElementById('bgMask');
+  var val=document.getElementById('bgMaskVal');
+  if(p.bg){
+    pv.style.backgroundImage='url('+p.bg+')';
+    pv.innerHTML='<span class="ph"></span>';
+  }else{
+    pv.style.backgroundImage='';
+    pv.innerHTML='<span class="ph">點此上傳背景圖</span>';
+  }
+  slider.value=p.bgMask;
+  val.textContent=p.bgMask+'%';
+  applyBackground();
+}
+function applyBackground(){
+  var p=S.profile();
+  var layer=document.getElementById('bgLayer');
+  var mask=layer.querySelector('.mask');
+  if(p.bg){
+    layer.style.backgroundImage='url('+p.bg+')';
+    layer.classList.add('on');
+    document.body.setAttribute('data-has-bg','1');
+  }else{
+    layer.style.backgroundImage='';
+    layer.classList.remove('on');
+    document.body.setAttribute('data-has-bg','0');
+  }
+  mask.style.opacity=(p.bgMask/100);
 }
 function bindProfile(){
   var nh=document.getElementById('profNameHim'), ch=document.getElementById('profCallHim');
@@ -1293,6 +1376,29 @@ function bindProfile(){
       toast('我的頭像已更換');
     });
   });
+
+  document.getElementById('bgPreview').addEventListener('click',function(){
+    pickImage(function(dataUrl){
+      var p=S.profile(); p.bg=dataUrl;
+      Store.touch('profile'); Store.flush();
+      renderBackground();
+      toast('背景已更換');
+    });
+  });
+  document.getElementById('bgMask').addEventListener('input',function(){
+    var v=parseInt(this.value,10); if(isNaN(v)) v=60;
+    v=Math.max(0,Math.min(100,v));
+    var p=S.profile(); p.bgMask=v;
+    document.getElementById('bgMaskVal').textContent=v+'%';
+    applyBackground();
+    Store.touch('profile'); Store.flush();
+  });
+  document.getElementById('bgClear').addEventListener('click',function(){
+    var p=S.profile(); p.bg='';
+    Store.touch('profile'); Store.flush();
+    renderBackground();
+    toast('已移除背景圖');
+  });
 }
 
 /* ===================== 设置页 ===================== */
@@ -1307,6 +1413,7 @@ function renderSet(){
     '存储：本机 OPFS（/bian/）。\n電文 '+S.cards().length+' 份 · 已出刊 '+issueTotal()+' 期\n'
     +'电讯 '+S.msgs().length+' 条（彼岸 '+countWho('him')+' · 此岸 '+countWho('me')+'）';
   renderProfile();
+  renderBackground();
 }
 function bindSet(){
   ['dMin','dMax'].forEach(function(id){
@@ -1456,10 +1563,11 @@ bindProfile();
 
 Store.init().then(function(){
   rearmAll();
-  renderMasthead(); renderFlow(); renderSet(); renderCards(); renderProfile();
+  applyBackground();
+  renderMasthead(); renderFlow(); renderSet(); renderCards(); renderProfile(); renderBackground();
 }).catch(function(e){
   alert('存储出错：'+(e&&e.name)+' / '+(e&&e.message));
-  renderMasthead(); renderFlow(); renderSet(); renderCards(); renderProfile();
+  renderMasthead(); renderFlow(); renderSet(); renderCards(); renderProfile(); renderBackground();
 });
 })();
 </script>
