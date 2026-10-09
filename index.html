@@ -492,12 +492,18 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 (function(){
 'use strict';
 
-/* ===================== 存储层：纯 OPFS，无任何判断/兜底 ===================== */
-var FILES={meta:'bian/meta.json',cards:'bian/cards.json',chat:'bian/chat.json',set:'bian/settings.json'};
+/* ===================== 存储层：纯 OPFS，无判断、无探针、无兜底 ===================== */
+var FILES={
+  meta:'meta.json',
+  cards:'cards.json',
+  chat:'chat.json',
+  set:'settings.json'
+};
+
 var Store={
-  root:null, dir:null,
+  dir:null,
   cache:{meta:null,cards:null,chat:null,set:null},
-  dirty:{}, timers:{},
+  timers:{},
 
   async init(){
     var DEFS={
@@ -507,8 +513,8 @@ var Store={
       set:function(){return {v:1,dMin:15,dMax:30};}
     };
 
-    this.root=await navigator.storage.getDirectory();
-    this.dir=await this.root.getDirectoryHandle('bian',{create:true});
+    var root=await navigator.storage.getDirectory();
+    this.dir=await root.getDirectoryHandle('bian',{create:true});
 
     for(var k in FILES){
       var d=null;
@@ -523,8 +529,8 @@ var Store={
     }
 
     var meta=this.cache.meta;
-    if(!meta || !meta.issues){
-      meta=meta||DEFS.meta(); meta.issues=[];
+    if(!meta.issues){
+      meta.issues=[];
       var seen={}, ms=(this.cache.chat&&this.cache.chat.msgs)||[];
       for(var i=0;i<ms.length;i++){
         if(ms[i].who==='me'||ms[i].who==='him'){
@@ -533,7 +539,6 @@ var Store={
         }
       }
       meta.issues.sort();
-      this.cache.meta=meta;
       await this.writeNow('meta',meta);
     }
 
@@ -545,7 +550,7 @@ var Store={
   },
 
   async read(name){
-    var fh=await this.dir.getFileHandle(name.replace('bian/',''),{create:false});
+    var fh=await this.dir.getFileHandle(FILES[name],{create:false});
     var f=await fh.getFile();
     var t=await f.text();
     if(!t) return null;
@@ -553,29 +558,25 @@ var Store={
   },
 
   async writeNow(name,obj){
-    var base=name.replace('bian/','');
     var txt=JSON.stringify(obj);
-    var tmp=await this.dir.getFileHandle(base+'.tmp',{create:true});
-    var w=await tmp.createWritable();
+    var fh=await this.dir.getFileHandle(FILES[name],{create:true});
+    var w=await fh.createWritable();
     await w.write(txt);
     await w.close();
-    await tmp.move(base);
   },
 
   touch(name){
     if(!this.cache[name]||typeof this.cache[name]!=='object') return;
-    this.dirty[name]=true; this.sched(name);
-  },
-  sched(name){
     clearTimeout(this.timers[name]);
+    var self=this;
     this.timers[name]=setTimeout(function(){
-      var s=Store;
-      if(s.cache[name] && typeof s.cache[name]==='object'){
-        s.writeNow(name,s.cache[name]).catch(function(){});
+      if(self.cache[name] && typeof self.cache[name]==='object'){
+        self.writeNow(name,self.cache[name]).catch(function(){});
       }
-      delete s.timers[name];
-    },400);
+      delete self.timers[name];
+    },300);
   },
+
   async flush(){
     for(var k in this.timers){
       clearTimeout(this.timers[k]);
@@ -583,11 +584,15 @@ var Store={
         try{ await this.writeNow(k,this.cache[k]); }catch(e){}
       }
     }
-    this.timers={}; this.dirty={};
+    this.timers={};
   },
+
   async clearAll(){
     for(var k in FILES){
-      try{ var fh=await this.dir.getFileHandle(FILES[k].replace('bian/','')); await fh.remove(); }catch(e){}
+      try{
+        var fh=await this.dir.getFileHandle(FILES[k]);
+        await fh.remove();
+      }catch(e){}
     }
   }
 };
@@ -619,7 +624,7 @@ function seasonCN(t){ var m=new Date(t).getMonth()+1;
 var WEATHER=['晴','多云','微风','细雨','薄阴','骤雨初歇','海雾','转凉','闷热','风起'];
 var PRICE=['一次心动','半句晚安','一枚邮票','一滴眼泪','无边无际','一声叹息','一个回头的念头','一句未曾说出口的话'];
 
-/* ===================== 出刊 / 期号 ===================== */
+/* ===================== 出刊 ===================== */
 function issueList(){
   var m=Store.cache.meta;
   if(!m) return [];
