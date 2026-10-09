@@ -25,6 +25,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--serif);
   -webkit-font-smoothing:antialiased;user-select:none;-webkit-user-select:none}
 button{font-family:inherit;color:inherit;background:none;border:0;cursor:pointer}
 input,textarea{font-family:inherit;color:inherit;background:none;border:0;outline:0;-webkit-appearance:none}
+img{max-width:100%;display:block}
 
 /* ================= 封面 ================= */
 #cover{position:fixed;inset:0;z-index:300;height:100vh;height:100dvh;
@@ -112,6 +113,7 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 #enter .stamp::before{content:"";position:absolute;inset:4px;border:1px solid rgba(156,74,50,.24);border-radius:50%}
 #cbot .hint{margin-top:16px;font-size:12px;letter-spacing:.16em;color:var(--ink2)}
 
+/* ================= 版面 ================= */
 :root{--navh:50px}
 #paper{position:fixed;inset:0;height:100vh;height:100dvh;display:flex;flex-direction:column;
   opacity:0;transition:opacity .35s ease;background-color:var(--paper);
@@ -123,11 +125,13 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
   padding-bottom:calc(var(--navh) + env(safe-area-inset-bottom))}
 .sec.on{display:flex}
 #paper.sec{opacity:1}
+
 #navbar{position:fixed;left:0;right:0;bottom:0;z-index:150;
   height:calc(var(--navh) + env(safe-area-inset-bottom));
   padding-bottom:env(safe-area-inset-bottom);
   display:flex;align-items:stretch;
-  border-top:3px double var(--ink);background:var(--paper)}
+  border-top:3px double var(--ink);background-color:var(--paper);
+  background-size:cover;background-position:center;background-repeat:no-repeat}
 #navbar .nb{flex:1 1 0;display:flex;align-items:center;justify-content:center;
   font-size:13px;letter-spacing:.14em;color:var(--ink3);position:relative}
 #navbar .nb+.nb::before{content:"";position:absolute;left:0;top:22%;bottom:22%;width:1px;background:var(--rule2)}
@@ -135,7 +139,7 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 #navbar .nb.on::after{content:"";position:absolute;left:18%;right:18%;top:5px;height:2px;background:var(--red)}
 
 .masthead{flex:0 0 auto;padding:calc(env(safe-area-inset-top) + 9px) 16px 7px;text-align:center;
-  border-bottom:3px double var(--ink);position:relative}
+  border-bottom:3px double var(--ink);position:relative;background:transparent}
 .mh-nav{display:flex;align-items:center;justify-content:space-between;height:26px;margin-bottom:5px;
   padding:0 84px}
 .mh-nav .btn{font-size:11px;letter-spacing:.2em;color:var(--ink2);padding:4px 6px}
@@ -169,6 +173,9 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 .item .col .tm{font-family:var(--geo);font-size:10px;color:var(--ink3);letter-spacing:.06em}
 .item .body{margin-top:9px;font-size:16px;line-height:1.85;
   word-break:break-word;white-space:pre-wrap;user-select:text;-webkit-user-select:text}
+.item .body img{max-width:200px;max-height:200px;width:auto;height:auto;
+  border:1px solid var(--rule);outline:1px solid var(--rule2);outline-offset:2px;
+  cursor:pointer;background:rgba(255,250,238,.35)}
 .item.me .col{flex-direction:row-reverse}
 .item.me .body{text-align:right}
 .item.me .nm{color:var(--ink)}
@@ -188,7 +195,7 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 .colophon{text-align:center;padding:22px 0 6px;color:var(--ink3);font-size:10px;letter-spacing:.2em}
 
 .press{flex:0 0 auto;display:flex;flex-direction:column;
-  padding:0 14px;position:relative;
+  padding:0 14px;position:relative;background:transparent;
   border-top:3px double var(--ink)}
 .press-cn{position:relative;text-align:center;font-size:10px;letter-spacing:.3em;margin-right:-.3em;
   color:var(--ink2);padding:8px 0 6px;cursor:pointer;transition:color .18s ease;
@@ -225,6 +232,7 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 .opbar .op:active .gi,.opbar .op:active{color:var(--red)}
 .opbar .op:active .gi svg{stroke:var(--red)}
 
+/* ================= 子页 ================= */
 #cardsPage,#setPage,#laiGaoPage,#picsPage,#actsPage,#musicPage{position:fixed;inset:0;z-index:250;
   height:100vh;height:100dvh;background-color:var(--paper);
   background-size:cover;background-position:center;background-repeat:no-repeat;
@@ -360,6 +368,91 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
   background:var(--paper);border:1.5px solid var(--red);cursor:pointer}
 .bg-mask-row .val{flex:0 0 auto;font-size:12px;color:var(--ink3);font-family:var(--geo);
   min-width:34px;text-align:right}
+
+/* 比例：档位 + 输入 */
+.ratio-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.ratio-row .rb{font-size:12px;letter-spacing:.1em;color:var(--ink2);
+  border:1px solid var(--rule);padding:6px 10px;border-radius:2px;background:none}
+.ratio-row .rb.on{color:var(--red);border-color:var(--red);background:rgba(156,74,50,.08)}
+.ratio-row .rb:active{background:rgba(59,42,24,.07)}
+.ratio-num{display:flex;align-items:center;gap:8px;padding:4px 0}
+.ratio-num label{font-size:13px;color:var(--ink2);width:34px}
+.ratio-num input{width:70px;font-size:16px;text-align:center;border:1px solid var(--rule);
+  border-radius:2px;padding:6px 4px;font-family:var(--geo)}
+.ratio-num .u{font-size:11px;color:var(--ink3)}
+
+/* 畫帖网格 */
+.pic-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.pic-cell{position:relative;aspect-ratio:1/1;border:1px solid var(--rule);
+  outline:1px solid var(--rule2);outline-offset:2px;background:rgba(255,250,238,.35);
+  overflow:hidden;cursor:pointer}
+.pic-cell img{width:100%;height:100%;object-fit:cover;display:block}
+.pic-cell .ck{position:absolute;top:4px;left:4px;display:none}
+.pic-cell .ck input{-webkit-appearance:none;appearance:none;width:18px;height:18px;
+  border:1.5px solid var(--paper);border-radius:2px;background:rgba(59,42,24,.4);position:relative}
+.pic-cell .ck input:checked{border-color:var(--red);background:var(--red)}
+.pic-cell .ck input:checked::after{content:"";position:absolute;left:5px;top:1px;
+  width:4px;height:9px;border:solid var(--paper);border-width:0 2px 2px 0;transform:rotate(45deg)}
+.pic-grid.picking .pic-cell .ck{display:block}
+.pic-grid.picking .pic-cell img{opacity:.55}
+
+.add-tile{aspect-ratio:1/1;border:2px dashed var(--rule);outline:1px solid var(--rule2);
+  outline-offset:2px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:6px;color:var(--ink3);font-size:12px;letter-spacing:.14em;cursor:pointer;
+  background:rgba(255,250,238,.2);grid-column:span 1}
+.add-tile:active{background:rgba(59,42,24,.06)}
+.add-tile .plus{font-size:24px;line-height:1;color:var(--ink2)}
+
+/* 预览层 / 进度层 */
+.mask-layer{position:fixed;inset:0;z-index:400;display:none;
+  align-items:center;justify-content:center;background:rgba(20,14,8,.55)}
+.mask-layer.on{display:flex}
+.preview-box{width:86vw;max-width:420px;max-height:80vh;background:var(--paper);
+  border:2px solid var(--ink);display:flex;flex-direction:column;
+  box-shadow:0 8px 30px rgba(20,14,8,.35)}
+.preview-hd{padding:12px 14px;border-bottom:1px solid var(--rule2);
+  font-size:12px;letter-spacing:.24em;color:var(--red);text-align:center}
+.preview-bd{flex:1 1 auto;min-height:0;overflow-y:auto;padding:12px}
+.preview-ft{padding:10px 14px;border-top:1px solid var(--rule2);display:flex;gap:10px}
+.preview-ft button{flex:1 1 0;font-size:13px;letter-spacing:.18em;padding:10px;
+  border:1px solid var(--rule);border-radius:2px;color:var(--ink2)}
+.preview-ft button.ok{color:var(--red);border-color:var(--red)}
+.preview-ft button:active{background:rgba(59,42,24,.06)}
+.preview-ft button.ok:active{background:rgba(156,74,50,.10)}
+.preview-ft button[disabled]{opacity:.4}
+.preview-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.preview-cell{position:relative;aspect-ratio:1/1;border:1px solid var(--rule);
+  overflow:hidden;background:rgba(255,250,238,.35)}
+.preview-cell img{width:100%;height:100%;object-fit:cover;display:block}
+.preview-cell .x{position:absolute;top:2px;right:2px;width:20px;height:20px;
+  border-radius:50%;background:rgba(59,42,24,.7);color:var(--paper);
+  font-size:13px;line-height:20px;text-align:center;border:0;padding:0}
+.progress-wrap{padding:18px 14px}
+.progress-label{font-size:12px;letter-spacing:.16em;color:var(--ink2);
+  text-align:center;margin-bottom:10px;font-family:var(--geo)}
+.progress-bar{height:6px;background:rgba(59,42,24,.14);position:relative;overflow:hidden}
+.progress-bar .fill{position:absolute;left:0;top:0;bottom:0;width:0;
+  background:var(--red);transition:width .2s ease}
+
+/* 大图查看 */
+.img-view{position:fixed;inset:0;z-index:500;display:none;align-items:center;justify-content:center;
+  background:rgba(20,14,8,.85)}
+.img-view.on{display:flex}
+.img-view img{max-width:92vw;max-height:82vh;width:auto;height:auto;
+  border:1px solid rgba(255,250,238,.4)}
+
+/* 畫帖选择器（操作栏点畫帖） */
+.pick-layer{position:fixed;inset:0;z-index:420;display:none;
+  align-items:center;justify-content:center;background:rgba(20,14,8,.55)}
+.pick-layer.on{display:flex}
+.pick-box{width:86vw;max-width:420px;max-height:76vh;background:var(--paper);
+  border:2px solid var(--ink);display:flex;flex-direction:column;
+  box-shadow:0 8px 30px rgba(20,14,8,.35)}
+.pick-hd{padding:12px 14px;border-bottom:1px solid var(--rule2);
+  font-size:12px;letter-spacing:.24em;color:var(--red);text-align:center;position:relative}
+.pick-hd .x{position:absolute;right:8px;top:50%;transform:translateY(-50%);
+  font-size:18px;color:var(--ink3);padding:4px 8px;border:0;background:none}
+.pick-bd{flex:1 1 auto;min-height:0;overflow-y:auto;padding:12px}
 
 #toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom) + 24px);
   transform:translateX(-50%) translateY(14px);z-index:600;opacity:0;pointer-events:none;
@@ -516,7 +609,8 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
       </button>
       <button class="tocrow" data-into="picsPage">
         <span class="nm">畫 帖</span><span class="dash"></span>
-        <span class="en">STICKERS</span><span class="pg">二</span>
+        <span class="en">PICS · <i id="lgPicsN">0</i></span>
+        <span class="pg">二</span>
       </button>
       <button class="tocrow" data-into="actsPage">
         <span class="nm">往 來 簿</span><span class="dash"></span>
@@ -567,8 +661,30 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
   </div>
 </div>
 
-<div id="picsPage"><div class="sheet-hd"><button class="back" data-back="1">‹ 來 稿</button><h2>畫 帖</h2><div class="sub">STICKERS</div></div>
-  <div class="sheet-bd"><div class="empty">這間屋子還沒開張。</div></div></div>
+<div id="picsPage">
+  <div class="sheet-hd">
+    <button class="back" id="picsBack">‹ 來 稿</button>
+    <h2>畫 帖</h2>
+    <div class="sub">PICS FROM BEYOND</div>
+  </div>
+  <div class="sheet-bd">
+    <div class="tools">
+      <button class="tl" id="picDedup">剔重</button>
+      <button class="tl" id="picImport">收圖</button>
+      <button class="tl" id="picExport">寄圖</button>
+      <button class="tl danger" id="picBulk">銷燬</button>
+    </div>
+    <div class="cntbar" id="picCntBar">共 0 张</div>
+    <div class="pic-grid" id="picGrid"></div>
+  </div>
+  <div class="bulkbar" id="picBulkBar">
+    <label class="selall"><input type="checkbox" id="picSelAll"><span>全選</span></label>
+    <span class="n" id="picBulkN">已選 0 张</span>
+    <button class="do" id="picBulkDo">銷 燬</button>
+    <button class="cx" id="picBulkCancel">罷手</button>
+  </div>
+</div>
+
 <div id="actsPage"><div class="sheet-hd"><button class="back" data-back="1">‹ 來 稿</button><h2>往 來 簿</h2><div class="sub">MOMENTS</div></div>
   <div class="sheet-bd"><div class="empty">這間屋子還沒開張。</div></div></div>
 <div id="musicPage"><div class="sheet-hd"><button class="back" data-back="1">‹ 來 稿</button><h2>唱 片 架</h2><div class="sub">RECORDS</div></div>
@@ -634,6 +750,23 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
     </div>
 
     <div class="blk">
+      <h3>祂 發 圖</h3>
+      <p class="tip">祂回复时，有多大几率用一张畫帖代替文字。</p>
+      <div class="ratio-row" id="ratioRow">
+        <button class="rb" data-v="0">从不用</button>
+        <button class="rb" data-v="10">偶尔</button>
+        <button class="rb" data-v="50">一半</button>
+        <button class="rb" data-v="80">经常</button>
+        <button class="rb" data-v="100">总是</button>
+      </div>
+      <div class="ratio-num">
+        <label>比例</label>
+        <input id="picRatio" type="number" inputmode="numeric" min="0" max="100" value="10">
+        <span class="u">%</span>
+      </div>
+    </div>
+
+    <div class="blk">
       <h3>關 於</h3>
       <p class="tip">本站为一人一世界的私人版面。<br>字卡由你亲手写，不预设、不联网、不接任何外部服务。<br>所有内容仅存于本机 OPFS 存储。</p>
     </div>
@@ -647,22 +780,46 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
   </div>
 </div>
 
+<!-- 预览 / 进度层 -->
+<div class="mask-layer" id="pvLayer">
+  <div class="preview-box">
+    <div class="preview-hd" id="pvTitle">確 認 添 加</div>
+    <div class="preview-bd" id="pvBody"></div>
+    <div class="preview-ft" id="pvFt">
+      <button id="pvCancel">取 消</button>
+      <button class="ok" id="pvOk">確 定 添 加</button>
+    </div>
+  </div>
+</div>
+
+<!-- 畫帖选择器（操作栏点畫帖） -->
+<div class="pick-layer" id="pickLayer">
+  <div class="pick-box">
+    <div class="pick-hd">畫 帖<button class="x" id="pickClose">×</button></div>
+    <div class="pick-bd"><div class="pic-grid" id="pickGrid"></div></div>
+  </div>
+</div>
+
+<!-- 大图查看 -->
+<div class="img-view" id="imgView"><img id="imgViewSrc" src="" alt=""></div>
+
 <div id="toast"></div>
 <script>
 (function(){
 'use strict';
 
-/* ===================== 存储层：纯 OPFS ===================== */
+/* ===================== 存储层 ===================== */
 var FILES={
   meta:'meta.json',
   cards:'cards.json',
   chat:'chat.json',
   set:'settings.json',
-  profile:'profile.json'
+  profile:'profile.json',
+  pics:'pics.json'
 };
 var Store={
   dir:null,
-  cache:{meta:null,cards:null,chat:null,set:null,profile:null},
+  cache:{meta:null,cards:null,chat:null,set:null,profile:null,pics:null},
   timers:{},
 
   async init(){
@@ -670,14 +827,15 @@ var Store={
       meta:function(){return {v:1,createdAt:Date.now(),issues:[]};},
       cards:function(){return {v:1,cards:[]};},
       chat:function(){return {v:1,msgs:[]};},
-      set:function(){return {v:1,dMin:15,dMax:30};},
+      set:function(){return {v:1,dMin:15,dMax:30,picRatio:10};},
       profile:function(){return {
         v:1,
         him:{name:'',call:'',avatar:''},
         me:{name:'',call:'',avatar:''},
         bg:'',
         bgMask:60
-      };}
+      };},
+      pics:function(){return {v:1,pics:[]};}
     };
     var root=await navigator.storage.getDirectory();
     this.dir=await root.getDirectoryHandle('bian',{create:true});
@@ -710,6 +868,11 @@ var Store={
     if(!prof.me) prof.me={name:'',call:'',avatar:''};
     if(typeof prof.bg!=='string') prof.bg='';
     if(typeof prof.bgMask!=='number') prof.bgMask=60;
+    var st=this.cache.set;
+    if(typeof st.picRatio!=='number') st.picRatio=10;
+    if(!this.cache.pics || !Array.isArray(this.cache.pics.pics)){
+      this.cache.pics={v:1,pics:[]};
+    }
     for(var k2 in FILES){
       if(!this.cache[k2] || typeof this.cache[k2]!=='object'){
         this.cache[k2]=DEFS[k2]();
@@ -775,7 +938,8 @@ function _msgs(){
   return Store.cache.chat.msgs;
 }
 function _set(){
-  if(!Store.cache.set||typeof Store.cache.set!=='object') Store.cache.set={v:1,dMin:15,dMax:30};
+  if(!Store.cache.set||typeof Store.cache.set!=='object') Store.cache.set={v:1,dMin:15,dMax:30,picRatio:10};
+  if(typeof Store.cache.set.picRatio!=='number') Store.cache.set.picRatio=10;
   return Store.cache.set;
 }
 function _profile(){
@@ -788,7 +952,11 @@ function _profile(){
   Store.cache.profile=p;
   return p;
 }
-var S={ cards:_cards, msgs:_msgs, set:_set, profile:_profile, pendings:{} };
+function _pics(){
+  if(!Store.cache.pics||!Array.isArray(Store.cache.pics.pics)) Store.cache.pics={v:1,pics:[]};
+  return Store.cache.pics.pics;
+}
+var S={ cards:_cards, msgs:_msgs, set:_set, profile:_profile, pics:_pics, pendings:{} };
 
 function uid(p){ return p+'_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,7); }
 function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
@@ -899,8 +1067,14 @@ function renderFlow(){
       var col=(m.who==='him')
         ? '<span class="nm">◆ '+nm+'</span><span class="dash"></span><span class="tm">'+hhmm(m.at)+'</span>'
         : '<span class="tm">'+hhmm(m.at)+'</span><span class="dash"></span><span class="nm">'+nm+' ◆</span>';
+      var bodyHtml;
+      if(m.kind==='pic' && m.pic){
+        bodyHtml='<img src="'+m.pic+'" data-img="'+m.id+'" alt="">';
+      }else{
+        bodyHtml=esc(m.text||'');
+      }
       html+='<article class="'+cls+'" data-id="'+m.id+'"><div class="col">'+col+'</div>'
-           +'<div class="body">'+esc(m.text)+'</div></article>';
+           +'<div class="body">'+bodyHtml+'</div></article>';
     }else if(m.who==='wait'){
       var wcls='item wait'+(groupOpen?' group':'');
       html+='<article class="'+wcls+'" data-id="'+m.id+'">'
@@ -932,6 +1106,14 @@ function nearBottom(){
   return (box.scrollHeight - box.scrollTop - box.clientHeight) < 60;
 }
 
+/* 点图片看大图 */
+document.getElementById('flow').addEventListener('click',function(e){
+  var img=e.target;
+  if(img && img.tagName==='IMG' && img.getAttribute('data-img')){
+    openImgView(img.src);
+  }
+});
+
 /* ===================== 抽卡 / 回复 ===================== */
 function delayMs(){ var s=S.set();
   var a=Math.max(1,Math.min(120,s.dMin|0||15)), b=Math.max(1,Math.min(120,s.dMax|0||30));
@@ -956,6 +1138,21 @@ function sendMine(text){
   armWait(w);
 }
 
+// 发一张畫帖（我发）
+function sendMinePic(dataUrl){
+  var now=Date.now();
+  ensureIssue();
+  renderMasthead();
+  var ms=S.msgs();
+  ms.push({id:uid('m'),who:'me',kind:'pic',pic:dataUrl,at:now});
+  var w={id:uid('w'),who:'wait',at:now,dueAt:now+delayMs()};
+  ms.push(w);
+  Store.touch('chat');
+  Store.flush();
+  renderFlow(); toBottom(true);
+  armWait(w);
+}
+
 function armWait(w){
   var left=w.dueAt-Date.now();
   if(left<0) left=0;
@@ -963,6 +1160,7 @@ function armWait(w){
   S.pendings[w.id]=setTimeout(function(){ resolveWait(w.id); }, left+60);
 }
 
+// 一次回复的「批次」：抽 1~3 条，每条 90% 文字 + 10% 图片（可设置）
 function resolveWait(id){
   delete S.pendings[id];
   var ms=S.msgs(), idx=-1;
@@ -970,7 +1168,8 @@ function resolveWait(id){
   if(idx<0) return;
 
   var cards=S.cards();
-  if(!cards.length){
+  var pics=S.pics();
+  if(!cards.length && !pics.length){
     ms[idx]={id:uid('x'),who:'extra',text:'本报尚未收到彼岸来稿。\n祂还没有话可说——除非你替祂写。',at:Date.now()};
     renderMasthead();
     Store.touch('chat'); Store.flush();
@@ -978,14 +1177,31 @@ function resolveWait(id){
     return;
   }
 
+  var ratio=Math.max(0,Math.min(100, S.set().picRatio|0));
   var n=1+Math.floor(Math.random()*3);
-  var picked=[];
+  var batch=[];
   for(var q=0;q<n;q++){
-    picked.push(cards[Math.floor(Math.random()*cards.length)]);
+    var usePic=false;
+    if(pics.length && Math.random()*100 < ratio){ usePic=true; }
+    if(usePic){
+      batch.push({kind:'pic', pic:pics[Math.floor(Math.random()*pics.length)].data});
+    }else{
+      if(cards.length){
+        batch.push({kind:'text', text:cards[Math.floor(Math.random()*cards.length)].text});
+      }else{
+        batch.push({kind:'pic', pic:pics[Math.floor(Math.random()*pics.length)].data});
+      }
+    }
   }
   ensureIssue();
 
-  ms[idx]={id:uid('m'),who:'him',text:picked[0].text,at:Date.now(),cardId:picked[0].id};
+  // 第一条替换「译电中」
+  var first=batch[0];
+  if(first.kind==='pic'){
+    ms[idx]={id:uid('m'),who:'him',kind:'pic',pic:first.pic,at:Date.now()};
+  }else{
+    ms[idx]={id:uid('m'),who:'him',text:first.text,at:Date.now()};
+  }
 
   if(n>1){
     ms.push({id:uid('w'),who:'wait',at:Date.now(),dueAt:Date.now(),_silent:true});
@@ -1003,7 +1219,12 @@ function resolveWait(id){
         var ms2=S.msgs();
         for(var a=ms2.length-1;a>=0;a--){
           if(ms2[a].who==='wait' && ms2[a]._silent){
-            ms2[a]={id:uid('m'),who:'him',text:picked[k].text,at:Date.now(),cardId:picked[k].id};
+            var item=batch[k];
+            if(item.kind==='pic'){
+              ms2[a]={id:uid('m'),who:'him',kind:'pic',pic:item.pic,at:Date.now()};
+            }else{
+              ms2[a]={id:uid('m'),who:'him',text:item.text,at:Date.now()};
+            }
             break;
           }
         }
@@ -1025,8 +1246,7 @@ function rearmAll(){
   var ms=S.msgs();
   for(var i=0;i<ms.length;i++){ if(ms[i].who==='wait') armWait(ms[i]); }
 }
-
-/* ===================== 電文匣 ===================== */
+  /* ===================== 電文匣 ===================== */
 var picking=false, picked={};
 var kw='';
 
@@ -1165,22 +1385,45 @@ function pickFile(accept,cb){
   document.body.appendChild(f);
   try{ f.click(); }catch(e){ cleanup(); toast('無法開啟檔案選擇器'); }
 }
-function pickImage(cb){
+function pickImages(cb){
   var f=document.createElement('input');
-  f.type='file'; f.accept='image/*';
+  f.type='file'; f.accept='image/*'; f.multiple=true;
   f.style.cssText='position:fixed;left:-9999px;width:1px;height:1px;opacity:0';
   f.onchange=function(){
-    var file=f.files&&f.files[0];
-    if(!file){ cleanup(); return; }
-    var r=new FileReader();
-    r.onload=function(){ cleanup(); cb(String(r.result||'')); };
-    r.onerror=function(){ cleanup(); toast('讀不出這張圖'); };
-    try{ r.readAsDataURL(file); }
-    catch(e){ cleanup(); toast('讀不出這張圖'); }
+    var files=f.files?Array.prototype.slice.call(f.files):[];
+    cleanup();
+    if(!files.length) return;
+    cb(files);
   };
   function cleanup(){ try{ if(f.parentNode) f.parentNode.removeChild(f); }catch(e){} }
   document.body.appendChild(f);
   try{ f.click(); }catch(e){ cleanup(); toast('無法開啟檔案選擇器'); }
+}
+function pickImage(cb){
+  pickImages(function(files){ readImage(files[0],cb); });
+}
+function readImage(file,cb){
+  var r=new FileReader();
+  r.onload=function(){
+    var img=new Image();
+    img.onload=function(){
+      var maxW=800;
+      var w=img.width, h=img.height;
+      if(w>maxW){ h=Math.round(h*maxW/w); w=maxW; }
+      var c=document.createElement('canvas');
+      c.width=w; c.height=h;
+      var ctx=c.getContext('2d');
+      ctx.drawImage(img,0,0,w,h);
+      var dataUrl;
+      try{ dataUrl=c.toDataURL('image/jpeg',0.82); }
+      catch(e){ dataUrl=String(r.result||''); }
+      cb(dataUrl);
+    };
+    img.onerror=function(){ cb(String(r.result||'')); };
+    img.src=String(r.result||'');
+  };
+  r.onerror=function(){ toast('讀不出這張圖'); };
+  r.readAsDataURL(file);
 }
 function download(name,text,mime){
   var blob=new Blob([text],{type:mime||'application/json;charset=utf-8'});
@@ -1278,7 +1521,219 @@ function toast(msg){
   toastT=setTimeout(function(){ el.classList.remove('on'); },2200);
 }
 
-/* ===================== 档案 / 背景 ===================== */
+/* ===================== 畫帖 ===================== */
+var picPicking=false, picPicked={};
+var pvFiles=[], pvBusy=false;
+
+function renderPics(){
+  var all=S.pics();
+  document.getElementById('picCntBar').innerHTML='共 '+all.length+' 张';
+  document.getElementById('lgPicsN').textContent=all.length;
+  var grid=document.getElementById('picGrid');
+  grid.classList.toggle('picking',picPicking);
+  document.getElementById('picBulk').classList.toggle('on',picPicking);
+  document.getElementById('picBulkBar').classList.toggle('on',picPicking);
+
+  var h='';
+  h+='<div class="add-tile" id="picAddTile"><span class="plus">＋</span><span>添加圖片</span></div>';
+  for(var i=0;i<all.length;i++){
+    var it=all[i];
+    h+='<div class="pic-cell" data-pic="'+it.id+'">'
+      +'<img src="'+it.data+'" alt="">'
+      +'<label class="ck"><input type="checkbox" data-pck="'+it.id+'"'
+      +(picPicked[it.id]?' checked':'')+'></label>'
+      +'</div>';
+  }
+  grid.innerHTML=h;
+
+  var tile=document.getElementById('picAddTile');
+  if(tile){ tile.addEventListener('click',addPicFlow); }
+  updatePicBulkN();
+}
+function updatePicBulkN(){
+  var n=0; for(var k in picPicked) if(picPicked[k]) n++;
+  document.getElementById('picBulkN').textContent='已選 '+n+' 张';
+  var sa=document.getElementById('picSelAll');
+  var all=S.pics();
+  var allOn=all.length>0;
+  for(var i=0;i<all.length;i++){ if(!picPicked[all[i].id]){ allOn=false; break; } }
+  sa.checked=allOn;
+}
+document.getElementById('picGrid').addEventListener('click',function(e){
+  if(e.target.tagName==='INPUT') return;
+  var cell=e.target.closest?e.target.closest('.pic-cell'):null;
+  if(!cell) return;
+  var id=cell.getAttribute('data-pic');
+  if(picPicking){
+    picPicked[id]=!picPicked[id];
+    renderPics();
+  }else{
+    var p=S.pics();
+    for(var i=0;i<p.length;i++){
+      if(p[i].id===id){ openImgView(p[i].data); break; }
+    }
+  }
+});
+document.getElementById('picGrid').addEventListener('change',function(e){
+  var id=e.target.getAttribute&&e.target.getAttribute('data-pck');
+  if(id){ picPicked[id]=e.target.checked; updatePicBulkN(); }
+});
+
+function picSetPicking(v){
+  picPicking=v;
+  if(!v) picPicked={};
+  renderPics();
+}
+document.getElementById('picBulk').addEventListener('click',function(){ picSetPicking(!picPicking); });
+document.getElementById('picBulkCancel').addEventListener('click',function(){ picSetPicking(false); });
+document.getElementById('picSelAll').addEventListener('change',function(){
+  var all=S.pics(), on=this.checked;
+  for(var i=0;i<all.length;i++) picPicked[all[i].id]=on;
+  renderPics();
+});
+document.getElementById('picBulkDo').addEventListener('click',function(){
+  var n=0, all=S.pics(), out=[];
+  for(var i=0;i<all.length;i++){
+    if(picPicked[all[i].id]){ n++; continue; }
+    out.push(all[i]);
+  }
+  if(!n){ toast('尚未勾選'); return; }
+  var cc=_pics(); cc.length=0;
+  for(var q=0;q<out.length;q++) cc.push(out[q]);
+  Store.touch('pics'); picSetPicking(false);
+  toast('已銷燬 '+n+' 张，餘 '+out.length+' 张');
+});
+
+document.getElementById('picDedup').addEventListener('click',function(){
+  var all=S.pics(), seen={}, out=[], n=0;
+  for(var i=0;i<all.length;i++){
+    var k=all[i].data;
+    if(seen[k]){ n++; continue; }
+    seen[k]=1; out.push(all[i]);
+  }
+  if(!n){ toast('無重複，帖中 '+all.length+' 张各異'); return; }
+  var cc=_pics(); cc.length=0;
+  for(var q=0;q<out.length;q++) cc.push(out[q]);
+  Store.touch('pics'); renderPics(); toast('剔去 '+n+' 张，餘 '+out.length+' 张');
+});
+
+document.getElementById('picImport').addEventListener('click',function(){
+  pickFile('.json,application/json,text/plain,*/*',function(txt){
+    var arr=null;
+    try{
+      var j=JSON.parse(txt);
+      arr = Array.isArray(j) ? j : (j&&j.pics)||null;
+    }catch(e){ toast('這個檔案讀不出'); return; }
+    if(!arr || !arr.length){ toast('這個檔案裡沒有可用的圖'); return; }
+    var all=S.pics(), have={}, added=0, dup=0;
+    for(var i=0;i<all.length;i++) have[all[i].data]=1;
+    for(var j2=0;j2<arr.length;j2++){
+      var d=typeof arr[j2]==='string'?arr[j2]:(arr[j2]&&arr[j2].data);
+      if(!d) continue;
+      if(have[d]){ dup++; continue; }
+      have[d]=1;
+      all.push({id:uid('p'),data:d,at:Date.now()});
+      added++;
+    }
+    if(added){ Store.touch('pics'); Store.flush(); renderPics(); }
+    if(!added && dup) toast('帖中已有這 '+dup+' 张，無需重收');
+    else if(dup) toast('收進 '+added+' 张，重複 '+dup+' 张已略過');
+    else toast('收進 '+added+' 张');
+  });
+});
+document.getElementById('picExport').addEventListener('click',function(){
+  var all=S.pics(), n=stamp();
+  openChoices([
+    ['JSON','畫帖-'+n+'.json',JSON.stringify({v:1,exportedAt:Date.now(),count:all.length,pics:all},null,2),'application/json;charset=utf-8']
+  ]);
+});
+
+/* 添加流程：选图 → 预览 → 进度 */
+function addPicFlow(){
+  pickImages(function(files){
+    pvFiles=[];
+    var remain=files.length;
+    if(!remain) return;
+    for(var i=0;i<files.length;i++){
+      (function(file){
+        readImage(file,function(dataUrl){
+          if(dataUrl) pvFiles.push(dataUrl);
+          remain--;
+          if(remain<=0) showPreview();
+        });
+      })(files[i]);
+    }
+  });
+}
+function showPreview(){
+  pvBusy=false;
+  document.getElementById('pvTitle').textContent='確 認 添 加';
+  var ft=document.getElementById('pvFt');
+  ft.innerHTML='<button id="pvCancel">取 消</button><button class="ok" id="pvOk">確 定 添 加</button>';
+  document.getElementById('pvCancel').addEventListener('click',closePreview);
+  document.getElementById('pvOk').addEventListener('click',startAdd);
+  var h='<div class="preview-grid">';
+  for(var i=0;i<pvFiles.length;i++){
+    h+='<div class="preview-cell"><img src="'+pvFiles[i]+'" alt="">'
+      +'<button class="x" data-px="'+i+'">×</button></div>';
+  }
+  h+='</div>';
+  document.getElementById('pvBody').innerHTML=h;
+  document.getElementById('pvLayer').classList.add('on');
+}
+document.getElementById('pvBody').addEventListener('click',function(e){
+  if(pvBusy) return;
+  var x=e.target.getAttribute&&e.target.getAttribute('data-px');
+  if(x!==null && x!==undefined){
+    var i=parseInt(x,10);
+    pvFiles.splice(i,1);
+    if(!pvFiles.length){ closePreview(); return; }
+    showPreview();
+  }
+});
+function closePreview(){
+  document.getElementById('pvLayer').classList.remove('on');
+  pvFiles=[];
+}
+function startAdd(){
+  if(pvBusy) return;
+  pvBusy=true;
+  document.getElementById('pvTitle').textContent='正 在 添 加';
+  var ft=document.getElementById('pvFt');
+  ft.innerHTML='<button disabled>添加中…</button>';
+  var total=pvFiles.length, done=0;
+  var h='<div class="progress-wrap">'
+    +'<div class="progress-label" id="pvLabel">正在添加 0/'+total+'</div>'
+    +'<div class="progress-bar"><div class="fill" id="pvFill"></div></div>'
+    +'</div>';
+  document.getElementById('pvBody').innerHTML=h;
+  var all=S.pics(), have={};
+  for(var i=0;i<all.length;i++) have[all[i].data]=1;
+  var idx=0;
+  function next(){
+    if(idx>=total){
+      Store.touch('pics'); Store.flush();
+      renderPics();
+      setTimeout(function(){
+        document.getElementById('pvLayer').classList.remove('on');
+        pvFiles=[]; pvBusy=false;
+        toast('已添加 '+total+' 张');
+      },300);
+      return;
+    }
+    var d=pvFiles[idx];
+    if(!have[d]){ all.push({id:uid('p'),data:d,at:Date.now()}); have[d]=1; }
+    idx++; done++;
+    var lab=document.getElementById('pvLabel');
+    var fill=document.getElementById('pvFill');
+    if(lab) lab.textContent='正在添加 '+done+'/'+total;
+    if(fill) fill.style.width=Math.round(done*100/total)+'%';
+    setTimeout(next,20);
+  }
+  next();
+}
+
+/* ===================== 设置 / 档案 / 背景 ===================== */
 function renderProfile(){
   var p=S.profile();
   var ah=document.getElementById('profAvaHim');
@@ -1312,7 +1767,8 @@ function renderBackground(){
 function applyBackground(){
   var p=S.profile();
   var ids=['paper','secMail','secSupp','secClip','secSpecial',
-           'laiGaoPage','cardsPage','picsPage','actsPage','musicPage','setPage'];
+           'laiGaoPage','cardsPage','picsPage','actsPage','musicPage','setPage',
+           'navbar'];
   var m=p.bgMask/100;
   var mask='rgba(239,225,198,'+m+')';
   for(var i=0;i<ids.length;i++){
@@ -1387,8 +1843,35 @@ function bindProfile(){
     toast('已移除背景圖');
   });
 }
-
-/* ===================== 设置页 ===================== */
+function renderRatio(){
+  var v=S.set().picRatio|0;
+  document.getElementById('picRatio').value=v;
+  var rbs=document.querySelectorAll('#ratioRow .rb');
+  for(var i=0;i<rbs.length;i++){
+    var rv=parseInt(rbs[i].getAttribute('data-v'),10);
+    rbs[i].classList.toggle('on', rv===v);
+  }
+}
+function bindRatio(){
+  var rbs=document.querySelectorAll('#ratioRow .rb');
+  for(var i=0;i<rbs.length;i++){
+    rbs[i].addEventListener('click',function(){
+      var v=parseInt(this.getAttribute('data-v'),10);
+      var s=S.set(); s.picRatio=v;
+      Store.touch('set'); Store.flush();
+      renderRatio();
+    });
+  }
+  document.getElementById('picRatio').addEventListener('change',function(){
+    var v=parseInt(this.value,10);
+    if(isNaN(v)) v=10;
+    v=Math.max(0,Math.min(100,v));
+    this.value=v;
+    var s=S.set(); s.picRatio=v;
+    Store.touch('set'); Store.flush();
+    renderRatio();
+  });
+}
 function countWho(w){ var m=S.msgs(), n=0;
   for(var i=0;i<m.length;i++) if(m[i].who===w) n++;
   return n; }
@@ -1397,10 +1880,11 @@ function renderSet(){
   document.getElementById('dMin').value=s.dMin;
   document.getElementById('dMax').value=s.dMax;
   document.getElementById('storeTip').textContent =
-    '存储：本机 OPFS（/bian/）。\n電文 '+S.cards().length+' 份 · 已出刊 '+issueTotal()+' 期\n'
+    '存储：本机 OPFS（/bian/）。\n電文 '+S.cards().length+' 份 · 畫帖 '+S.pics().length+' 张 · 已出刊 '+issueTotal()+' 期\n'
     +'电讯 '+S.msgs().length+' 条（彼岸 '+countWho('him')+' · 此岸 '+countWho('me')+'）';
   renderProfile();
   renderBackground();
+  renderRatio();
 }
 function bindSet(){
   ['dMin','dMax'].forEach(function(id){
@@ -1448,7 +1932,49 @@ opbar.addEventListener('click',function(e){
   var b=e.target.closest?e.target.closest('[data-op]'):null;
   if(!b) return;
   var k=b.getAttribute('data-op');
+  if(k==='pics'){ openPickLayer(); return; }
   if(OPS[k]) toast(OPS[k]+'：正在開發');
+});
+
+/* 畫帖选择器 */
+function openPickLayer(){
+  var all=S.pics();
+  var grid=document.getElementById('pickGrid');
+  if(!all.length){
+    toast('畫帖空空如也，先去來稿添加');
+    return;
+  }
+  var h='';
+  for(var i=0;i<all.length;i++){
+    h+='<div class="pic-cell" data-pick="'+i+'"><img src="'+all[i].data+'" alt=""></div>';
+  }
+  grid.innerHTML=h;
+  document.getElementById('pickLayer').classList.add('on');
+}
+document.getElementById('pickClose').addEventListener('click',function(){
+  document.getElementById('pickLayer').classList.remove('on');
+});
+document.getElementById('pickLayer').addEventListener('click',function(e){
+  if(e.target===this){ this.classList.remove('on'); return; }
+  var cell=e.target.closest?e.target.closest('[data-pick]'):null;
+  if(!cell) return;
+  var i=parseInt(cell.getAttribute('data-pick'),10);
+  var all=S.pics();
+  if(!all[i]) return;
+  var d=all[i].data;
+  document.getElementById('pickLayer').classList.remove('on');
+  if(opOpen) toggleOp();
+  sendMinePic(d);
+});
+
+/* 大图 */
+function openImgView(src){
+  document.getElementById('imgViewSrc').src=src;
+  document.getElementById('imgView').classList.add('on');
+}
+document.getElementById('imgView').addEventListener('click',function(){
+  this.classList.remove('on');
+  document.getElementById('imgViewSrc').src='';
 });
 
 /* ===================== 页面切换 ===================== */
@@ -1457,6 +1983,7 @@ function closeAll(){ PAGES.forEach(function(p){ document.getElementById(p).class
 function openLaiGao(){
   closeAll();
   document.getElementById('lgCardsN').textContent=S.cards().length;
+  document.getElementById('lgPicsN').textContent=S.pics().length;
   document.getElementById('laiGaoPage').classList.add('on');
 }
 function openCards(){
@@ -1466,6 +1993,12 @@ function openCards(){
   if(si) si.value='';
   document.getElementById('cardsPage').classList.add('on');
   renderCards();
+}
+function openPics(){
+  closeAll();
+  picSetPicking(false);
+  document.getElementById('picsPage').classList.add('on');
+  renderPics();
 }
 function openSet(){ closeAll(); document.getElementById('setPage').classList.add('on'); renderSet(); }
 
@@ -1477,6 +2010,7 @@ Array.prototype.forEach.call(document.querySelectorAll('.tocrow'),function(b){
   b.addEventListener('click',function(){
     var t=b.getAttribute('data-into');
     if(t==='cardsPage'){ openCards(); return; }
+    if(t==='picsPage'){ openPics(); return; }
     var nm=b.querySelector('.nm');
     toast((nm?nm.textContent.replace(/\s/g,''):'此版')+'：正在開發');
   });
@@ -1486,6 +2020,9 @@ Array.prototype.forEach.call(document.querySelectorAll('[data-back]'),function(b
 });
 document.getElementById('cardsBack').addEventListener('click',function(){
   setPicking(false); openLaiGao();
+});
+document.getElementById('picsBack').addEventListener('click',function(){
+  picSetPicking(false); openLaiGao();
 });
 document.getElementById('setBack').addEventListener('click',closeAll);
 
@@ -1547,14 +2084,15 @@ window.addEventListener('pagehide',function(){ Store.flush(); });
 /* ===================== 启动 ===================== */
 bindSet();
 bindProfile();
+bindRatio();
 
 Store.init().then(function(){
   rearmAll();
   applyBackground();
-  renderMasthead(); renderFlow(); renderSet(); renderCards(); renderProfile(); renderBackground();
+  renderMasthead(); renderFlow(); renderSet(); renderCards(); renderPics(); renderProfile(); renderBackground(); renderRatio();
 }).catch(function(e){
   alert('存储出错：'+(e&&e.name)+' / '+(e&&e.message));
-  renderMasthead(); renderFlow(); renderSet(); renderCards(); renderProfile(); renderBackground();
+  renderMasthead(); renderFlow(); renderSet(); renderCards(); renderPics(); renderProfile(); renderBackground(); renderRatio();
 });
 })();
 </script>
