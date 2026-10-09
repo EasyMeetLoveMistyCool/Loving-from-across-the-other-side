@@ -26,11 +26,9 @@ body{background:var(--paper);color:var(--ink);font-family:var(--serif);
 button{font-family:inherit;color:inherit;background:none;border:0;cursor:pointer}
 input,textarea{font-family:inherit;color:inherit;background:none;border:0;outline:0;-webkit-appearance:none}
 
-/* ================= 封面（1926 老报纸） ================= */
 #cover{position:fixed;inset:0;z-index:300;height:100vh;height:100dvh;
   background:var(--paper);transition:opacity .45s ease,transform .45s ease;overflow:hidden}
 #cover.out{opacity:0;transform:scale(1.03);pointer-events:none}
-
 #cover .art{position:absolute;inset:0;
   background-color:#e8d9bc;
   background-image:
@@ -38,71 +36,53 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
     radial-gradient(60% 40% at 82% 78%,rgba(156,74,50,.055),transparent 70%),
     radial-gradient(70% 50% at 12% 88%,rgba(59,42,24,.06),transparent 72%);
   background-size:100% 100%;background-repeat:no-repeat}
-
 #cover .grain{position:absolute;inset:0;opacity:.5;mix-blend-mode:multiply;
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .32 0 0 0 0 .22 0 0 0 0 .12 0 0 0 .35 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
   background-size:180px 180px}
-
 #cover .fold{position:absolute;inset:0;pointer-events:none}
 #cover .fold::before,#cover .fold::after{content:"";position:absolute;background:
   linear-gradient(to right,transparent,rgba(59,42,24,.10) 48%,rgba(255,255,255,.28) 50%,rgba(59,42,24,.10) 52%,transparent)}
 #cover .fold::before{left:0;right:0;top:50%;height:2px;transform:translateY(-1px)}
 #cover .fold::after{top:0;bottom:0;left:50%;width:2px;transform:translateX(-1px);
   background:linear-gradient(to bottom,transparent,rgba(59,42,24,.09) 48%,rgba(255,255,255,.22) 50%,rgba(59,42,24,.09) 52%,transparent)}
-
 #cover .stain{position:absolute;border-radius:50%;pointer-events:none;
   background:radial-gradient(closest-side,rgba(120,86,52,.16),rgba(120,86,52,.07) 62%,transparent 78%);
   filter:blur(.4px)}
 #cover .stain.s1{width:38vw;height:30vw;left:-8vw;top:12vh;transform:rotate(-18deg)}
 #cover .stain.s2{width:26vw;height:22vw;right:-6vw;bottom:22vh;
   background:radial-gradient(closest-side,rgba(156,74,50,.13),rgba(156,74,50,.05) 60%,transparent 76%)}
-
 #cover .banner{position:absolute;left:0;right:0;top:calc(env(safe-area-inset-top) + 16px);
   text-align:center;color:var(--ink2);z-index:2}
 #cover .banner .r{width:60%;height:0;border-top:1px solid var(--rule);margin:0 auto}
 #cover .banner .en{margin-top:9px;font-family:var(--geo);font-size:9px;letter-spacing:.5em;margin-right:-.5em}
 #cover .banner .dt{margin-top:6px;font-family:var(--geo);font-size:9px;letter-spacing:.3em;margin-right:-.3em;color:var(--ink3)}
 #cover .banner .r2{width:36%;height:0;border-top:1px solid var(--rule2);margin:9px auto 0}
-
 #ctop{position:absolute;left:0;right:0;top:22vh;z-index:3;
   padding:0 24px;text-align:center}
 #ctop h1{font-size:clamp(38px,12.5vw,58px);font-weight:400;line-height:1.18;
   letter-spacing:.32em;margin-right:-.32em;color:var(--ink);
-  text-shadow:
-    0 1px 0 rgba(255,255,255,.55),
-    0 -1px 0 rgba(59,42,24,.14),
-    0 3px 18px rgba(156,74,50,.14)}
+  text-shadow:0 1px 0 rgba(255,255,255,.55),0 -1px 0 rgba(59,42,24,.14),0 3px 18px rgba(156,74,50,.14)}
 #ctop .rule{width:56px;height:1px;margin:22px auto 0;
   background:linear-gradient(to right,transparent,var(--ink2),transparent)}
 #ctop .rule::after{content:"";display:block;width:5px;height:5px;margin:-3px auto 0;
   background:var(--red);transform:rotate(45deg)}
-#ctop .en{margin-top:16px;font-family:var(--geo);font-size:10px;letter-spacing:.46em;margin-right:-.46em;
-  color:var(--ink2)}
+#ctop .en{margin-top:16px;font-family:var(--geo);font-size:10px;letter-spacing:.46em;margin-right:-.46em;color:var(--ink2)}
 #ctop .cn-sub{margin-top:8px;font-size:11px;letter-spacing:.3em;margin-right:-.3em;color:var(--ink3)}
-
 #cover .postmark{position:absolute;right:6vw;top:calc(env(safe-area-inset-top) + 62px);
   width:80px;height:80px;border:1.6px solid rgba(156,74,50,.5);border-radius:50%;
   transform:rotate(-14deg);color:rgba(156,74,50,.55);z-index:4;opacity:.9}
 #cover .postmark::before{content:"";position:absolute;inset:5px;border:1px solid rgba(156,74,50,.32);border-radius:50%}
-#cover .postmark .t{position:absolute;left:0;right:0;top:12px;text-align:center;
-  font-family:var(--geo);font-size:7px;letter-spacing:.22em}
-#cover .postmark .c{position:absolute;left:0;right:0;top:36px;text-align:center;
-  font-size:13px;letter-spacing:.14em;font-weight:400}
-#cover .postmark .b{position:absolute;left:0;right:0;bottom:11px;text-align:center;
-  font-family:var(--geo);font-size:7px;letter-spacing:.22em}
-#cover .postmark .ring{position:absolute;left:50%;top:26px;width:1px;height:26px;
-  background:rgba(156,74,50,.25);transform:translateX(-.5px)}
-
+#cover .postmark .t{position:absolute;left:0;right:0;top:12px;text-align:center;font-family:var(--geo);font-size:7px;letter-spacing:.22em}
+#cover .postmark .c{position:absolute;left:0;right:0;top:36px;text-align:center;font-size:13px;letter-spacing:.14em;font-weight:400}
+#cover .postmark .b{position:absolute;left:0;right:0;bottom:11px;text-align:center;font-family:var(--geo);font-size:7px;letter-spacing:.22em}
+#cover .postmark .ring{position:absolute;left:50%;top:26px;width:1px;height:26px;background:rgba(156,74,50,.25);transform:translateX(-.5px)}
 #cbot{position:absolute;left:0;right:0;bottom:0;z-index:5;
   padding:0 24px calc(env(safe-area-inset-bottom) + 30px);
   display:flex;flex-direction:column;align-items:center}
 #enter{position:relative;display:block;width:248px;padding:0;
   background:linear-gradient(175deg,#eedfbe,#e2d1aa 60%,#d9c79c);
   border:0;border-radius:3px;
-  box-shadow:
-    0 1px 0 rgba(255,255,255,.6) inset,
-    0 6px 22px rgba(59,42,24,.18),
-    0 1px 0 rgba(59,42,24,.18);
+  box-shadow:0 1px 0 rgba(255,255,255,.6) inset,0 6px 22px rgba(59,42,24,.18),0 1px 0 rgba(59,42,24,.18);
   animation:breathe 3.6s ease-in-out infinite}
 #enter::before{content:"";position:absolute;inset:0;border-radius:3px;
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n2'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/><feColorMatrix values='0 0 0 0 .35 0 0 0 0 .24 0 0 0 0 .14 0 0 0 .22 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n2)'/></svg>");
@@ -125,18 +105,15 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 #enter .stamp::before{content:"";position:absolute;inset:4px;border:1px solid rgba(156,74,50,.24);border-radius:50%}
 #cbot .hint{margin-top:16px;font-size:12px;letter-spacing:.16em;color:var(--ink2)}
 
-/* ================= 版面框架 ================= */
 :root{--navh:50px}
 #paper{position:fixed;inset:0;height:100vh;height:100dvh;display:flex;flex-direction:column;
   opacity:0;transition:opacity .35s ease}
 #paper.on{opacity:1}
-
 .sec{position:fixed;left:0;right:0;top:0;bottom:0;height:100vh;height:100dvh;
   display:none;flex-direction:column;background:var(--paper);
   padding-bottom:calc(var(--navh) + env(safe-area-inset-bottom))}
 .sec.on{display:flex}
 #paper.sec{opacity:1}
-
 #navbar{position:fixed;left:0;right:0;bottom:0;z-index:150;
   height:calc(var(--navh) + env(safe-area-inset-bottom));
   padding-bottom:env(safe-area-inset-bottom);
@@ -144,12 +121,9 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
   border-top:3px double var(--ink);background:var(--paper)}
 #navbar .nb{flex:1 1 0;display:flex;align-items:center;justify-content:center;
   font-size:13px;letter-spacing:.14em;color:var(--ink3);position:relative}
-#navbar .nb+.nb::before{content:"";position:absolute;left:0;top:22%;bottom:22%;
-  width:1px;background:var(--rule2)}
+#navbar .nb+.nb::before{content:"";position:absolute;left:0;top:22%;bottom:22%;width:1px;background:var(--rule2)}
 #navbar .nb.on{color:var(--red)}
-#navbar .nb.on::after{content:"";position:absolute;left:18%;right:18%;top:5px;
-  height:2px;background:var(--red)}
-
+#navbar .nb.on::after{content:"";position:absolute;left:18%;right:18%;top:5px;height:2px;background:var(--red)}
 .opbar{flex:0 0 auto;display:flex;gap:0;overflow-x:auto;-webkit-overflow-scrolling:touch;
   border-top:1px solid var(--rule2);background:var(--paper)}
 .opbar::-webkit-scrollbar{display:none}
@@ -159,7 +133,6 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 .opbar .op:active{background:rgba(59,42,24,.07)}
 .opbar .op:active .gi,.opbar .op:active{color:var(--red)}
 .opbar .op.dim .gi{color:var(--ink3)}
-
 .masthead{flex:0 0 auto;padding:calc(env(safe-area-inset-top) + 9px) 16px 7px;text-align:center;
   border-bottom:3px double var(--ink);position:relative}
 .mh-nav{display:flex;align-items:center;justify-content:space-between;height:26px;margin-bottom:5px}
@@ -171,10 +144,8 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 .mh-meta{margin-top:6px;font-size:10px;letter-spacing:.14em;color:var(--ink2)}
 .mh-meta b{font-weight:400;color:var(--red)}
 .mh-sub{margin-top:3px;font-size:10px;letter-spacing:.12em;color:var(--ink3);font-family:var(--geo)}
-
 #flow{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;
   padding:14px 16px 20px;overscroll-behavior:contain}
-
 .item{margin:0 0 20px}
 .item .col{display:flex;align-items:center;gap:7px;font-size:11px;letter-spacing:.18em;color:var(--ink2)}
 .item .col .dash{flex:1 1 auto;height:0;border-top:1px solid var(--rule2);align-self:center}
@@ -187,40 +158,29 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 .item.me .nm{color:var(--ink)}
 .item.him .body{padding-left:9px;border-left:2px solid var(--rule2)}
 .item.me .body{padding-right:9px;border-right:2px solid var(--rule2)}
-
 .item.lead .body{font-size:20px;line-height:1.75}
-.item.lead .body::first-letter{float:left;font-size:2.9em;line-height:.86;
-  padding:2px 7px 0 0;color:var(--red)}
+.item.lead .body::first-letter{float:left;font-size:2.9em;line-height:.86;padding:2px 7px 0 0;color:var(--red)}
 .item.me.lead .body::first-letter{float:right;padding:2px 0 0 7px}
-
 .item.wait .col .nm{color:var(--ink3)}
 .item.wait .body{color:var(--ink3);font-size:14px;letter-spacing:.1em}
 .blink{animation:blink 1.1s steps(1) infinite}
 @keyframes blink{0%,50%{opacity:1}51%,100%{opacity:.15}}
-
 .extra{margin:16px 0 20px;border:2px solid var(--red);padding:11px 13px;text-align:center}
 .extra .t{font-size:12px;letter-spacing:.5em;margin-right:-.5em;color:var(--red)}
 .extra .m{margin-top:7px;font-size:13px;line-height:1.8;color:var(--ink2)}
-.extra .go{margin-top:9px;display:inline-block;font-size:12px;letter-spacing:.18em;
-  color:var(--red);border-bottom:1px solid var(--red);padding-bottom:2px}
-
+.extra .go{margin-top:9px;display:inline-block;font-size:12px;letter-spacing:.18em;color:var(--red);border-bottom:1px solid var(--red);padding-bottom:2px}
 .colophon{text-align:center;padding:22px 0 6px;color:var(--ink3);font-size:10px;letter-spacing:.2em}
-
-.press{flex:0 0 auto;display:flex;align-items:flex-end;gap:10px;
-  padding:9px 14px 9px;
-  border-top:3px double var(--ink)}
+.press{flex:0 0 auto;display:flex;align-items:flex-end;gap:10px;padding:9px 14px 9px;border-top:3px double var(--ink)}
 .press textarea{flex:1 1 auto;min-height:40px;max-height:118px;font-size:16px;line-height:1.5;
   padding:9px 11px;border:1px solid var(--rule2);border-radius:2px;resize:none;
   user-select:text;-webkit-user-select:text}
 .press textarea::placeholder{color:var(--ink3)}
 .stampbtn{flex:0 0 auto;width:56px;height:56px;border-radius:50%;
   border:1.5px solid var(--red);color:var(--red);font-size:13px;letter-spacing:.1em;
-  display:flex;align-items:center;justify-content:center;position:relative;
-  transform:rotate(-9deg)}
+  display:flex;align-items:center;justify-content:center;position:relative;transform:rotate(-9deg)}
 .stampbtn::before{content:"";position:absolute;inset:4px;border:1px solid rgba(156,74,50,.4);border-radius:50%}
 .stampbtn:active{background:rgba(156,74,50,.1)}
 .stampbtn[disabled]{opacity:.35}
-
 #cardsPage,#setPage,#laiGaoPage,#picsPage,#actsPage,#musicPage{position:fixed;inset:0;z-index:250;
   height:100vh;height:100dvh;background:var(--paper);display:none;flex-direction:column}
 #cardsPage.on,#setPage.on,#laiGaoPage.on,#picsPage.on,#actsPage.on,#musicPage.on{display:flex}
@@ -232,17 +192,14 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 .sheet-hd .sub{margin-top:5px;font-size:10px;letter-spacing:.16em;color:var(--ink3);font-family:var(--geo)}
 .sheet-bd{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;
   padding:14px 16px calc(env(safe-area-inset-bottom) + 20px);overscroll-behavior:contain}
-
 .compose{border:1px solid var(--rule);padding:11px 12px;margin-bottom:16px}
 .compose textarea{width:100%;min-height:62px;font-size:16px;line-height:1.6;resize:none;
   user-select:text;-webkit-user-select:text}
 .compose .row{margin-top:9px;display:flex;align-items:center;justify-content:space-between;
   border-top:1px dashed var(--rule2);padding-top:9px}
 .compose .cnt{font-size:10px;color:var(--ink3);font-family:var(--geo)}
-.compose .add{font-size:12px;letter-spacing:.2em;color:var(--red);border:1px solid var(--red);
-  border-radius:999px;padding:6px 16px}
+.compose .add{font-size:12px;letter-spacing:.2em;color:var(--red);border:1px solid var(--red);border-radius:999px;padding:6px 16px}
 .compose .add:active{background:rgba(156,74,50,.1)}
-
 .toc{padding:8px 0}
 .tocrow{display:flex;align-items:center;gap:8px;width:100%;text-align:left;
   padding:15px 2px;border-bottom:1px dashed var(--rule2)}
@@ -252,16 +209,12 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 .tocrow .en i{font-style:normal;color:var(--red)}
 .tocrow .pg{font-size:10px;color:var(--ink3);min-width:16px;text-align:right}
 .tocrow:active .nm{color:var(--red)}
-
-.search{display:flex;align-items:center;gap:8px;border:1px solid var(--rule);
-  padding:7px 10px;margin-bottom:12px}
+.search{display:flex;align-items:center;gap:8px;border:1px solid var(--rule);padding:7px 10px;margin-bottom:12px}
 .search .ico{font-size:12px;letter-spacing:.1em;color:var(--red)}
 .search input{flex:1 1 auto;font-size:16px;min-width:0}
 .search input::placeholder{color:var(--ink3)}
 .search .clr{font-size:16px;color:var(--ink3);padding:0 4px}
-
-.tools{display:flex;gap:0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
-  margin-bottom:10px}
+.tools{display:flex;gap:0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin-bottom:10px}
 .tools .tl{flex:1 1 0;font-size:12px;letter-spacing:.14em;color:var(--ink2);
   padding:9px 0;text-align:center;border-right:1px solid var(--rule2)}
 .tools .tl:last-child{border-right:0}
@@ -269,11 +222,8 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 .tools .tl.danger{color:var(--red)}
 .tools .tl.danger:active{background:rgba(156,74,50,.12)}
 .tools .tl.on{background:rgba(156,74,50,.12);color:var(--red)}
-
-.cntbar{font-size:11px;letter-spacing:.16em;color:var(--ink3);padding:0 2px 8px;
-  font-family:var(--geo)}
+.cntbar{font-size:11px;letter-spacing:.16em;color:var(--ink3);padding:0 2px 8px;font-family:var(--geo)}
 .cntbar b{font-weight:400;color:var(--red)}
-
 .carditem{display:flex;gap:10px;padding:11px 0;border-bottom:1px solid var(--rule2);align-items:flex-start}
 .carditem .ck{flex:0 0 auto;display:none}
 .carditem .ck input{-webkit-appearance:none;appearance:none;width:17px;height:17px;
@@ -284,7 +234,6 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 #cardList.picking .carditem .ck{display:block}
 #cardList.picking .carditem .del{display:none}
 #cardList.picking .carditem .tx{color:var(--ink3)}
-
 .bulkbar{flex:0 0 auto;display:none;align-items:center;gap:12px;
   padding:10px 14px calc(env(safe-area-inset-bottom) + 10px);
   border-top:3px double var(--red);background:rgba(156,74,50,.05)}
@@ -296,40 +245,28 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 .bulkbar .selall input:checked::after{content:"";position:absolute;left:5px;top:1px;
   width:4px;height:9px;border:solid var(--paper);border-width:0 2px 2px 0;transform:rotate(45deg)}
 .bulkbar .n{flex:1 1 auto;font-size:11px;color:var(--ink2);font-family:var(--geo)}
-.bulkbar .do{font-size:13px;letter-spacing:.18em;color:var(--red);
-  border:1px solid var(--red);border-radius:2px;padding:7px 15px}
+.bulkbar .do{font-size:13px;letter-spacing:.18em;color:var(--red);border:1px solid var(--red);border-radius:2px;padding:7px 15px}
 .bulkbar .do:active{background:rgba(156,74,50,.14)}
 .bulkbar .cx{font-size:12px;letter-spacing:.1em;color:var(--ink3);padding:7px 4px}
-.carditem .no{flex:0 0 auto;font-family:var(--geo);font-size:10px;color:var(--ink3);
-  padding-top:3px;min-width:30px}
+.carditem .no{flex:0 0 auto;font-family:var(--geo);font-size:10px;color:var(--ink3);padding-top:3px;min-width:30px}
 .carditem .tx{flex:1 1 auto;font-size:15px;line-height:1.7;word-break:break-word;
   white-space:pre-wrap;user-select:text;-webkit-user-select:text}
 .carditem .del{flex:0 0 auto;font-size:11px;letter-spacing:.1em;color:var(--ink3);padding:3px 2px}
 .carditem .del:active{color:var(--red)}
-.carditem.conf .tx{color:var(--ink3)}
-.carditem.conf .cfm{flex:0 0 auto;display:flex;gap:12px;font-size:11px;letter-spacing:.1em}
-.carditem.conf .cfm button:first-child{color:var(--red)}
-.carditem.conf .del{display:none}
-
 .empty{text-align:center;padding:34px 20px;color:var(--ink3);font-size:13px;line-height:2}
-
 .blk{margin-bottom:22px}
 .blk h3{font-size:12px;font-weight:400;letter-spacing:.24em;color:var(--red);
   border-bottom:1px solid var(--rule2);padding-bottom:6px;margin-bottom:11px}
 .blk p.tip{font-size:12px;line-height:1.9;color:var(--ink2);margin-bottom:11px}
-.fld{display:flex;align-items:center;justify-content:space-between;
-  padding:9px 0;border-bottom:1px solid var(--rule2)}
+.fld{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--rule2)}
 .fld label{font-size:14px}
 .fld .r{display:flex;align-items:center;gap:8px}
-.fld input{width:66px;font-size:16px;text-align:center;border:1px solid var(--rule);
-  border-radius:2px;padding:7px 4px;font-family:var(--geo)}
+.fld input{width:66px;font-size:16px;text-align:center;border:1px solid var(--rule);border-radius:2px;padding:7px 4px;font-family:var(--geo)}
 .fld .u{font-size:11px;color:var(--ink3)}
 .btnline{padding:11px 0}
-.btnline button{font-size:13px;letter-spacing:.18em;color:var(--ink2);
-  border:1px solid var(--rule);border-radius:2px;padding:9px 18px;width:100%}
+.btnline button{font-size:13px;letter-spacing:.18em;color:var(--ink2);border:1px solid var(--rule);border-radius:2px;padding:9px 18px;width:100%}
 .btnline button:active{background:rgba(59,42,24,.06)}
 .btnline.danger button{color:var(--red);border-color:var(--red)}
-
 #toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom) + 24px);
   transform:translateX(-50%) translateY(14px);z-index:600;opacity:0;pointer-events:none;
   background:var(--ink);color:var(--paper);font-size:13px;letter-spacing:.14em;
@@ -340,35 +277,30 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 </head>
 <body>
 
-<!-- ============ 封面 ============ -->
 <div id="cover">
   <div class="art"></div>
   <div class="grain"></div>
   <div class="fold"></div>
   <div class="stain s1"></div>
   <div class="stain s2"></div>
-
   <div class="banner">
     <div class="r"></div>
     <div class="en">THE BEYOND DAILY</div>
     <div class="dt">EST. 1926 · 不定期刊</div>
     <div class="r2"></div>
   </div>
-
   <div class="postmark">
     <div class="t">BEYOND</div>
     <div class="c">相 爱</div>
     <div class="ring"></div>
     <div class="b">1926</div>
   </div>
-
   <div id="ctop">
     <h1>彼岸相爱</h1>
     <div class="rule"></div>
     <div class="en">BEYOND · LOVE</div>
     <div class="cn-sub">写给对岸，一句一句</div>
   </div>
-
   <div id="cbot">
     <button id="enter">
       <div class="frame">
@@ -420,31 +352,26 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
   </footer>
 </div>
 
-<!-- ============ 郵筒 ============ -->
 <div class="sec" id="secMail">
   <div class="sheet-hd"><h2>郵 筒</h2><div class="sub">LETTERS · 慢信，隔夜方達</div></div>
   <div class="sheet-bd"><div class="empty">郵筒尚未啟用。<br><br>與頭版不同：<br>頭版是即時電訊，一句一句來；<br>郵筒是寫信，投進去便只剩等。</div></div>
 </div>
 
-<!-- ============ 副刊 ============ -->
 <div class="sec" id="secSupp">
   <div class="sheet-hd"><h2>副 刊</h2><div class="sub">SUPPLEMENT · 雙方皆可投稿</div></div>
   <div class="sheet-bd"><div class="empty">副刊尚未啟用。<br><br>雙方都能發，<br>是會有人回話的版面。</div></div>
 </div>
 
-<!-- ============ 剪報 ============ -->
 <div class="sec" id="secClip">
   <div class="sheet-hd"><h2>剪 報</h2><div class="sub">CLIPPINGS</div></div>
   <div class="sheet-bd"><div class="empty">剪報簿空空如也。<br><br>喜歡的，剪下來存著。</div></div>
 </div>
 
-<!-- ============ 特刊 ============ -->
 <div class="sec" id="secSpecial">
   <div class="sheet-hd"><h2>特 刊</h2><div class="sub">SPECIAL ISSUE</div></div>
   <div class="sheet-bd"><div class="empty">尚無特刊。<br><br>重要的日子，單獨出一期。</div></div>
 </div>
 
-<!-- ============ 底部導覽 ============ -->
 <nav id="navbar">
   <button class="nb on" data-sec="paper">頭版</button>
   <button class="nb" data-sec="secMail">郵筒</button>
@@ -453,7 +380,6 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
   <button class="nb" data-sec="secSpecial">特刊</button>
 </nav>
 
-<!-- ============ 來稿 ============ -->
 <div id="laiGaoPage">
   <div class="sheet-hd">
     <button class="back" id="lgBack">‹ 回頭版</button>
@@ -484,7 +410,6 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
   </div>
 </div>
 
-<!-- ============ 電文匣 ============ -->
 <div id="cardsPage">
   <div class="sheet-hd">
     <button class="back" id="cardsBack">‹ 來 稿</button>
@@ -499,24 +424,20 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
         <button class="add" id="cardAdd">存 電</button>
       </div>
     </div>
-
     <div class="search">
       <span class="ico">檢</span>
       <input id="cardSearch" type="text" placeholder="檢字…">
       <button class="clr" id="searchClr">×</button>
     </div>
-
     <div class="tools">
       <button class="tl" id="btnDedup">剔重</button>
       <button class="tl" id="btnImport">收電</button>
       <button class="tl" id="btnExport">發報</button>
       <button class="tl danger" id="btnBulk">銷燬</button>
     </div>
-
     <div class="cntbar" id="cntBar">共 0 份</div>
     <div id="cardList"></div>
   </div>
-
   <div class="bulkbar" id="bulkBar">
     <label class="selall"><input type="checkbox" id="selAll"><span>全選</span></label>
     <span class="n" id="bulkN">已選 0 份</span>
@@ -525,7 +446,6 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
   </div>
 </div>
 
-<!-- ============ 空屋子（保留结构，无入口） ============ -->
 <div id="picsPage"><div class="sheet-hd"><button class="back" data-back="1">‹ 來 稿</button><h2>畫 帖</h2><div class="sub">STICKERS</div></div>
   <div class="sheet-bd"><div class="empty">這間屋子還沒開張。</div></div></div>
 <div id="actsPage"><div class="sheet-hd"><button class="back" data-back="1">‹ 來 稿</button><h2>往 來 簿</h2><div class="sub">MOMENTS</div></div>
@@ -533,7 +453,6 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 <div id="musicPage"><div class="sheet-hd"><button class="back" data-back="1">‹ 來 稿</button><h2>唱 片 架</h2><div class="sub">RECORDS</div></div>
   <div class="sheet-bd"><div class="empty">這間屋子還沒開張。</div></div></div>
 
-<!-- ============ 设置页 ============ -->
 <div id="setPage">
   <div class="sheet-hd">
     <button class="back" id="setBack">‹ 回頭版</button>
@@ -554,12 +473,10 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
       </div>
       <p class="tip" style="margin-top:11px">范围 1 – 120 秒。默认 15 – 30。<br>数值即出结果，无需保存。</p>
     </div>
-
     <div class="blk">
       <h3>關 於</h3>
       <p class="tip">本站为一人一世界的私人版面。<br>字卡由你亲手写，不预设、不联网、不接任何外部服务。<br>所有内容仅存于本机 OPFS 存储。</p>
     </div>
-
     <div class="blk">
       <h3>存 檔</h3>
       <p class="tip" id="storeTip">检测中…</p>
@@ -575,10 +492,10 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 (function(){
 'use strict';
 
-/* ===================== 存储层 ===================== */
+/* ===================== 存储层：纯 OPFS，无任何判断/兜底 ===================== */
 var FILES={meta:'bian/meta.json',cards:'bian/cards.json',chat:'bian/chat.json',set:'bian/settings.json'};
 var Store={
-  ok:false, root:null, dir:null,
+  root:null, dir:null,
   cache:{meta:null,cards:null,chat:null,set:null},
   dirty:{}, timers:{},
 
@@ -589,67 +506,50 @@ var Store={
       chat:function(){return {v:1,msgs:[]};},
       set:function(){return {v:1,dMin:15,dMax:30};}
     };
-    this.ok=false;
-    try{
-      if(!navigator.storage||!navigator.storage.getDirectory) throw 0;
-      this.root=await navigator.storage.getDirectory();
-      this.dir=await this.root.getDirectoryHandle('bian',{create:true});
 
-      try{
-        var t=await this.dir.getFileHandle('__probe',{create:true});
-        var w=await t.createWritable(); await w.write('1'); await w.close();
-        try{ await t.remove(); }catch(e){}
-      }catch(e){ throw e; }
+    this.root=await navigator.storage.getDirectory();
+    this.dir=await this.root.getDirectoryHandle('bian',{create:true});
 
-      for(var k in FILES){
-        var d=null;
-        try{ d=await this.read(k); }catch(e){ d=null; }
-        if(!d || typeof d!=='object'){
-          d=DEFS[k]();
-          this.cache[k]=d;
-          try{ await this.writeNow(k,d); }
-          catch(e){ this.ok=false; break; }
-        }else{
-          this.cache[k]=d;
-        }
-      }
-      if(this.ok!==false){
-        var meta=this.cache.meta;
-        if(!meta || !meta.issues){
-          meta=meta||DEFS.meta(); meta.issues=[];
-          var seen={}, ms=(this.cache.chat&&this.cache.chat.msgs)||[];
-          for(var i=0;i<ms.length;i++){
-            if(ms[i].who==='me'||ms[i].who==='him'){
-              var kk=dayKey(ms[i].at);
-              if(!seen[kk]){ seen[kk]=1; meta.issues.push(kk); }
-            }
-          }
-          meta.issues.sort();
-          this.cache.meta=meta;
-          try{ await this.writeNow('meta',meta); }catch(e){}
-        }
-        this.ok=true;
-      }
-    }catch(e){ this.ok=false; }
-
-    var allOk=true;
-    for(var k2 in FILES){
-      if(!this.cache[k2] || typeof this.cache[k2]!=='object'){
-        this.cache[k2]=DEFS[k2](); allOk=false;
+    for(var k in FILES){
+      var d=null;
+      try{ d=await this.read(k); }catch(e){ d=null; }
+      if(!d || typeof d!=='object'){
+        d=DEFS[k]();
+        this.cache[k]=d;
+        await this.writeNow(k,d);
+      }else{
+        this.cache[k]=d;
       }
     }
-    if(!allOk) this.ok=false;
-    return this.ok;
+
+    var meta=this.cache.meta;
+    if(!meta || !meta.issues){
+      meta=meta||DEFS.meta(); meta.issues=[];
+      var seen={}, ms=(this.cache.chat&&this.cache.chat.msgs)||[];
+      for(var i=0;i<ms.length;i++){
+        if(ms[i].who==='me'||ms[i].who==='him'){
+          var kk=dayKey(ms[i].at);
+          if(!seen[kk]){ seen[kk]=1; meta.issues.push(kk); }
+        }
+      }
+      meta.issues.sort();
+      this.cache.meta=meta;
+      await this.writeNow('meta',meta);
+    }
+
+    for(var k2 in FILES){
+      if(!this.cache[k2] || typeof this.cache[k2]!=='object'){
+        this.cache[k2]=DEFS[k2]();
+      }
+    }
   },
 
   async read(name){
-    try{
-      var fh=await this.dir.getFileHandle(name.replace('bian/',''),{create:false});
-      var f=await fh.getFile();
-      var t=await f.text();
-      if(!t) return null;
-      return JSON.parse(t);
-    }catch(e){ return null; }
+    var fh=await this.dir.getFileHandle(name.replace('bian/',''),{create:false});
+    var f=await fh.getFile();
+    var t=await f.text();
+    if(!t) return null;
+    return JSON.parse(t);
   },
 
   async writeNow(name,obj){
@@ -670,17 +570,16 @@ var Store={
     clearTimeout(this.timers[name]);
     this.timers[name]=setTimeout(function(){
       var s=Store;
-      if(s.ok && s.cache[name] && typeof s.cache[name]==='object'){
-        try{ s.writeNow(name,s.cache[name]).catch(function(){ s.ok=false; }); }
-        catch(e){ s.ok=false; }
+      if(s.cache[name] && typeof s.cache[name]==='object'){
+        s.writeNow(name,s.cache[name]).catch(function(){});
       }
-      delete s.dirty[name];
+      delete s.timers[name];
     },400);
   },
   async flush(){
     for(var k in this.timers){
       clearTimeout(this.timers[k]);
-      if(this.ok && this.cache[k] && typeof this.cache[k]==='object'){
+      if(this.cache[k] && typeof this.cache[k]==='object'){
         try{ await this.writeNow(k,this.cache[k]); }catch(e){}
       }
     }
@@ -706,10 +605,7 @@ function _set(){
   if(!Store.cache.set||typeof Store.cache.set!=='object') Store.cache.set={v:1,dMin:15,dMax:30};
   return Store.cache.set;
 }
-var S={
-  cards:_cards, msgs:_msgs, set:_set,
-  pendings:{}
-};
+var S={ cards:_cards, msgs:_msgs, set:_set, pendings:{} };
 
 function uid(p){ return p+'_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,7); }
 function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
@@ -753,8 +649,7 @@ function renderMasthead(){
     '第 '+('000'+no).slice(-3)+' 期'+(pub?'':'<b> · 待付印</b>')
     +' · '+weekCN(now)+' · <b>'+seasonCN(now)+'</b> · <b>'+WEATHER[h%WEATHER.length]+'</b>';
   document.getElementById('mhSub').textContent=
-    d.getFullYear()+'年'+(d.getMonth()+1)+'月'+d.getDate()+'日 · 定价：'+PRICE[(h>>>3)%PRICE.length]
-    +(Store.ok?'':' · 試讀版');
+    d.getFullYear()+'年'+(d.getMonth()+1)+'月'+d.getDate()+'日 · 定价：'+PRICE[(h>>>3)%PRICE.length];
 }
 
 /* ===================== 消息流 ===================== */
@@ -763,10 +658,6 @@ function renderFlow(){
   var ms=S.msgs();
   var html='';
   var prevDay=null;
-  if(!Store.ok){
-    html+='<aside class="extra"><div class="t">號 外</div>'
-      +'<div class="m">非 https 環境，印刷廠（OPFS）暫不可用。<br>當前為試讀版：可正常聊天、存字卡，<br>但關掉就沒了。</div></aside>';
-  }
   for(var i=0;i<ms.length;i++){
     var m=ms[i], dk=dayKey(m.at), lead=(dk!==prevDay);
     prevDay=dk;
@@ -1101,10 +992,9 @@ function renderSet(){
   var s=S.set();
   document.getElementById('dMin').value=s.dMin;
   document.getElementById('dMax').value=s.dMax;
-  document.getElementById('storeTip').textContent = Store.ok
-    ? '存储可用：本机 OPFS（/bian/）。\n電文 '+S.cards().length+' 份 · 已出刊 '+issueTotal()+' 期\n'
-      +'电讯 '+S.msgs().length+' 条（彼岸 '+countWho('him')+' · 此岸 '+countWho('me')+'）'
-    : '存储不可用。请通过 https 打开本站（OPFS 需安全上下文）。\n当前为试读版，内容不会被保存。';
+  document.getElementById('storeTip').textContent =
+    '存储：本机 OPFS（/bian/）。\n電文 '+S.cards().length+' 份 · 已出刊 '+issueTotal()+' 期\n'
+    +'电讯 '+S.msgs().length+' 条（彼岸 '+countWho('him')+' · 此岸 '+countWho('me')+'）';
 }
 function bindSet(){
   ['dMin','dMax'].forEach(function(id){
@@ -1133,7 +1023,7 @@ Array.prototype.forEach.call(document.querySelectorAll('#navbar .nb'),function(b
   b.addEventListener('click',function(){ switchSec(b.getAttribute('data-sec')); });
 });
 
-/* ===================== 操作栏（全部只 toast） ===================== */
+/* ===================== 操作栏 ===================== */
 var OPS={
   photo:'攝影', album:'影集', video:'隔岸對影',
   pics:'畫帖', acts:'往來', music:'唱片',
@@ -1242,19 +1132,11 @@ window.addEventListener('pagehide',function(){ Store.flush(); });
 /* ===================== 启动 ===================== */
 bindSet();
 
-Store.init().then(function(ok){
-  if(!ok){
-    Store.cache={meta:{v:1,createdAt:Date.now(),issues:[]},cards:{v:1,cards:[]},
-                 chat:{v:1,msgs:[]},set:{v:1,dMin:15,dMax:30}};
-    toast('試讀版：非 https 环境，印刷廠（OPFS）不可用，关掉就沒了');
-  }else{
-    rearmAll();
-  }
+Store.init().then(function(){
+  rearmAll();
   renderMasthead(); renderFlow(); renderSet(); renderCards();
 }).catch(function(e){
-  Store.ok=false;
-  Store.cache={meta:{v:1,createdAt:Date.now(),issues:[]},cards:{v:1,cards:[]},
-               chat:{v:1,msgs:[]},set:{v:1,dMin:15,dMax:30}};
+  alert('存储出错：'+(e&&e.name)+' / '+(e&&e.message));
   renderMasthead(); renderFlow(); renderSet(); renderCards();
 });
 })();
