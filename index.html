@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- 彼岸相爱 · 1926 老报纸封面版 -->
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -15,6 +14,7 @@
   --ink3:rgba(59,42,24,.44);
   --rule:rgba(59,42,24,.34);
   --rule2:rgba(59,42,24,.18);
+  --rule3:rgba(59,42,24,.28);
   --red:#9c4a32;
   --serif:"Songti SC","STSong","Noto Serif CJK SC","Source Han Serif SC","SimSun",serif;
   --geo:Georgia,"Times New Roman",serif;
@@ -26,9 +26,11 @@ body{background:var(--paper);color:var(--ink);font-family:var(--serif);
 button{font-family:inherit;color:inherit;background:none;border:0;cursor:pointer}
 input,textarea{font-family:inherit;color:inherit;background:none;border:0;outline:0;-webkit-appearance:none}
 
+/* ================= 封面 ================= */
 #cover{position:fixed;inset:0;z-index:300;height:100vh;height:100dvh;
   background:var(--paper);transition:opacity .45s ease,transform .45s ease;overflow:hidden}
 #cover.out{opacity:0;transform:scale(1.03);pointer-events:none}
+
 #cover .art{position:absolute;inset:0;
   background-color:#e8d9bc;
   background-image:
@@ -36,29 +38,38 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
     radial-gradient(60% 40% at 82% 78%,rgba(156,74,50,.055),transparent 70%),
     radial-gradient(70% 50% at 12% 88%,rgba(59,42,24,.06),transparent 72%);
   background-size:100% 100%;background-repeat:no-repeat}
+
 #cover .grain{position:absolute;inset:0;opacity:.5;mix-blend-mode:multiply;
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .32 0 0 0 0 .22 0 0 0 0 .12 0 0 0 .35 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
   background-size:180px 180px}
-#cover .fold{position:absolute;inset:0;pointer-events:none}
-#cover .fold::before,#cover .fold::after{content:"";position:absolute;background:
-  linear-gradient(to right,transparent,rgba(59,42,24,.10) 48%,rgba(255,255,255,.28) 50%,rgba(59,42,24,.10) 52%,transparent)}
-#cover .fold::before{left:0;right:0;top:50%;height:2px;transform:translateY(-1px)}
-#cover .fold::after{top:0;bottom:0;left:50%;width:2px;transform:translateX(-1px);
-  background:linear-gradient(to bottom,transparent,rgba(59,42,24,.09) 48%,rgba(255,255,255,.22) 50%,rgba(59,42,24,.09) 52%,transparent)}
+
 #cover .stain{position:absolute;border-radius:50%;pointer-events:none;
   background:radial-gradient(closest-side,rgba(120,86,52,.16),rgba(120,86,52,.07) 62%,transparent 78%);
   filter:blur(.4px)}
 #cover .stain.s1{width:38vw;height:30vw;left:-8vw;top:12vh;transform:rotate(-18deg)}
 #cover .stain.s2{width:26vw;height:22vw;right:-6vw;bottom:22vh;
   background:radial-gradient(closest-side,rgba(156,74,50,.13),rgba(156,74,50,.05) 60%,transparent 76%)}
-#cover .banner{position:absolute;left:0;right:0;top:calc(env(safe-area-inset-top) + 16px);
+
+#cover .banner{position:absolute;left:0;right:0;top:calc(env(safe-area-inset-top) + 22px);
   text-align:center;color:var(--ink2);z-index:2}
-#cover .banner .r{width:60%;height:0;border-top:1px solid var(--rule);margin:0 auto}
-#cover .banner .en{margin-top:9px;font-family:var(--geo);font-size:9px;letter-spacing:.5em;margin-right:-.5em}
-#cover .banner .dt{margin-top:6px;font-family:var(--geo);font-size:9px;letter-spacing:.3em;margin-right:-.3em;color:var(--ink3)}
-#cover .banner .r2{width:36%;height:0;border-top:1px solid var(--rule2);margin:9px auto 0}
-#ctop{position:absolute;left:0;right:0;top:22vh;z-index:3;
-  padding:0 24px;text-align:center}
+#cover .banner .en{font-family:var(--geo);font-size:10px;letter-spacing:.5em;margin-right:-.5em}
+#cover .banner .dt{margin-top:10px;font-family:var(--geo);font-size:9px;letter-spacing:.32em;margin-right:-.32em;color:var(--ink3)}
+
+/* 名字章 */
+#cover .names{position:absolute;left:0;right:0;top:44vh;z-index:3;text-align:center;pointer-events:none}
+#cover .names .pair{display:inline-flex;align-items:flex-end;gap:18px;position:relative;padding:0 6px}
+#cover .names .col{display:flex;flex-direction:column;align-items:center;
+  font-size:19px;line-height:1.15;letter-spacing:.06em;color:var(--ink)}
+#cover .names .col span{display:block}
+#cover .names .seal{position:absolute;right:-32px;bottom:-26px;
+  width:72px;height:72px;border:2px solid rgba(156,74,50,.58);
+  transform:rotate(-12deg);color:rgba(156,74,50,.68);
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(156,74,50,.03);z-index:4}
+#cover .names .seal::before{content:"";position:absolute;inset:4px;border:1px solid rgba(156,74,50,.44)}
+#cover .names .seal .t{font-size:12px;line-height:1.15;letter-spacing:.05em;text-align:center}
+
+#ctop{position:absolute;left:0;right:0;top:26vh;z-index:3;padding:0 24px;text-align:center}
 #ctop h1{font-size:clamp(38px,12.5vw,58px);font-weight:400;line-height:1.18;
   letter-spacing:.32em;margin-right:-.32em;color:var(--ink);
   text-shadow:0 1px 0 rgba(255,255,255,.55),0 -1px 0 rgba(59,42,24,.14),0 3px 18px rgba(156,74,50,.14)}
@@ -68,14 +79,7 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
   background:var(--red);transform:rotate(45deg)}
 #ctop .en{margin-top:16px;font-family:var(--geo);font-size:10px;letter-spacing:.46em;margin-right:-.46em;color:var(--ink2)}
 #ctop .cn-sub{margin-top:8px;font-size:11px;letter-spacing:.3em;margin-right:-.3em;color:var(--ink3)}
-#cover .postmark{position:absolute;right:6vw;top:calc(env(safe-area-inset-top) + 62px);
-  width:80px;height:80px;border:1.6px solid rgba(156,74,50,.5);border-radius:50%;
-  transform:rotate(-14deg);color:rgba(156,74,50,.55);z-index:4;opacity:.9}
-#cover .postmark::before{content:"";position:absolute;inset:5px;border:1px solid rgba(156,74,50,.32);border-radius:50%}
-#cover .postmark .t{position:absolute;left:0;right:0;top:12px;text-align:center;font-family:var(--geo);font-size:7px;letter-spacing:.22em}
-#cover .postmark .c{position:absolute;left:0;right:0;top:36px;text-align:center;font-size:13px;letter-spacing:.14em;font-weight:400}
-#cover .postmark .b{position:absolute;left:0;right:0;bottom:11px;text-align:center;font-family:var(--geo);font-size:7px;letter-spacing:.22em}
-#cover .postmark .ring{position:absolute;left:50%;top:26px;width:1px;height:26px;background:rgba(156,74,50,.25);transform:translateX(-.5px)}
+
 #cbot{position:absolute;left:0;right:0;bottom:0;z-index:5;
   padding:0 24px calc(env(safe-area-inset-bottom) + 30px);
   display:flex;flex-direction:column;align-items:center}
@@ -124,15 +128,7 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 #navbar .nb+.nb::before{content:"";position:absolute;left:0;top:22%;bottom:22%;width:1px;background:var(--rule2)}
 #navbar .nb.on{color:var(--red)}
 #navbar .nb.on::after{content:"";position:absolute;left:18%;right:18%;top:5px;height:2px;background:var(--red)}
-.opbar{flex:0 0 auto;display:flex;gap:0;overflow-x:auto;-webkit-overflow-scrolling:touch;
-  border-top:1px solid var(--rule2);background:var(--paper)}
-.opbar::-webkit-scrollbar{display:none}
-.opbar .op{flex:0 0 auto;min-width:56px;padding:9px 8px 8px;text-align:center;
-  font-size:11px;letter-spacing:.1em;color:var(--ink2);white-space:nowrap}
-.opbar .op .gi{display:block;font-size:15px;line-height:1.3;color:var(--ink)}
-.opbar .op:active{background:rgba(59,42,24,.07)}
-.opbar .op:active .gi,.opbar .op:active{color:var(--red)}
-.opbar .op.dim .gi{color:var(--ink3)}
+
 .masthead{flex:0 0 auto;padding:calc(env(safe-area-inset-top) + 9px) 16px 7px;text-align:center;
   border-bottom:3px double var(--ink);position:relative}
 .mh-nav{display:flex;align-items:center;justify-content:space-between;height:26px;margin-bottom:5px}
@@ -146,7 +142,9 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 .mh-sub{margin-top:3px;font-size:10px;letter-spacing:.12em;color:var(--ink3);font-family:var(--geo)}
 #flow{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;
   padding:14px 16px 20px;overscroll-behavior:contain}
+
 .item{margin:0 0 20px}
+.item.group{margin-bottom:12px}
 .item .col{display:flex;align-items:center;gap:7px;font-size:11px;letter-spacing:.18em;color:var(--ink2)}
 .item .col .dash{flex:1 1 auto;height:0;border-top:1px solid var(--rule2);align-self:center}
 .item .col .nm{color:var(--red);letter-spacing:.22em}
@@ -165,22 +163,63 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 .item.wait .body{color:var(--ink3);font-size:14px;letter-spacing:.1em}
 .blink{animation:blink 1.1s steps(1) infinite}
 @keyframes blink{0%,50%{opacity:1}51%,100%{opacity:.15}}
+
+.item.him .sepline{margin:10px 0 10px;display:flex;align-items:center;gap:8px;
+  font-family:var(--geo);font-size:10px;color:var(--ink3);letter-spacing:.06em}
+.item.him .sepline::before,.item.him .sepline::after{content:"";flex:1 1 auto;
+  height:0;border-top:1px solid var(--rule3);max-width:30%}
+
 .extra{margin:16px 0 20px;border:2px solid var(--red);padding:11px 13px;text-align:center}
 .extra .t{font-size:12px;letter-spacing:.5em;margin-right:-.5em;color:var(--red)}
 .extra .m{margin-top:7px;font-size:13px;line-height:1.8;color:var(--ink2)}
-.extra .go{margin-top:9px;display:inline-block;font-size:12px;letter-spacing:.18em;color:var(--red);border-bottom:1px solid var(--red);padding-bottom:2px}
+.extra .go{margin-top:9px;display:inline-block;font-size:12px;letter-spacing:.18em;
+  color:var(--red);border-bottom:1px solid var(--red);padding-bottom:2px}
 .colophon{text-align:center;padding:22px 0 6px;color:var(--ink3);font-size:10px;letter-spacing:.2em}
-.press{flex:0 0 auto;display:flex;align-items:flex-end;gap:10px;padding:9px 14px 9px;border-top:3px double var(--ink)}
-.press textarea{flex:1 1 auto;min-height:40px;max-height:118px;font-size:16px;line-height:1.5;
-  padding:9px 11px;border:1px solid var(--rule2);border-radius:2px;resize:none;
+
+/* 输入栏 */
+.press{flex:0 0 auto;display:flex;flex-direction:column;
+  padding:0 14px;position:relative;
+  border-top:3px double var(--ink)}
+.press .press-cn{text-align:center;font-size:10px;letter-spacing:.3em;margin-right:-.3em;
+  color:var(--ink2);padding:8px 0 6px}
+.press .press-row{display:flex;align-items:stretch;gap:10px;padding-bottom:9px}
+.press textarea{flex:1 1 auto;min-height:56px;max-height:118px;font-size:16px;line-height:1.5;
+  padding:10px 12px;border:1px solid var(--rule);outline:1px solid rgba(59,42,24,.20);
+  outline-offset:2px;border-radius:0;resize:none;
+  background:rgba(255,250,238,.35);
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/><feColorMatrix values='0 0 0 0 .35 0 0 0 0 .24 0 0 0 0 .14 0 0 0 .14 0'/></filter><rect width='100%25' height='100%25' filter='url(%23p)'/></svg>");
+  background-size:140px 140px;
   user-select:text;-webkit-user-select:text}
-.press textarea::placeholder{color:var(--ink3)}
-.stampbtn{flex:0 0 auto;width:56px;height:56px;border-radius:50%;
+.press textarea::placeholder{color:var(--ink3);font-style:italic;letter-spacing:.06em}
+.stampbtn{flex:0 0 auto;width:58px;height:58px;border-radius:50%;
   border:1.5px solid var(--red);color:var(--red);font-size:13px;letter-spacing:.1em;
-  display:flex;align-items:center;justify-content:center;position:relative;transform:rotate(-9deg)}
+  display:flex;align-items:center;justify-content:center;position:relative;
+  transform:rotate(-9deg);align-self:center;
+  background:rgba(255,250,238,.4);
+  box-shadow:0 1px 0 rgba(255,255,255,.6) inset,0 1px 2px rgba(59,42,24,.10)}
 .stampbtn::before{content:"";position:absolute;inset:4px;border:1px solid rgba(156,74,50,.4);border-radius:50%}
 .stampbtn:active{background:rgba(156,74,50,.1)}
 .stampbtn[disabled]{opacity:.35}
+
+/* 操作栏（平时隐藏） */
+.opbar{position:fixed;left:0;right:0;z-index:160;
+  bottom:calc(var(--navh) + env(safe-area-inset-bottom) + 92px);
+  background:var(--paper);
+  border-top:1px solid var(--rule2);border-bottom:1px solid var(--rule2);
+  display:flex;gap:0;overflow-x:auto;-webkit-overflow-scrolling:touch;
+  opacity:0;transform:translateY(8px);pointer-events:none;
+  transition:opacity .2s ease,transform .2s ease;
+  box-shadow:0 -4px 14px rgba(59,42,24,.10)}
+.opbar.on{opacity:1;transform:translateY(0);pointer-events:auto}
+.opbar::-webkit-scrollbar{display:none}
+.opbar .op{flex:0 0 auto;min-width:56px;padding:9px 8px 8px;text-align:center;
+  font-size:11px;letter-spacing:.1em;color:var(--ink2);white-space:nowrap}
+.opbar .op .gi{display:block;height:20px;margin-bottom:3px;color:var(--ink)}
+.opbar .op .gi svg{width:20px;height:20px;display:block;margin:0 auto}
+.opbar .op:active{background:rgba(59,42,24,.07)}
+.opbar .op:active .gi,.opbar .op:active{color:var(--red)}
+.opbar .op:active .gi svg{stroke:var(--red)}
+
 #cardsPage,#setPage,#laiGaoPage,#picsPage,#actsPage,#musicPage{position:fixed;inset:0;z-index:250;
   height:100vh;height:100dvh;background:var(--paper);display:none;flex-direction:column}
 #cardsPage.on,#setPage.on,#laiGaoPage.on,#picsPage.on,#actsPage.on,#musicPage.on{display:flex}
@@ -198,7 +237,8 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 .compose .row{margin-top:9px;display:flex;align-items:center;justify-content:space-between;
   border-top:1px dashed var(--rule2);padding-top:9px}
 .compose .cnt{font-size:10px;color:var(--ink3);font-family:var(--geo)}
-.compose .add{font-size:12px;letter-spacing:.2em;color:var(--red);border:1px solid var(--red);border-radius:999px;padding:6px 16px}
+.compose .add{font-size:12px;letter-spacing:.2em;color:var(--red);border:1px solid var(--red);
+  border-radius:999px;padding:6px 16px}
 .compose .add:active{background:rgba(156,74,50,.1)}
 .toc{padding:8px 0}
 .tocrow{display:flex;align-items:center;gap:8px;width:100%;text-align:left;
@@ -209,12 +249,14 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 .tocrow .en i{font-style:normal;color:var(--red)}
 .tocrow .pg{font-size:10px;color:var(--ink3);min-width:16px;text-align:right}
 .tocrow:active .nm{color:var(--red)}
-.search{display:flex;align-items:center;gap:8px;border:1px solid var(--rule);padding:7px 10px;margin-bottom:12px}
+.search{display:flex;align-items:center;gap:8px;border:1px solid var(--rule);
+  padding:7px 10px;margin-bottom:12px}
 .search .ico{font-size:12px;letter-spacing:.1em;color:var(--red)}
 .search input{flex:1 1 auto;font-size:16px;min-width:0}
 .search input::placeholder{color:var(--ink3)}
 .search .clr{font-size:16px;color:var(--ink3);padding:0 4px}
-.tools{display:flex;gap:0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin-bottom:10px}
+.tools{display:flex;gap:0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  margin-bottom:10px}
 .tools .tl{flex:1 1 0;font-size:12px;letter-spacing:.14em;color:var(--ink2);
   padding:9px 0;text-align:center;border-right:1px solid var(--rule2)}
 .tools .tl:last-child{border-right:0}
@@ -222,7 +264,8 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 .tools .tl.danger{color:var(--red)}
 .tools .tl.danger:active{background:rgba(156,74,50,.12)}
 .tools .tl.on{background:rgba(156,74,50,.12);color:var(--red)}
-.cntbar{font-size:11px;letter-spacing:.16em;color:var(--ink3);padding:0 2px 8px;font-family:var(--geo)}
+.cntbar{font-size:11px;letter-spacing:.16em;color:var(--ink3);padding:0 2px 8px;
+  font-family:var(--geo)}
 .cntbar b{font-weight:400;color:var(--red)}
 .carditem{display:flex;gap:10px;padding:11px 0;border-bottom:1px solid var(--rule2);align-items:flex-start}
 .carditem .ck{flex:0 0 auto;display:none}
@@ -245,10 +288,12 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 .bulkbar .selall input:checked::after{content:"";position:absolute;left:5px;top:1px;
   width:4px;height:9px;border:solid var(--paper);border-width:0 2px 2px 0;transform:rotate(45deg)}
 .bulkbar .n{flex:1 1 auto;font-size:11px;color:var(--ink2);font-family:var(--geo)}
-.bulkbar .do{font-size:13px;letter-spacing:.18em;color:var(--red);border:1px solid var(--red);border-radius:2px;padding:7px 15px}
+.bulkbar .do{font-size:13px;letter-spacing:.18em;color:var(--red);
+  border:1px solid var(--red);border-radius:2px;padding:7px 15px}
 .bulkbar .do:active{background:rgba(156,74,50,.14)}
 .bulkbar .cx{font-size:12px;letter-spacing:.1em;color:var(--ink3);padding:7px 4px}
-.carditem .no{flex:0 0 auto;font-family:var(--geo);font-size:10px;color:var(--ink3);padding-top:3px;min-width:30px}
+.carditem .no{flex:0 0 auto;font-family:var(--geo);font-size:10px;color:var(--ink3);
+  padding-top:3px;min-width:30px}
 .carditem .tx{flex:1 1 auto;font-size:15px;line-height:1.7;word-break:break-word;
   white-space:pre-wrap;user-select:text;-webkit-user-select:text}
 .carditem .del{flex:0 0 auto;font-size:11px;letter-spacing:.1em;color:var(--ink3);padding:3px 2px}
@@ -258,13 +303,16 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 .blk h3{font-size:12px;font-weight:400;letter-spacing:.24em;color:var(--red);
   border-bottom:1px solid var(--rule2);padding-bottom:6px;margin-bottom:11px}
 .blk p.tip{font-size:12px;line-height:1.9;color:var(--ink2);margin-bottom:11px}
-.fld{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--rule2)}
+.fld{display:flex;align-items:center;justify-content:space-between;
+  padding:9px 0;border-bottom:1px solid var(--rule2)}
 .fld label{font-size:14px}
 .fld .r{display:flex;align-items:center;gap:8px}
-.fld input{width:66px;font-size:16px;text-align:center;border:1px solid var(--rule);border-radius:2px;padding:7px 4px;font-family:var(--geo)}
+.fld input{width:66px;font-size:16px;text-align:center;border:1px solid var(--rule);
+  border-radius:2px;padding:7px 4px;font-family:var(--geo)}
 .fld .u{font-size:11px;color:var(--ink3)}
 .btnline{padding:11px 0}
-.btnline button{font-size:13px;letter-spacing:.18em;color:var(--ink2);border:1px solid var(--rule);border-radius:2px;padding:9px 18px;width:100%}
+.btnline button{font-size:13px;letter-spacing:.18em;color:var(--ink2);
+  border:1px solid var(--rule);border-radius:2px;padding:9px 18px;width:100%}
 .btnline button:active{background:rgba(59,42,24,.06)}
 .btnline.danger button{color:var(--red);border-color:var(--red)}
 #toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom) + 24px);
@@ -280,27 +328,29 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 <div id="cover">
   <div class="art"></div>
   <div class="grain"></div>
-  <div class="fold"></div>
   <div class="stain s1"></div>
   <div class="stain s2"></div>
+
   <div class="banner">
-    <div class="r"></div>
     <div class="en">THE BEYOND DAILY</div>
     <div class="dt">EST. 1926 · 不定期刊</div>
-    <div class="r2"></div>
   </div>
-  <div class="postmark">
-    <div class="t">BEYOND</div>
-    <div class="c">相 爱</div>
-    <div class="ring"></div>
-    <div class="b">1926</div>
-  </div>
+
   <div id="ctop">
     <h1>彼岸相爱</h1>
     <div class="rule"></div>
     <div class="en">BEYOND · LOVE</div>
     <div class="cn-sub">写给对岸，一句一句</div>
   </div>
+
+  <div class="names">
+    <div class="pair">
+      <div class="col"><span>易</span><span>遇</span></div>
+      <div class="col"><span>夏</span><span>雾</span><span>凉</span></div>
+      <div class="seal"><div class="t">彼岸<br>相爱</div></div>
+    </div>
+  </div>
+
   <div id="cbot">
     <button id="enter">
       <div class="frame">
@@ -318,7 +368,6 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
     <div class="hint">轻触船票登船</div>
   </div>
 </div>
-<!-- ============ 主版面 ============ -->
 <div id="paper" class="sec">
   <header class="masthead">
     <div class="mh-nav">
@@ -328,27 +377,90 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
     </div>
     <div class="mh-en">THE BEYOND DAILY</div>
     <div class="mh-cn">彼岸日報</div>
-    <div class="mh-meta" id="mhMeta">第 001 期 · 星期五 · 秋 · 晴</div>
-    <div class="mh-sub" id="mhSub">2026年10月9日 · 定价：一次心动</div>
+    <div class="mh-meta" id="mhMeta">第 001 期 · 星期六 · 彼岸入秋 · 无风</div>
+    <div class="mh-sub" id="mhSub">2026年10月10日 · 邮资：一次心动</div>
   </header>
 
   <div id="flow"></div>
 
   <div class="opbar" id="opbar">
-    <button class="op" data-op="photo"><span class="gi">◎</span>攝影</button>
-    <button class="op" data-op="album"><span class="gi">▤</span>影集</button>
-    <button class="op" data-op="video"><span class="gi">◐</span>隔岸對影</button>
-    <button class="op" data-op="pics"><span class="gi">❁</span>畫帖</button>
-    <button class="op" data-op="acts"><span class="gi">✧</span>往來</button>
-    <button class="op" data-op="music"><span class="gi">♫</span>唱片</button>
-    <button class="op" data-op="reply"><span class="gi">↺</span>回電</button>
-    <button class="op" data-op="stay"><span class="gi">☾</span>常駐</button>
-    <button class="op" data-op="arch"><span class="gi">▣</span>合訂本</button>
+    <button class="op" data-op="photo">
+      <span class="gi">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="7" width="18" height="13" rx="2"/>
+          <circle cx="12" cy="13.5" r="4"/>
+          <path d="M8.5 7l1.5-2.5h4L15.5 7"/>
+        </svg>
+      </span>攝影</button>
+    <button class="op" data-op="album">
+      <span class="gi">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="5" width="18" height="14" rx="1.5"/>
+          <path d="M3 15l4.5-4 4 3.5 3-2.5L21 16"/>
+          <circle cx="8.5" cy="9.5" r="1.4"/>
+        </svg>
+      </span>畫報</button>
+    <button class="op" data-op="video">
+      <span class="gi">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="6" width="13" height="12" rx="2"/>
+          <path d="M16 10l4-2v8l-4-2z"/>
+        </svg>
+      </span>通話</button>
+    <button class="op" data-op="pics">
+      <span class="gi">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 4h11l3 3v13H5z"/>
+          <path d="M16 4v3h3"/>
+          <path d="M8.5 13h7M8.5 16.5h4.5"/>
+        </svg>
+      </span>畫帖</button>
+    <button class="op" data-op="acts">
+      <span class="gi">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="2.2"/>
+          <circle cx="12" cy="12" r="5.5"/>
+          <circle cx="12" cy="12" r="9"/>
+        </svg>
+      </span>漣漪</button>
+    <button class="op" data-op="music">
+      <span class="gi">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="9"/>
+          <circle cx="12" cy="12" r="3"/>
+          <circle cx="12" cy="12" r="0.8" fill="currentColor"/>
+        </svg>
+      </span>唱片</button>
+    <button class="op" data-op="reply">
+      <span class="gi">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 5.5h16v10H10l-4 3.5v-3.5H4z"/>
+          <path d="M8.5 9.5h7M8.5 12.5h4"/>
+        </svg>
+      </span>回應</button>
+    <button class="op" data-op="stay">
+      <span class="gi">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="12" r="4"/>
+          <circle cx="15" cy="12" r="4"/>
+        </svg>
+      </span>相伴</button>
+    <button class="op" data-op="arch">
+      <span class="gi">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 7h16v12H4z"/>
+          <path d="M4 7l2-2h12l2 2"/>
+          <path d="M10 11h4"/>
+        </svg>
+      </span>歸檔</button>
   </div>
 
   <footer class="press">
-    <textarea id="inp" rows="1" placeholder="拍发去信…"></textarea>
-    <button class="stampbtn" id="send">送 出</button>
+    <div class="press-cn">此 岸 去 信</div>
+    <div class="press-row">
+      <textarea id="inp" rows="2" placeholder="落笔，即是渡海。"></textarea>
+      <button class="stampbtn" id="send">送 出</button>
+    </div>
   </footer>
 </div>
 
@@ -358,8 +470,8 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 </div>
 
 <div class="sec" id="secSupp">
-  <div class="sheet-hd"><h2>副 刊</h2><div class="sub">SUPPLEMENT · 雙方皆可投稿</div></div>
-  <div class="sheet-bd"><div class="empty">副刊尚未啟用。<br><br>雙方都能發，<br>是會有人回話的版面。</div></div>
+  <div class="sheet-hd"><h2>漂 流</h2><div class="sub">DRIFTING · 雙方皆可投</div></div>
+  <div class="sheet-bd"><div class="empty">漂流尚未啟用。<br><br>雙方都能發，<br>是會有人回話的版面。</div></div>
 </div>
 
 <div class="sec" id="secClip">
@@ -368,16 +480,16 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 </div>
 
 <div class="sec" id="secSpecial">
-  <div class="sheet-hd"><h2>特 刊</h2><div class="sub">SPECIAL ISSUE</div></div>
-  <div class="sheet-bd"><div class="empty">尚無特刊。<br><br>重要的日子，單獨出一期。</div></div>
+  <div class="sheet-hd"><h2>潮 汐</h2><div class="sub">TIDES · 重要日</div></div>
+  <div class="sheet-bd"><div class="empty">尚無潮汐。<br><br>重要的日子，單獨出一期。</div></div>
 </div>
 
 <nav id="navbar">
   <button class="nb on" data-sec="paper">頭版</button>
   <button class="nb" data-sec="secMail">郵筒</button>
-  <button class="nb" data-sec="secSupp">副刊</button>
+  <button class="nb" data-sec="secSupp">漂流</button>
   <button class="nb" data-sec="secClip">剪報</button>
-  <button class="nb" data-sec="secSpecial">特刊</button>
+  <button class="nb" data-sec="secSpecial">潮汐</button>
 </nav>
 
 <div id="laiGaoPage">
@@ -487,19 +599,17 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:0;outlin
 </div>
 
 <div id="toast"></div>
-
 <script>
 (function(){
 'use strict';
 
-/* ===================== 存储层：纯 OPFS，无判断、无探针、无兜底 ===================== */
+/* ===================== 存储层：纯 OPFS ===================== */
 var FILES={
   meta:'meta.json',
   cards:'cards.json',
   chat:'chat.json',
   set:'settings.json'
 };
-
 var Store={
   dir:null,
   cache:{meta:null,cards:null,chat:null,set:null},
@@ -512,10 +622,8 @@ var Store={
       chat:function(){return {v:1,msgs:[]};},
       set:function(){return {v:1,dMin:15,dMax:30};}
     };
-
     var root=await navigator.storage.getDirectory();
     this.dir=await root.getDirectoryHandle('bian',{create:true});
-
     for(var k in FILES){
       var d=null;
       try{ d=await this.read(k); }catch(e){ d=null; }
@@ -527,7 +635,6 @@ var Store={
         this.cache[k]=d;
       }
     }
-
     var meta=this.cache.meta;
     if(!meta.issues){
       meta.issues=[];
@@ -541,7 +648,6 @@ var Store={
       meta.issues.sort();
       await this.writeNow('meta',meta);
     }
-
     for(var k2 in FILES){
       if(!this.cache[k2] || typeof this.cache[k2]!=='object'){
         this.cache[k2]=DEFS[k2]();
@@ -619,10 +725,46 @@ function hhmm(t){ var d=new Date(t); return pad2(d.getHours())+':'+pad2(d.getMin
 function dayKey(t){ var d=new Date(t); return d.getFullYear()+'-'+pad2(d.getMonth()+1)+'-'+pad2(d.getDate()); }
 function weekCN(t){ return ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'][new Date(t).getDay()]; }
 function hash(s){ var h=0; for(var i=0;i<s.length;i++){ h=(h*31+s.charCodeAt(i))>>>0; } return h; }
-function seasonCN(t){ var m=new Date(t).getMonth()+1;
-  return m>=3&&m<=5?'春':(m>=6&&m<=8?'夏':(m>=9&&m<=11?'秋':'冬')); }
-var WEATHER=['晴','多云','微风','细雨','薄阴','骤雨初歇','海雾','转凉','闷热','风起'];
-var PRICE=['一次心动','半句晚安','一枚邮票','一滴眼泪','无边无际','一声叹息','一个回头的念头','一句未曾说出口的话'];
+
+/* ===================== 彼岸季节 / 天气 / 邮资 ===================== */
+var SEASON={
+  spring:['彼岸入春','彼岸也回暖了','对岸的春天来了','彼岸开春','彼岸正是春天','彼岸春意渐浓'],
+  summer:['彼岸入夏','对岸的夏天来了','彼岸蝉鸣了','彼岸正是夏天','彼岸暑气正盛','彼岸夏意浓'],
+  autumn:['彼岸入秋','对岸的秋天来了','彼岸叶落了','彼岸正是秋天','彼岸秋意渐浓','彼岸转凉了'],
+  winter:['彼岸入冬','对岸的冬天来了','彼岸落雪了','彼岸正是冬天','彼岸寒意重','彼岸岁末了']
+};
+var WEATHER=[
+  '雾从海上来','隔岸有雾','海上起雾','雾散了一半','天光被雾吃了','雾散尽了','雾里有灯','雾薄得能看见对岸',
+  '无风','风从对岸来','风里有咸味','风起了','风停在海中间','风很轻','风停了','风从海上回来',
+  '无云','云很低','云在天边','云压着海面','云散了一半','云开了','云薄','云像被谁推开了',
+  '隔岸有雨','彼岸下雨了','雨落在海上','雨没停','雨刚停','雨丝斜着','雨声很轻',
+  '天很蓝','天灰着','天色泛白','天光正好','天要黑了','月亮出来了','天亮了','天边有光',
+  '不冷不热','有点凉','很安静','暖着','凉了',
+  '起浪了','潮水退了','潮水涨了','船没开','船开了','对岸亮着灯','有船经过','对岸放晴了'
+];
+var PRICE=[
+  '一次心动','半句晚安','一枚邮票','一滴眼泪','一声叹息','一个回头的念头','一句未曾说出口的话','一个梦','一次沉默','一夜未眠',
+  '一张船票','一封信','一次渡海','半程思念','一程风','一纸旧信','一张作废的票根','一枚火漆印',
+  '一个黄昏','一整个秋天','一个雨天','一夜','半生','一个瞬间','一个夏夜','一个清晨',
+  '一海之隔','千里之外','一步之遥','一生一次','一整个彼岸','无边的等待','遥遥无期','一转身的距离',
+  '轻如鸿毛','重若千钧','不值一文','无可估量','一文不值','值一生的念想',
+  '无价','免费','赊账','分期偿还','永远还不清','一颗心','一整个我'
+];
+
+function seasonText(t){
+  var m=new Date(t).getMonth()+1, arr;
+  if(m>=3&&m<=5) arr=SEASON.spring;
+  else if(m>=6&&m<=8) arr=SEASON.summer;
+  else if(m>=9&&m<=11) arr=SEASON.autumn;
+  else arr=SEASON.winter;
+  return arr[hash(dayKey(t)+'s')%arr.length];
+}
+function weatherText(t){
+  return WEATHER[hash(dayKey(t)+'w')%WEATHER.length];
+}
+function priceText(t){
+  return PRICE[hash(dayKey(t)+'p')%PRICE.length];
+}
 
 /* ===================== 出刊 ===================== */
 function issueList(){
@@ -649,12 +791,11 @@ function issueTotal(){ return issueList().length; }
 function renderMasthead(){
   var now=Date.now(), d=new Date(now), k=dayKey(now);
   var no=issueNo(), pub=todayPublished();
-  var h=hash(k);
   document.getElementById('mhMeta').innerHTML=
     '第 '+('000'+no).slice(-3)+' 期'+(pub?'':'<b> · 待付印</b>')
-    +' · '+weekCN(now)+' · <b>'+seasonCN(now)+'</b> · <b>'+WEATHER[h%WEATHER.length]+'</b>';
+    +' · '+weekCN(now)+' · <b>'+seasonText(now)+'</b> · <b>'+weatherText(now)+'</b>';
   document.getElementById('mhSub').textContent=
-    d.getFullYear()+'年'+(d.getMonth()+1)+'月'+d.getDate()+'日 · 定价：'+PRICE[(h>>>3)%PRICE.length];
+    d.getFullYear()+'年'+(d.getMonth()+1)+'月'+d.getDate()+'日 · 邮资：'+priceText(now);
 }
 
 /* ===================== 消息流 ===================== */
@@ -663,26 +804,36 @@ function renderFlow(){
   var ms=S.msgs();
   var html='';
   var prevDay=null;
+  var prevWho=null;
+  var groupOpen=false;   // 是否处于一个「回复组」中
+
   for(var i=0;i<ms.length;i++){
     var m=ms[i], dk=dayKey(m.at), lead=(dk!==prevDay);
     prevDay=dk;
+
     if(m.who==='me'||m.who==='him'){
       var cls='item '+m.who+(lead?' lead':'');
+      // 同组：跟上一条是同一个 who、且在同一个回复组里
+      if(m.who==='him' && groupOpen) cls+=' group';
       var nm=(m.who==='him')?'彼岸來電':'此岸去信';
       var col=(m.who==='him')
         ? '<span class="nm">◆ '+nm+'</span><span class="dash"></span><span class="tm">'+hhmm(m.at)+'</span>'
         : '<span class="tm">'+hhmm(m.at)+'</span><span class="dash"></span><span class="nm">'+nm+' ◆</span>';
       html+='<article class="'+cls+'" data-id="'+m.id+'"><div class="col">'+col+'</div>'
            +'<div class="body">'+esc(m.text)+'</div></article>';
+      prevWho=m.who;
     }else if(m.who==='wait'){
-      html+='<article class="item wait" data-id="'+m.id+'">'
+      var wcls='item wait'+(groupOpen?' group':'');
+      html+='<article class="'+wcls+'" data-id="'+m.id+'">'
         +'<div class="col"><span class="nm">◆ 譯電中</span><span class="dash"></span>'
         +'<span class="tm">'+hhmm(m.at)+'</span></div>'
         +'<div class="body">▍正在译电<span class="blink">…</span></div></article>';
+      prevWho='wait';
     }else if(m.who==='extra'){
       html+='<aside class="extra"><div class="t">號 外</div>'
         +'<div class="m">'+esc(m.text)+'</div>'
         +'<div class="go" onclick="__goCards()">前往電文匣</div></aside>';
+      prevWho='extra';
     }
   }
   if(!ms.length){
@@ -699,6 +850,10 @@ function toBottom(smooth){
   try{ box.scrollTo({top:top,behavior:smooth?'smooth':'auto'}); }
   catch(e){ box.scrollTop=top; }
 }
+function nearBottom(){
+  var box=document.getElementById('flow');
+  return (box.scrollHeight - box.scrollTop - box.clientHeight) < 60;
+}
 
 /* ===================== 抽卡 / 回复 ===================== */
 function pickCard(){ var c=S.cards(); if(!c.length) return null; return c[Math.floor(Math.random()*c.length)]; }
@@ -707,6 +862,7 @@ function delayMs(){ var s=S.set();
   if(a>b){ var t=a; a=b; b=t; }
   return (a+Math.random()*(b-a))*1000;
 }
+function randGap(){ return (3+Math.random()*5)*1000; }
 
 function sendMine(text){
   text=String(text||'').replace(/\s+$/,'');
@@ -736,17 +892,68 @@ function resolveWait(id){
   var ms=S.msgs(), idx=-1;
   for(var i=0;i<ms.length;i++){ if(ms[i].id===id){ idx=i; break; } }
   if(idx<0) return;
-  var c=pickCard();
-  if(!c){
+
+  var cards=S.cards();
+  if(!cards.length){
     ms[idx]={id:uid('x'),who:'extra',text:'本报尚未收到彼岸来稿。\n祂还没有话可说——除非你替祂写。',at:Date.now()};
-  }else{
-    ensureIssue();
-    ms[idx]={id:uid('m'),who:'him',text:c.text,at:Date.now(),cardId:c.id};
+    renderMasthead();
+    Store.touch('chat'); Store.flush();
+    renderFlow(); toBottom(true);
+    return;
   }
+
+  // 抽 1~3 张
+  var n=1+Math.floor(Math.random()*3);
+  var picked=[];
+  for(var q=0;q<n;q++){
+    picked.push(cards[Math.floor(Math.random()*cards.length)]);
+  }
+
+  ensureIssue();
+
+  // 把 wait 占位替换成第一条「译电中」，然后依次插入
+  var firstAt=Date.now();
+  ms[idx]={id:uid('m'),who:'him',text:picked[0].text,at:firstAt,cardId:picked[0].id};
+  // 后面还有 n-1 条 + 最后收尾（不加 wait）
+  // 但为了「第一条出现后，下面接一个新的译电中」，
+  // 我们需要在第一条后面插一个 wait，然后依次推入
+  for(var j=1;j<n;j++){
+    var wAt=Date.now();
+    ms.push({id:uid('w'),who:'wait',at:wAt,dueAt:wAt, _silent:true});
+  }
+
   renderMasthead();
-  Store.touch('chat');
-  Store.flush();
+  Store.touch('chat'); Store.flush();
   renderFlow(); toBottom(true);
+
+  // 依次把剩下的字卡消息推出
+  if(n>1){
+    var k=1;
+    (function step(){
+      if(k>=n) return;
+      setTimeout(function(){
+        var ms2=S.msgs();
+        // 找到第一个 _silent wait
+        for(var a=0;a<ms2.length;a++){
+          if(ms2[a].who==='wait' && ms2[a]._silent){
+            ms2[a]={id:uid('m'),who:'him',text:picked[k].text,at:Date.now(),cardId:picked[k].id};
+            break;
+          }
+        }
+        // 如果还有下一条，补一个新的 wait 在末尾
+        if(k+1<n){
+          var wAt2=Date.now();
+          ms2.push({id:uid('w'),who:'wait',at:wAt2,dueAt:wAt2,_silent:true});
+        }
+        Store.touch('chat'); Store.flush();
+        var wasBottom=nearBottom();
+        renderFlow();
+        if(wasBottom) toBottom(true);
+        k++;
+        if(k<n) step();
+      }, randGap());
+    })();
+  }
 }
 
 function rearmAll(){
@@ -1028,17 +1235,58 @@ Array.prototype.forEach.call(document.querySelectorAll('#navbar .nb'),function(b
   b.addEventListener('click',function(){ switchSec(b.getAttribute('data-sec')); });
 });
 
-/* ===================== 操作栏 ===================== */
+/* ===================== 操作栏（滑出/收起） ===================== */
 var OPS={
-  photo:'攝影', album:'影集', video:'隔岸對影',
-  pics:'畫帖', acts:'往來', music:'唱片',
-  reply:'回電', stay:'常駐', arch:'合訂本'
+  photo:'攝影', album:'畫報', video:'通話',
+  pics:'畫帖', acts:'漣漪', music:'唱片',
+  reply:'回應', stay:'相伴', arch:'歸檔'
 };
-document.getElementById('opbar').addEventListener('click',function(e){
+var opbar=document.getElementById('opbar');
+var opOpen=false;
+function openOp(){ opOpen=true; opbar.classList.add('on'); }
+function closeOp(){ opOpen=false; opbar.classList.remove('on'); }
+opbar.addEventListener('click',function(e){
   var b=e.target.closest?e.target.closest('[data-op]'):null;
   if(!b) return;
   var k=b.getAttribute('data-op');
   if(OPS[k]) toast(OPS[k]+'：正在開發');
+});
+
+/* 输入框上滑唤出 */
+var inp=document.getElementById('inp');
+var touchStartY=0, touchStartX=0, touchOnInp=false;
+inp.addEventListener('touchstart',function(e){
+  if(!e.touches||!e.touches[0]) return;
+  touchOnInp=true;
+  touchStartY=e.touches[0].clientY;
+  touchStartX=e.touches[0].clientX;
+},{passive:true});
+inp.addEventListener('touchmove',function(e){
+  if(!touchOnInp||opOpen) return;
+  if(!e.touches||!e.touches[0]) return;
+  var dy=touchStartY - e.touches[0].clientY;
+  var dx=Math.abs(touchStartX - e.touches[0].clientX);
+  if(dy>18 && dx<40){ openOp(); touchOnInp=false; }
+},{passive:true});
+inp.addEventListener('touchend',function(){ touchOnInp=false; },{passive:true});
+
+/* 任意位置下滑收起 */
+var docStartY=0;
+document.addEventListener('touchstart',function(e){
+  if(!opOpen) return;
+  if(!e.touches||!e.touches[0]) return;
+  docStartY=e.touches[0].clientY;
+},{passive:true});
+document.addEventListener('touchmove',function(e){
+  if(!opOpen) return;
+  if(!e.touches||!e.touches[0]) return;
+  var dy=e.touches[0].clientY - docStartY;
+  if(dy>28){ closeOp(); }
+},{passive:true});
+
+/* 点聊天区也收起（可选） */
+document.getElementById('flow').addEventListener('click',function(){
+  if(opOpen) closeOp();
 });
 
 /* ===================== 页面切换 ===================== */
@@ -1080,7 +1328,6 @@ document.getElementById('cardsBack').addEventListener('click',function(){
 document.getElementById('setBack').addEventListener('click',closeAll);
 
 /* ===================== 输入 ===================== */
-var inp=document.getElementById('inp');
 function autosize(){ inp.style.height='auto'; inp.style.height=Math.min(inp.scrollHeight,118)+'px'; }
 inp.addEventListener('input',autosize);
 inp.addEventListener('keydown',function(e){
@@ -1091,6 +1338,7 @@ function doSend(){
   if(!String(t).trim()) return;
   sendMine(t);
   inp.value=''; autosize();
+  closeOp();
 }
 document.getElementById('send').addEventListener('click',doSend);
 
@@ -1100,7 +1348,6 @@ function kb(){
   var el=document.getElementById('paper');
   var off=window.innerHeight-vv.height-vv.offsetTop;
   el.style.transform= off>0 ? 'translateY(-'+off+'px)' : '';
-  toBottom(false);
 }
 if(window.visualViewport){ window.visualViewport.addEventListener('resize',kb); window.visualViewport.addEventListener('scroll',kb); }
 
