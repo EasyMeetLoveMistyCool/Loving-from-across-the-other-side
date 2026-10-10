@@ -168,7 +168,7 @@ img{max-width:100%;display:block}
 .reply-pic-cell{position:relative;aspect-ratio:1/1;border:1px solid var(--rule);overflow:hidden;background:rgba(255,250,238,.35)}
 .reply-pic-cell img{width:100%;height:100%;object-fit:cover;display:block}
 .reply-pic-cell .x{position:absolute;top:2px;right:2px;width:20px;height:20px;border-radius:50%;background:rgba(59,42,24,.7);color:var(--paper);font-size:13px;line-height:20px;text-align:center;border:0;padding:0}
-/* 队列 */
+  /* 队列 */
 .mp .queue{flex:0 0 auto;font-size:11px;color:var(--ink3);letter-spacing:.06em;font-family:var(--geo);cursor:pointer;padding:2px 4px}
 .mp .queue:active{color:var(--red)}
 .queue-layer{position:fixed;inset:0;z-index:430;display:none;align-items:center;justify-content:center;background:rgba(20,14,8,.55)}
@@ -207,7 +207,9 @@ img{max-width:100%;display:block}
 .opbar .op:active{background:rgba(59,42,24,.07)}
 .opbar .op:active .gi,.opbar .op:active{color:var(--red)}
 .opbar .op:active .gi svg{stroke:var(--red)}
-  #cardsPage,#setPage,#laiGaoPage,#picsPage,#actsPage,#musicPage,#ripplesPage,#recordsPage{position:fixed;inset:0;z-index:250;height:100vh;height:100dvh;background-color:var(--paper);background-size:cover;background-position:center;background-repeat:no-repeat;display:none;flex-direction:column}
+
+/* ================= 子页 ================= */
+#cardsPage,#setPage,#laiGaoPage,#picsPage,#actsPage,#musicPage,#ripplesPage,#recordsPage{position:fixed;inset:0;z-index:250;height:100vh;height:100dvh;background-color:var(--paper);background-size:cover;background-position:center;background-repeat:no-repeat;display:none;flex-direction:column}
 #cardsPage.on,#setPage.on,#laiGaoPage.on,#picsPage.on,#actsPage.on,#musicPage.on,#ripplesPage.on,#recordsPage.on{display:flex}
 .sheet-hd{flex:0 0 auto;padding:calc(env(safe-area-inset-top) + 12px) 16px 10px;border-bottom:3px double var(--ink);text-align:center;position:relative}
 .sheet-hd .back{position:absolute;left:12px;top:calc(env(safe-area-inset-top) + 12px);font-size:12px;letter-spacing:.14em;color:var(--ink2);padding:4px 6px}
@@ -404,6 +406,84 @@ img{max-width:100%;display:block}
 .mp .cbtn svg{width:22px;height:22px;display:block}
 .mp .cbtn.play{width:44px;height:44px}
 .mp .cbtn.play svg{width:26px;height:26px}
+/* ===== 相伴小窗 ===== */
+.companion{position:fixed;z-index:425;width:70vw;max-width:340px;
+  background:var(--paper);border:2px solid var(--ink);
+  box-shadow:0 8px 30px rgba(20,14,8,.35);
+  padding:18px 16px 16px;display:none;flex-direction:column;
+  align-items:center;gap:14px;
+  left:15vw;bottom:calc(var(--navh) + env(safe-area-inset-bottom) + 90px)}
+.companion.on{display:flex}
+.companion .cp-avas{display:flex;align-items:center;justify-content:center;gap:12px}
+.companion .cp-ava{width:48px;height:48px;border:2px solid var(--rule);
+  outline:1px solid var(--rule2);outline-offset:2px;
+  background:rgba(255,250,238,.35);overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;color:var(--ink3)}
+.companion .cp-ava img{width:100%;height:100%;object-fit:cover;display:block}
+.companion .cp-heart{font-size:18px;color:var(--red);line-height:1}
+.companion .cp-line1{font-size:14px;letter-spacing:.08em;color:var(--ink);
+  text-align:center;line-height:1.5}
+.companion .cp-line1 .nn{color:var(--red)}
+.companion .cp-line2{font-size:16px;letter-spacing:.1em;color:var(--ink);
+  text-align:center;line-height:1.5}
+.companion .cp-timer{font-size:12px;letter-spacing:.1em;color:var(--ink3);
+  text-align:center;line-height:1.5}
+.companion .cp-end{font-size:12px;letter-spacing:.18em;color:var(--red);
+  border:1px solid var(--red);border-radius:2px;padding:7px 18px;
+  background:none;margin-top:2px}
+.companion .cp-end:active{background:rgba(156,74,50,.12)}
+/* ===== 相伴设置弹层 ===== */
+.cp-layer{position:fixed;inset:0;z-index:440;display:none;
+  align-items:center;justify-content:center;background:rgba(20,14,8,.55)}
+.cp-layer.on{display:flex}
+.cp-box{width:86vw;max-width:420px;max-height:82vh;background:var(--paper);
+  border:2px solid var(--ink);display:flex;flex-direction:column;
+  box-shadow:0 8px 30px rgba(20,14,8,.35)}
+.cp-hd{padding:12px 14px;border-bottom:1px solid var(--rule2);
+  font-size:12px;letter-spacing:.24em;color:var(--red);
+  text-align:center;position:relative}
+.cp-hd .x{position:absolute;right:8px;top:50%;transform:translateY(-50%);
+  font-size:18px;color:var(--ink3);padding:4px 8px;border:0;background:none}
+.cp-bd{flex:1 1 auto;min-height:0;overflow-y:auto;padding:14px}
+.cp-blk{margin-bottom:16px}
+.cp-blk .t{font-size:12px;letter-spacing:.2em;color:var(--ink2);
+  margin-bottom:10px}
+.cp-chips{display:flex;flex-wrap:wrap;gap:6px}
+.cp-chip-wrap{position:relative}
+.cp-chip{font-size:12px;letter-spacing:.08em;color:var(--ink2);
+  border:1px solid var(--rule);padding:7px 12px;border-radius:2px;
+  background:rgba(255,250,238,.2)}
+.cp-chip.on{color:var(--red);border-color:var(--red);
+  background:rgba(156,74,50,.08)}
+.cp-chip:active{background:rgba(59,42,24,.06)}
+.cp-chip-wrap .delx{position:absolute;right:-5px;top:-5px;width:16px;height:16px;
+  border-radius:50%;background:var(--red);color:var(--paper);
+  font-size:11px;line-height:16px;text-align:center;padding:0;border:0}
+.cp-add{font-size:12px;letter-spacing:.08em;color:var(--red);
+  border:1px dashed var(--red);padding:7px 12px;border-radius:2px;
+  background:rgba(156,74,50,.05)}
+.cp-add:active{background:rgba(156,74,50,.12)}
+.cp-add-input{font-size:12px;letter-spacing:.08em;color:var(--ink);
+  border:1px solid var(--red);padding:7px 12px;border-radius:2px;
+  background:var(--paper);width:100px;outline:0}
+.cp-custom{display:flex;align-items:center;gap:8px;margin-top:10px}
+.cp-custom input{flex:1 1 auto;font-size:15px;padding:6px 8px;
+  border:1px solid var(--rule);border-radius:2px;min-width:0}
+.cp-custom input::placeholder{color:var(--ink3)}
+.cp-ft{padding:10px 14px;border-top:1px solid var(--rule2);
+  display:flex;gap:10px}
+.cp-ft button{flex:1 1 0;font-size:13px;letter-spacing:.18em;padding:10px;
+  border:1px solid var(--rule);border-radius:2px;color:var(--ink2)}
+.cp-ft button.ok{color:var(--red);border-color:var(--red)}
+.cp-ft button:active{background:rgba(59,42,24,.06)}
+.cp-ft button.ok:active{background:rgba(156,74,50,.10)}
+.sw-row{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--rule2)}
+.sw-row label{font-size:14px}
+.sw-row .sw{position:relative;width:44px;height:24px;background:rgba(59,42,24,.2);border-radius:12px;transition:background .2s}
+.sw-row .sw::after{content:"";position:absolute;left:2px;top:2px;width:20px;height:20px;border-radius:50%;background:var(--paper);transition:transform .2s;box-shadow:0 1px 2px rgba(59,42,24,.3)}
+.sw-row .sw.on{background:var(--red)}
+.sw-row .sw.on::after{transform:translateX(20px)}
 #toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom) + 24px);transform:translateX(-50%) translateY(14px);z-index:600;opacity:0;pointer-events:none;background:var(--ink);color:var(--paper);font-size:13px;letter-spacing:.14em;padding:11px 20px;border-radius:2px;max-width:82vw;text-align:center;line-height:1.6;transition:opacity .28s ease,transform .28s ease;box-shadow:0 6px 22px rgba(20,14,8,.34)}
 #toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
@@ -821,6 +901,14 @@ img{max-width:100%;display:block}
       <div class="ratio-num"><label>比例</label><input id="recRatio" type="number" inputmode="numeric" min="0" max="100" value="10"><span class="u">%</span></div>
     </div>
     <div class="blk">
+      <h3>測 試</h3>
+      <p class="tip">開啓後，相伴的說話間隔縮到秒級，方便看效果。</p>
+      <div class="sw-row">
+        <label>測試模式</label>
+        <div class="sw" id="testModeSw"></div>
+      </div>
+    </div>
+    <div class="blk">
       <h3>關 於</h3>
       <p class="tip">本站为一人一世界的私人版面。<br>字卡由你亲手写，不预设、不联网、不接任何外部服务。<br>所有内容仅存于本机 OPFS 存储。</p>
     </div>
@@ -951,6 +1039,47 @@ img{max-width:100%;display:block}
   </div>
 </div>
 
+<div class="cp-layer" id="cpLayer">
+  <div class="cp-box">
+    <div class="cp-hd">
+      相 伴
+      <button class="x" id="cpClose">×</button>
+    </div>
+    <div class="cp-bd">
+      <div class="cp-blk">
+        <div class="t">在 做 什 么</div>
+        <div class="cp-chips" id="cpThings"></div>
+        <div class="cp-custom">
+          <input id="cpCustom" type="text" placeholder="或臨時寫一句…">
+        </div>
+      </div>
+      <div class="cp-blk">
+        <div class="t">祂 說 話 頻 率</div>
+        <div class="cp-chips" id="cpFreqs">
+          <button class="cp-chip" data-f="quiet">安靜</button>
+          <button class="cp-chip on" data-f="normal">偶爾</button>
+          <button class="cp-chip" data-f="often">經常</button>
+        </div>
+      </div>
+    </div>
+    <div class="cp-ft">
+      <button class="ok" id="cpStart">開 始</button>
+    </div>
+  </div>
+</div>
+
+<div class="companion" id="companionWin">
+  <div class="cp-avas">
+    <div class="cp-ava" id="cpAvaHim">祂</div>
+    <div class="cp-heart">❤</div>
+    <div class="cp-ava" id="cpAvaMe">我</div>
+  </div>
+  <div class="cp-line1"><span class="nn" id="cpName">祂</span> 在陪你</div>
+  <div class="cp-line2" id="cpThing">打游戏</div>
+  <div class="cp-timer" id="cpTimer">已陪你 0 秒</div>
+  <button class="cp-end" id="cpEnd">结 束 相 伴</button>
+</div>
+
 <div class="mp" id="miniPlayer">
   <div class="top">
     <div class="tinfo">
@@ -994,7 +1123,7 @@ var Store={
       meta:function(){return {v:1,createdAt:Date.now(),issues:[]};},
       cards:function(){return {v:1,cards:[]};},
       chat:function(){return {v:1,msgs:[]};},
-      set:function(){return {v:1,dMin:15,dMax:30,picRatio:10,ripRatio:10,recRatio:10,recMode:'seq'};},
+      set:function(){return {v:1,dMin:15,dMax:30,picRatio:10,ripRatio:10,recRatio:10,recMode:'seq',testMode:false,companion:{active:false,thing:'',freq:'normal',startAt:0,customThings:[]}};},
       profile:function(){return {v:1,him:{name:'',call:'',avatar:''},me:{name:'',call:'',avatar:''},bg:'',bgMask:60};},
       pics:function(){return {v:1,pics:[]};},
       ripples:function(){return {v:1,mine:[],hers:[]};},
@@ -1036,6 +1165,13 @@ var Store={
     if(typeof st.ripRatio!=='number') st.ripRatio=10;
     if(typeof st.recRatio!=='number') st.recRatio=10;
     if(typeof st.recMode!=='string') st.recMode='seq';
+    if(typeof st.testMode!=='boolean') st.testMode=false;
+    if(!st.companion || typeof st.companion!=='object') st.companion={active:false,thing:'',freq:'normal',startAt:0,customThings:[]};
+    if(typeof st.companion.active!=='boolean') st.companion.active=false;
+    if(typeof st.companion.thing!=='string') st.companion.thing='';
+    if(typeof st.companion.freq!=='string') st.companion.freq='normal';
+    if(typeof st.companion.startAt!=='number') st.companion.startAt=0;
+    if(!Array.isArray(st.companion.customThings)) st.companion.customThings=[];
     if(!this.cache.pics || !Array.isArray(this.cache.pics.pics)) this.cache.pics={v:1,pics:[]};
     var rp=this.cache.ripples;
     if(!rp || !Array.isArray(rp.mine) || !Array.isArray(rp.hers)) this.cache.ripples={v:1,mine:[],hers:[]};
@@ -1088,11 +1224,18 @@ var Store={
 function _cards(){ if(!Store.cache.cards||!Array.isArray(Store.cache.cards.cards)) Store.cache.cards={v:1,cards:[]}; return Store.cache.cards.cards; }
 function _msgs(){ if(!Store.cache.chat||!Array.isArray(Store.cache.chat.msgs)) Store.cache.chat={v:1,msgs:[]}; return Store.cache.chat.msgs; }
 function _set(){
-  if(!Store.cache.set||typeof Store.cache.set!=='object') Store.cache.set={v:1,dMin:15,dMax:30,picRatio:10,ripRatio:10,recRatio:10,recMode:'seq'};
+  if(!Store.cache.set||typeof Store.cache.set!=='object') Store.cache.set={v:1,dMin:15,dMax:30,picRatio:10,ripRatio:10,recRatio:10,recMode:'seq',testMode:false,companion:{active:false,thing:'',freq:'normal',startAt:0,customThings:[]}};
   if(typeof Store.cache.set.picRatio!=='number') Store.cache.set.picRatio=10;
   if(typeof Store.cache.set.ripRatio!=='number') Store.cache.set.ripRatio=10;
   if(typeof Store.cache.set.recRatio!=='number') Store.cache.set.recRatio=10;
   if(typeof Store.cache.set.recMode!=='string') Store.cache.set.recMode='seq';
+  if(typeof Store.cache.set.testMode!=='boolean') Store.cache.set.testMode=false;
+  if(!Store.cache.set.companion || typeof Store.cache.set.companion!=='object') Store.cache.set.companion={active:false,thing:'',freq:'normal',startAt:0,customThings:[]};
+  if(typeof Store.cache.set.companion.active!=='boolean') Store.cache.set.companion.active=false;
+  if(typeof Store.cache.set.companion.thing!=='string') Store.cache.set.companion.thing='';
+  if(typeof Store.cache.set.companion.freq!=='string') Store.cache.set.companion.freq='normal';
+  if(typeof Store.cache.set.companion.startAt!=='number') Store.cache.set.companion.startAt=0;
+  if(!Array.isArray(Store.cache.set.companion.customThings)) Store.cache.set.companion.customThings=[];
   return Store.cache.set;
 }
 function _profile(){
@@ -1205,7 +1348,6 @@ function updateListenBar(){
   }
 }
 
-/* ===================== 消息流（含回應） ===================== */
 function renderFlow(){
   var box=document.getElementById('flow');
   var ms=S.msgs();
@@ -1224,7 +1366,6 @@ function renderFlow(){
       var cls='item '+m.who+(lead?' lead':'');
       if(m.who==='him' && groupOpen) cls+=' group';
 
-      // 回應消息
       if(m.kind==='reply'){
         cls+=' reply';
         var rpName = (m.who==='him') ? callHim : callMe;
@@ -1353,7 +1494,6 @@ function resolveWait(id){
   if(idx<0) return;
   var w=ms[idx];
 
-  // 回應
   if(w && w._reply){
     var rk=w._reply.replyKind;
     if(rk==='option'){
@@ -1378,7 +1518,6 @@ function resolveWait(id){
     return;
   }
 
-  // 普通回复
   var cards=S.cards(); var pics=S.pics(); var rp=S.ripples(); var recs=S.records();
   var hersRip=rp.hers||[];
   if(!cards.length && !pics.length && !hersRip.length && !recs.length){
@@ -2467,8 +2606,7 @@ document.getElementById('replyOk').addEventListener('click',function(){
   if(opOpen) toggleOp();
   armWait(w);
 });
-
-/* ===================== 操作栏 ===================== */
+  /* ===================== 操作栏 ===================== */
 var OPS={
   photo:'攝影', album:'畫報', video:'通話',
   pics:'畫帖', acts:'漣漪', music:'唱片', reply:'回應',
@@ -2489,6 +2627,7 @@ opbar.addEventListener('click',function(e){
   if(k==='photo'){ shootPhoto(); return; }
   if(k==='album'){ pickFromAlbum(); return; }
   if(k==='reply'){ openReplyLayer(); return; }
+  if(k==='stay'){ openCpLayer(); return; }
   if(OPS[k]) toast(OPS[k]+'：正在開發');
 });
 function openPickLayer(){
@@ -2660,16 +2799,26 @@ function bindProfile(){
     input.addEventListener('input',function(){
       var p=S.profile(); p[who][key]=this.value;
       Store.touch('profile'); Store.flush();
-      renderMasthead(); updateListenBar();
+      renderMasthead(); updateListenBar(); renderCompanion();
     });
   }
   bind(nh,'him','name'); bind(ch,'him','call');
   bind(nm,'me','name');  bind(cm,'me','call');
   document.getElementById('profAvaHim').addEventListener('click',function(){
-    pickOneImage(function(dataUrl){ var p=S.profile(); p.him.avatar=dataUrl; Store.touch('profile'); Store.flush(); renderProfile(); renderMasthead(); toast('祂的頭像已更換'); });
+    pickOneImage(function(dataUrl){
+      var p=S.profile(); p.him.avatar=dataUrl;
+      Store.touch('profile'); Store.flush();
+      renderProfile(); renderMasthead(); renderCompanion();
+      toast('祂的頭像已更換');
+    });
   });
   document.getElementById('profAvaMe').addEventListener('click',function(){
-    pickOneImage(function(dataUrl){ var p=S.profile(); p.me.avatar=dataUrl; Store.touch('profile'); Store.flush(); renderProfile(); renderMasthead(); toast('我的頭像已更換'); });
+    pickOneImage(function(dataUrl){
+      var p=S.profile(); p.me.avatar=dataUrl;
+      Store.touch('profile'); Store.flush();
+      renderProfile(); renderMasthead(); renderCompanion();
+      toast('我的頭像已更換');
+    });
   });
   document.getElementById('bgPreview').addEventListener('click',function(){
     pickOneImage(function(dataUrl){ var p=S.profile(); p.bg=dataUrl; Store.touch('profile'); Store.flush(); renderBackground(); toast('背景已更換'); });
@@ -2738,6 +2887,247 @@ function bindSet(){
     });
   });
 }
+function renderTestSw(){
+  var s=S.set();
+  var sw=document.getElementById('testModeSw');
+  if(!sw) return;
+  sw.classList.toggle('on', !!s.testMode);
+}
+document.getElementById('testModeSw').addEventListener('click',function(){
+  var s=S.set();
+  s.testMode=!s.testMode;
+  Store.touch('set'); Store.flush();
+  renderTestSw();
+  toast(s.testMode ? '測試模式 開' : '測試模式 關');
+});
+
+/* ===================== 相伴 ===================== */
+var CP={ active:false, thing:'', freq:'normal', timer:null, tick:null, startAt:0 };
+
+function cpInterval(){
+  var s=S.set();
+  if(s.testMode){ return (10+Math.random()*10)*1000; }
+  if(CP.freq==='quiet') return (30+Math.random()*30)*60*1000;
+  if(CP.freq==='often') return (5+Math.random()*10)*60*1000;
+  return (15+Math.random()*15)*60*1000;
+}
+function cpFormat(ms){
+  var s=Math.floor(ms/1000);
+  if(s<60) return '已陪你 '+s+' 秒';
+  var m=Math.floor(s/60);
+  if(m<60) return '已陪你 '+m+' 分钟';
+  var h=Math.floor(m/60), mm=m%60;
+  return '已陪你 '+h+' 小时 '+mm+' 分';
+}
+function cpTick(){
+  var el=document.getElementById('cpTimer');
+  if(!el) return;
+  if(!CP.active || !CP.startAt){ el.textContent=''; return; }
+  el.textContent=cpFormat(Date.now()-CP.startAt);
+}
+function renderCompanion(){
+  var win=document.getElementById('companionWin');
+  var p=S.profile();
+  document.getElementById('cpAvaHim').innerHTML = p.him.avatar ? '<img src="'+p.him.avatar+'" alt="">' : '祂';
+  document.getElementById('cpAvaMe').innerHTML = p.me.avatar ? '<img src="'+p.me.avatar+'" alt="">' : '我';
+  document.getElementById('cpName').textContent = p.him.call || '祂';
+  document.getElementById('cpThing').textContent = CP.thing || '';
+  if(CP.active) win.classList.add('on');
+  else win.classList.remove('on');
+  cpTick();
+}
+function startCompanion(thing, freq){
+  CP.active=true; CP.thing=thing; CP.freq=freq; CP.startAt=Date.now();
+  var s=S.set();
+  s.companion={active:true, thing:thing, freq:freq, startAt:CP.startAt, customThings:s.companion.customThings||[]};
+  Store.touch('set'); Store.flush();
+  renderCompanion();
+  if(CP.tick) clearInterval(CP.tick);
+  CP.tick=setInterval(cpTick, 1000);
+  scheduleCompanion();
+  toast('相伴開始了');
+}
+function endCompanion(){
+  CP.active=false;
+  if(CP.timer){ clearTimeout(CP.timer); CP.timer=null; }
+  if(CP.tick){ clearInterval(CP.tick); CP.tick=null; }
+  var s=S.set();
+  s.companion={active:false, thing:'', freq:'normal', startAt:0, customThings:s.companion.customThings||[]};
+  Store.touch('set'); Store.flush();
+  renderCompanion();
+  toast('相伴結束');
+}
+function scheduleCompanion(){
+  if(CP.timer){ clearTimeout(CP.timer); CP.timer=null; }
+  if(!CP.active) return;
+  var wait=cpInterval();
+  CP.timer=setTimeout(function(){
+    if(!CP.active) return;
+    cpSay();
+    scheduleCompanion();
+  }, wait);
+}
+function cpSay(){
+  var cards=S.cards();
+  var rp=S.ripples();
+  var hersRip=rp.hers||[];
+  var pool=[];
+  for(var i=0;i<cards.length;i++) pool.push({kind:'text', text:cards[i].text});
+  for(var j=0;j<hersRip.length;j++) pool.push({kind:'act', text:hersRip[j].text});
+  if(!pool.length) return;
+  var pick=pool[Math.floor(Math.random()*pool.length)];
+  var now=Date.now();
+  var ms=S.msgs();
+  if(pick.kind==='text'){
+    ms.push({id:uid('m'),who:'him',text:pick.text,at:now, companion:true});
+  }else{
+    ms.push({id:uid('m'),who:'him',kind:'act',text:pick.text,at:now, companion:true});
+  }
+  Store.touch('chat'); Store.flush();
+  var wasBottom=nearBottom();
+  renderFlow();
+  if(wasBottom) toBottom(true);
+}
+
+function renderCpThings(){
+  var s=S.set();
+  var box=document.getElementById('cpThings');
+  var fixed=['打遊戲','刷抖音','刷小紅書','看小說','寫東西','睡覺','吃飯','發呆','走路'];
+  var custom=s.companion.customThings||[];
+  var h='';
+  for(var i=0;i<fixed.length;i++){
+    h+='<button class="cp-chip" data-t="'+esc(fixed[i])+'">'+esc(fixed[i])+'</button>';
+  }
+  for(var j=0;j<custom.length;j++){
+    h+='<span class="cp-chip-wrap"><button class="cp-chip" data-t="'+esc(custom[j])+'">'+esc(custom[j])+'</button>'
+      +'<button class="delx" data-delc="'+j+'">×</button></span>';
+  }
+  h+='<button class="cp-add" id="cpAddBtn">＋ 添加</button>';
+  box.innerHTML=h;
+  document.getElementById('cpAddBtn').addEventListener('click',cpAddStart);
+}
+function cpAddStart(){
+  var box=document.getElementById('cpThings');
+  if(box.querySelector('.cp-add-input')) return;
+  var inp=document.createElement('input');
+  inp.type='text'; inp.className='cp-add-input'; inp.placeholder='寫一個…';
+  box.appendChild(inp);
+  inp.focus();
+  inp.addEventListener('keydown',function(e){
+    if(e.key==='Enter'){
+      cpAddConfirm(inp.value);
+    }
+  });
+  inp.addEventListener('blur',function(){
+    if(inp.value.trim()) cpAddConfirm(inp.value);
+    else if(inp.parentNode) inp.parentNode.removeChild(inp);
+  });
+}
+function cpAddConfirm(v){
+  v=String(v||'').trim();
+  if(!v) return;
+  var s=S.set();
+  if(!s.companion.customThings) s.companion.customThings=[];
+  for(var i=0;i<s.companion.customThings.length;i++){
+    if(s.companion.customThings[i]===v){ renderCpThings(); return; }
+  }
+  s.companion.customThings.push(v);
+  Store.touch('set'); Store.flush();
+  renderCpThings();
+  // 自动选中新加的
+  var chips=document.querySelectorAll('#cpThings .cp-chip');
+  for(var j=0;j<chips.length;j++){
+    if(chips[j].getAttribute('data-t')===v){
+      chips[j].classList.add('on');
+    }else{
+      chips[j].classList.remove('on');
+    }
+  }
+  document.getElementById('cpCustom').value='';
+}
+document.getElementById('cpThings').addEventListener('click',function(e){
+  var delx=e.target.getAttribute&&e.target.getAttribute('data-delc');
+  if(delx!==null && delx!==undefined){
+    var i=parseInt(delx,10);
+    var s=S.set();
+    s.companion.customThings.splice(i,1);
+    Store.touch('set'); Store.flush();
+    renderCpThings();
+    toast('已刪除');
+    return;
+  }
+  var c=e.target.closest?e.target.closest('.cp-chip'):null;
+  if(!c) return;
+  document.querySelectorAll('#cpThings .cp-chip').forEach(function(x){ x.classList.remove('on'); });
+  c.classList.add('on');
+  document.getElementById('cpCustom').value='';
+});
+document.getElementById('cpFreqs').addEventListener('click',function(e){
+  var c=e.target.closest?e.target.closest('.cp-chip'):null;
+  if(!c) return;
+  document.querySelectorAll('#cpFreqs .cp-chip').forEach(function(x){ x.classList.remove('on'); });
+  c.classList.add('on');
+  CP.freq=c.getAttribute('data-f');
+});
+document.getElementById('cpClose').addEventListener('click',function(){ document.getElementById('cpLayer').classList.remove('on'); });
+document.getElementById('cpLayer').addEventListener('click',function(e){ if(e.target===this) this.classList.remove('on'); });
+document.getElementById('cpStart').addEventListener('click',function(){
+  var custom=String(document.getElementById('cpCustom').value||'').trim();
+  var thing='';
+  if(custom){
+    thing=custom;
+  }else{
+    var on=document.querySelector('#cpThings .cp-chip.on');
+    if(on) thing=on.getAttribute('data-t');
+  }
+  if(!thing){ toast('先選或寫一個「在做什麼」'); return; }
+  var freq=CP.freq||'normal';
+  document.getElementById('cpLayer').classList.remove('on');
+  startCompanion(thing, freq);
+});
+document.getElementById('cpEnd').addEventListener('click',endCompanion);
+function openCpLayer(){
+  renderCpThings();
+  document.getElementById('cpCustom').value='';
+  document.querySelectorAll('#cpFreqs .cp-chip').forEach(function(x){
+    x.classList.toggle('on', x.getAttribute('data-f')==='normal');
+  });
+  CP.freq='normal';
+  // 如果当前相伴，预选当前 thing
+  if(CP.active && CP.thing){
+    var chips=document.querySelectorAll('#cpThings .cp-chip');
+    for(var i=0;i<chips.length;i++){
+      if(chips[i].getAttribute('data-t')===CP.thing) chips[i].classList.add('on');
+    }
+  }
+  document.getElementById('cpLayer').classList.add('on');
+}
+(function(){
+  var win=document.getElementById('companionWin');
+  var dragging=false, sx=0, sy=0, sl=0, st=0;
+  win.addEventListener('touchstart',function(e){
+    var t=e.target;
+    if(t.closest && t.closest('button')) return;
+    if(!e.touches[0]) return;
+    dragging=true;
+    var rect=win.getBoundingClientRect();
+    sx=e.touches[0].clientX; sy=e.touches[0].clientY;
+    sl=rect.left; st=rect.top;
+    win.style.left=sl+'px'; win.style.top=st+'px'; win.style.bottom='auto';
+  },{passive:true});
+  win.addEventListener('touchmove',function(e){
+    if(!dragging) return;
+    if(!e.touches[0]) return;
+    var dx=e.touches[0].clientX-sx, dy=e.touches[0].clientY-sy;
+    var nl=sl+dx, nt=st+dy;
+    var w=window.innerWidth, h=window.innerHeight;
+    var rw=win.offsetWidth, rh=win.offsetHeight;
+    nl=Math.max(4,Math.min(w-rw-4,nl));
+    nt=Math.max(4,Math.min(h-rh-4,nt));
+    win.style.left=nl+'px'; win.style.top=nt+'px';
+  },{passive:true});
+  win.addEventListener('touchend',function(){ dragging=false; },{passive:true});
+})();
 
 /* ===================== 底部導覽 ===================== */
 var SECS=['paper','secMail','secSupp','secClip','secSpecial'];
@@ -2774,7 +3164,7 @@ function openRipples(){
   document.getElementById('ripplesPage').classList.add('on'); renderRipples();
 }
 function openRecords(){ closeAll(); recSetPicking(false); document.getElementById('recordsPage').classList.add('on'); renderRecords(); }
-function openSet(){ closeAll(); document.getElementById('setPage').classList.add('on'); renderSet(); }
+function openSet(){ closeAll(); document.getElementById('setPage').classList.add('on'); renderSet(); renderTestSw(); }
 
 document.getElementById('navCards').addEventListener('click',openLaiGao);
 document.getElementById('navSet').addEventListener('click',openSet);
@@ -2796,8 +3186,7 @@ document.getElementById('picsBack').addEventListener('click',function(){ picSetP
 document.getElementById('ripplesBack').addEventListener('click',function(){ ripPicking=false; openLaiGao(); });
 document.getElementById('recordsBack').addEventListener('click',function(){ recSetPicking(false); openLaiGao(); });
 document.getElementById('setBack').addEventListener('click',closeAll);
-
-/* ===================== 输入 ===================== */
+  /* ===================== 输入 ===================== */
 var inp=document.getElementById('inp');
 function autosize(){ inp.style.height='auto'; inp.style.height=Math.min(inp.scrollHeight,118)+'px'; }
 inp.addEventListener('input',autosize);
@@ -2850,12 +3239,29 @@ Store.init().then(function(){
   rearmAll();
   applyBackground();
   preloadPics();
+
+  // 从设置里恢复相伴
+  var cpSet=S.set().companion;
+  if(cpSet && cpSet.active){
+    CP.active=true;
+    CP.thing=cpSet.thing||'';
+    CP.freq=cpSet.freq||'normal';
+    CP.startAt=cpSet.startAt||Date.now();
+    scheduleCompanion();
+    if(CP.tick) clearInterval(CP.tick);
+    CP.tick=setInterval(cpTick, 1000);
+  }
+
   renderMasthead(); renderFlow(); renderSet(); renderCards(); renderPics(); renderRipples(); renderRecords(); renderProfile(); renderBackground(); renderRatio();
+  renderCompanion();
+  renderTestSw();
   mpRenderMode();
   mpRenderPlay();
 }).catch(function(e){
   alert('存储出错：'+(e&&e.name)+' / '+(e&&e.message));
   renderMasthead(); renderFlow(); renderSet(); renderCards(); renderPics(); renderRipples(); renderRecords(); renderProfile(); renderBackground(); renderRatio();
+  renderCompanion();
+  renderTestSw();
 });
 })();
 </script>
