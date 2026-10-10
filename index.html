@@ -12,6 +12,7 @@
   --ink2:rgba(59,42,24,.68); --ink3:rgba(59,42,24,.44);
   --rule:rgba(59,42,24,.34); --rule2:rgba(59,42,24,.18); --rule3:rgba(59,42,24,.28);
   --red:#9c4a32;
+  --green:#4a7c59;
   --serif:"Songti SC","STSong","Noto Serif CJK SC","Source Han Serif SC","SimSun",serif;
   --geo:Georgia,"Times New Roman",serif;
 }
@@ -137,7 +138,6 @@ img{max-width:100%;display:block}
 .item.act .col .nm{color:var(--ink3)}
 .item.act .body{text-align:center;font-style:italic;color:var(--ink2);font-size:14px;letter-spacing:.08em;padding:8px 0;margin-top:4px}
 .item.act .body .sep{display:block;font-style:normal;color:var(--rule3);font-size:12px;letter-spacing:.4em;margin-right:-.4em}
-/* 回應消息 */
 .item.reply .body{margin-top:6px}
 .item.reply .rp-q{font-size:15px;color:var(--ink);line-height:1.7;margin-bottom:6px;white-space:pre-wrap;word-break:break-word}
 .item.reply .rp-pic{max-width:160px;max-height:160px;border:1px solid var(--rule);outline:1px solid var(--rule2);outline-offset:2px;margin-bottom:6px}
@@ -147,7 +147,6 @@ img{max-width:100%;display:block}
 .item.reply .rp-imgs img{width:100px;height:100px;object-fit:cover;border:1px solid var(--rule);outline:1px solid var(--rule2);outline-offset:2px}
 .item.reply .rp-pick{display:inline-block;padding:5px 12px;border:1px solid var(--red);color:var(--red);font-size:14px;letter-spacing:.06em;border-radius:2px;margin-top:4px}
 .item.reply .rp-pick-img{max-width:160px;max-height:160px;border:2px solid var(--red);outline:1px solid var(--red);outline-offset:2px}
-/* 回應 form */
 .reply-tabs{display:flex;border-bottom:1px solid var(--rule);margin-bottom:12px}
 .reply-tab{flex:1 1 0;text-align:center;font-size:13px;letter-spacing:.2em;padding:10px 0;color:var(--ink3);position:relative;cursor:pointer}
 .reply-tab.on{color:var(--red)}
@@ -406,6 +405,7 @@ img{max-width:100%;display:block}
 .mp .cbtn svg{width:22px;height:22px;display:block}
 .mp .cbtn.play{width:44px;height:44px}
 .mp .cbtn.play svg{width:26px;height:26px}
+
 /* ===== 相伴小窗 ===== */
 .companion{position:fixed;z-index:425;width:70vw;max-width:340px;
   background:var(--paper);border:2px solid var(--ink);
@@ -422,59 +422,35 @@ img{max-width:100%;display:block}
   font-size:20px;color:var(--ink3)}
 .companion .cp-ava img{width:100%;height:100%;object-fit:cover;display:block}
 .companion .cp-heart{font-size:18px;color:var(--red);line-height:1}
-.companion .cp-line1{font-size:14px;letter-spacing:.08em;color:var(--ink);
-  text-align:center;line-height:1.5}
+.companion .cp-line1{font-size:14px;letter-spacing:.08em;color:var(--ink);text-align:center;line-height:1.5}
 .companion .cp-line1 .nn{color:var(--red)}
-.companion .cp-line2{font-size:16px;letter-spacing:.1em;color:var(--ink);
-  text-align:center;line-height:1.5}
-.companion .cp-timer{font-size:12px;letter-spacing:.1em;color:var(--ink3);
-  text-align:center;line-height:1.5}
-.companion .cp-end{font-size:12px;letter-spacing:.18em;color:var(--red);
-  border:1px solid var(--red);border-radius:2px;padding:7px 18px;
-  background:none;margin-top:2px}
+.companion .cp-line2{font-size:16px;letter-spacing:.1em;color:var(--ink);text-align:center;line-height:1.5}
+.companion .cp-timer{font-size:12px;letter-spacing:.1em;color:var(--ink3);text-align:center;line-height:1.5}
+.companion .cp-end{font-size:12px;letter-spacing:.18em;color:var(--red);border:1px solid var(--red);border-radius:2px;padding:7px 18px;background:none;margin-top:2px}
 .companion .cp-end:active{background:rgba(156,74,50,.12)}
 /* ===== 相伴设置弹层 ===== */
-.cp-layer{position:fixed;inset:0;z-index:440;display:none;
-  align-items:center;justify-content:center;background:rgba(20,14,8,.55)}
+.cp-layer{position:fixed;inset:0;z-index:440;display:none;align-items:center;justify-content:center;background:rgba(20,14,8,.55)}
 .cp-layer.on{display:flex}
-.cp-box{width:86vw;max-width:420px;max-height:82vh;background:var(--paper);
-  border:2px solid var(--ink);display:flex;flex-direction:column;
-  box-shadow:0 8px 30px rgba(20,14,8,.35)}
-.cp-hd{padding:12px 14px;border-bottom:1px solid var(--rule2);
-  font-size:12px;letter-spacing:.24em;color:var(--red);
-  text-align:center;position:relative}
-.cp-hd .x{position:absolute;right:8px;top:50%;transform:translateY(-50%);
-  font-size:18px;color:var(--ink3);padding:4px 8px;border:0;background:none}
+.cp-box{width:86vw;max-width:420px;max-height:82vh;background:var(--paper);border:2px solid var(--ink);display:flex;flex-direction:column;box-shadow:0 8px 30px rgba(20,14,8,.35)}
+.cp-hd{padding:12px 14px;border-bottom:1px solid var(--rule2);font-size:12px;letter-spacing:.24em;color:var(--red);text-align:center;position:relative}
+.cp-hd .x{position:absolute;right:8px;top:50%;transform:translateY(-50%);font-size:18px;color:var(--ink3);padding:4px 8px;border:0;background:none}
 .cp-bd{flex:1 1 auto;min-height:0;overflow-y:auto;padding:14px}
 .cp-blk{margin-bottom:16px}
-.cp-blk .t{font-size:12px;letter-spacing:.2em;color:var(--ink2);
-  margin-bottom:10px}
+.cp-blk .t{font-size:12px;letter-spacing:.2em;color:var(--ink2);margin-bottom:10px}
 .cp-chips{display:flex;flex-wrap:wrap;gap:6px}
 .cp-chip-wrap{position:relative}
-.cp-chip{font-size:12px;letter-spacing:.08em;color:var(--ink2);
-  border:1px solid var(--rule);padding:7px 12px;border-radius:2px;
-  background:rgba(255,250,238,.2)}
-.cp-chip.on{color:var(--red);border-color:var(--red);
-  background:rgba(156,74,50,.08)}
+.cp-chip{font-size:12px;letter-spacing:.08em;color:var(--ink2);border:1px solid var(--rule);padding:7px 12px;border-radius:2px;background:rgba(255,250,238,.2)}
+.cp-chip.on{color:var(--red);border-color:var(--red);background:rgba(156,74,50,.08)}
 .cp-chip:active{background:rgba(59,42,24,.06)}
-.cp-chip-wrap .delx{position:absolute;right:-5px;top:-5px;width:16px;height:16px;
-  border-radius:50%;background:var(--red);color:var(--paper);
-  font-size:11px;line-height:16px;text-align:center;padding:0;border:0}
-.cp-add{font-size:12px;letter-spacing:.08em;color:var(--red);
-  border:1px dashed var(--red);padding:7px 12px;border-radius:2px;
-  background:rgba(156,74,50,.05)}
+.cp-chip-wrap .delx{position:absolute;right:-5px;top:-5px;width:16px;height:16px;border-radius:50%;background:var(--red);color:var(--paper);font-size:11px;line-height:16px;text-align:center;padding:0;border:0}
+.cp-add{font-size:12px;letter-spacing:.08em;color:var(--red);border:1px dashed var(--red);padding:7px 12px;border-radius:2px;background:rgba(156,74,50,.05)}
 .cp-add:active{background:rgba(156,74,50,.12)}
-.cp-add-input{font-size:12px;letter-spacing:.08em;color:var(--ink);
-  border:1px solid var(--red);padding:7px 12px;border-radius:2px;
-  background:var(--paper);width:100px;outline:0}
+.cp-add-input{font-size:12px;letter-spacing:.08em;color:var(--ink);border:1px solid var(--red);padding:7px 12px;border-radius:2px;background:var(--paper);width:100px;outline:0}
 .cp-custom{display:flex;align-items:center;gap:8px;margin-top:10px}
-.cp-custom input{flex:1 1 auto;font-size:15px;padding:6px 8px;
-  border:1px solid var(--rule);border-radius:2px;min-width:0}
+.cp-custom input{flex:1 1 auto;font-size:15px;padding:6px 8px;border:1px solid var(--rule);border-radius:2px;min-width:0}
 .cp-custom input::placeholder{color:var(--ink3)}
-.cp-ft{padding:10px 14px;border-top:1px solid var(--rule2);
-  display:flex;gap:10px}
-.cp-ft button{flex:1 1 0;font-size:13px;letter-spacing:.18em;padding:10px;
-  border:1px solid var(--rule);border-radius:2px;color:var(--ink2)}
+.cp-ft{padding:10px 14px;border-top:1px solid var(--rule2);display:flex;gap:10px}
+.cp-ft button{flex:1 1 0;font-size:13px;letter-spacing:.18em;padding:10px;border:1px solid var(--rule);border-radius:2px;color:var(--ink2)}
 .cp-ft button.ok{color:var(--red);border-color:var(--red)}
 .cp-ft button:active{background:rgba(59,42,24,.06)}
 .cp-ft button.ok:active{background:rgba(156,74,50,.10)}
@@ -484,6 +460,91 @@ img{max-width:100%;display:block}
 .sw-row .sw::after{content:"";position:absolute;left:2px;top:2px;width:20px;height:20px;border-radius:50%;background:var(--paper);transition:transform .2s;box-shadow:0 1px 2px rgba(59,42,24,.3)}
 .sw-row .sw.on{background:var(--red)}
 .sw-row .sw.on::after{transform:translateX(20px)}
+
+/* ===== 通话小窗 ===== */
+.call{position:fixed;z-index:426;width:70vw;max-width:320px;
+  background:var(--paper);border:2px solid var(--ink);
+  box-shadow:0 8px 30px rgba(20,14,8,.35);
+  padding:20px 16px 16px;display:none;flex-direction:column;
+  align-items:center;gap:12px;
+  left:15vw;top:30vh}
+.call.on{display:flex}
+.call.mini{width:64vw;max-width:280px;left:auto;right:4vw;top:auto;
+  bottom:calc(var(--navh) + env(safe-area-inset-bottom) + 90px);
+  padding:10px 12px 10px;gap:6px}
+.call .call-mini-btn{position:absolute;right:8px;top:8px;font-size:11px;
+  letter-spacing:.1em;color:var(--ink3);padding:2px 4px;border:0;background:none}
+.call .call-mini-btn:active{color:var(--red)}
+.call .call-ava-wrap{position:relative;width:90px;height:90px;display:flex;
+  align-items:center;justify-content:center}
+.call.mini .call-ava-wrap{width:44px;height:44px}
+.call .call-ava{position:relative;z-index:3;width:72px;height:72px;
+  border:2px solid var(--rule);outline:1px solid var(--rule2);outline-offset:2px;
+  background:rgba(255,250,238,.35);overflow:hidden;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:24px;color:var(--ink3);
+  animation:cpBreath 2.6s ease-in-out infinite}
+.call .call-ava img{width:100%;height:100%;object-fit:cover;display:block}
+@keyframes cpBreath{
+  0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(156,74,50,.35)}
+  50%{transform:scale(1.06);box-shadow:0 0 0 8px rgba(156,74,50,0)}
+}
+.call.mini .call-ava{width:40px;height:40px;font-size:18px}
+.call .wave{position:absolute;left:50%;top:50%;width:72px;height:72px;
+  border:1.4px solid rgba(156,74,50,.38);border-radius:50%;
+  transform:translate(-50%,-50%) scale(1);
+  animation:waveOut 2.4s linear infinite;opacity:0;pointer-events:none}
+.call .wave.w2{animation-delay:.8s}
+.call .wave.w3{animation-delay:1.6s}
+@keyframes waveOut{
+  0%{transform:translate(-50%,-50%) scale(.9);opacity:.75}
+  100%{transform:translate(-50%,-50%) scale(1.9);opacity:0}
+}
+.call .call-name{font-size:16px;letter-spacing:.12em;color:var(--ink);
+  text-align:center;line-height:1.4}
+.call .call-name .nn{color:var(--red)}
+.call .call-status{font-size:12px;letter-spacing:.12em;color:var(--ink3);
+  text-align:center;line-height:1.5}
+.call .call-wave-bar{display:flex;align-items:flex-end;gap:3px;height:20px;
+  justify-content:center;margin:2px 0}
+.call .call-wave-bar span{display:block;width:3px;background:var(--red);
+  border-radius:2px;animation:waveBar 1s ease-in-out infinite}
+.call .call-wave-bar span:nth-child(1){height:6px;animation-delay:0s}
+.call .call-wave-bar span:nth-child(2){height:12px;animation-delay:.1s}
+.call .call-wave-bar span:nth-child(3){height:18px;animation-delay:.2s}
+.call .call-wave-bar span:nth-child(4){height:10px;animation-delay:.3s}
+.call .call-wave-bar span:nth-child(5){height:16px;animation-delay:.4s}
+.call .call-wave-bar span:nth-child(6){height:8px;animation-delay:.5s}
+.call .call-wave-bar span:nth-child(7){height:14px;animation-delay:.6s}
+@keyframes waveBar{
+  0%,100%{transform:scaleY(.5);opacity:.6}
+  50%{transform:scaleY(1);opacity:1}
+}
+.call.mini .call-wave-bar{height:14px}
+.call.mini .call-wave-bar span{width:2px}
+.call .call-dot{display:inline-block;width:7px;height:7px;border-radius:50%;
+  background:var(--green);margin-right:6px;
+  animation:cpDot 1s ease-in-out infinite}
+@keyframes cpDot{0%,100%{opacity:.4}50%{opacity:1}}
+.call .call-btns{display:flex;gap:16px;justify-content:center;align-items:center;
+  margin-top:4px}
+.call .call-btns .cb{font-size:13px;letter-spacing:.16em;padding:9px 22px;
+  border-radius:2px;border:1px solid var(--rule);color:var(--ink2);
+  background:none}
+.call .call-btns .cb:active{background:rgba(59,42,24,.06)}
+.call .call-btns .cb.answer{color:#fff;background:var(--green);border-color:var(--green)}
+.call .call-btns .cb.answer:active{background:#3c6a4c}
+.call .call-btns .cb.reject{color:#fff;background:var(--red);border-color:var(--red)}
+.call .call-btns .cb.reject:active{background:#823d29}
+.call .call-btns .cb.hangup{color:var(--red);border-color:var(--red)}
+.call .call-btns .cb.hangup:active{background:rgba(156,74,50,.12)}
+.call.mini .call-name{font-size:13px;display:flex;align-items:center;justify-content:center}
+.call.mini .call-status{font-size:11px}
+.call.mini .call-btns{display:none}
+.call.mini .call-x{font-size:16px;color:var(--ink3);position:absolute;
+  right:8px;top:50%;transform:translateY(-50%);padding:0 4px}
+.call.mini .call-x:active{color:var(--red)}
+
 #toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom) + 24px);transform:translateX(-50%) translateY(14px);z-index:600;opacity:0;pointer-events:none;background:var(--ink);color:var(--paper);font-size:13px;letter-spacing:.14em;padding:11px 20px;border-radius:2px;max-width:82vw;text-align:center;line-height:1.6;transition:opacity .28s ease,transform .28s ease;box-shadow:0 6px 22px rgba(20,14,8,.34)}
 #toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
@@ -901,6 +962,36 @@ img{max-width:100%;display:block}
       <div class="ratio-num"><label>比例</label><input id="recRatio" type="number" inputmode="numeric" min="0" max="100" value="10"><span class="u">%</span></div>
     </div>
     <div class="blk">
+      <h3>祂 接 電</h3>
+      <p class="tip">你打给祂时，祂接听的概率。</p>
+      <div class="ratio-row" id="ratioRowAnswer">
+        <button class="rb" data-v="0">从不接</button>
+        <button class="rb" data-v="10">偶尔</button>
+        <button class="rb" data-v="50">一半</button>
+        <button class="rb" data-v="90">经常</button>
+        <button class="rb" data-v="100">总是</button>
+      </div>
+      <div class="ratio-num"><label>概率</label><input id="answerRatio" type="number" inputmode="numeric" min="0" max="100" value="90"><span class="u">%</span></div>
+    </div>
+    <div class="blk">
+      <h3>祂 掛 電</h3>
+      <p class="tip">通话开始后，祂多久挂断。<br>最快最慢都填 0，祂就不挂。</p>
+      <div class="fld"><label>最快</label><div class="r"><input id="callHangMin" type="number" inputmode="numeric" min="0"><span class="u">分</span></div></div>
+      <div class="fld"><label>最慢</label><div class="r"><input id="callHangMax" type="number" inputmode="numeric" min="0"><span class="u">分</span></div></div>
+    </div>
+    <div class="blk">
+      <h3>祂 來 電</h3>
+      <p class="tip">祂回复时，有多大几率主动打给你。</p>
+      <div class="ratio-row" id="ratioRowCallIn">
+        <button class="rb" data-v="0">从不用</button>
+        <button class="rb" data-v="10">偶尔</button>
+        <button class="rb" data-v="50">一半</button>
+        <button class="rb" data-v="80">经常</button>
+        <button class="rb" data-v="100">总是</button>
+      </div>
+      <div class="ratio-num"><label>比例</label><input id="callInRatio" type="number" inputmode="numeric" min="0" max="100" value="10"><span class="u">%</span></div>
+    </div>
+    <div class="blk">
       <h3>測 試</h3>
       <p class="tip">開啓後，相伴的說話間隔縮到秒級，方便看效果。</p>
       <div class="sw-row">
@@ -1050,7 +1141,7 @@ img{max-width:100%;display:block}
         <div class="t">在 做 什 么</div>
         <div class="cp-chips" id="cpThings"></div>
         <div class="cp-custom">
-          <input id="cpCustom" type="text" placeholder="或臨時寫一句…">
+          <input id="cpCustom" type="text" placeholder="臨時寫一句…">
         </div>
       </div>
       <div class="cp-blk">
@@ -1101,6 +1192,26 @@ img{max-width:100%;display:block}
   </div>
 </div>
 
+<div class="call" id="callWin">
+  <button class="call-mini-btn" id="callMiniBtn">縮小</button>
+  <div class="call-ava-wrap">
+    <div class="wave w1"></div>
+    <div class="wave w2"></div>
+    <div class="wave w3"></div>
+    <div class="call-ava" id="callAva">祂</div>
+  </div>
+  <div class="call-name" id="callName">祂</div>
+  <div class="call-wave-bar" id="callWaveBar">
+    <span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span>
+  </div>
+  <div class="call-status" id="callStatus">通話中 00:00</div>
+  <div class="call-btns" id="callBtns">
+    <button class="cb hangup" id="callHangup">掛 斷</button>
+  </div>
+  <button class="call-x" id="callX" style="display:none">×</button>
+</div>
+
 <div class="img-view" id="imgView"><img id="imgViewSrc" src="" alt=""></div>
 
 <div id="toast"></div>
@@ -1123,7 +1234,16 @@ var Store={
       meta:function(){return {v:1,createdAt:Date.now(),issues:[]};},
       cards:function(){return {v:1,cards:[]};},
       chat:function(){return {v:1,msgs:[]};},
-      set:function(){return {v:1,dMin:15,dMax:30,picRatio:10,ripRatio:10,recRatio:10,recMode:'seq',testMode:false,companion:{active:false,thing:'',freq:'normal',startAt:0,customThings:[]}};},
+      set:function(){return {v:1,
+        dMin:15,dMax:30,
+        picRatio:10,ripRatio:10,recRatio:10,
+        answerRatio:90,
+        callHangMin:2,callHangMax:5,
+        callInRatio:10,
+        recMode:'seq',
+        testMode:false,
+        companion:{active:false,thing:'',freq:'normal',startAt:0,customThings:[]}
+      };},
       profile:function(){return {v:1,him:{name:'',call:'',avatar:''},me:{name:'',call:'',avatar:''},bg:'',bgMask:60};},
       pics:function(){return {v:1,pics:[]};},
       ripples:function(){return {v:1,mine:[],hers:[]};},
@@ -1164,6 +1284,10 @@ var Store={
     if(typeof st.picRatio!=='number') st.picRatio=10;
     if(typeof st.ripRatio!=='number') st.ripRatio=10;
     if(typeof st.recRatio!=='number') st.recRatio=10;
+    if(typeof st.answerRatio!=='number') st.answerRatio=90;
+    if(typeof st.callHangMin!=='number') st.callHangMin=2;
+    if(typeof st.callHangMax!=='number') st.callHangMax=5;
+    if(typeof st.callInRatio!=='number') st.callInRatio=10;
     if(typeof st.recMode!=='string') st.recMode='seq';
     if(typeof st.testMode!=='boolean') st.testMode=false;
     if(!st.companion || typeof st.companion!=='object') st.companion={active:false,thing:'',freq:'normal',startAt:0,customThings:[]};
@@ -1224,19 +1348,25 @@ var Store={
 function _cards(){ if(!Store.cache.cards||!Array.isArray(Store.cache.cards.cards)) Store.cache.cards={v:1,cards:[]}; return Store.cache.cards.cards; }
 function _msgs(){ if(!Store.cache.chat||!Array.isArray(Store.cache.chat.msgs)) Store.cache.chat={v:1,msgs:[]}; return Store.cache.chat.msgs; }
 function _set(){
-  if(!Store.cache.set||typeof Store.cache.set!=='object') Store.cache.set={v:1,dMin:15,dMax:30,picRatio:10,ripRatio:10,recRatio:10,recMode:'seq',testMode:false,companion:{active:false,thing:'',freq:'normal',startAt:0,customThings:[]}};
-  if(typeof Store.cache.set.picRatio!=='number') Store.cache.set.picRatio=10;
-  if(typeof Store.cache.set.ripRatio!=='number') Store.cache.set.ripRatio=10;
-  if(typeof Store.cache.set.recRatio!=='number') Store.cache.set.recRatio=10;
-  if(typeof Store.cache.set.recMode!=='string') Store.cache.set.recMode='seq';
-  if(typeof Store.cache.set.testMode!=='boolean') Store.cache.set.testMode=false;
-  if(!Store.cache.set.companion || typeof Store.cache.set.companion!=='object') Store.cache.set.companion={active:false,thing:'',freq:'normal',startAt:0,customThings:[]};
-  if(typeof Store.cache.set.companion.active!=='boolean') Store.cache.set.companion.active=false;
-  if(typeof Store.cache.set.companion.thing!=='string') Store.cache.set.companion.thing='';
-  if(typeof Store.cache.set.companion.freq!=='string') Store.cache.set.companion.freq='normal';
-  if(typeof Store.cache.set.companion.startAt!=='number') Store.cache.set.companion.startAt=0;
-  if(!Array.isArray(Store.cache.set.companion.customThings)) Store.cache.set.companion.customThings=[];
-  return Store.cache.set;
+  var d={v:1,dMin:15,dMax:30,picRatio:10,ripRatio:10,recRatio:10,answerRatio:90,callHangMin:2,callHangMax:5,callInRatio:10,recMode:'seq',testMode:false,companion:{active:false,thing:'',freq:'normal',startAt:0,customThings:[]}};
+  if(!Store.cache.set||typeof Store.cache.set!=='object') Store.cache.set=d;
+  var s=Store.cache.set;
+  if(typeof s.picRatio!=='number') s.picRatio=10;
+  if(typeof s.ripRatio!=='number') s.ripRatio=10;
+  if(typeof s.recRatio!=='number') s.recRatio=10;
+  if(typeof s.answerRatio!=='number') s.answerRatio=90;
+  if(typeof s.callHangMin!=='number') s.callHangMin=2;
+  if(typeof s.callHangMax!=='number') s.callHangMax=5;
+  if(typeof s.callInRatio!=='number') s.callInRatio=10;
+  if(typeof s.recMode!=='string') s.recMode='seq';
+  if(typeof s.testMode!=='boolean') s.testMode=false;
+  if(!s.companion || typeof s.companion!=='object') s.companion={active:false,thing:'',freq:'normal',startAt:0,customThings:[]};
+  if(typeof s.companion.active!=='boolean') s.companion.active=false;
+  if(typeof s.companion.thing!=='string') s.companion.thing='';
+  if(typeof s.companion.freq!=='string') s.companion.freq='normal';
+  if(typeof s.companion.startAt!=='number') s.companion.startAt=0;
+  if(!Array.isArray(s.companion.customThings)) s.companion.customThings=[];
+  return s;
 }
 function _profile(){
   var p=Store.cache.profile;
@@ -1271,6 +1401,15 @@ function fmtTime(sec){
   sec=Math.max(0,Math.floor(sec));
   var m=Math.floor(sec/60), s=sec%60;
   return pad2(m)+':'+pad2(s);
+}
+function fmtDur(sec){
+  sec=Math.max(0,Math.floor(sec));
+  var h=Math.floor(sec/3600);
+  var m=Math.floor((sec%3600)/60);
+  var s=sec%60;
+  if(h>0) return h+' 小时 '+m+' 分';
+  if(m>0) return m+' 分 '+s+' 秒';
+  return s+' 秒';
 }
 
 var SEASON={
@@ -1348,6 +1487,7 @@ function updateListenBar(){
   }
 }
 
+/* ===================== 消息流 ===================== */
 function renderFlow(){
   var box=document.getElementById('flow');
   var ms=S.msgs();
@@ -1417,6 +1557,9 @@ function renderFlow(){
         cls='item act'+(lead?' lead':'');
       }else if(m.kind==='song'){
         bodyHtml='♫ '+esc(m.title||'')+(m.artist?' — '+esc(m.artist):'');
+        cls='item act'+(lead?' lead':'');
+      }else if(m.kind==='calllog'){
+        bodyHtml='<span class="sep">〜〜〜〜〜〜〜〜〜〜</span>'+esc(m.text||'')+'<span class="sep">〜〜〜〜〜〜〜〜〜〜</span>';
         cls='item act'+(lead?' lead':'');
       }else{
         bodyHtml=esc(m.text||'');
@@ -1582,6 +1725,8 @@ function resolveWait(id){
       }, randGap());
     })();
   }
+  // 检查是否触发祂来电
+  if(Math.random()*100 < (S.set().callInRatio|0)){ maybeIncomingCall(); }
 }
 function rearmAll(){
   var ms=S.msgs();
@@ -2354,11 +2499,7 @@ function playRecord(rec, together){
   updateListenBar();
 }
 function mpOnEnded(){
-  if(MP.queue.length){
-    var next=MP.queue.shift();
-    playRecord(next.rec, next.together);
-    return;
-  }
+  if(MP.queue.length){ var next=MP.queue.shift(); playRecord(next.rec, next.together); return; }
   var all=S.records();
   if(!all.length) return;
   if(MP.mode==='single'){ if(MP.audio){ MP.audio.currentTime=0; MP.audio.play(); } }
@@ -2511,7 +2652,7 @@ document.getElementById('recInviteYes').addEventListener('click',function(){
   if(r) enqueueAndPlay(r, true);
 });
 
-/* ===================== 回應弹层 ===================== */
+/* ===================== 回应弹层 ===================== */
 var replyTab='option';
 var replyPicOption='';
 var replyPics=[];
@@ -2606,6 +2747,241 @@ document.getElementById('replyOk').addEventListener('click',function(){
   if(opOpen) toggleOp();
   armWait(w);
 });
+
+/* ===================== 通话 ===================== */
+var CALL={
+  active:false,      // 是否在通话中
+  state:'',          // dialing / incoming / connecting / talking
+  startAt:0,         // 通话开始时间（talking 时才有）
+  mini:false,        // 是否缩小
+  timer:null,        // 计时器
+  hangupTimer:null,  // 祂挂断的定时器
+  connectTimer:null, // 拨号/接通的定时器
+  direction:''       // 'out'（我打给祂）/ 'in'（祂打给我）
+};
+
+function callRender(){
+  var win=document.getElementById('callWin');
+  var p=S.profile();
+  var nn=p.him.call||'祂';
+  document.getElementById('callAva').innerHTML = p.him.avatar ? '<img src="'+p.him.avatar+'" alt="">' : '祂';
+  document.getElementById('callName').textContent = nn;
+  document.getElementById('callWaveBar').style.display='none';
+  document.getElementById('callStatus').textContent='';
+  document.getElementById('callBtns').innerHTML='';
+  document.getElementById('callX').style.display='none';
+
+  if(CALL.state==='dialing'){
+    document.getElementById('callStatus').textContent='撥號中…';
+    document.getElementById('callBtns').innerHTML='<button class="cb hangup" id="callHangup">掛 斷</button>';
+    document.getElementById('callHangup').addEventListener('click',function(){ callEnd('me-hangup-early'); });
+  }else if(CALL.state==='incoming'){
+    document.getElementById('callStatus').textContent='來電';
+    document.getElementById('callBtns').innerHTML=
+      '<button class="cb reject" id="callReject">掛 斷</button>'+
+      '<button class="cb answer" id="callAnswer">接 聽</button>';
+    document.getElementById('callReject').addEventListener('click',function(){ callEnd('me-reject'); });
+    document.getElementById('callAnswer').addEventListener('click',function(){ callAccept(); });
+  }else if(CALL.state==='connecting'){
+    document.getElementById('callStatus').textContent='接通中…';
+    document.getElementById('callBtns').innerHTML='<button class="cb hangup" id="callHangup">掛 斷</button>';
+    document.getElementById('callHangup').addEventListener('click',function(){ callEnd('me-hangup-early'); });
+  }else if(CALL.state==='talking'){
+    document.getElementById('callWaveBar').style.display='flex';
+    document.getElementById('callStatus').innerHTML='<span class="call-dot"></span>通話中 '+fmtTime((Date.now()-CALL.startAt)/1000);
+    document.getElementById('callBtns').innerHTML='<button class="cb hangup" id="callHangup">掛 斷</button>';
+    document.getElementById('callHangup').addEventListener('click',function(){ callEnd('me-hangup'); });
+  }
+
+  // 缩小状态
+  if(CALL.mini){
+    win.classList.add('mini');
+    document.getElementById('callMiniBtn').style.display='none';
+    document.getElementById('callX').style.display='block';
+    // 缩小态的内容
+    if(CALL.state==='talking'){
+      document.getElementById('callStatus').innerHTML='<span class="call-dot"></span>'+fmtTime((Date.now()-CALL.startAt)/1000);
+    }
+  }else{
+    win.classList.remove('mini');
+    document.getElementById('callMiniBtn').style.display='block';
+    document.getElementById('callX').style.display='none';
+  }
+  win.classList.add('on');
+}
+
+function callStartOut(){
+  if(CALL.active) return;
+  CALL.active=true; CALL.state='dialing'; CALL.direction='out';
+  CALL.mini=false;
+  callRender();
+  var connectIn = (15+Math.random()*15)*1000;
+  CALL.connectTimer=setTimeout(function(){
+    if(!CALL.active || CALL.state!=='dialing') return;
+    // 按接听概率判断
+    var prob=S.set().answerRatio|0;
+    if(Math.random()*100 < prob){
+      CALL.state='talking';
+      CALL.startAt=Date.now();
+      startCallTick();
+      scheduleHangupByHim();
+      callRender();
+    }else{
+      // 没接
+      callEnd('no-answer');
+    }
+  }, connectIn);
+}
+
+function callIncoming(){
+  if(CALL.active) return;
+  CALL.active=true; CALL.state='incoming'; CALL.direction='in';
+  CALL.mini=false;
+  callRender();
+}
+
+function callAccept(){
+  if(CALL.state!=='incoming') return;
+  CALL.state='connecting';
+  callRender();
+  var t=(15+Math.random()*15)*1000;
+  CALL.connectTimer=setTimeout(function(){
+    if(!CALL.active || CALL.state!=='connecting') return;
+    CALL.state='talking';
+    CALL.startAt=Date.now();
+    startCallTick();
+    scheduleHangupByHim();
+    callRender();
+  }, t);
+}
+
+function startCallTick(){
+  if(CALL.timer) clearInterval(CALL.timer);
+  CALL.timer=setInterval(function(){
+    if(CALL.state!=='talking') return;
+    if(CALL.mini){
+      document.getElementById('callStatus').innerHTML='<span class="call-dot"></span>'+fmtTime((Date.now()-CALL.startAt)/1000);
+    }else{
+      document.getElementById('callStatus').innerHTML='<span class="call-dot"></span>通話中 '+fmtTime((Date.now()-CALL.startAt)/1000);
+    }
+  }, 1000);
+}
+
+function scheduleHangupByHim(){
+  var s=S.set();
+  var mn=Math.max(0,s.callHangMin|0), mx=Math.max(0,s.callHangMax|0);
+  if(mn===0 && mx===0) return;  // 不挂
+  if(mn>mx){ var t=mn; mn=mx; mx=t; }
+  var dur=(mn+Math.random()*(mx-mn))*60*1000;
+  if(CALL.hangupTimer) clearTimeout(CALL.hangupTimer);
+  CALL.hangupTimer=setTimeout(function(){
+    if(!CALL.active || CALL.state!=='talking') return;
+    callEnd('him-hangup');
+  }, dur);
+}
+
+function callEnd(reason){
+  var durSec = 0;
+  if(CALL.startAt) durSec=(Date.now()-CALL.startAt)/1000;
+  if(CALL.timer){ clearInterval(CALL.timer); CALL.timer=null; }
+  if(CALL.hangupTimer){ clearTimeout(CALL.hangupTimer); CALL.hangupTimer=null; }
+  if(CALL.connectTimer){ clearTimeout(CALL.connectTimer); CALL.connectTimer=null; }
+
+  var p=S.profile();
+  var nn=p.him.call||'祂';
+  var now=Date.now();
+
+  if(reason==='no-answer'){
+    pushCallLog('（'+nn+' 沒接）');
+  }else if(reason==='me-reject'){
+    pushCallLog('（'+nn+' 來電 · 已拒絕）');
+  }else if(reason==='him-hangup'){
+    pushCallLog('和 '+nn+' 通話 '+fmtDur(durSec)+'\n（祂掛斷了）');
+    // 祂挂断前发一句
+    var ms=S.msgs();
+    var cards=S.cards();
+    var rp=S.ripples();
+    var hersRip=rp.hers||[];
+    var pool=[];
+    for(var i=0;i<cards.length;i++) pool.push({kind:'text', text:cards[i].text});
+    for(var j=0;j<hersRip.length;j++) pool.push({kind:'act', text:hersRip[j].text});
+    if(pool.length){
+      var pick=pool[Math.floor(Math.random()*pool.length)];
+      if(pick.kind==='text') ms.push({id:uid('m'),who:'him',text:pick.text,at:now});
+      else ms.push({id:uid('m'),who:'him',kind:'act',text:pick.text,at:now});
+      Store.touch('chat');
+    }
+  }else if(reason==='me-hangup'){
+    pushCallLog('和 '+nn+' 通話 '+fmtDur(durSec));
+  }else if(reason==='me-hangup-early'){
+    // 拨号/接通中挂断，不记录
+  }
+  Store.touch('chat'); Store.flush();
+
+  CALL.active=false; CALL.state=''; CALL.startAt=0; CALL.mini=false;
+  CALL.direction='';
+  document.getElementById('callWin').classList.remove('on');
+  document.getElementById('callWin').classList.remove('mini');
+  renderFlow(); toBottom(true);
+}
+
+function pushCallLog(text){
+  var ms=S.msgs();
+  ms.push({id:uid('m'),who:'me',kind:'calllog',text:text,at:Date.now()});
+}
+
+function maybeIncomingCall(){
+  if(CALL.active) return;
+  // 只在聊天页 / 头版 / 不锁屏时才触发
+  if(document.visibilityState!=='visible') return;
+  callIncoming();
+  // 聊天里加一条 "（XX 来电）"
+  var p=S.profile();
+  var nn=p.him.call||'祂';
+  var ms=S.msgs();
+  ms.push({id:uid('m'),who:'him',kind:'calllog',text:'（'+nn+' 來電）',at:Date.now()});
+  Store.touch('chat'); Store.flush();
+  renderFlow(); toBottom(true);
+}
+
+// 通话小窗按钮
+document.getElementById('callMiniBtn').addEventListener('click',function(){
+  CALL.mini=true; callRender();
+});
+document.getElementById('callX').addEventListener('click',function(){
+  // 缩小态的叉 = 挂断
+  if(CALL.state==='talking' || CALL.state==='connecting') callEnd('me-hangup');
+  else if(CALL.state==='incoming') callEnd('me-reject');
+  else if(CALL.state==='dialing') callEnd('me-hangup-early');
+});
+
+// 拖动通话小窗
+(function(){
+  var win=document.getElementById('callWin');
+  var dragging=false, sx=0, sy=0, sl=0, st=0;
+  win.addEventListener('touchstart',function(e){
+    var t=e.target;
+    if(t.closest && t.closest('button')) return;
+    if(!e.touches[0]) return;
+    dragging=true;
+    var rect=win.getBoundingClientRect();
+    sx=e.touches[0].clientX; sy=e.touches[0].clientY;
+    sl=rect.left; st=rect.top;
+    win.style.left=sl+'px'; win.style.top=st+'px'; win.style.bottom='auto';
+  },{passive:true});
+  win.addEventListener('touchmove',function(e){
+    if(!dragging) return;
+    if(!e.touches[0]) return;
+    var dx=e.touches[0].clientX-sx, dy=e.touches[0].clientY-sy;
+    var nl=sl+dx, nt=st+dy;
+    var w=window.innerWidth, h=window.innerHeight;
+    var rw=win.offsetWidth, rh=win.offsetHeight;
+    nl=Math.max(4,Math.min(w-rw-4,nl));
+    nt=Math.max(4,Math.min(h-rh-4,nt));
+    win.style.left=nl+'px'; win.style.top=nt+'px';
+  },{passive:true});
+  win.addEventListener('touchend',function(){ dragging=false; },{passive:true});
+})();
   /* ===================== 操作栏 ===================== */
 var OPS={
   photo:'攝影', album:'畫報', video:'通話',
@@ -2628,6 +3004,7 @@ opbar.addEventListener('click',function(e){
   if(k==='album'){ pickFromAlbum(); return; }
   if(k==='reply'){ openReplyLayer(); return; }
   if(k==='stay'){ openCpLayer(); return; }
+  if(k==='video'){ if(!CALL.active) callStartOut(); return; }
   if(OPS[k]) toast(OPS[k]+'：正在開發');
 });
 function openPickLayer(){
@@ -2800,6 +3177,7 @@ function bindProfile(){
       var p=S.profile(); p[who][key]=this.value;
       Store.touch('profile'); Store.flush();
       renderMasthead(); updateListenBar(); renderCompanion();
+      if(CALL.active) callRender();
     });
   }
   bind(nh,'him','name'); bind(ch,'him','call');
@@ -2809,6 +3187,7 @@ function bindProfile(){
       var p=S.profile(); p.him.avatar=dataUrl;
       Store.touch('profile'); Store.flush();
       renderProfile(); renderMasthead(); renderCompanion();
+      if(CALL.active) callRender();
       toast('祂的頭像已更換');
     });
   });
@@ -2837,7 +3216,8 @@ function bindProfile(){
 }
 function renderRatio(){
   function setRow(rowId, inputId, val){
-    document.getElementById(inputId).value=val;
+    var el=document.getElementById(inputId);
+    if(el) el.value=val;
     var rbs=document.querySelectorAll('#'+rowId+' .rb');
     for(var i=0;i<rbs.length;i++){
       var rv=parseInt(rbs[i].getAttribute('data-v'),10);
@@ -2847,6 +3227,8 @@ function renderRatio(){
   setRow('ratioRowPic','picRatio', S.set().picRatio|0);
   setRow('ratioRowRip','ripRatio', S.set().ripRatio|0);
   setRow('ratioRowRec','recRatio', S.set().recRatio|0);
+  setRow('ratioRowAnswer','answerRatio', S.set().answerRatio|0);
+  setRow('ratioRowCallIn','callInRatio', S.set().callInRatio|0);
 }
 function bindRatio(){
   function bindOne(rowId, inputId, key){
@@ -2857,8 +3239,9 @@ function bindRatio(){
         var s=S.set(); s[key]=v; Store.touch('set'); Store.flush(); renderRatio();
       });
     }
-    document.getElementById(inputId).addEventListener('change',function(){
-      var v=parseInt(this.value,10); if(isNaN(v)) v=10;
+    var el=document.getElementById(inputId);
+    if(el) el.addEventListener('change',function(){
+      var v=parseInt(this.value,10); if(isNaN(v)) v=0;
       v=Math.max(0,Math.min(100,v)); this.value=v;
       var s=S.set(); s[key]=v; Store.touch('set'); Store.flush(); renderRatio();
     });
@@ -2866,6 +3249,26 @@ function bindRatio(){
   bindOne('ratioRowPic','picRatio','picRatio');
   bindOne('ratioRowRip','ripRatio','ripRatio');
   bindOne('ratioRowRec','recRatio','recRatio');
+  bindOne('ratioRowAnswer','answerRatio','answerRatio');
+  bindOne('ratioRowCallIn','callInRatio','callInRatio');
+}
+function renderCallHang(){
+  var s=S.set();
+  var a=document.getElementById('callHangMin'), b=document.getElementById('callHangMax');
+  if(a) a.value=s.callHangMin;
+  if(b) b.value=s.callHangMax;
+}
+function bindCallHang(){
+  ['callHangMin','callHangMax'].forEach(function(id){
+    var el=document.getElementById(id);
+    if(!el) return;
+    el.addEventListener('change',function(){
+      var v=parseInt(this.value,10); if(isNaN(v)) v=0;
+      v=Math.max(0,v);
+      this.value=v;
+      var s=S.set(); s[id]=v; Store.touch('set'); Store.flush();
+    });
+  });
 }
 function countWho(w){ var m=S.msgs(), n=0; for(var i=0;i<m.length;i++) if(m[i].who===w) n++; return n; }
 function renderSet(){
@@ -2875,7 +3278,7 @@ function renderSet(){
   document.getElementById('storeTip').textContent =
     '存储：本机 OPFS（/bian/）。\n電文 '+S.cards().length+' 份 · 畫帖 '+S.pics().length+' 张 · 漣漪 '+(S.ripples().mine.length+S.ripples().hers.length)+' 個 · 唱片 '+S.records().length+' 首 · 已出刊 '+issueTotal()+' 期\n'
     +'电讯 '+S.msgs().length+' 条（彼岸 '+countWho('him')+' · 此岸 '+countWho('me')+'）';
-  renderProfile(); renderBackground(); renderRatio();
+  renderProfile(); renderBackground(); renderRatio(); renderCallHang();
 }
 function bindSet(){
   ['dMin','dMax'].forEach(function(id){
@@ -3014,9 +3417,7 @@ function cpAddStart(){
   box.appendChild(inp);
   inp.focus();
   inp.addEventListener('keydown',function(e){
-    if(e.key==='Enter'){
-      cpAddConfirm(inp.value);
-    }
+    if(e.key==='Enter'){ cpAddConfirm(inp.value); }
   });
   inp.addEventListener('blur',function(){
     if(inp.value.trim()) cpAddConfirm(inp.value);
@@ -3034,14 +3435,10 @@ function cpAddConfirm(v){
   s.companion.customThings.push(v);
   Store.touch('set'); Store.flush();
   renderCpThings();
-  // 自动选中新加的
   var chips=document.querySelectorAll('#cpThings .cp-chip');
   for(var j=0;j<chips.length;j++){
-    if(chips[j].getAttribute('data-t')===v){
-      chips[j].classList.add('on');
-    }else{
-      chips[j].classList.remove('on');
-    }
+    if(chips[j].getAttribute('data-t')===v){ chips[j].classList.add('on'); }
+    else{ chips[j].classList.remove('on'); }
   }
   document.getElementById('cpCustom').value='';
 }
@@ -3074,9 +3471,8 @@ document.getElementById('cpLayer').addEventListener('click',function(e){ if(e.ta
 document.getElementById('cpStart').addEventListener('click',function(){
   var custom=String(document.getElementById('cpCustom').value||'').trim();
   var thing='';
-  if(custom){
-    thing=custom;
-  }else{
+  if(custom){ thing=custom; }
+  else{
     var on=document.querySelector('#cpThings .cp-chip.on');
     if(on) thing=on.getAttribute('data-t');
   }
@@ -3093,7 +3489,6 @@ function openCpLayer(){
     x.classList.toggle('on', x.getAttribute('data-f')==='normal');
   });
   CP.freq='normal';
-  // 如果当前相伴，预选当前 thing
   if(CP.active && CP.thing){
     var chips=document.querySelectorAll('#cpThings .cp-chip');
     for(var i=0;i<chips.length;i++){
@@ -3232,7 +3627,7 @@ document.addEventListener('visibilitychange',function(){
 window.addEventListener('pagehide',function(){ Store.flush(); });
 
 /* ===================== 启动 ===================== */
-bindSet(); bindProfile(); bindRatio();
+bindSet(); bindProfile(); bindRatio(); bindCallHang();
 
 Store.init().then(function(){
   MP.mode = S.set().recMode || 'seq';
@@ -3240,7 +3635,7 @@ Store.init().then(function(){
   applyBackground();
   preloadPics();
 
-  // 从设置里恢复相伴
+  // 恢复相伴
   var cpSet=S.set().companion;
   if(cpSet && cpSet.active){
     CP.active=true;
@@ -3252,14 +3647,14 @@ Store.init().then(function(){
     CP.tick=setInterval(cpTick, 1000);
   }
 
-  renderMasthead(); renderFlow(); renderSet(); renderCards(); renderPics(); renderRipples(); renderRecords(); renderProfile(); renderBackground(); renderRatio();
+  renderMasthead(); renderFlow(); renderSet(); renderCards(); renderPics(); renderRipples(); renderRecords(); renderProfile(); renderBackground(); renderRatio(); renderCallHang();
   renderCompanion();
   renderTestSw();
   mpRenderMode();
   mpRenderPlay();
 }).catch(function(e){
   alert('存储出错：'+(e&&e.name)+' / '+(e&&e.message));
-  renderMasthead(); renderFlow(); renderSet(); renderCards(); renderPics(); renderRipples(); renderRecords(); renderProfile(); renderBackground(); renderRatio();
+  renderMasthead(); renderFlow(); renderSet(); renderCards(); renderPics(); renderRipples(); renderRecords(); renderProfile(); renderBackground(); renderRatio(); renderCallHang();
   renderCompanion();
   renderTestSw();
 });
