@@ -522,34 +522,36 @@ img{max-width:100%;display:block}
 .call .call-btns .cb.hangup{color:var(--red);border-color:var(--red)}
 .call .call-btns .cb.hangup:active{background:rgba(156,74,50,.12)}
 
-.call.mini{width:80vw;max-width:340px;left:auto;right:4vw;top:auto;
+.call.mini{width:72vw;max-width:320px;left:auto;right:4vw;top:auto;
   bottom:calc(var(--navh) + env(safe-area-inset-bottom) + 90px);
-  padding:8px 10px;gap:0;cursor:pointer;display:none}
+  padding:9px 10px;gap:0;cursor:pointer;display:none}
 .call.mini.on{display:grid;
-  grid-template-columns:38px 1fr auto;
+  grid-template-columns:40px minmax(0,1fr) auto;
   grid-template-rows:auto auto;
-  column-gap:8px;row-gap:2px;align-items:center}
+  column-gap:8px;row-gap:3px;align-items:center}
 .call.mini .call-mini-btn{display:none}
-.call.mini .call-ava-wrap{grid-column:1;grid-row:1 / span 2;width:38px;height:38px;justify-self:center}
-.call.mini .call-ava{width:36px;height:36px;font-size:16px;
+.call.mini .call-ava-wrap{grid-column:1;grid-row:1 / span 2;width:40px;height:40px;justify-self:center;align-self:center}
+.call.mini .call-ava{width:38px;height:38px;font-size:16px;
   animation:cpBreathMini 2.6s ease-in-out infinite}
 @keyframes cpBreathMini{
   0%,100%{transform:scale(1)}
   50%{transform:scale(1.08)}
 }
-.call.mini .call-name{grid-column:2;grid-row:1;display:flex;align-items:center;
-  justify-content:flex-start;gap:5px;font-size:13px;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.call.mini .call-status{grid-column:2;grid-row:1;margin-left:auto;font-size:11px;
-  display:flex;align-items:center;line-height:1.2;color:var(--ink3);white-space:nowrap}
+.call.mini .call-name{grid-column:2;grid-row:1;display:flex;align-items:center;gap:6px;
+  font-size:13px;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  min-width:0}
+.call.mini .call-name .call-state{color:var(--ink3);font-size:11px;letter-spacing:.06em;flex:0 0 auto}
+.call.mini .call-status{grid-column:2;grid-row:2;display:flex;align-items:center;gap:5px;
+  font-size:11px;color:var(--ink3);text-align:left;line-height:1.2;min-width:0}
 .call.mini .call-wave-bar{grid-column:2;grid-row:2;justify-content:flex-start;
-  height:16px;margin:0;width:100%;overflow:hidden}
-.call.mini .call-wave-bar span{width:4px}
+  height:14px;margin:0 0 0 auto;padding-left:8px;width:auto;overflow:hidden}
+.call.mini .call-wave-bar span{width:3px}
 .call.mini .call-btns{display:none}
 .call.mini .call-x{display:none}
 .call.mini .call-hang{grid-column:3;grid-row:1 / span 2;align-self:center;justify-self:center;
   display:flex;align-items:center;justify-content:center;
   font-size:12px;letter-spacing:.1em;color:var(--red);
-  border:1px solid var(--red);border-radius:2px;padding:6px 8px;background:none;white-space:nowrap}
+  border:1px solid var(--red);border-radius:2px;padding:7px 10px;background:none;white-space:nowrap}
 .call.mini .call-hang:active{background:rgba(156,74,50,.14)}
 
 #toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom) + 24px);transform:translateX(-50%) translateY(14px);z-index:600;opacity:0;pointer-events:none;background:var(--ink);color:var(--paper);font-size:13px;letter-spacing:.14em;padding:11px 20px;border-radius:2px;max-width:82vw;text-align:center;line-height:1.6;transition:opacity .28s ease,transform .28s ease;box-shadow:0 6px 22px rgba(20,14,8,.34)}
@@ -656,6 +658,107 @@ img{max-width:100%;display:block}
 .clip-item .cl-text{font-size:15px;line-height:1.7;color:var(--ink);white-space:pre-wrap;word-break:break-word}
 .clip-item .cl-del{float:right;font-size:11px;color:var(--ink3);padding:0 2px}
 .clip-item .cl-del:active{color:var(--red)}
+
+/* ===== 郵筒 ===== */
+#secMail .sheet-bd{padding-top:10px}
+.mail-actions{display:flex;gap:8px;margin-bottom:14px}
+.mail-actions button{flex:1 1 0;font-size:13px;letter-spacing:.16em;color:var(--red);border:1px solid var(--red);border-radius:2px;padding:10px 6px;background:none}
+.mail-actions button:active{background:rgba(156,74,50,.10)}
+.mail-tabs{display:flex;border-bottom:1px solid var(--rule);margin-bottom:12px}
+.mail-tab{flex:1 1 0;text-align:center;font-size:13px;letter-spacing:.2em;padding:10px 0;color:var(--ink3);position:relative;cursor:pointer}
+.mail-tab.on{color:var(--red)}
+.mail-tab.on::after{content:"";position:absolute;left:20%;right:20%;bottom:-1px;height:2px;background:var(--red)}
+.mail-item{border:1px solid var(--rule);border-bottom:1px solid var(--rule2);padding:11px 12px;margin-bottom:10px;cursor:pointer;background:rgba(255,250,238,.25)}
+.mail-item:active{background:rgba(59,42,24,.05)}
+.mail-item .mi-to{font-size:13px;letter-spacing:.12em;color:var(--ink)}
+.mail-item .mi-to b{font-weight:400;color:var(--red)}
+.mail-item .mi-ex{margin-top:6px;font-size:13px;line-height:1.7;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mail-item .mi-ft{margin-top:8px;display:flex;align-items:center;justify-content:space-between;font-family:var(--geo);font-size:10px;color:var(--ink3);letter-spacing:.06em}
+.mail-item .mi-st{color:var(--red)}
+.mail-item .mi-st.done{color:var(--ink3)}
+.mail-view{display:flex;flex-direction:column;gap:18px}
+.letter{padding:16px 6px 14px;border-bottom:1px dashed var(--rule2)}
+.letter .lt-to{font-size:16px;letter-spacing:.1em;color:var(--ink);margin-bottom:16px}
+.letter .lt-body{font-size:16px;line-height:2;color:var(--ink);text-indent:2em;word-break:break-word;white-space:pre-wrap}
+.letter .lt-pic{margin-top:14px;text-align:center}
+.letter .lt-pic img{display:inline-block;max-width:100%;max-height:280px;border:1px solid var(--rule);outline:1px solid var(--rule2);outline-offset:2px;background:rgba(255,250,238,.35);cursor:pointer}
+.letter .lt-sign{margin-top:18px;text-align:right;font-size:15px;letter-spacing:.1em;color:var(--ink)}
+.letter .lt-date{margin-top:4px;text-align:right;font-family:var(--geo);font-size:11px;color:var(--ink3);letter-spacing:.06em}
+.mail-write{border:1px solid var(--rule);padding:12px;margin-bottom:14px}
+.mail-write .mw-to{font-size:14px;letter-spacing:.1em;color:var(--ink);margin-bottom:10px;padding-bottom:8px;border-bottom:1px dashed var(--rule2)}
+.mail-write textarea{width:100%;min-height:180px;font-size:16px;line-height:1.9;resize:none;user-select:text;-webkit-user-select:text}
+.mail-write .mw-row{margin-top:10px;display:flex;align-items:center;justify-content:space-between;border-top:1px dashed var(--rule2);padding-top:10px}
+.mail-write .mw-pic{font-size:12px;letter-spacing:.12em;color:var(--red);border:1px dashed var(--red);padding:7px 12px;border-radius:2px}
+.mail-write .mw-pic:active{background:rgba(156,74,50,.10)}
+.mail-write .mw-send{font-size:13px;letter-spacing:.2em;color:var(--red);border:1px solid var(--red);border-radius:2px;padding:8px 20px}
+.mail-write .mw-send:active{background:rgba(156,74,50,.12)}
+.mail-pic-cell{position:relative;margin-top:10px;display:inline-block}
+.mail-pic-cell img{max-width:160px;max-height:160px;border:1px solid var(--rule);outline:1px solid var(--rule2);outline-offset:2px}
+.mail-pic-cell .x{position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;background:var(--red);color:var(--paper);font-size:13px;line-height:20px;text-align:center;border:0;padding:0}
+
+/* ===== 潮汐 / 星辰 ===== */
+#tideTabs{display:flex;border-bottom:1px solid var(--rule);margin-bottom:12px}
+#tideTabs .tide-tab{flex:1 1 0;text-align:center;font-size:13px;letter-spacing:.2em;padding:10px 0;color:var(--ink3);position:relative;cursor:pointer}
+#tideTabs .tide-tab.on{color:var(--red)}
+#tideTabs .tide-tab.on::after{content:"";position:absolute;left:20%;right:20%;bottom:-1px;height:2px;background:var(--red)}
+.cal-head{display:flex;align-items:center;justify-content:space-between;padding:4px 2px 10px}
+.cal-head .cal-nav{font-size:14px;color:var(--ink2);padding:4px 10px;border:1px solid var(--rule);border-radius:2px}
+.cal-head .cal-nav:active{color:var(--red);border-color:var(--red)}
+.cal-head .cal-title{font-size:15px;letter-spacing:.14em;color:var(--ink);font-family:var(--geo)}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:6px}
+.cal-wd{text-align:center;font-size:10px;color:var(--ink3);padding:4px 0;letter-spacing:.06em}
+.cal-cell{aspect-ratio:1/1;border:1px solid var(--rule2);display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;font-family:var(--geo);font-size:12px;color:var(--ink2);background:rgba(255,250,238,.2)}
+.cal-cell.empty{border:0;background:none}
+.cal-cell.today{border-color:var(--red);color:var(--red)}
+.cal-cell.period{background:rgba(156,74,50,.20);color:var(--ink)}
+.cal-cell.predict{background:rgba(156,74,50,.08);border-style:dashed;border-color:var(--red)}
+.cal-cell .cal-dot{position:absolute;bottom:3px;width:4px;height:4px;border-radius:50%;background:var(--red)}
+.cal-legend{display:flex;flex-wrap:wrap;gap:12px;font-size:11px;color:var(--ink3);padding:4px 2px 14px}
+.cal-legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px;font-style:normal}
+.cal-legend i.lg-period{background:rgba(156,74,50,.20)}
+.cal-legend i.lg-predict{background:rgba(156,74,50,.08);border:1px dashed var(--red)}
+.cal-legend i.lg-dot{background:var(--red);border-radius:50%}
+.tide-blk{margin-bottom:16px}
+.tide-blk .tb-hd{font-size:12px;letter-spacing:.2em;color:var(--red);border-bottom:1px solid var(--rule2);padding-bottom:6px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between}
+.tide-blk .tb-hd button{font-size:12px;letter-spacing:.1em;color:var(--red);border:1px solid var(--red);border-radius:2px;padding:4px 10px;background:none}
+.tide-blk .tb-hd button:active{background:rgba(156,74,50,.10)}
+.tide-item{padding:10px 0;border-bottom:1px solid var(--rule2)}
+.tide-item .ti-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.tide-item .ti-name{font-size:15px;color:var(--ink)}
+.tide-item .ti-info{font-family:var(--geo);font-size:11px;color:var(--ink3)}
+.tide-item .ti-del{flex:0 0 auto;font-size:11px;color:var(--ink3);padding:2px 4px}
+.tide-item .ti-del:active{color:var(--red)}
+.tide-item .ti-days{margin-top:8px;display:flex;flex-direction:column;gap:6px}
+.tide-day{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink2);padding:5px 8px;background:rgba(255,250,238,.3);border:1px solid var(--rule2)}
+.tide-day .td-date{font-family:var(--geo);font-size:11px;color:var(--ink3);min-width:66px}
+.tide-day .td-tags{flex:1 1 auto;min-width:0;display:flex;flex-wrap:wrap;gap:6px}
+.tide-day .td-tag{font-size:11px;color:var(--ink2)}
+.tide-day .td-note{font-size:11px;color:var(--ink3);width:100%;margin-top:2px}
+.tide-day .td-edit{flex:0 0 auto;font-size:11px;color:var(--red);padding:2px 4px}
+.tide-day .td-edit:active{background:rgba(156,74,50,.10)}
+.tide-dialog{position:fixed;inset:0;z-index:470;display:none;align-items:center;justify-content:center;background:rgba(20,14,8,.55)}
+.tide-dialog.on{display:flex}
+.tide-dlg-box{width:88vw;max-width:400px;max-height:84vh;background:var(--paper);border:2px solid var(--ink);display:flex;flex-direction:column;box-shadow:0 8px 30px rgba(20,14,8,.35)}
+.tide-dlg-hd{padding:12px 14px;border-bottom:1px solid var(--rule2);font-size:12px;letter-spacing:.24em;color:var(--red);text-align:center;position:relative}
+.tide-dlg-hd .x{position:absolute;right:8px;top:50%;transform:translateY(-50%);font-size:18px;color:var(--ink3);padding:4px 8px;border:0;background:none}
+.tide-dlg-bd{flex:1 1 auto;min-height:0;overflow-y:auto;padding:14px}
+.tide-dlg-ft{padding:10px 14px;border-top:1px solid var(--rule2);display:flex;gap:10px}
+.tide-dlg-ft button{flex:1 1 0;font-size:13px;letter-spacing:.18em;padding:10px;border:1px solid var(--rule);border-radius:2px;color:var(--ink2)}
+.tide-dlg-ft button.ok{color:var(--red);border-color:var(--red)}
+.tide-dlg-ft button:active{background:rgba(59,42,24,.06)}
+.tide-dlg-ft button.ok:active{background:rgba(156,74,50,.10)}
+.tide-fld{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--rule2)}
+.tide-fld label{flex:0 0 auto;font-size:13px;color:var(--ink2);width:60px}
+.tide-fld input{flex:1 1 auto;font-size:15px;padding:5px 0;min-width:0}
+.tide-fld input[type=date]{font-family:var(--geo)}
+.tide-fld input::placeholder{color:var(--ink3)}
+.tide-fld select{flex:1 1 auto;font-size:15px;padding:5px 0;min-width:0;color:var(--ink);background:none;border:0;font-family:inherit}
+.tide-fld .tide-note{flex:1 1 auto;font-size:14px;padding:5px 0;min-width:0}
+.tide-chips{display:flex;flex-wrap:wrap;gap:6px;padding:8px 0;border-bottom:1px solid var(--rule2)}
+.tide-chips .tc{font-size:12px;letter-spacing:.06em;color:var(--ink2);border:1px solid var(--rule);padding:6px 10px;border-radius:2px;background:rgba(255,250,238,.2)}
+.tide-chips .tc.on{color:var(--red);border-color:var(--red);background:rgba(156,74,50,.08)}
+.tide-chips .tc:active{background:rgba(59,42,24,.06)}
+.tide-chips-label{font-size:12px;color:var(--ink2);padding:8px 0 2px}
 </style>
 </head>
 <body>
@@ -784,7 +887,16 @@ img{max-width:100%;display:block}
 
 <div class="sec" id="secMail">
   <div class="sheet-hd"><h2>郵 筒</h2><div class="sub">LETTERS · 慢信，隔夜方達</div></div>
-  <div class="sheet-bd"><div class="empty">郵筒尚未啟用。<br><br>與頭版不同：<br>頭版是即時電訊，一句一句來；<br>郵筒是寫信，投進去便只剩等。</div></div>
+  <div class="sheet-bd">
+    <div class="mail-actions">
+      <button id="mailWriteBtn">寫 一 封 信</button>
+    </div>
+    <div class="mail-tabs" id="mailTabs">
+      <div class="mail-tab on" data-mt="wait">等 回 信</div>
+      <div class="mail-tab" data-mt="done">已 往 返</div>
+    </div>
+    <div id="mailList"></div>
+  </div>
 </div>
 
 <div class="sec" id="secSupp">
@@ -804,8 +916,36 @@ img{max-width:100%;display:block}
 </div>
 
 <div class="sec" id="secSpecial">
-  <div class="sheet-hd"><h2>潮 汐</h2><div class="sub">TIDES · 重要日</div></div>
-  <div class="sheet-bd"><div class="empty">尚無潮汐。<br><br>重要的日子，單獨出一期。</div></div>
+  <div class="sheet-hd"><h2>潮 汐</h2><div class="sub">TIDES &amp; STARS</div></div>
+  <div class="sheet-bd" style="padding-top:6px">
+    <div id="tideTabs">
+      <div class="tide-tab on" data-tt="tide">潮 汐</div>
+      <div class="tide-tab" data-tt="star">星 辰</div>
+    </div>
+    <div id="tidePaneTide">
+      <div class="cal-head">
+        <button class="cal-nav" id="calPrev">‹</button>
+        <div class="cal-title" id="calTitle">—</div>
+        <button class="cal-nav" id="calNext">›</button>
+      </div>
+      <div class="cal-grid" id="calGrid"></div>
+      <div class="cal-legend">
+        <span><i class="lg-period"></i>經期</span>
+        <span><i class="lg-predict"></i>預計</span>
+        <span><i class="lg-dot"></i>重要日</span>
+      </div>
+      <div class="tide-blk">
+        <div class="tb-hd">經 期 記 錄<button id="periodAddBtn">添加</button></div>
+        <div id="periodList"></div>
+      </div>
+    </div>
+    <div id="tidePaneStar" style="display:none">
+      <div class="tide-blk">
+        <div class="tb-hd">重 要 日<button id="eventAddBtn">添加</button></div>
+        <div id="eventList"></div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <nav id="navbar">
@@ -1219,12 +1359,49 @@ img{max-width:100%;display:block}
       <div class="ratio-num"><label>比例</label><input id="callInRatio" type="number" inputmode="numeric" min="0" max="100" value="10"><span class="u">%</span></div>
     </div>
     <div class="blk">
+      <h3>郵 筒</h3>
+      <p class="tip">信投出去后，隔多久对方才收到。<br>在此区间内随机取值。</p>
+      <div class="fld"><label>最快</label><div class="r"><input id="mailMin" type="number" inputmode="numeric" min="1" max="72"><span class="u">时</span></div></div>
+      <div class="fld"><label>最慢</label><div class="r"><input id="mailMax" type="number" inputmode="numeric" min="1" max="72"><span class="u">时</span></div></div>
+      <p class="tip" style="margin-top:11px">祂主动投信给你的几率。</p>
+      <div class="ratio-row" id="ratioRowMailIn">
+        <button class="rb" data-v="0">从不用</button>
+        <button class="rb" data-v="10">偶尔</button>
+        <button class="rb" data-v="50">一半</button>
+        <button class="rb" data-v="80">经常</button>
+        <button class="rb" data-v="100">总是</button>
+      </div>
+      <div class="ratio-num"><label>比例</label><input id="mailInRatio" type="number" inputmode="numeric" min="0" max="100" value="10"><span class="u">%</span></div>
+      <p class="tip" style="margin-top:11px">祂信里夹东西的几率：快照（你们最近五句的聊天记录）与畫帖各一。</p>
+      <div class="ratio-row" id="ratioRowMailSnap">
+        <button class="rb" data-v="0">从不用</button>
+        <button class="rb" data-v="10">偶尔</button>
+        <button class="rb" data-v="50">一半</button>
+        <button class="rb" data-v="80">经常</button>
+        <button class="rb" data-v="100">总是</button>
+      </div>
+      <div class="ratio-num"><label>快照</label><input id="mailSnapRatio" type="number" inputmode="numeric" min="0" max="100" value="10"><span class="u">%</span></div>
+      <div class="ratio-row" id="ratioRowMailPic" style="margin-top:8px">
+        <button class="rb" data-v="0">从不用</button>
+        <button class="rb" data-v="10">偶尔</button>
+        <button class="rb" data-v="50">一半</button>
+        <button class="rb" data-v="80">经常</button>
+        <button class="rb" data-v="100">总是</button>
+      </div>
+      <div class="ratio-num"><label>夾圖</label><input id="mailPicRatio" type="number" inputmode="numeric" min="0" max="100" value="20"><span class="u">%</span></div>
+    </div>
+    <div class="blk">
       <h3>測 試</h3>
-      <p class="tip">開啓後，相伴的說話間隔縮到秒級，方便看效果。</p>
+      <p class="tip">開啓後，相伴的說話間隔縮到秒級，方便看效果。<br>「測試寫信」開啓後，郵筒延遲縮到 3~8 秒。</p>
       <div class="sw-row">
         <label>測試模式</label>
         <div class="sw" id="testModeSw"></div>
       </div>
+      <div class="sw-row">
+        <label>測試寫信</label>
+        <div class="sw" id="testMailSw"></div>
+      </div>
+      <div class="btnline"><button id="himWriteMailBtn">祂 寫 一 封</button></div>
     </div>
     <div class="blk">
       <h3>關 於</h3>
@@ -1494,6 +1671,68 @@ img{max-width:100%;display:block}
   </div>
 </div>
 
+<div class="mask-layer" id="mailWriteLayer">
+  <div class="preview-box">
+    <div class="preview-hd">寫 一 封 信<button class="x" id="mailWriteClose">×</button></div>
+    <div class="preview-bd">
+      <div class="mail-write" style="border:0;padding:0;margin:0">
+        <div class="mw-to" id="mailWriteTo">致 —</div>
+        <textarea id="mailWriteBody" rows="8" placeholder="见字如面。&#10;&#10;在此写下你想说的话。"></textarea>
+        <div class="mw-row">
+          <button class="mw-pic" id="mailWritePicBtn">夾 一 張 照 片</button>
+          <button class="mw-send" id="mailWriteSend">投 進 郵 筒</button>
+        </div>
+        <div id="mailWritePicBox"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mask-layer" id="mailViewLayer">
+  <div class="preview-box">
+    <div class="preview-hd">讀 信<button class="x" id="mailViewClose">×</button></div>
+    <div class="preview-bd" id="mailViewBody"></div>
+  </div>
+</div>
+
+<div class="tide-dialog" id="periodDialog">
+  <div class="tide-dlg-box">
+    <div class="tide-dlg-hd" id="periodDialogTitle">添 加 經 期<button class="x" id="periodDialogClose">×</button></div>
+    <div class="tide-dlg-bd">
+      <div class="tide-fld"><label>開始</label><input type="date" id="periodStart"></div>
+      <div class="tide-fld"><label>結束</label><input type="date" id="periodEnd"></div>
+      <div class="tide-chips-label">每日狀態（可選）</div>
+      <div id="periodDaysBox"></div>
+    </div>
+    <div class="tide-dlg-ft">
+      <button id="periodDialogCancel">取 消</button>
+      <button class="ok" id="periodDialogOk">存 入</button>
+    </div>
+  </div>
+</div>
+
+<div class="tide-dialog" id="eventDialog">
+  <div class="tide-dlg-box">
+    <div class="tide-dlg-hd" id="eventDialogTitle">添 加 重 要 日<button class="x" id="eventDialogClose">×</button></div>
+    <div class="tide-dlg-bd">
+      <div class="tide-fld"><label>名稱</label><input type="text" id="eventName" placeholder="例：在一起紀念日"></div>
+      <div class="tide-fld"><label>日期</label><input type="date" id="eventDate"></div>
+      <div class="tide-fld"><label>重複</label>
+        <select id="eventRepeat">
+          <option value="none">不重複</option>
+          <option value="year">每年</option>
+          <option value="month">每月</option>
+          <option value="week">每週</option>
+        </select>
+      </div>
+    </div>
+    <div class="tide-dlg-ft">
+      <button id="eventDialogCancel">取 消</button>
+      <button class="ok" id="eventDialogOk">存 入</button>
+    </div>
+  </div>
+</div>
+
 <div class="img-view" id="imgView"><img id="imgViewSrc" src="" alt=""></div>
 
 <div id="toast"></div>
@@ -1505,11 +1744,12 @@ img{max-width:100%;display:block}
 var FILES={
   meta:'meta.json', cards:'cards.json', chat:'chat.json', set:'settings.json',
   profile:'profile.json', pics:'pics.json', ripples:'ripples.json', records:'records.json',
-  archive:'archive.json', clips:'clips.json', companion:'companion.json'
+  archive:'archive.json', clips:'clips.json', companion:'companion.json',
+  mail:'mail.json', tides:'tides.json'
 };
 var Store={
   dir:null,
-  cache:{meta:null,cards:null,chat:null,set:null,profile:null,pics:null,ripples:null,records:null,archive:null,clips:null,companion:null},
+  cache:{meta:null,cards:null,chat:null,set:null,profile:null,pics:null,ripples:null,records:null,archive:null,clips:null,companion:null,mail:null,tides:null},
   timers:{},
 
   async init(){
@@ -1523,8 +1763,11 @@ var Store={
         answerRatio:70,
         callHangMin:2,callHangMax:5,
         callInRatio:10,
+        mailMin:5,mailMax:8,
+        mailInRatio:10,mailSnapRatio:10,mailPicRatio:20,
         recMode:'seq',
         testMode:false,
+        testMail:false,
         companion:{active:false,thing:'',freq:'normal',startAt:0,customThings:[]}
       };},
       profile:function(){return {v:1,him:{name:'',call:'',avatar:''},me:{name:'',call:'',avatar:''},bg:'',bgMask:60};},
@@ -1533,7 +1776,9 @@ var Store={
       records:function(){return {v:1,records:[]};},
       archive:function(){return {v:1,issues:[]};},
       clips:function(){return {v:1,clips:[]};},
-      companion:function(){return {v:1,sessions:[]};}
+      companion:function(){return {v:1,sessions:[]};},
+      mail:function(){return {v:1,mails:[]};},
+      tides:function(){return {v:1,periods:[],events:[]};}
     };
     var root=await navigator.storage.getDirectory();
     this.dir=await root.getDirectoryHandle('bian',{create:true});
@@ -1578,8 +1823,14 @@ var Store={
     if(typeof st.callHangMin!=='number') st.callHangMin=2;
     if(typeof st.callHangMax!=='number') st.callHangMax=5;
     if(typeof st.callInRatio!=='number') st.callInRatio=10;
+    if(typeof st.mailMin!=='number') st.mailMin=5;
+    if(typeof st.mailMax!=='number') st.mailMax=8;
+    if(typeof st.mailInRatio!=='number') st.mailInRatio=10;
+    if(typeof st.mailSnapRatio!=='number') st.mailSnapRatio=10;
+    if(typeof st.mailPicRatio!=='number') st.mailPicRatio=20;
     if(typeof st.recMode!=='string') st.recMode='seq';
     if(typeof st.testMode!=='boolean') st.testMode=false;
+    if(typeof st.testMail!=='boolean') st.testMail=false;
     if(!st.companion || typeof st.companion!=='object') st.companion={active:false,thing:'',freq:'normal',startAt:0,customThings:[]};
     if(typeof st.companion.active!=='boolean') st.companion.active=false;
     if(typeof st.companion.thing!=='string') st.companion.thing='';
@@ -1593,6 +1844,12 @@ var Store={
     if(!this.cache.archive || !Array.isArray(this.cache.archive.issues)) this.cache.archive={v:1,issues:[]};
     if(!this.cache.clips || !Array.isArray(this.cache.clips.clips)) this.cache.clips={v:1,clips:[]};
     if(!this.cache.companion || !Array.isArray(this.cache.companion.sessions)) this.cache.companion={v:1,sessions:[]};
+    if(!this.cache.mail || !Array.isArray(this.cache.mail.mails)) this.cache.mail={v:1,mails:[]};
+    var td=this.cache.tides;
+    if(!td || typeof td!=='object') td={v:1,periods:[],events:[]};
+    if(!Array.isArray(td.periods)) td.periods=[];
+    if(!Array.isArray(td.events)) td.events=[];
+    this.cache.tides=td;
     for(var k2 in FILES){
       if(!this.cache[k2] || typeof this.cache[k2]!=='object'){
         this.cache[k2]=DEFS[k2]();
@@ -1641,7 +1898,7 @@ var Store={
 function _cards(){ if(!Store.cache.cards||!Array.isArray(Store.cache.cards.cards)) Store.cache.cards={v:1,cards:[]}; return Store.cache.cards.cards; }
 function _msgs(){ if(!Store.cache.chat||!Array.isArray(Store.cache.chat.msgs)) Store.cache.chat={v:1,msgs:[]}; return Store.cache.chat.msgs; }
 function _set(){
-  var d={v:1,dMin:15,dMax:30,picRatio:10,ripRatio:10,recRatio:10,quoteRatio:10,clipRatio:10,cpInviteRatio:10,answerRatio:70,callHangMin:2,callHangMax:5,callInRatio:10,recMode:'seq',testMode:false,companion:{active:false,thing:'',freq:'normal',startAt:0,customThings:[]}};
+  var d={v:1,dMin:15,dMax:30,picRatio:10,ripRatio:10,recRatio:10,quoteRatio:10,clipRatio:10,cpInviteRatio:10,answerRatio:70,callHangMin:2,callHangMax:5,callInRatio:10,mailMin:5,mailMax:8,mailInRatio:10,mailSnapRatio:10,mailPicRatio:20,recMode:'seq',testMode:false,testMail:false,companion:{active:false,thing:'',freq:'normal',startAt:0,customThings:[]}};
   if(!Store.cache.set||typeof Store.cache.set!=='object') Store.cache.set=d;
   var s=Store.cache.set;
   if(typeof s.picRatio!=='number') s.picRatio=10;
@@ -1654,8 +1911,14 @@ function _set(){
   if(typeof s.callHangMin!=='number') s.callHangMin=2;
   if(typeof s.callHangMax!=='number') s.callHangMax=5;
   if(typeof s.callInRatio!=='number') s.callInRatio=10;
+  if(typeof s.mailMin!=='number') s.mailMin=5;
+  if(typeof s.mailMax!=='number') s.mailMax=8;
+  if(typeof s.mailInRatio!=='number') s.mailInRatio=10;
+  if(typeof s.mailSnapRatio!=='number') s.mailSnapRatio=10;
+  if(typeof s.mailPicRatio!=='number') s.mailPicRatio=20;
   if(typeof s.recMode!=='string') s.recMode='seq';
   if(typeof s.testMode!=='boolean') s.testMode=false;
+  if(typeof s.testMail!=='boolean') s.testMail=false;
   if(!s.companion || typeof s.companion!=='object') s.companion={active:false,thing:'',freq:'normal',startAt:0,customThings:[]};
   if(typeof s.companion.active!=='boolean') s.companion.active=false;
   if(typeof s.companion.thing!=='string') s.companion.thing='';
@@ -1705,7 +1968,22 @@ function _companion(){
   Store.cache.companion=c;
   return c;
 }
-var S={ cards:_cards, msgs:_msgs, set:_set, profile:_profile, pics:_pics, ripples:_ripples, records:_records, archive:_archive, clips:_clips, companion:_companion, pendings:{} };
+function _mail(){
+  var m=Store.cache.mail;
+  if(!m||typeof m!=='object') m={v:1,mails:[]};
+  if(!Array.isArray(m.mails)) m.mails=[];
+  Store.cache.mail=m;
+  return m;
+}
+function _tides(){
+  var t=Store.cache.tides;
+  if(!t||typeof t!=='object') t={v:1,periods:[],events:[]};
+  if(!Array.isArray(t.periods)) t.periods=[];
+  if(!Array.isArray(t.events)) t.events=[];
+  Store.cache.tides=t;
+  return t;
+}
+var S={ cards:_cards, msgs:_msgs, set:_set, profile:_profile, pics:_pics, ripples:_ripples, records:_records, archive:_archive, clips:_clips, companion:_companion, mail:_mail, tides:_tides, pendings:{} };
 
 function uid(p){ return p+'_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,7); }
 function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
@@ -1736,6 +2014,41 @@ function shortText(t,n){
 }
 function callHim(){ return (S.profile().him.call)||'祂'; }
 function callMe(){ return (S.profile().me.call)||'我'; }
+function nameHim(){ return (S.profile().him.name)||'易遇'; }
+function nameMe(){ return (S.profile().me.name)||'夏雾凉'; }
+
+var CN_NUM=['零','一','二','三','四','五','六','七','八','九'];
+function cnNum(n){
+  n=Math.floor(n);
+  if(n<10) return CN_NUM[n];
+  if(n<20) return '十'+(n>10?CN_NUM[n-10]:'');
+  if(n<100){
+    var t=Math.floor(n/10), u=n%10;
+    return CN_NUM[t]+'十'+(u?CN_NUM[u]:'');
+  }
+  var h=Math.floor(n/100), r=n%100;
+  return CN_NUM[h]+'百'+(r?((r<10?'零':'')+cnNum(r)):'');
+}
+function cnMonth(m){
+  if(m===11) return '十一';
+  if(m===12) return '十二';
+  return CN_NUM[m];
+}
+function cnDay(d){
+  if(d<=10) return '初'+CN_NUM[d%10||10];
+  if(d<20) return '十'+CN_NUM[d-10];
+  if(d===20) return '二十';
+  if(d<30) return '廿'+CN_NUM[d-20];
+  if(d===30) return '三十';
+  return '三十一';
+}
+function mingGuoDate(t){
+  var d=new Date(t);
+  var y=d.getFullYear()-1911;
+  var m=d.getMonth()+1, dd=d.getDate();
+  return '民国'+cnNum(y)+'年'+cnMonth(m)+'月'+cnDay(dd)+'日';
+}
+function cnNumberYear(n){ return cnNum(n); }
 
 var SEASON={
   spring:['彼岸入春','彼岸也回暖了','对岸的春天来了','彼岸开春','彼岸正是春天','彼岸春意渐浓'],
@@ -1809,9 +2122,8 @@ function renderMasthead(){
 }
 
 function renderCoverNames(){
-  var p=S.profile();
-  var himName=(p.him.name||p.him.call||'').trim();
-  var meName=(p.me.name||p.me.call||'').trim();
+  var himName=nameHim();
+  var meName=nameMe();
   var colHim=document.getElementById('coverNameHim');
   var colMe=document.getElementById('coverNameMe');
   if(colHim){
@@ -1842,7 +2154,7 @@ var ARCH={ on:false, picked:{} };
 
 function quoteBlockHtml(m){
   if(!m.quote) return '';
-  var who = (m.quote.from==='him') ? callHim() : callMe();
+  var who = (m.quote.from==='him') ? nameHim() : nameMe();
   var side = (m.quote.from==='him') ? '彼岸' : '此岸';
   var qt;
   if(m.quote.pic){ return '<div class="quote-block" data-qref="'+esc(m.quote.refId||'')+'"><div class="q-tag">◆ 引 自 <span class="q-who">'+esc(who)+'</span> · '+side+' · <span class="q-tm">'+hhmm(m.quote.at)+'</span></div><div class="q-text q-pic">［ 一張畫帖 ］</div></div>'; }
@@ -2002,7 +2314,7 @@ function setPendingQuote(q){
   var txt=document.getElementById('quotePendTxt');
   if(!bar||!txt) return;
   if(!q){ bar.classList.remove('on'); txt.textContent=''; return; }
-  var who=(q.from==='him')?callHim():callMe();
+  var who=(q.from==='him')?nameHim():nameMe();
   var body=q.pic?'［ 一張畫帖 ］':shortText(q.text||'',40);
   txt.textContent='引自 '+who+'：'+body;
   bar.classList.add('on');
@@ -2059,7 +2371,6 @@ function tryClipMine(msg){
   Store.touch('clips'); Store.flush();
 }
 
-var lastQuoteMsgCount=0;
 function pickQuoteTarget(ms){
   var cand=[];
   for(var i=0;i<ms.length;i++){
@@ -2197,7 +2508,8 @@ function resolveWait(id){
     })();
   }
   if(Math.random()*100 < (S.set().callInRatio|0)){ maybeIncomingCall(); return; }
-  if(Math.random()*100 < (S.set().cpInviteRatio|0)){ maybeInviteCompanion(); }
+  if(Math.random()*100 < (S.set().cpInviteRatio|0)){ maybeInviteCompanion(); return; }
+  if(Math.random()*100 < (S.set().mailInRatio|0)){ maybeHimMail(); }
 }
 function rearmAll(){
   var ms=S.msgs();
@@ -2380,6 +2692,7 @@ function renderArchList(){
   var nEl=document.getElementById('lgArchN');
   if(nEl) nEl.textContent=arc.issues.length;
   if(bar) bar.innerHTML='共 '+arc.issues.length+' 期';
+  if(!box) return;
   if(!arc.issues.length){
     box.innerHTML='<div class="empty">歸檔空空如也。<br>頭版點「歸檔」把記錄存進來。</div>';
     return;
@@ -2445,7 +2758,7 @@ document.getElementById('amExport').addEventListener('click',function(){
   if(!issue) return;
   openChoices([
     ['JSON', d+'.json', JSON.stringify({v:1,date:issue.date,no:issue.no,msgs:issue.msgs},null,2), 'application/json;charset=utf-8'],
-    ['TXT', d+'.txt', issue.msgs.map(function(m){ return hhmm(m.at)+' '+(m.who==='him'?callHim():callMe())+'：'+(m.text||m.title||''); }).join('\n'), 'text/plain;charset=utf-8']
+    ['TXT', d+'.txt', issue.msgs.map(function(m){ return hhmm(m.at)+' '+(m.who==='him'?nameHim():nameMe())+'：'+(m.text||m.title||''); }).join('\n'), 'text/plain;charset=utf-8']
   ]);
 });
 document.getElementById('amDelete').addEventListener('click',function(){
@@ -2560,6 +2873,7 @@ function renderCalls(){
   var bar=document.getElementById('callsCntBar');
   if(bar) bar.innerHTML='共 '+list.length+' 通';
   var box=document.getElementById('callsList');
+  if(!box) return;
   if(!list.length){
     box.innerHTML='<div class="empty">還沒有通話記錄。<br>在頭版點「通話」打給'+esc(nn)+'。</div>';
     return;
@@ -2584,6 +2898,7 @@ function renderCompanionLog(){
   var bar=document.getElementById('cpLogCntBar');
   if(bar) bar.innerHTML='共 '+list.length+' 次';
   var box=document.getElementById('cpLogList');
+  if(!box) return;
   if(!list.length){
     box.innerHTML='<div class="empty">還沒有相伴記錄。<br>點「相伴」開始一次。</div>';
     return;
@@ -2611,6 +2926,7 @@ function renderClips(){
   var bar=document.getElementById('clipCntBar');
   if(bar) bar.innerHTML='共 '+list.length+' 條';
   var box=document.getElementById('clipList');
+  if(!box) return;
   if(!list.length){
     box.innerHTML='<div class="empty">剪報簿空空如也。<br>祂看到好句子，會剪下來存著。</div>';
     return;
@@ -3730,17 +4046,23 @@ function callRender(){
     document.getElementById('callMiniBtn').style.display='none';
     document.getElementById('callX').style.display='none';
     document.getElementById('callHangMini').style.display='flex';
+    var nmEl=document.getElementById('callName');
+    if(!nmEl.querySelector('.call-state')){
+      nmEl.innerHTML=esc(nn)+' <span class="call-state">通話中</span>';
+    }
     if(CALL.state==='talking'){
       document.getElementById('callStatus').innerHTML='<span class="call-dot"></span>'+fmtTime((Date.now()-CALL.startAt)/1000);
     }else if(CALL.state==='dialing'){
-      document.getElementById('callStatus').textContent='撥號中…';
+      document.getElementById('callStatus').innerHTML='<span class="call-dot"></span>撥號中';
     }else if(CALL.state==='connecting'){
-      document.getElementById('callStatus').textContent='接通中…';
+      document.getElementById('callStatus').innerHTML='<span class="call-dot"></span>接通中';
     }else if(CALL.state==='incoming'){
-      document.getElementById('callStatus').textContent='來電';
+      document.getElementById('callStatus').innerHTML='<span class="call-dot"></span>來電';
     }
+    document.getElementById('callWaveBar').style.display='flex';
   }else{
     win.classList.remove('mini');
+    document.getElementById('callName').textContent=nn;
     document.getElementById('callMiniBtn').style.display='block';
     document.getElementById('callMiniBtn').textContent='縮小';
     document.getElementById('callX').style.display='none';
@@ -4178,6 +4500,9 @@ function renderRatio(){
   setRow('ratioRowCpInvite','cpInviteRatio', S.set().cpInviteRatio|0);
   setRow('ratioRowAnswer','answerRatio', S.set().answerRatio|0);
   setRow('ratioRowCallIn','callInRatio', S.set().callInRatio|0);
+  setRow('ratioRowMailIn','mailInRatio', S.set().mailInRatio|0);
+  setRow('ratioRowMailSnap','mailSnapRatio', S.set().mailSnapRatio|0);
+  setRow('ratioRowMailPic','mailPicRatio', S.set().mailPicRatio|0);
 }
 function bindRatio(){
   function bindOne(rowId, inputId, key){
@@ -4203,6 +4528,9 @@ function bindRatio(){
   bindOne('ratioRowCpInvite','cpInviteRatio','cpInviteRatio');
   bindOne('ratioRowAnswer','answerRatio','answerRatio');
   bindOne('ratioRowCallIn','callInRatio','callInRatio');
+  bindOne('ratioRowMailIn','mailInRatio','mailInRatio');
+  bindOne('ratioRowMailSnap','mailSnapRatio','mailSnapRatio');
+  bindOne('ratioRowMailPic','mailPicRatio','mailPicRatio');
 }
 function renderCallHang(){
   var s=S.set();
@@ -4222,15 +4550,33 @@ function bindCallHang(){
     });
   });
 }
+function renderMailSet(){
+  var s=S.set();
+  var a=document.getElementById('mailMin'), b=document.getElementById('mailMax');
+  if(a) a.value=s.mailMin;
+  if(b) b.value=s.mailMax;
+}
+function bindMailSet(){
+  ['mailMin','mailMax'].forEach(function(id){
+    var el=document.getElementById(id);
+    if(!el) return;
+    el.addEventListener('change',function(){
+      var v=parseInt(this.value,10); if(isNaN(v)) v=5;
+      v=Math.max(1,Math.min(72,v)); this.value=v;
+      var s=S.set(); if(id==='mailMin') s.mailMin=v; else s.mailMax=v;
+      Store.touch('set'); Store.flush();
+    });
+  });
+}
 function countWho(w){ var m=S.msgs(), n=0; for(var i=0;i<m.length;i++) if(m[i].who===w) n++; return n; }
 function renderSet(){
   var s=S.set();
   document.getElementById('dMin').value=s.dMin;
   document.getElementById('dMax').value=s.dMax;
   document.getElementById('storeTip').textContent =
-    '存储：本机 OPFS（/bian/）。\n電文 '+S.cards().length+' 份 · 畫帖 '+S.pics().length+' 张 · 漣漪 '+(S.ripples().mine.length+S.ripples().hers.length)+' 個 · 唱片 '+S.records().length+' 首 · 已出刊 '+issueTotal()+' 期 · 歸檔 '+S.archive().issues.length+' 期 · 剪報 '+S.clips().length+' 條 · 相伴 '+S.companion().sessions.length+' 次\n'
+    '存储：本机 OPFS（/bian/）。\n電文 '+S.cards().length+' 份 · 畫帖 '+S.pics().length+' 张 · 漣漪 '+(S.ripples().mine.length+S.ripples().hers.length)+' 個 · 唱片 '+S.records().length+' 首 · 已出刊 '+issueTotal()+' 期 · 歸檔 '+S.archive().issues.length+' 期 · 剪報 '+S.clips().length+' 條 · 相伴 '+S.companion().sessions.length+' 次 · 郵筒 '+S.mail().mails.length+' 封\n'
     +'电讯 '+S.msgs().length+' 条（彼岸 '+countWho('him')+' · 此岸 '+countWho('me')+'）';
-  renderProfile(); renderBackground(); renderRatio(); renderCallHang();
+  renderProfile(); renderBackground(); renderRatio(); renderCallHang(); renderMailSet(); renderTestSw();
 }
 function bindSet(){
   ['dMin','dMax'].forEach(function(id){
@@ -4245,8 +4591,9 @@ function bindSet(){
 function renderTestSw(){
   var s=S.set();
   var sw=document.getElementById('testModeSw');
-  if(!sw) return;
-  sw.classList.toggle('on', !!s.testMode);
+  if(sw) sw.classList.toggle('on', !!s.testMode);
+  var sw2=document.getElementById('testMailSw');
+  if(sw2) sw2.classList.toggle('on', !!s.testMail);
 }
 document.getElementById('testModeSw').addEventListener('click',function(){
   var s=S.set();
@@ -4254,6 +4601,13 @@ document.getElementById('testModeSw').addEventListener('click',function(){
   Store.touch('set'); Store.flush();
   renderTestSw();
   toast(s.testMode ? '測試模式 開' : '測試模式 關');
+});
+document.getElementById('testMailSw').addEventListener('click',function(){
+  var s=S.set();
+  s.testMail=!s.testMail;
+  Store.touch('set'); Store.flush();
+  renderTestSw();
+  toast(s.testMail ? '測試寫信 開' : '測試寫信 關');
 });
 
 /* ===================== 相伴 ===================== */
@@ -4491,6 +4845,635 @@ function openCpLayer(){
   win.addEventListener('touchend',function(){ dragging=false; },{passive:true});
 })();
 
+/* ===================== 郵筒 ===================== */
+var mailTab='wait';
+var mailWritePic='';
+var mailPendings={};
+
+function mailArr(){ return S.mail().mails||[]; }
+function renderMail(){
+  var all=mailArr();
+  var waitList=[], doneList=[];
+  for(var i=0;i<all.length;i++){
+    if(all[i].status==='waiting') waitList.push(all[i]);
+    else doneList.push(all[i]);
+  }
+  document.getElementById('mailTabs').querySelectorAll('.mail-tab').forEach(function(t){
+    t.classList.toggle('on', t.getAttribute('data-mt')===mailTab);
+  });
+  var box=document.getElementById('mailList');
+  if(!box) return;
+  var list = (mailTab==='wait') ? waitList : doneList;
+  if(!list.length){
+    box.innerHTML='<div class="empty">'+(mailTab==='wait'?'沒有在路上信。':'還沒有往來的信。<br>寫一封，等祂回。')+'</div>';
+    return;
+  }
+  var sorted=list.slice().sort(function(a,b){ return (b.at||0)-(a.at||0); });
+  var h='';
+  for(var j=0;j<sorted.length;j++){
+    var it=sorted[j];
+    var toName = (it.to==='him') ? nameHim() : nameMe();
+    var ex = shortText(it.body||'',34);
+    var st = (it.status==='waiting') ? '已投递 · 等回信' : '已往返';
+    h+='<div class="mail-item" data-mid="'+it.id+'">'
+      +'<div class="mi-to">致 <b>'+esc(toName)+'</b></div>'
+      +'<div class="mi-ex">'+esc(ex)+'</div>'
+      +'<div class="mi-ft"><span>'+dayKey(it.at)+' '+hhmm(it.at)+'</span><span class="mi-st'+(it.status==='done'?' done':'')+'">'+st+'</span></div>'
+      +'</div>';
+  }
+  box.innerHTML=h;
+}
+document.getElementById('mailTabs').addEventListener('click',function(e){
+  var t=e.target.closest?e.target.closest('.mail-tab'):null;
+  if(!t) return;
+  mailTab=t.getAttribute('data-mt');
+  renderMail();
+});
+document.getElementById('mailList').addEventListener('click',function(e){
+  var it=e.target.closest?e.target.closest('[data-mid]'):null;
+  if(!it) return;
+  openMailView(it.getAttribute('data-mid'));
+});
+
+function openMailWrite(toWho){
+  mailWritePic='';
+  document.getElementById('mailWriteTo').textContent='致 '+((toWho==='him')?nameHim():nameMe());
+  document.getElementById('mailWriteBody').value='';
+  document.getElementById('mailWritePicBox').innerHTML='';
+  document.getElementById('mailWriteLayer').classList.add('on');
+  document.getElementById('mailWriteLayer').setAttribute('data-to',toWho);
+}
+document.getElementById('mailWriteClose').addEventListener('click',function(){
+  document.getElementById('mailWriteLayer').classList.remove('on');
+});
+document.getElementById('mailWritePicBtn').addEventListener('click',function(){
+  pickOneImage(function(dataUrl){
+    if(!dataUrl) return;
+    mailWritePic=dataUrl;
+    document.getElementById('mailWritePicBox').innerHTML='<div class="mail-pic-cell"><img src="'+dataUrl+'" alt=""><button class="x" id="mailWritePicX">×</button></div>';
+    document.getElementById('mailWritePicX').addEventListener('click',function(){
+      mailWritePic=''; document.getElementById('mailWritePicBox').innerHTML='';
+    });
+  });
+});
+document.getElementById('mailWriteSend').addEventListener('click',function(){
+  var body=String(document.getElementById('mailWriteBody').value||'').replace(/\s+$/,'');
+  if(!body){ toast('寫點什麼再投'); return; }
+  var toWho=document.getElementById('mailWriteLayer').getAttribute('data-to')||'him';
+  var now=Date.now();
+  var m={
+    id:uid('mail'),
+    from:'me', to:toWho,
+    body:body,
+    pic:mailWritePic||'',
+    at:now,
+    status:'waiting',
+    replyBody:'', replyPic:'', replyAt:0,
+    dueAt: now + mailDelayMs()
+  };
+  var arr=S.mail();
+  arr.mails.push(m);
+  Store.touch('mail'); Store.flush();
+  document.getElementById('mailWriteLayer').classList.remove('on');
+  renderMail();
+  toast('已投進郵筒');
+  armMail(m);
+});
+function mailDelayMs(){
+  var s=S.set();
+  if(s.testMail){ return (3+Math.random()*5)*1000; }
+  var a=Math.max(1,s.mailMin|0||5), b=Math.max(1,s.mailMax|0||8);
+  if(a>b){ var t=a; a=b; b=t; }
+  return (a+Math.random()*(b-a))*3600*1000;
+}
+function armMail(m){
+  clearTimeout(mailPendings[m.id]);
+  var left=(m.dueAt||Date.now())-Date.now(); if(left<0) left=0;
+  mailPendings[m.id]=setTimeout(function(){ resolveMail(m.id); }, left+80);
+}
+function resolveMail(id){
+  delete mailPendings[id];
+  var arr=S.mail(), m=null;
+  for(var i=0;i<arr.mails.length;i++){ if(arr.mails[i].id===id){ m=arr.mails[i]; break; } }
+  if(!m || m.status!=='waiting') return;
+  var reply={};
+  var rs=Math.random()*100, snapR=S.set().mailSnapRatio|0, picR=S.set().mailPicRatio|0;
+  var attach=null;
+  if(rs < snapR){ attach={kind:'snap'}; }
+  else if(rs < snapR + picR){ attach={kind:'pic'}; }
+  if(attach){
+    if(attach.kind==='pic'){
+      var pics=S.pics();
+      if(pics.length){ reply.pic=pics[Math.floor(Math.random()*pics.length)].data; }
+      else { reply.pic=buildSnapShot(); }
+    }else{
+      reply.pic=buildSnapShot();
+    }
+  }
+  reply.body=buildHimLetterText();
+  reply.at=Date.now();
+  m.replyBody=reply.body;
+  m.replyPic=reply.pic||'';
+  m.replyAt=reply.at;
+  m.status='done';
+  Store.touch('mail'); Store.flush();
+  renderMail();
+  toast('有信到了');
+  var ms=S.msgs();
+  ms.push({id:uid('m'),who:'him',kind:'act',text:'（'+nameHim()+' 寄來一封信）',at:Date.now()});
+  Store.touch('chat'); Store.flush();
+  renderFlow();
+}
+function buildHimLetterText(){
+  var cards=S.cards();
+  if(!cards.length) return '见字如面。';
+  var n=15+Math.floor(Math.random()*16);
+  if(n>30) n=30;
+  var picked=[];
+  for(var i=0;i<n;i++){
+    picked.push(cards[Math.floor(Math.random()*cards.length)].text);
+  }
+  var paras=[], cur=[];
+  var per=4+Math.floor(Math.random()*3);
+  for(var j=0;j<picked.length;j++){
+    cur.push(picked[j]);
+    if(cur.length>=per){ paras.push(cur.join('')); cur=[]; }
+  }
+  if(cur.length) paras.push(cur.join(''));
+  return paras.join('\n\n');
+}
+function buildSnapShot(){
+  var ms=S.msgs();
+  var list=[];
+  for(var i=ms.length-1;i>=0;i--){
+    if(ms[i].who==='me'||ms[i].who==='him'){ list.unshift(ms[i]); }
+    if(list.length>=5) break;
+  }
+  var W=560;
+  var pad=18, lineH=30, headH=60;
+  var lines=[];
+  for(var j=0;j<list.length;j++){
+    var m=list[j];
+    var who = (m.who==='him') ? nameHim() : nameMe();
+    var txt = m.text || (m.kind==='pic'?'［一張畫帖］':(m.title||''));
+    lines.push({side:(m.who==='him'?'right':'left'), text:who+'：'+txt, time:hhmm(m.at)});
+  }
+  var H=headH + lines.length*lineH + pad*2;
+  var c=document.createElement('canvas');
+  c.width=W; c.height=H;
+  var ctx=c.getContext('2d');
+  ctx.fillStyle='#efe1c6'; ctx.fillRect(0,0,W,H);
+  ctx.strokeStyle='rgba(156,74,50,.5)'; ctx.strokeRect(8,8,W-16,H-16);
+  ctx.fillStyle='#9c4a32';
+  ctx.font='13px Georgia,serif';
+  ctx.textAlign='center';
+  ctx.fillText('彼 岸 日 報 · 快 照', W/2, 30);
+  var y=headH;
+  for(var k=0;k<lines.length;k++){
+    var ln=lines[k];
+    ctx.font='14px serif';
+    if(ln.side==='right'){
+      ctx.fillStyle='#9c4a32';
+      ctx.textAlign='right';
+      ctx.fillText(ln.time, W-pad, y+2);
+      ctx.fillStyle='#3b2a18';
+      ctx.textAlign='left';
+      ctx.fillText(ln.text, pad, y+22);
+    }else{
+      ctx.fillStyle='rgba(59,42,24,.44)';
+      ctx.textAlign='left';
+      ctx.fillText(ln.time, pad, y+2);
+      ctx.fillStyle='#3b2a18';
+      ctx.textAlign='right';
+      ctx.fillText(ln.text, W-pad, y+22);
+    }
+    y+=lineH;
+  }
+  try{ return c.toDataURL('image/jpeg',0.82); }catch(e){ return ''; }
+}
+function maybeHimMail(){
+  if(document.visibilityState!=='visible') return;
+  var now=Date.now();
+  var m={
+    id:uid('mail'),
+    from:'him', to:'me',
+    body:buildHimLetterText(),
+    pic:'',
+    at:now,
+    status:'waiting',
+    replyBody:'', replyPic:'', replyAt:0,
+    dueAt: now + mailDelayMs()
+  };
+  var rs=Math.random()*100, snapR=S.set().mailSnapRatio|0, picR=S.set().mailPicRatio|0;
+  if(rs < snapR){ m.pic=buildSnapShot(); }
+  else if(rs < snapR + picR){
+    var pics=S.pics();
+    if(pics.length){ m.pic=pics[Math.floor(Math.random()*pics.length)].data; }
+  }
+  var arr=S.mail();
+  arr.mails.push(m);
+  Store.touch('mail'); Store.flush();
+  renderMail();
+  toast('祂 寄來了一封信');
+  var ms=S.msgs();
+  ms.push({id:uid('m'),who:'him',kind:'act',text:'（'+nameHim()+' 寄來一封信）',at:Date.now()});
+  Store.touch('chat'); Store.flush();
+  renderFlow();
+}
+document.getElementById('mailWriteBtn').addEventListener('click',function(){
+  openMailWrite('him');
+});
+document.getElementById('himWriteMailBtn').addEventListener('click',function(){
+  maybeHimMail();
+  toast('祂 投了一封信');
+});
+
+function openMailView(id){
+  var arr=S.mail(), m=null;
+  for(var i=0;i<arr.mails.length;i++){ if(arr.mails[i].id===id){ m=arr.mails[i]; break; } }
+  if(!m) return;
+  var box=document.getElementById('mailViewBody');
+  var h='';
+  var toName = (m.from==='me') ? nameHim() : nameMe();
+  var signName = (m.from==='me') ? nameMe() : nameHim();
+  h+='<div class="letter">';
+  h+='<div class="lt-to">'+esc(toName)+'：</div>';
+  h+='<div class="lt-body">'+esc(m.body||'')+'</div>';
+  if(m.pic){ h+='<div class="lt-pic"><img src="'+m.pic+'" data-mimg="1" alt=""></div>'; }
+  h+='<div class="lt-sign">'+esc(signName)+'</div>';
+  h+='<div class="lt-date">'+mingGuoDate(m.at)+'</div>';
+  h+='</div>';
+  if(m.status==='done' && m.replyBody){
+    var toName2 = (m.to==='him') ? nameHim() : nameMe();
+    var signName2 = (m.to==='him') ? nameHim() : nameMe();
+    h+='<div class="letter">';
+    h+='<div class="lt-to">'+esc(toName2)+'：</div>';
+    h+='<div class="lt-body">'+esc(m.replyBody||'')+'</div>';
+    if(m.replyPic){ h+='<div class="lt-pic"><img src="'+m.replyPic+'" data-mimg="1" alt=""></div>'; }
+    h+='<div class="lt-sign">'+esc(signName2)+'</div>';
+    h+='<div class="lt-date">'+mingGuoDate(m.replyAt||m.at)+'</div>';
+    h+='</div>';
+  }else if(m.status==='waiting'){
+    h+='<div class="empty" style="padding:20px 0">信在路上，還沒到。</div>';
+  }
+  box.innerHTML=h;
+  document.getElementById('mailViewLayer').classList.add('on');
+}
+document.getElementById('mailViewClose').addEventListener('click',function(){
+  document.getElementById('mailViewLayer').classList.remove('on');
+});
+document.getElementById('mailViewBody').addEventListener('click',function(e){
+  if(e.target.tagName==='IMG' && e.target.getAttribute('data-mimg')){ openImgView(e.target.src); }
+});
+function rearmMails(){
+  var arr=mailArr();
+  for(var i=0;i<arr.length;i++){
+    if(arr[i].status==='waiting'){ armMail(arr[i]); }
+  }
+}
+
+/* ===================== 潮汐 / 星辰 ===================== */
+var tideTab='tide';
+var calYM={ y:new Date().getFullYear(), m:new Date().getMonth() };
+
+function periodList(){ return S.tides().periods||[]; }
+function eventList(){ return S.tides().events||[]; }
+
+function periodDatesSet(){
+  var set={};
+  var list=periodList();
+  for(var i=0;i<list.length;i++){
+    var p=list[i];
+    var cur=new Date(p.start+'T00:00:00');
+    var end=new Date(p.end+'T00:00:00');
+    if(isNaN(cur.getTime())) continue;
+    if(isNaN(end.getTime())) end=new Date(cur.getTime());
+    while(cur.getTime()<=end.getTime()){
+      set[dayKey(cur.getTime())]=1;
+      cur.setDate(cur.getDate()+1);
+    }
+  }
+  return set;
+}
+function predictDatesSet(){
+  var set={};
+  var list=periodList();
+  if(list.length<2) return set;
+  var starts=[];
+  for(var i=0;i<list.length;i++){ starts.push(list[i].start); }
+  starts.sort();
+  var last=starts[starts.length-1];
+  var recent=starts.slice(-4);
+  var gaps=[];
+  for(var j=1;j<recent.length;j++){
+    var a=new Date(recent[j-1]+'T00:00:00');
+    var b=new Date(recent[j]+'T00:00:00');
+    var diff=Math.round((b.getTime()-a.getTime())/86400000);
+    if(diff>0) gaps.push(diff);
+  }
+  if(!gaps.length) return set;
+  var avg=Math.round(gaps.reduce(function(x,y){return x+y;},0)/gaps.length);
+  var lastD=new Date(last+'T00:00:00');
+  if(isNaN(lastD.getTime())) return set;
+  var next=new Date(lastD.getTime()+avg*86400000);
+  var days=5;
+  for(var k=0;k<days;k++){
+    set[dayKey(next.getTime())]=1;
+    next.setDate(next.getDate()+1);
+  }
+  return set;
+}
+function eventDatesThisMonth(y,m){
+  var set={};
+  var list=eventList();
+  for(var i=0;i<list.length;i++){
+    var ev=list[i];
+    var d=new Date(ev.date+'T00:00:00');
+    if(isNaN(d.getTime())) continue;
+    if(ev.repeat==='year'){
+      if(d.getMonth()===m){ set[y+'-'+pad2(m+1)+'-'+pad2(d.getDate())]=1; }
+    }else if(ev.repeat==='month'){
+      set[y+'-'+pad2(m+1)+'-'+pad2(d.getDate())]=1;
+    }else if(ev.repeat==='week'){
+      var base=new Date(y,m,1);
+      var cur=new Date(base.getTime());
+      while(cur.getMonth()===m){
+        if(cur.getDay()===d.getDay()){ set[dayKey(cur.getTime())]=1; }
+        cur.setDate(cur.getDate()+1);
+      }
+    }else{
+      if(d.getFullYear()===y && d.getMonth()===m){ set[dayKey(d.getTime())]=1; }
+    }
+  }
+  return set;
+}
+function renderCalendar(){
+  var grid=document.getElementById('calGrid');
+  if(!grid) return;
+  var y=calYM.y, m=calYM.m;
+  document.getElementById('calTitle').textContent=y+' 年 '+(m+1)+' 月';
+  var periodSet=periodDatesSet();
+  var predictSet=predictDatesSet();
+  var evSet=eventDatesThisMonth(y,m);
+  var first=new Date(y,m,1);
+  var startWd=first.getDay();
+  var daysInMonth=new Date(y,m+1,0).getDate();
+  var wd=['日','一','二','三','四','五','六'];
+  var h='';
+  for(var w=0;w<7;w++){ h+='<div class="cal-wd">'+wd[w]+'</div>'; }
+  for(var e=0;e<startWd;e++){ h+='<div class="cal-cell empty"></div>'; }
+  var todayK=dayKey(Date.now());
+  for(var d=1;d<=daysInMonth;d++){
+    var dk=y+'-'+pad2(m+1)+'-'+pad2(d);
+    var cls='cal-cell';
+    if(dk===todayK) cls+=' today';
+    if(periodSet[dk]) cls+=' period';
+    else if(predictSet[dk]) cls+=' predict';
+    var dot = evSet[dk] ? '<span class="cal-dot"></span>' : '';
+    h+='<div class="'+cls+'">'+d+dot+'</div>';
+  }
+  grid.innerHTML=h;
+}
+document.getElementById('calPrev').addEventListener('click',function(){
+  calYM.m--; if(calYM.m<0){ calYM.m=11; calYM.y--; }
+  renderCalendar();
+});
+document.getElementById('calNext').addEventListener('click',function(){
+  calYM.m++; if(calYM.m>11){ calYM.m=0; calYM.y++; }
+  renderCalendar();
+});
+function renderPeriodList(){
+  var box=document.getElementById('periodList');
+  var list=periodList();
+  if(!box) return;
+  if(!list.length){
+    box.innerHTML='<div class="empty">還沒有經期記錄。</div>';
+    return;
+  }
+  var sorted=list.slice().sort(function(a,b){ return a.start<b.start?1:(a.start>b.start?-1:0); });
+  var h='';
+  for(var i=0;i<sorted.length;i++){
+    var p=sorted[i];
+    var sd=new Date(p.start+'T00:00:00');
+    var ed=new Date(p.end+'T00:00:00');
+    var days=1;
+    if(!isNaN(sd.getTime()) && !isNaN(ed.getTime())) days=Math.round((ed.getTime()-sd.getTime())/86400000)+1;
+    if(days<1) days=1;
+    h+='<div class="tide-item">';
+    h+='<div class="ti-top"><span class="ti-name">'+esc(p.start)+' ~ '+esc(p.end)+'</span><span class="ti-info">共 '+days+' 天</span><span class="ti-del" data-pdel="'+esc(p.start)+'">刪</span></div>';
+    var dlist=p.days||[];
+    if(dlist.length){
+      h+='<div class="ti-days">';
+      for(var j=0;j<dlist.length;j++){
+        var dd=dlist[j];
+        var tags=[];
+        if(dd.pain) tags.push('痛：'+esc(dd.pain));
+        if(dd.mood) tags.push('心：'+esc(dd.mood));
+        if(dd.flow) tags.push('量：'+esc(dd.flow));
+        h+='<div class="tide-day"><span class="td-date">'+esc(dd.date)+'</span><span class="td-tags">'+(tags.length?tags.map(function(x){return '<span class="td-tag">'+x+'</span>';}).join(''):'')+'</span>'+(dd.note?'<span class="td-note">'+esc(dd.note)+'</span>':'')+'</div>';
+      }
+      h+='</div>';
+    }
+    h+='</div>';
+  }
+  box.innerHTML=h;
+}
+document.getElementById('periodList').addEventListener('click',function(e){
+  var s=e.target.getAttribute&&e.target.getAttribute('data-pdel');
+  if(!s) return;
+  var list=periodList();
+  for(var i=0;i<list.length;i++){
+    if(list[i].start===s){ list.splice(i,1); break; }
+  }
+  Store.touch('tides'); Store.flush();
+  renderPeriodList(); renderCalendar();
+  toast('已刪除');
+});
+function renderEventList(){
+  var box=document.getElementById('eventList');
+  var list=eventList();
+  if(!box) return;
+  if(!list.length){
+    box.innerHTML='<div class="empty">還沒有重要日。</div>';
+    return;
+  }
+  var sorted=list.slice().sort(function(a,b){ return a.date<b.date?1:(a.date>b.date?-1:0); });
+  var h='';
+  var repeatTxt={none:'不重複',year:'每年',month:'每月',week:'每週'};
+  for(var i=0;i<sorted.length;i++){
+    var ev=sorted[i];
+    h+='<div class="tide-item"><div class="ti-top"><span class="ti-name">'+esc(ev.name||'')+'</span><span class="ti-info">'+esc(ev.date)+' · '+esc(repeatTxt[ev.repeat]||'')+'</span><span class="ti-del" data-edel="'+ev.id+'">刪</span></div></div>';
+  }
+  box.innerHTML=h;
+}
+document.getElementById('eventList').addEventListener('click',function(e){
+  var id=e.target.getAttribute&&e.target.getAttribute('data-edel');
+  if(!id) return;
+  var list=eventList();
+  for(var i=0;i<list.length;i++){
+    if(list[i].id===id){ list.splice(i,1); break; }
+  }
+  Store.touch('tides'); Store.flush();
+  renderEventList(); renderCalendar();
+  toast('已刪除');
+});
+document.getElementById('tideTabs').addEventListener('click',function(e){
+  var t=e.target.closest?e.target.closest('.tide-tab'):null;
+  if(!t) return;
+  tideTab=t.getAttribute('data-tt');
+  document.querySelectorAll('#tideTabs .tide-tab').forEach(function(x){
+    x.classList.toggle('on', x.getAttribute('data-tt')===tideTab);
+  });
+  document.getElementById('tidePaneTide').style.display=(tideTab==='tide')?'':'none';
+  document.getElementById('tidePaneStar').style.display=(tideTab==='star')?'':'none';
+  if(tideTab==='tide'){ renderCalendar(); renderPeriodList(); }
+  else{ renderEventList(); }
+});
+
+var periodEditingStart='';
+function openPeriodDialog(start){
+  periodEditingStart=start||'';
+  var s=document.getElementById('periodStart'), e=document.getElementById('periodEnd');
+  var today=dayKey(Date.now());
+  s.value=start||today;
+  e.value=start||today;
+  renderPeriodDaysBox();
+  document.getElementById('periodDialog').classList.add('on');
+}
+function renderPeriodDaysBox(){
+  var box=document.getElementById('periodDaysBox');
+  var sVal=document.getElementById('periodStart').value;
+  var eVal=document.getElementById('periodEnd').value;
+  if(!sVal||!eVal){ box.innerHTML=''; return; }
+  var sd=new Date(sVal+'T00:00:00'), ed=new Date(eVal+'T00:00:00');
+  if(isNaN(sd.getTime())||isNaN(ed.getTime())){ box.innerHTML=''; return; }
+  if(sd.getTime()>ed.getTime()){ box.innerHTML='<div class="empty" style="padding:10px 0">結束日早於開始日。</div>'; return; }
+  var exist={};
+  var list=periodList();
+  for(var i=0;i<list.length;i++){
+    if(list[i].start===sVal && list[i].days){
+      for(var j=0;j<list[i].days.length;j++) exist[list[i].days[j].date]=list[i].days[j];
+    }
+  }
+  var h='';
+  var cur=new Date(sd.getTime());
+  while(cur.getTime()<=ed.getTime()){
+    var dk=dayKey(cur.getTime());
+    var rec=exist[dk]||{};
+    h+='<div class="tide-chips-label">'+dk+'</div>';
+    h+='<div class="tide-chips" data-day="'+dk+'">';
+    var pains=['无','轻微','中等','严重'];
+    h+='<span style="font-size:11px;color:var(--ink3);width:100%">痛感</span>';
+    for(var p=0;p<pains.length;p++){
+      h+='<span class="tc'+(rec.pain===pains[p]?' on':'')+'" data-pain="'+pains[p]+'">'+pains[p]+'</span>';
+    }
+    var moods=['平静','烦躁','低落','开心'];
+    h+='<span style="font-size:11px;color:var(--ink3);width:100%;margin-top:6px">心情</span>';
+    for(var m2=0;m2<moods.length;m2++){
+      h+='<span class="tc'+(rec.mood===moods[m2]?' on':'')+'" data-mood="'+moods[m2]+'">'+moods[m2]+'</span>';
+    }
+    var flows=['少','中','多'];
+    h+='<span style="font-size:11px;color:var(--ink3);width:100%;margin-top:6px">血量</span>';
+    for(var f=0;f<flows.length;f++){
+      h+='<span class="tc'+(rec.flow===flows[f]?' on':'')+'" data-flow="'+flows[f]+'">'+flows[f]+'</span>';
+    }
+    h+='<input class="tide-note" data-note="'+dk+'" type="text" placeholder="備註" value="'+esc(rec.note||'')+'" style="margin-top:6px;border:1px solid var(--rule);padding:5px;width:100%">';
+    h+='</div>';
+    cur.setDate(cur.getDate()+1);
+  }
+  box.innerHTML=h;
+}
+document.getElementById('periodStart').addEventListener('change',renderPeriodDaysBox);
+document.getElementById('periodEnd').addEventListener('change',renderPeriodDaysBox);
+document.getElementById('periodDaysBox').addEventListener('click',function(e){
+  var c=e.target.closest?e.target.closest('.tc'):null;
+  if(!c) return;
+  var wrap=c.parentNode;
+  var key=c.getAttribute('data-pain')?'pain':(c.getAttribute('data-mood')?'mood':'flow');
+  wrap.querySelectorAll('[data-'+key+']').forEach(function(x){ x.classList.remove('on'); });
+  c.classList.add('on');
+});
+document.getElementById('periodDialogCancel').addEventListener('click',function(){
+  document.getElementById('periodDialog').classList.remove('on');
+});
+document.getElementById('periodDialogClose').addEventListener('click',function(){
+  document.getElementById('periodDialog').classList.remove('on');
+});
+document.getElementById('periodDialogOk').addEventListener('click',function(){
+  var sVal=document.getElementById('periodStart').value;
+  var eVal=document.getElementById('periodEnd').value;
+  if(!sVal||!eVal){ toast('選開始和結束'); return; }
+  if(sVal>eVal){ toast('結束日不能早於開始日'); return; }
+  var days=[];
+  var boxes=document.querySelectorAll('#periodDaysBox .tide-chips');
+  for(var i=0;i<boxes.length;i++){
+    var dk=boxes[i].getAttribute('data-day');
+    var rec={date:dk};
+    var pain=boxes[i].querySelector('[data-pain].on'); if(pain) rec.pain=pain.getAttribute('data-pain');
+    var mood=boxes[i].querySelector('[data-mood].on'); if(mood) rec.mood=mood.getAttribute('data-mood');
+    var flow=boxes[i].querySelector('[data-flow].on'); if(flow) rec.flow=flow.getAttribute('data-flow');
+    var note=boxes[i].querySelector('[data-note]'); if(note && note.value.trim()) rec.note=note.value.trim();
+    days.push(rec);
+  }
+  var list=periodList();
+  var found=false;
+  for(var j=0;j<list.length;j++){
+    if(list[j].start===sVal){ list[j].end=eVal; list[j].days=days; found=true; break; }
+  }
+  if(!found){ list.push({start:sVal, end:eVal, days:days}); }
+  Store.touch('tides'); Store.flush();
+  document.getElementById('periodDialog').classList.remove('on');
+  renderPeriodList(); renderCalendar();
+  toast('已存入');
+});
+document.getElementById('periodAddBtn').addEventListener('click',function(){ openPeriodDialog(''); });
+
+var eventEditingId='';
+function openEventDialog(id){
+  eventEditingId=id||'';
+  var ev=null;
+  if(id){
+    var list=eventList();
+    for(var i=0;i<list.length;i++){ if(list[i].id===id){ ev=list[i]; break; } }
+  }
+  document.getElementById('eventName').value=ev?ev.name:'';
+  document.getElementById('eventDate').value=ev?ev.date:dayKey(Date.now());
+  document.getElementById('eventRepeat').value=ev?ev.repeat:'none';
+  document.getElementById('eventDialog').classList.add('on');
+}
+document.getElementById('eventDialogCancel').addEventListener('click',function(){
+  document.getElementById('eventDialog').classList.remove('on');
+});
+document.getElementById('eventDialogClose').addEventListener('click',function(){
+  document.getElementById('eventDialog').classList.remove('on');
+});
+document.getElementById('eventDialogOk').addEventListener('click',function(){
+  var name=String(document.getElementById('eventName').value||'').trim();
+  var date=document.getElementById('eventDate').value;
+  var repeat=document.getElementById('eventRepeat').value;
+  if(!name){ toast('寫個名稱'); return; }
+  if(!date){ toast('選個日期'); return; }
+  var list=eventList();
+  if(eventEditingId){
+    for(var i=0;i<list.length;i++){
+      if(list[i].id===eventEditingId){ list[i].name=name; list[i].date=date; list[i].repeat=repeat; break; }
+    }
+  }else{
+    list.push({id:uid('ev'), name:name, date:date, repeat:repeat});
+  }
+  Store.touch('tides'); Store.flush();
+  document.getElementById('eventDialog').classList.remove('on');
+  renderEventList(); renderCalendar();
+  toast('已存入');
+});
+document.getElementById('eventAddBtn').addEventListener('click',function(){ openEventDialog(''); });
+
+function renderTides(){
+  renderCalendar();
+  renderPeriodList();
+  renderEventList();
+}
+
 /* ===================== 底部導覽 ===================== */
 var SECS=['paper','secMail','secSupp','secClip','secSpecial'];
 function switchSec(id){
@@ -4500,6 +5483,8 @@ function switchSec(id){
   });
   if(id==='paper'){ renderMasthead(); renderFlow(); toBottom(false); updateListenBar(); }
   if(id==='secClip'){ renderClips(); }
+  if(id==='secMail'){ renderMail(); }
+  if(id==='secSpecial'){ renderTides(); }
 }
 Array.prototype.forEach.call(document.querySelectorAll('#navbar .nb'),function(b){
   b.addEventListener('click',function(){ switchSec(b.getAttribute('data-sec')); });
@@ -4604,16 +5589,17 @@ cover.addEventListener('click',enter);
 /* ===================== 落盘 ===================== */
 document.addEventListener('visibilitychange',function(){
   if(document.visibilityState==='hidden'){ Store.flush(); }
-  else { renderMasthead(); rearmAll(); }
+  else { renderMasthead(); rearmAll(); rearmMails(); }
 });
 window.addEventListener('pagehide',function(){ Store.flush(); });
 
 /* ===================== 启动 ===================== */
-bindSet(); bindProfile(); bindRatio(); bindCallHang();
+bindSet(); bindProfile(); bindRatio(); bindCallHang(); bindMailSet();
 
 Store.init().then(function(){
   MP.mode = S.set().recMode || 'seq';
   rearmAll();
+  rearmMails();
   applyBackground();
   preloadPics();
 
@@ -4638,25 +5624,29 @@ Store.init().then(function(){
   }
 
   renderCoverNames();
-  renderMasthead(); renderFlow(); renderSet(); renderCards(); renderPics(); renderRipples(); renderRecords(); renderProfile(); renderBackground(); renderRatio(); renderCallHang();
+  renderMasthead(); renderFlow(); renderSet(); renderCards(); renderPics(); renderRipples(); renderRecords(); renderProfile(); renderBackground(); renderRatio(); renderCallHang(); renderMailSet();
   renderCompanion();
   renderTestSw();
   renderArchList();
   renderCalls();
   renderCompanionLog();
   renderClips();
+  renderMail();
+  renderTides();
   mpRenderMode();
   mpRenderPlay();
 }).catch(function(e){
   alert('存储出错：'+(e&&e.name)+' / '+(e&&e.message));
   renderCoverNames();
-  renderMasthead(); renderFlow(); renderSet(); renderCards(); renderPics(); renderRipples(); renderRecords(); renderProfile(); renderBackground(); renderRatio(); renderCallHang();
+  renderMasthead(); renderFlow(); renderSet(); renderCards(); renderPics(); renderRipples(); renderRecords(); renderProfile(); renderBackground(); renderRatio(); renderCallHang(); renderMailSet();
   renderCompanion();
   renderTestSw();
   renderArchList();
   renderCalls();
   renderCompanionLog();
   renderClips();
+  renderMail();
+  renderTides();
 });
 })();
 </script>
