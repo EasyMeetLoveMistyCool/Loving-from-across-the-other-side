@@ -22,7 +22,8 @@
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;overflow:hidden;overscroll-behavior:none}
 body{background:var(--paper);color:var(--ink);font-family:var(--serif);
-  -webkit-font-smoothing:antialiased;user-select:none;-webkit-user-select:none}
+  -webkit-font-smoothing:antialiased;user-select:none;-webkit-user-select:none;
+  background-size:cover;background-position:center;background-repeat:no-repeat}
 button{font-family:inherit;color:inherit;background:none;border:0;cursor:pointer}
 input,textarea{font-family:inherit;color:inherit;background:none;border:0;outline:0;-webkit-appearance:none}
 img{max-width:100%;display:block}
@@ -130,8 +131,7 @@ img{max-width:100%;display:block}
   height:calc(var(--navh) + env(safe-area-inset-bottom));
   padding-bottom:env(safe-area-inset-bottom);
   display:flex;align-items:stretch;
-  border-top:3px double var(--ink);background-color:var(--paper);
-  background-size:cover;background-position:center;background-repeat:no-repeat}
+  border-top:3px double var(--ink);background:transparent}
 #navbar .nb{flex:1 1 0;display:flex;align-items:center;justify-content:center;
   font-size:13px;letter-spacing:.14em;color:var(--ink3);position:relative}
 #navbar .nb+.nb::before{content:"";position:absolute;left:0;top:22%;bottom:22%;width:1px;background:var(--rule2)}
@@ -164,7 +164,7 @@ img{max-width:100%;display:block}
 .mh-sub{margin-top:3px;font-size:10px;letter-spacing:.12em;color:var(--ink3);font-family:var(--geo)}
 
 #flow{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;
-  padding:14px 16px 20px;overscroll-behavior:contain}
+  padding:14px 16px 20px;overscroll-behavior:contain;background:transparent}
 .item{margin:0 0 20px}
 .item.group{margin-bottom:12px}
 .item .col{display:flex;align-items:center;gap:7px;font-size:11px;letter-spacing:.18em;color:var(--ink2)}
@@ -188,6 +188,14 @@ img{max-width:100%;display:block}
 .item.wait .body{color:var(--ink3);font-size:14px;letter-spacing:.1em}
 .blink{animation:blink 1.1s steps(1) infinite}
 @keyframes blink{0%,50%{opacity:1}51%,100%{opacity:.15}}
+
+/* 动作消息 */
+.item.act .col .nm{color:var(--ink3)}
+.item.act .body{text-align:center;font-style:italic;color:var(--ink2);font-size:14px;
+  letter-spacing:.08em;padding:8px 0;margin-top:4px}
+.item.act .body .sep{display:block;font-style:normal;color:var(--rule3);font-size:12px;
+  letter-spacing:.4em;margin-right:-.4em}
+
 .extra{margin:16px 0 20px;border:2px solid var(--red);padding:11px 13px;text-align:center}
 .extra .t{font-size:12px;letter-spacing:.5em;margin-right:-.5em;color:var(--red)}
 .extra .m{margin-top:7px;font-size:13px;line-height:1.8;color:var(--ink2)}
@@ -219,7 +227,7 @@ img{max-width:100%;display:block}
 .stampbtn[disabled]{opacity:.35}
 
 .opbar{flex:0 0 auto;display:flex;gap:0;overflow-x:auto;-webkit-overflow-scrolling:touch;
-  border-bottom:1px solid var(--rule2);
+  border-bottom:1px solid var(--rule2);background:transparent;
   max-height:0;opacity:0;overflow-y:hidden;
   transition:max-height .28s ease,opacity .22s ease}
 .opbar.on{max-height:80px;opacity:1}
@@ -233,11 +241,12 @@ img{max-width:100%;display:block}
 .opbar .op:active .gi svg{stroke:var(--red)}
 
 /* ================= 子页 ================= */
-#cardsPage,#setPage,#laiGaoPage,#picsPage,#actsPage,#musicPage{position:fixed;inset:0;z-index:250;
+#cardsPage,#setPage,#laiGaoPage,#picsPage,#actsPage,#musicPage,#ripplesPage,#ripplesMinePage,#ripplesHersPage{position:fixed;inset:0;z-index:250;
   height:100vh;height:100dvh;background-color:var(--paper);
   background-size:cover;background-position:center;background-repeat:no-repeat;
   display:none;flex-direction:column}
-#cardsPage.on,#setPage.on,#laiGaoPage.on,#picsPage.on,#actsPage.on,#musicPage.on{display:flex}
+#cardsPage.on,#setPage.on,#laiGaoPage.on,#picsPage.on,#actsPage.on,#musicPage.on,
+#ripplesPage.on,#ripplesMinePage.on,#ripplesHersPage.on{display:flex}
 .sheet-hd{flex:0 0 auto;padding:calc(env(safe-area-inset-top) + 12px) 16px 10px;
   border-bottom:3px double var(--ink);text-align:center;position:relative}
 .sheet-hd .back{position:absolute;left:12px;top:calc(env(safe-area-inset-top) + 12px);
@@ -369,7 +378,6 @@ img{max-width:100%;display:block}
 .bg-mask-row .val{flex:0 0 auto;font-size:12px;color:var(--ink3);font-family:var(--geo);
   min-width:34px;text-align:right}
 
-/* 比例：档位 + 输入 */
 .ratio-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
 .ratio-row .rb{font-size:12px;letter-spacing:.1em;color:var(--ink2);
   border:1px solid var(--rule);padding:6px 10px;border-radius:2px;background:none}
@@ -381,7 +389,6 @@ img{max-width:100%;display:block}
   border-radius:2px;padding:6px 4px;font-family:var(--geo)}
 .ratio-num .u{font-size:11px;color:var(--ink3)}
 
-/* 畫帖网格 */
 .pic-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .pic-cell{position:relative;aspect-ratio:1/1;border:1px solid var(--rule);
   outline:1px solid var(--rule2);outline-offset:2px;background:rgba(255,250,238,.35);
@@ -399,11 +406,10 @@ img{max-width:100%;display:block}
 .add-tile{aspect-ratio:1/1;border:2px dashed var(--rule);outline:1px solid var(--rule2);
   outline-offset:2px;display:flex;flex-direction:column;align-items:center;justify-content:center;
   gap:6px;color:var(--ink3);font-size:12px;letter-spacing:.14em;cursor:pointer;
-  background:rgba(255,250,238,.2);grid-column:span 1}
+  background:rgba(255,250,238,.2)}
 .add-tile:active{background:rgba(59,42,24,.06)}
 .add-tile .plus{font-size:24px;line-height:1;color:var(--ink2)}
 
-/* 预览层 / 进度层 */
 .mask-layer{position:fixed;inset:0;z-index:400;display:none;
   align-items:center;justify-content:center;background:rgba(20,14,8,.55)}
 .mask-layer.on{display:flex}
@@ -434,14 +440,12 @@ img{max-width:100%;display:block}
 .progress-bar .fill{position:absolute;left:0;top:0;bottom:0;width:0;
   background:var(--red);transition:width .2s ease}
 
-/* 大图查看 */
 .img-view{position:fixed;inset:0;z-index:500;display:none;align-items:center;justify-content:center;
   background:rgba(20,14,8,.85)}
 .img-view.on{display:flex}
 .img-view img{max-width:92vw;max-height:82vh;width:auto;height:auto;
   border:1px solid rgba(255,250,238,.4)}
 
-/* 畫帖选择器（操作栏点畫帖） */
 .pick-layer{position:fixed;inset:0;z-index:420;display:none;
   align-items:center;justify-content:center;background:rgba(20,14,8,.55)}
 .pick-layer.on{display:flex}
@@ -453,6 +457,31 @@ img{max-width:100%;display:block}
 .pick-hd .x{position:absolute;right:8px;top:50%;transform:translateY(-50%);
   font-size:18px;color:var(--ink3);padding:4px 8px;border:0;background:none}
 .pick-bd{flex:1 1 auto;min-height:0;overflow-y:auto;padding:12px}
+
+/* 涟漪选择器 */
+.rip-layer{position:fixed;inset:0;z-index:420;display:none;
+  align-items:center;justify-content:center;background:rgba(20,14,8,.55)}
+.rip-layer.on{display:flex}
+.rip-box{width:86vw;max-width:420px;max-height:76vh;background:var(--paper);
+  border:2px solid var(--ink);display:flex;flex-direction:column;
+  box-shadow:0 8px 30px rgba(20,14,8,.35)}
+.rip-hd{padding:12px 14px;border-bottom:1px solid var(--rule2);
+  font-size:12px;letter-spacing:.24em;color:var(--red);text-align:center;position:relative}
+.rip-hd .x{position:absolute;right:8px;top:50%;transform:translateY(-50%);
+  font-size:18px;color:var(--ink3);padding:4px 8px;border:0;background:none}
+.rip-bd{flex:1 1 auto;min-height:0;overflow-y:auto;padding:6px 0}
+.rip-item{padding:12px 16px;font-size:15px;letter-spacing:.06em;color:var(--ink);
+  border-bottom:1px solid var(--rule2);cursor:pointer}
+.rip-item:active{background:rgba(59,42,24,.06);color:var(--red)}
+.rip-item:last-child{border-bottom:0}
+
+/* 涟漪页面 tab */
+.rip-tabs{display:flex;border-bottom:1px solid var(--rule);margin-bottom:12px}
+.rip-tab{flex:1 1 0;text-align:center;font-size:13px;letter-spacing:.2em;
+  padding:10px 0;color:var(--ink3);position:relative;cursor:pointer}
+.rip-tab.on{color:var(--red)}
+.rip-tab.on::after{content:"";position:absolute;left:20%;right:20%;bottom:-1px;
+  height:2px;background:var(--red)}
 
 #toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom) + 24px);
   transform:translateX(-50%) translateY(14px);z-index:600;opacity:0;pointer-events:none;
@@ -612,9 +641,10 @@ img{max-width:100%;display:block}
         <span class="en">PICS · <i id="lgPicsN">0</i></span>
         <span class="pg">二</span>
       </button>
-      <button class="tocrow" data-into="actsPage">
-        <span class="nm">往 來 簿</span><span class="dash"></span>
-        <span class="en">MOMENTS</span><span class="pg">三</span>
+      <button class="tocrow" data-into="ripplesPage">
+        <span class="nm">漣 漪</span><span class="dash"></span>
+        <span class="en">RIPPLES · <i id="lgRipN">0</i></span>
+        <span class="pg">三</span>
       </button>
       <button class="tocrow" data-into="musicPage">
         <span class="nm">唱 片 架</span><span class="dash"></span>
@@ -685,6 +715,62 @@ img{max-width:100%;display:block}
   </div>
 </div>
 
+<div id="ripplesPage">
+  <div class="sheet-hd">
+    <button class="back" id="ripplesBack">‹ 來 稿</button>
+    <h2>漣 漪</h2>
+    <div class="sub">RIPPLES</div>
+  </div>
+  <div class="sheet-bd">
+    <div class="rip-tabs" id="ripTabs">
+      <button class="rip-tab on" data-side="mine">此 岸</button>
+      <button class="rip-tab" data-side="hers">彼 岸</button>
+    </div>
+
+    <div id="ripPaneMine">
+      <div class="compose">
+        <textarea id="ripMineIn" rows="3" placeholder="一行一个动作…&#10;例：拍了拍祂的头"></textarea>
+        <div class="row">
+          <span class="cnt" id="ripMineCnt">共 0 个</span>
+          <button class="add" id="ripMineAdd">存 入</button>
+        </div>
+      </div>
+      <div class="tools">
+        <button class="tl" id="ripMineDedup">剔重</button>
+        <button class="tl" id="ripMineImport">收錄</button>
+        <button class="tl" id="ripMineExport">寄錄</button>
+        <button class="tl danger" id="ripMineBulk">銷燬</button>
+      </div>
+      <div class="cntbar" id="ripMineCntBar">共 0 个</div>
+      <div id="ripMineList"></div>
+    </div>
+
+    <div id="ripPaneHers" style="display:none">
+      <div class="compose">
+        <textarea id="ripHersIn" rows="3" placeholder="一行一个动作…&#10;例：摸了摸你的头"></textarea>
+        <div class="row">
+          <span class="cnt" id="ripHersCnt">共 0 个</span>
+          <button class="add" id="ripHersAdd">存 入</button>
+        </div>
+      </div>
+      <div class="tools">
+        <button class="tl" id="ripHersDedup">剔重</button>
+        <button class="tl" id="ripHersImport">收錄</button>
+        <button class="tl" id="ripHersExport">寄錄</button>
+        <button class="tl danger" id="ripHersBulk">銷燬</button>
+      </div>
+      <div class="cntbar" id="ripHersCntBar">共 0 个</div>
+      <div id="ripHersList"></div>
+    </div>
+  </div>
+  <div class="bulkbar" id="ripBulkBar">
+    <label class="selall"><input type="checkbox" id="ripSelAll"><span>全選</span></label>
+    <span class="n" id="ripBulkN">已選 0 个</span>
+    <button class="do" id="ripBulkDo">銷 燬</button>
+    <button class="cx" id="ripBulkCancel">罷手</button>
+  </div>
+</div>
+
 <div id="actsPage"><div class="sheet-hd"><button class="back" data-back="1">‹ 來 稿</button><h2>往 來 簿</h2><div class="sub">MOMENTS</div></div>
   <div class="sheet-bd"><div class="empty">這間屋子還沒開張。</div></div></div>
 <div id="musicPage"><div class="sheet-hd"><button class="back" data-back="1">‹ 來 稿</button><h2>唱 片 架</h2><div class="sub">RECORDS</div></div>
@@ -752,7 +838,7 @@ img{max-width:100%;display:block}
     <div class="blk">
       <h3>祂 發 圖</h3>
       <p class="tip">祂回复时，有多大几率用一张畫帖代替文字。</p>
-      <div class="ratio-row" id="ratioRow">
+      <div class="ratio-row" id="ratioRowPic">
         <button class="rb" data-v="0">从不用</button>
         <button class="rb" data-v="10">偶尔</button>
         <button class="rb" data-v="50">一半</button>
@@ -762,6 +848,23 @@ img{max-width:100%;display:block}
       <div class="ratio-num">
         <label>比例</label>
         <input id="picRatio" type="number" inputmode="numeric" min="0" max="100" value="10">
+        <span class="u">%</span>
+      </div>
+    </div>
+
+    <div class="blk">
+      <h3>祂 發 動 作</h3>
+      <p class="tip">祂回复时，有多大几率用一个「彼岸」的动作代替文字。</p>
+      <div class="ratio-row" id="ratioRowRip">
+        <button class="rb" data-v="0">从不用</button>
+        <button class="rb" data-v="10">偶尔</button>
+        <button class="rb" data-v="50">一半</button>
+        <button class="rb" data-v="80">经常</button>
+        <button class="rb" data-v="100">总是</button>
+      </div>
+      <div class="ratio-num">
+        <label>比例</label>
+        <input id="ripRatio" type="number" inputmode="numeric" min="0" max="100" value="10">
         <span class="u">%</span>
       </div>
     </div>
@@ -780,7 +883,6 @@ img{max-width:100%;display:block}
   </div>
 </div>
 
-<!-- 预览 / 进度层 -->
 <div class="mask-layer" id="pvLayer">
   <div class="preview-box">
     <div class="preview-hd" id="pvTitle">確 認 添 加</div>
@@ -792,7 +894,6 @@ img{max-width:100%;display:block}
   </div>
 </div>
 
-<!-- 畫帖选择器（操作栏点畫帖） -->
 <div class="pick-layer" id="pickLayer">
   <div class="pick-box">
     <div class="pick-hd">畫 帖<button class="x" id="pickClose">×</button></div>
@@ -800,7 +901,13 @@ img{max-width:100%;display:block}
   </div>
 </div>
 
-<!-- 大图查看 -->
+<div class="rip-layer" id="ripLayer">
+  <div class="rip-box">
+    <div class="rip-hd">漣 漪<button class="x" id="ripClose">×</button></div>
+    <div class="rip-bd" id="ripList"></div>
+  </div>
+</div>
+
 <div class="img-view" id="imgView"><img id="imgViewSrc" src="" alt=""></div>
 
 <div id="toast"></div>
@@ -815,11 +922,12 @@ var FILES={
   chat:'chat.json',
   set:'settings.json',
   profile:'profile.json',
-  pics:'pics.json'
+  pics:'pics.json',
+  ripples:'ripples.json'
 };
 var Store={
   dir:null,
-  cache:{meta:null,cards:null,chat:null,set:null,profile:null,pics:null},
+  cache:{meta:null,cards:null,chat:null,set:null,profile:null,pics:null,ripples:null},
   timers:{},
 
   async init(){
@@ -827,7 +935,7 @@ var Store={
       meta:function(){return {v:1,createdAt:Date.now(),issues:[]};},
       cards:function(){return {v:1,cards:[]};},
       chat:function(){return {v:1,msgs:[]};},
-      set:function(){return {v:1,dMin:15,dMax:30,picRatio:10};},
+      set:function(){return {v:1,dMin:15,dMax:30,picRatio:10,ripRatio:10};},
       profile:function(){return {
         v:1,
         him:{name:'',call:'',avatar:''},
@@ -835,7 +943,8 @@ var Store={
         bg:'',
         bgMask:60
       };},
-      pics:function(){return {v:1,pics:[]};}
+      pics:function(){return {v:1,pics:[]};},
+      ripples:function(){return {v:1,mine:[],hers:[]};}
     };
     var root=await navigator.storage.getDirectory();
     this.dir=await root.getDirectoryHandle('bian',{create:true});
@@ -870,8 +979,13 @@ var Store={
     if(typeof prof.bgMask!=='number') prof.bgMask=60;
     var st=this.cache.set;
     if(typeof st.picRatio!=='number') st.picRatio=10;
+    if(typeof st.ripRatio!=='number') st.ripRatio=10;
     if(!this.cache.pics || !Array.isArray(this.cache.pics.pics)){
       this.cache.pics={v:1,pics:[]};
+    }
+    var rp=this.cache.ripples;
+    if(!rp || !Array.isArray(rp.mine) || !Array.isArray(rp.hers)){
+      this.cache.ripples={v:1,mine:[],hers:[]};
     }
     for(var k2 in FILES){
       if(!this.cache[k2] || typeof this.cache[k2]!=='object'){
@@ -938,8 +1052,9 @@ function _msgs(){
   return Store.cache.chat.msgs;
 }
 function _set(){
-  if(!Store.cache.set||typeof Store.cache.set!=='object') Store.cache.set={v:1,dMin:15,dMax:30,picRatio:10};
+  if(!Store.cache.set||typeof Store.cache.set!=='object') Store.cache.set={v:1,dMin:15,dMax:30,picRatio:10,ripRatio:10};
   if(typeof Store.cache.set.picRatio!=='number') Store.cache.set.picRatio=10;
+  if(typeof Store.cache.set.ripRatio!=='number') Store.cache.set.ripRatio=10;
   return Store.cache.set;
 }
 function _profile(){
@@ -956,7 +1071,15 @@ function _pics(){
   if(!Store.cache.pics||!Array.isArray(Store.cache.pics.pics)) Store.cache.pics={v:1,pics:[]};
   return Store.cache.pics.pics;
 }
-var S={ cards:_cards, msgs:_msgs, set:_set, profile:_profile, pics:_pics, pendings:{} };
+function _ripples(){
+  var r=Store.cache.ripples;
+  if(!r||typeof r!=='object') r={v:1,mine:[],hers:[]};
+  if(!Array.isArray(r.mine)) r.mine=[];
+  if(!Array.isArray(r.hers)) r.hers=[];
+  Store.cache.ripples=r;
+  return r;
+}
+var S={ cards:_cards, msgs:_msgs, set:_set, profile:_profile, pics:_pics, ripples:_ripples, pendings:{} };
 
 function uid(p){ return p+'_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,7); }
 function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
@@ -1070,6 +1193,11 @@ function renderFlow(){
       var bodyHtml;
       if(m.kind==='pic' && m.pic){
         bodyHtml='<img src="'+m.pic+'" data-img="'+m.id+'" alt="">';
+      }else if(m.kind==='act'){
+        bodyHtml='<span class="sep">〜〜〜〜〜〜〜〜〜〜</span>'
+                +esc(m.text||'')
+                +'<span class="sep">〜〜〜〜〜〜〜〜〜〜</span>';
+        cls='item act'+(lead?' lead':'');
       }else{
         bodyHtml=esc(m.text||'');
       }
@@ -1106,7 +1234,6 @@ function nearBottom(){
   return (box.scrollHeight - box.scrollTop - box.clientHeight) < 60;
 }
 
-/* 点图片看大图 */
 document.getElementById('flow').addEventListener('click',function(e){
   var img=e.target;
   if(img && img.tagName==='IMG' && img.getAttribute('data-img')){
@@ -1137,14 +1264,25 @@ function sendMine(text){
   renderFlow(); toBottom(true);
   armWait(w);
 }
-
-// 发一张畫帖（我发）
 function sendMinePic(dataUrl){
   var now=Date.now();
   ensureIssue();
   renderMasthead();
   var ms=S.msgs();
   ms.push({id:uid('m'),who:'me',kind:'pic',pic:dataUrl,at:now});
+  var w={id:uid('w'),who:'wait',at:now,dueAt:now+delayMs()};
+  ms.push(w);
+  Store.touch('chat');
+  Store.flush();
+  renderFlow(); toBottom(true);
+  armWait(w);
+}
+function sendMineAct(text){
+  var now=Date.now();
+  ensureIssue();
+  renderMasthead();
+  var ms=S.msgs();
+  ms.push({id:uid('m'),who:'me',kind:'act',text:text,at:now});
   var w={id:uid('w'),who:'wait',at:now,dueAt:now+delayMs()};
   ms.push(w);
   Store.touch('chat');
@@ -1160,7 +1298,6 @@ function armWait(w){
   S.pendings[w.id]=setTimeout(function(){ resolveWait(w.id); }, left+60);
 }
 
-// 一次回复的「批次」：抽 1~3 条，每条 90% 文字 + 10% 图片（可设置）
 function resolveWait(id){
   delete S.pendings[id];
   var ms=S.msgs(), idx=-1;
@@ -1169,7 +1306,10 @@ function resolveWait(id){
 
   var cards=S.cards();
   var pics=S.pics();
-  if(!cards.length && !pics.length){
+  var rip=S.ripples();
+  var hersRip=rip.hers||[];
+
+  if(!cards.length && !pics.length && !hersRip.length){
     ms[idx]={id:uid('x'),who:'extra',text:'本报尚未收到彼岸来稿。\n祂还没有话可说——除非你替祂写。',at:Date.now()};
     renderMasthead();
     Store.touch('chat'); Store.flush();
@@ -1177,28 +1317,36 @@ function resolveWait(id){
     return;
   }
 
-  var ratio=Math.max(0,Math.min(100, S.set().picRatio|0));
+  var picR=Math.max(0,Math.min(100, S.set().picRatio|0));
+  var ripR=Math.max(0,Math.min(100, S.set().ripRatio|0));
+
   var n=1+Math.floor(Math.random()*3);
   var batch=[];
   for(var q=0;q<n;q++){
-    var usePic=false;
-    if(pics.length && Math.random()*100 < ratio){ usePic=true; }
-    if(usePic){
+    var kind='text';
+    if(pics.length && Math.random()*100 < picR){ kind='pic'; }
+    else if(hersRip.length && Math.random()*100 < ripR){ kind='act'; }
+    if(kind==='pic'){
       batch.push({kind:'pic', pic:pics[Math.floor(Math.random()*pics.length)].data});
+    }else if(kind==='act'){
+      batch.push({kind:'act', text:hersRip[Math.floor(Math.random()*hersRip.length)].text});
     }else{
       if(cards.length){
         batch.push({kind:'text', text:cards[Math.floor(Math.random()*cards.length)].text});
-      }else{
+      }else if(pics.length){
         batch.push({kind:'pic', pic:pics[Math.floor(Math.random()*pics.length)].data});
+      }else{
+        batch.push({kind:'act', text:hersRip[Math.floor(Math.random()*hersRip.length)].text});
       }
     }
   }
   ensureIssue();
 
-  // 第一条替换「译电中」
   var first=batch[0];
   if(first.kind==='pic'){
     ms[idx]={id:uid('m'),who:'him',kind:'pic',pic:first.pic,at:Date.now()};
+  }else if(first.kind==='act'){
+    ms[idx]={id:uid('m'),who:'him',kind:'act',text:first.text,at:Date.now()};
   }else{
     ms[idx]={id:uid('m'),who:'him',text:first.text,at:Date.now()};
   }
@@ -1222,6 +1370,8 @@ function resolveWait(id){
             var item=batch[k];
             if(item.kind==='pic'){
               ms2[a]={id:uid('m'),who:'him',kind:'pic',pic:item.pic,at:Date.now()};
+            }else if(item.kind==='act'){
+              ms2[a]={id:uid('m'),who:'him',kind:'act',text:item.text,at:Date.now()};
             }else{
               ms2[a]={id:uid('m'),who:'him',text:item.text,at:Date.now()};
             }
@@ -1246,7 +1396,16 @@ function rearmAll(){
   var ms=S.msgs();
   for(var i=0;i<ms.length;i++){ if(ms[i].who==='wait') armWait(ms[i]); }
 }
-  /* ===================== 電文匣 ===================== */
+
+function preloadPics(){
+  var all=S.pics();
+  for(var i=0;i<all.length;i++){
+    var img=new Image();
+    img.src=all[i].data;
+  }
+}
+
+/* ===================== 電文匣 ===================== */
 var picking=false, picked={};
 var kw='';
 
@@ -1520,8 +1679,7 @@ function toast(msg){
   clearTimeout(toastT);
   toastT=setTimeout(function(){ el.classList.remove('on'); },2200);
 }
-
-/* ===================== 畫帖 ===================== */
+  /* ===================== 畫帖 ===================== */
 var picPicking=false, picPicked={};
 var pvFiles=[], pvBusy=false;
 
@@ -1635,7 +1793,7 @@ document.getElementById('picImport').addEventListener('click',function(){
       all.push({id:uid('p'),data:d,at:Date.now()});
       added++;
     }
-    if(added){ Store.touch('pics'); Store.flush(); renderPics(); }
+    if(added){ Store.touch('pics'); Store.flush(); renderPics(); preloadPics(); }
     if(!added && dup) toast('帖中已有這 '+dup+' 张，無需重收');
     else if(dup) toast('收進 '+added+' 张，重複 '+dup+' 张已略過');
     else toast('收進 '+added+' 张');
@@ -1648,7 +1806,6 @@ document.getElementById('picExport').addEventListener('click',function(){
   ]);
 });
 
-/* 添加流程：选图 → 预览 → 进度 */
 function addPicFlow(){
   pickImages(function(files){
     pvFiles=[];
@@ -1714,6 +1871,7 @@ function startAdd(){
     if(idx>=total){
       Store.touch('pics'); Store.flush();
       renderPics();
+      preloadPics();
       setTimeout(function(){
         document.getElementById('pvLayer').classList.remove('on');
         pvFiles=[]; pvBusy=false;
@@ -1732,6 +1890,195 @@ function startAdd(){
   }
   next();
 }
+
+/* ===================== 漣漪 ===================== */
+var ripSide='mine';
+var ripPicking=false, ripPicked={};
+
+function ripArr(side){
+  var r=S.ripples();
+  return r[side];
+}
+function ripSetArr(side,arr){
+  var r=S.ripples();
+  r[side]=arr;
+}
+function renderRipples(){
+  var mine=ripArr('mine'), hers=ripArr('hers');
+  document.getElementById('lgRipN').textContent=(mine.length+hers.length);
+  document.getElementById('ripMineCnt').textContent='共 '+mine.length+' 个';
+  document.getElementById('ripHersCnt').textContent='共 '+hers.length+' 个';
+  document.getElementById('ripMineCntBar').innerHTML='共 '+mine.length+' 个';
+  document.getElementById('ripHersCntBar').innerHTML='共 '+hers.length+' 个';
+
+  renderRipList('ripMineList', mine);
+  renderRipList('ripHersList', hers);
+
+  // 高亮 tab
+  var tabs=document.querySelectorAll('#ripTabs .rip-tab');
+  for(var i=0;i<tabs.length;i++){
+    tabs[i].classList.toggle('on', tabs[i].getAttribute('data-side')===ripSide);
+  }
+  document.getElementById('ripPaneMine').style.display = (ripSide==='mine')?'':'none';
+  document.getElementById('ripPaneHers').style.display = (ripSide==='hers')?'':'none';
+
+  // 批量状态
+  document.getElementById('ripBulkBar').classList.toggle('on', ripPicking);
+}
+function renderRipList(id, arr){
+  var box=document.getElementById(id);
+  if(!arr.length){
+    box.innerHTML='<div class="empty">空空如也。<br>寫幾個動作吧。</div>';
+    return;
+  }
+  var h='';
+  for(var i=0;i<arr.length;i++){
+    var it=arr[i];
+    h+='<div class="carditem">'
+      +'<label class="ck" style="'+(ripPicking?'display:block':'')+'"><input type="checkbox" data-rck="'+it.id+'"'
+      +(ripPicked[it.id]?' checked':'')+'></label>'
+      +'<span class="no">'+('00'+(i+1)).slice(-3)+'</span>'
+      +'<span class="tx">'+esc(it.text)+'</span>'
+      +'<button class="del" data-rdel="'+it.id+'" style="'+(ripPicking?'display:none':'')+'">刪</button></div>';
+  }
+  box.innerHTML=h;
+}
+function ripAdd(side,text){
+  var lines=String(text||'').split('\n');
+  var arr=ripArr(side), have={};
+  for(var i=0;i<arr.length;i++) have[norm(arr[i].text)]=1;
+  var added=0, dup=0;
+  for(var j=0;j<lines.length;j++){
+    var t=norm(lines[j]);
+    if(!t) continue;
+    if(have[t]){ dup++; continue; }
+    have[t]=1;
+    arr.push({id:uid('r'),text:t,at:Date.now()});
+    added++;
+  }
+  if(added){ Store.touch('ripples'); Store.flush(); }
+  return {added:added,dup:dup};
+}
+document.getElementById('ripMineAdd').addEventListener('click',function(){
+  var el=document.getElementById('ripMineIn');
+  var r=ripAdd('mine', el.value);
+  if(r.added||r.dup){
+    el.value=''; el.blur(); renderRipples();
+    toast(r.dup ? ('存入 '+r.added+' 个，重複 '+r.dup+' 個已略過') : ('存入 '+r.added+' 個'));
+  }
+});
+document.getElementById('ripHersAdd').addEventListener('click',function(){
+  var el=document.getElementById('ripHersIn');
+  var r=ripAdd('hers', el.value);
+  if(r.added||r.dup){
+    el.value=''; el.blur(); renderRipples();
+    toast(r.dup ? ('存入 '+r.added+' 个，重複 '+r.dup+' 個已略過') : ('存入 '+r.added+' 個'));
+  }
+});
+
+document.getElementById('ripTabs').addEventListener('click',function(e){
+  var t=e.target.closest?e.target.closest('.rip-tab'):null;
+  if(!t) return;
+  ripSide=t.getAttribute('data-side');
+  ripPicked={};
+  renderRipples();
+});
+
+// 单击列表项（删除）
+document.getElementById('ripplesPage').addEventListener('click',function(e){
+  var d=e.target.getAttribute&&e.target.getAttribute('data-rdel');
+  if(d){
+    var arr=ripArr(ripSide);
+    for(var i=0;i<arr.length;i++){ if(arr[i].id===d){ arr.splice(i,1); break; } }
+    delete ripPicked[d];
+    Store.touch('ripples'); renderRipples(); toast('已刪');
+  }
+});
+document.getElementById('ripplesPage').addEventListener('change',function(e){
+  var id=e.target.getAttribute&&e.target.getAttribute('data-rck');
+  if(id){ ripPicked[id]=e.target.checked; }
+});
+
+document.getElementById('ripMineDedup').addEventListener('click',function(){ ripDedup('mine'); });
+document.getElementById('ripHersDedup').addEventListener('click',function(){ ripDedup('hers'); });
+function ripDedup(side){
+  var arr=ripArr(side), seen={}, out=[], n=0;
+  for(var i=0;i<arr.length;i++){
+    var k=norm(arr[i].text);
+    if(seen[k]){ n++; continue; }
+    seen[k]=1; out.push(arr[i]);
+  }
+  if(!n){ toast('無重複'); return; }
+  ripSetArr(side,out);
+  Store.touch('ripples'); renderRipples();
+  toast('剔去 '+n+' 個，餘 '+out.length+' 個');
+}
+
+document.getElementById('ripMineImport').addEventListener('click',function(){ ripImport('mine'); });
+document.getElementById('ripHersImport').addEventListener('click',function(){ ripImport('hers'); });
+function ripImport(side){
+  pickFile('.json,application/json,text/plain,*/*',function(txt){
+    var arr=null;
+    try{
+      var j=JSON.parse(txt);
+      if(Array.isArray(j)) arr=j;
+      else if(j && Array.isArray(j.ripples)) arr=j.ripples;
+      else if(side==='mine' && j && Array.isArray(j.mine)) arr=j.mine;
+      else if(side==='hers' && j && Array.isArray(j.hers)) arr=j.hers;
+    }catch(e){ toast('這個檔案讀不出'); return; }
+    if(!arr || !arr.length){ toast('這個檔案裡沒有可用的動作'); return; }
+    var cur=ripArr(side), have={}, added=0, dup=0;
+    for(var i=0;i<cur.length;i++) have[norm(cur[i].text)]=1;
+    for(var j2=0;j2<arr.length;j2++){
+      var t=typeof arr[j2]==='string'?arr[j2]:(arr[j2]&&arr[j2].text);
+      if(!t) continue;
+      t=norm(t);
+      if(have[t]){ dup++; continue; }
+      have[t]=1;
+      cur.push({id:uid('r'),text:t,at:Date.now()});
+      added++;
+    }
+    if(added){ Store.touch('ripples'); Store.flush(); renderRipples(); }
+    if(!added && dup) toast('已有這 '+dup+' 個');
+    else if(dup) toast('收進 '+added+' 個，重複 '+dup+' 個已略過');
+    else toast('收進 '+added+' 個');
+  });
+}
+document.getElementById('ripMineExport').addEventListener('click',function(){ ripExport('mine'); });
+document.getElementById('ripHersExport').addEventListener('click',function(){ ripExport('hers'); });
+function ripExport(side){
+  var arr=ripArr(side), n=stamp();
+  var name=(side==='mine'?'漣漪-此岸-':'漣漪-彼岸-')+n+'.json';
+  download(name, JSON.stringify({v:1,exportedAt:Date.now(),count:arr.length,ripples:arr},null,2), 'application/json;charset=utf-8');
+  toast('已寄錄');
+}
+
+document.getElementById('ripMineBulk').addEventListener('click',function(){ ripSetPicking(true); });
+document.getElementById('ripHersBulk').addEventListener('click',function(){ ripSetPicking(true); });
+function ripSetPicking(v){
+  ripPicking=v;
+  if(!v) ripPicked={};
+  renderRipples();
+}
+document.getElementById('ripBulkCancel').addEventListener('click',function(){ ripSetPicking(false); });
+document.getElementById('ripSelAll').addEventListener('change',function(){
+  var arr=ripArr(ripSide), on=this.checked;
+  for(var i=0;i<arr.length;i++) ripPicked[arr[i].id]=on;
+  renderRipples();
+});
+document.getElementById('ripBulkDo').addEventListener('click',function(){
+  var arr=ripArr(ripSide), out=[], n=0;
+  for(var i=0;i<arr.length;i++){
+    if(ripPicked[arr[i].id]){ n++; continue; }
+    out.push(arr[i]);
+  }
+  if(!n){ toast('尚未勾選'); return; }
+  ripSetArr(ripSide,out);
+  Store.touch('ripples');
+  ripPicked={}; ripPicking=false;
+  renderRipples();
+  toast('已銷燬 '+n+' 個，餘 '+out.length+' 個');
+});
 
 /* ===================== 设置 / 档案 / 背景 ===================== */
 function renderProfile(){
@@ -1766,13 +2113,28 @@ function renderBackground(){
 }
 function applyBackground(){
   var p=S.profile();
-  var ids=['paper','secMail','secSupp','secClip','secSpecial',
-           'laiGaoPage','cardsPage','picsPage','actsPage','musicPage','setPage',
-           'navbar'];
   var m=p.bgMask/100;
   var mask='rgba(239,225,198,'+m+')';
-  for(var i=0;i<ids.length;i++){
-    var el=document.getElementById(ids[i]);
+
+  // 頭版：#paper 一整张图；顶栏/聊天区/输入框/底栏 透明
+  var paper=document.getElementById('paper');
+  if(p.bg){
+    paper.style.backgroundImage='linear-gradient('+mask+','+mask+'),url('+p.bg+')';
+    paper.style.backgroundSize='cover';
+    paper.style.backgroundPosition='center';
+    paper.style.backgroundRepeat='no-repeat';
+  }else{
+    paper.style.backgroundImage='';
+    paper.style.backgroundSize='';
+    paper.style.backgroundPosition='';
+    paper.style.backgroundRepeat='';
+  }
+
+  // 子页：各自有背景图
+  var subIds=['secMail','secSupp','secClip','secSpecial',
+              'laiGaoPage','cardsPage','picsPage','ripplesPage','setPage','musicPage','actsPage'];
+  for(var i=0;i<subIds.length;i++){
+    var el=document.getElementById(subIds[i]);
     if(!el) continue;
     if(p.bg){
       el.style.backgroundImage='linear-gradient('+mask+','+mask+'),url('+p.bg+')';
@@ -1786,6 +2148,8 @@ function applyBackground(){
       el.style.backgroundRepeat='';
     }
   }
+  // 底栏透明（透出 #paper 的背景）
+  // navbar 已经是 transparent（CSS 里设了）
 }
 function bindProfile(){
   var nh=document.getElementById('profNameHim'), ch=document.getElementById('profCallHim');
@@ -1846,14 +2210,21 @@ function bindProfile(){
 function renderRatio(){
   var v=S.set().picRatio|0;
   document.getElementById('picRatio').value=v;
-  var rbs=document.querySelectorAll('#ratioRow .rb');
+  var rbs=document.querySelectorAll('#ratioRowPic .rb');
   for(var i=0;i<rbs.length;i++){
     var rv=parseInt(rbs[i].getAttribute('data-v'),10);
     rbs[i].classList.toggle('on', rv===v);
   }
+  var r2=S.set().ripRatio|0;
+  document.getElementById('ripRatio').value=r2;
+  var rbs2=document.querySelectorAll('#ratioRowRip .rb');
+  for(var j=0;j<rbs2.length;j++){
+    var rv2=parseInt(rbs2[j].getAttribute('data-v'),10);
+    rbs2[j].classList.toggle('on', rv2===r2);
+  }
 }
 function bindRatio(){
-  var rbs=document.querySelectorAll('#ratioRow .rb');
+  var rbs=document.querySelectorAll('#ratioRowPic .rb');
   for(var i=0;i<rbs.length;i++){
     rbs[i].addEventListener('click',function(){
       var v=parseInt(this.getAttribute('data-v'),10);
@@ -1871,6 +2242,24 @@ function bindRatio(){
     Store.touch('set'); Store.flush();
     renderRatio();
   });
+  var rbs2=document.querySelectorAll('#ratioRowRip .rb');
+  for(var j=0;j<rbs2.length;j++){
+    rbs2[j].addEventListener('click',function(){
+      var v=parseInt(this.getAttribute('data-v'),10);
+      var s=S.set(); s.ripRatio=v;
+      Store.touch('set'); Store.flush();
+      renderRatio();
+    });
+  }
+  document.getElementById('ripRatio').addEventListener('change',function(){
+    var v=parseInt(this.value,10);
+    if(isNaN(v)) v=10;
+    v=Math.max(0,Math.min(100,v));
+    this.value=v;
+    var s=S.set(); s.ripRatio=v;
+    Store.touch('set'); Store.flush();
+    renderRatio();
+  });
 }
 function countWho(w){ var m=S.msgs(), n=0;
   for(var i=0;i<m.length;i++) if(m[i].who===w) n++;
@@ -1880,7 +2269,7 @@ function renderSet(){
   document.getElementById('dMin').value=s.dMin;
   document.getElementById('dMax').value=s.dMax;
   document.getElementById('storeTip').textContent =
-    '存储：本机 OPFS（/bian/）。\n電文 '+S.cards().length+' 份 · 畫帖 '+S.pics().length+' 张 · 已出刊 '+issueTotal()+' 期\n'
+    '存储：本机 OPFS（/bian/）。\n電文 '+S.cards().length+' 份 · 畫帖 '+S.pics().length+' 张 · 漣漪 '+(S.ripples().mine.length+S.ripples().hers.length)+' 個 · 已出刊 '+issueTotal()+' 期\n'
     +'电讯 '+S.msgs().length+' 条（彼岸 '+countWho('him')+' · 此岸 '+countWho('me')+'）';
   renderProfile();
   renderBackground();
@@ -1933,6 +2322,7 @@ opbar.addEventListener('click',function(e){
   if(!b) return;
   var k=b.getAttribute('data-op');
   if(k==='pics'){ openPickLayer(); return; }
+  if(k==='acts'){ openRipLayer(); return; }
   if(OPS[k]) toast(OPS[k]+'：正在開發');
 });
 
@@ -1967,6 +2357,37 @@ document.getElementById('pickLayer').addEventListener('click',function(e){
   sendMinePic(d);
 });
 
+/* 涟漪选择器（只显示此岸） */
+function openRipLayer(){
+  var mine=ripArr('mine');
+  var list=document.getElementById('ripList');
+  if(!mine.length){
+    toast('漣漪空空如也，先去來稿添加');
+    return;
+  }
+  var h='';
+  for(var i=0;i<mine.length;i++){
+    h+='<div class="rip-item" data-rip="'+i+'">'+esc(mine[i].text)+'</div>';
+  }
+  list.innerHTML=h;
+  document.getElementById('ripLayer').classList.add('on');
+}
+document.getElementById('ripClose').addEventListener('click',function(){
+  document.getElementById('ripLayer').classList.remove('on');
+});
+document.getElementById('ripLayer').addEventListener('click',function(e){
+  if(e.target===this){ this.classList.remove('on'); return; }
+  var item=e.target.closest?e.target.closest('[data-rip]'):null;
+  if(!item) return;
+  var i=parseInt(item.getAttribute('data-rip'),10);
+  var mine=ripArr('mine');
+  if(!mine[i]) return;
+  var t=mine[i].text;
+  document.getElementById('ripLayer').classList.remove('on');
+  if(opOpen) toggleOp();
+  sendMineAct(t);
+});
+
 /* 大图 */
 function openImgView(src){
   document.getElementById('imgViewSrc').src=src;
@@ -1978,12 +2399,13 @@ document.getElementById('imgView').addEventListener('click',function(){
 });
 
 /* ===================== 页面切换 ===================== */
-var PAGES=['laiGaoPage','cardsPage','picsPage','actsPage','musicPage','setPage'];
+var PAGES=['laiGaoPage','cardsPage','picsPage','ripplesPage','actsPage','musicPage','setPage'];
 function closeAll(){ PAGES.forEach(function(p){ document.getElementById(p).classList.remove('on'); }); }
 function openLaiGao(){
   closeAll();
   document.getElementById('lgCardsN').textContent=S.cards().length;
   document.getElementById('lgPicsN').textContent=S.pics().length;
+  document.getElementById('lgRipN').textContent=(S.ripples().mine.length+S.ripples().hers.length);
   document.getElementById('laiGaoPage').classList.add('on');
 }
 function openCards(){
@@ -2000,6 +2422,13 @@ function openPics(){
   document.getElementById('picsPage').classList.add('on');
   renderPics();
 }
+function openRipples(){
+  closeAll();
+  ripPicking=false; ripPicked={};
+  ripSide='mine';
+  document.getElementById('ripplesPage').classList.add('on');
+  renderRipples();
+}
 function openSet(){ closeAll(); document.getElementById('setPage').classList.add('on'); renderSet(); }
 
 document.getElementById('navCards').addEventListener('click',openLaiGao);
@@ -2011,6 +2440,7 @@ Array.prototype.forEach.call(document.querySelectorAll('.tocrow'),function(b){
     var t=b.getAttribute('data-into');
     if(t==='cardsPage'){ openCards(); return; }
     if(t==='picsPage'){ openPics(); return; }
+    if(t==='ripplesPage'){ openRipples(); return; }
     var nm=b.querySelector('.nm');
     toast((nm?nm.textContent.replace(/\s/g,''):'此版')+'：正在開發');
   });
@@ -2023,6 +2453,9 @@ document.getElementById('cardsBack').addEventListener('click',function(){
 });
 document.getElementById('picsBack').addEventListener('click',function(){
   picSetPicking(false); openLaiGao();
+});
+document.getElementById('ripplesBack').addEventListener('click',function(){
+  ripPicking=false; openLaiGao();
 });
 document.getElementById('setBack').addEventListener('click',closeAll);
 
@@ -2089,10 +2522,11 @@ bindRatio();
 Store.init().then(function(){
   rearmAll();
   applyBackground();
-  renderMasthead(); renderFlow(); renderSet(); renderCards(); renderPics(); renderProfile(); renderBackground(); renderRatio();
+  preloadPics();
+  renderMasthead(); renderFlow(); renderSet(); renderCards(); renderPics(); renderRipples(); renderProfile(); renderBackground(); renderRatio();
 }).catch(function(e){
   alert('存储出错：'+(e&&e.name)+' / '+(e&&e.message));
-  renderMasthead(); renderFlow(); renderSet(); renderCards(); renderPics(); renderProfile(); renderBackground(); renderRatio();
+  renderMasthead(); renderFlow(); renderSet(); renderCards(); renderPics(); renderRipples(); renderProfile(); renderBackground(); renderRatio();
 });
 })();
 </script>
