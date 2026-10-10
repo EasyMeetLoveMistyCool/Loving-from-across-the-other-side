@@ -8,13 +8,8 @@
 <title>彼岸相爱 · 彼岸日報</title>
 <style>
 :root{
-  --paper:#efe1c6;
-  --ink:#3b2a18;
-  --ink2:rgba(59,42,24,.68);
-  --ink3:rgba(59,42,24,.44);
-  --rule:rgba(59,42,24,.34);
-  --rule2:rgba(59,42,24,.18);
-  --rule3:rgba(59,42,24,.28);
+  --paper:#efe1c6;--ink:#3b2a18;--ink2:rgba(59,42,24,.68);--ink3:rgba(59,42,24,.44);
+  --rule:rgba(59,42,24,.34);--rule2:rgba(59,42,24,.18);--rule3:rgba(59,42,24,.28);
   --red:#9c4a32;
   --serif:"Songti SC","STSong","Noto Serif CJK SC","Source Han Serif SC","SimSun",serif;
   --geo:Georgia,"Times New Roman",serif;
@@ -28,7 +23,6 @@ button{font-family:inherit;color:inherit;background:none;border:0;cursor:pointer
 input,textarea{font-family:inherit;color:inherit;background:none;border:0;outline:0;-webkit-appearance:none}
 img{max-width:100%;display:block}
 
-/* 封面 */
 #cover{position:fixed;inset:0;z-index:300;height:100vh;height:100dvh;background:var(--paper);transition:opacity .45s ease,transform .45s ease;overflow:hidden}
 #cover.out{opacity:0;transform:scale(1.03);pointer-events:none}
 #cover .art{position:absolute;inset:0;background-color:#e8d9bc;background-image:radial-gradient(120% 70% at 50% 26%,rgba(255,250,238,.92),rgba(232,217,188,.55) 55%,rgba(180,150,110,.22) 100%),radial-gradient(60% 40% at 82% 78%,rgba(156,74,50,.055),transparent 70%),radial-gradient(70% 50% at 12% 88%,rgba(59,42,24,.06),transparent 72%);background-size:100% 100%;background-repeat:no-repeat}
@@ -102,11 +96,9 @@ img{max-width:100%;display:block}
 .mh-meta{margin-top:6px;font-size:10px;letter-spacing:.14em;color:var(--ink2)}
 .mh-meta b{font-weight:400;color:var(--red)}
 .mh-sub{margin-top:3px;font-size:10px;letter-spacing:.12em;color:var(--ink3);font-family:var(--geo)}
-
 .listen-bar{flex:0 0 auto;display:none;padding:7px 16px;text-align:center;font-size:11px;letter-spacing:.14em;color:var(--red);border-bottom:1px solid var(--rule2);background:transparent}
 .listen-bar.on{display:block}
 .listen-bar .nn{font-weight:400}
-
 #flow{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 16px 20px;overscroll-behavior:contain;background:transparent}
 .item{margin:0 0 20px}
 .item.group{margin-bottom:12px}
@@ -131,8 +123,6 @@ img{max-width:100%;display:block}
 .item.act .col .nm{color:var(--ink3)}
 .item.act .body{text-align:center;font-style:italic;color:var(--ink2);font-size:14px;letter-spacing:.08em;padding:8px 0;margin-top:4px}
 .item.act .body .sep{display:block;font-style:normal;color:var(--rule3);font-size:12px;letter-spacing:.4em;margin-right:-.4em}
-
-/* 回應消息 */
 .item.reply .body{margin-top:6px}
 .item.reply .rp-q{font-size:15px;color:var(--ink);line-height:1.7;margin-bottom:6px;white-space:pre-wrap;word-break:break-word}
 .item.reply .rp-pic{max-width:160px;max-height:160px;border:1px solid var(--rule);outline:1px solid var(--rule2);outline-offset:2px;margin-bottom:6px;cursor:pointer}
@@ -140,12 +130,10 @@ img{max-width:100%;display:block}
 .item.reply .rp-opt .n{color:var(--ink3);font-family:var(--geo);font-size:12px;margin-right:4px}
 .item.reply .rp-imgs{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
 .item.reply .rp-imgs img{width:100px;height:100px;object-fit:cover;border:1px solid var(--rule);outline:1px solid var(--rule2);outline-offset:2px;cursor:pointer}
-.item.reply .rp-imgs img.sel{border:2px solid var(--red);outline:1px solid var(--red)}
 .item.reply .rp-pick{display:inline-block;padding:5px 12px;border:1px solid var(--red);color:var(--red);font-size:14px;letter-spacing:.06em;border-radius:2px;margin-top:4px}
 .item.reply .rp-pick-img{max-width:160px;max-height:160px;border:2px solid var(--red);outline:1px solid var(--red);outline-offset:2px;cursor:pointer}
 .item.reply .rp-name{color:var(--red);letter-spacing:.18em;margin-right:6px}
 .item.reply.me .rp-name{color:var(--ink)}
-
 .extra{margin:16px 0 20px;border:2px solid var(--red);padding:11px 13px;text-align:center}
 .extra .t{font-size:12px;letter-spacing:.5em;margin-right:-.5em;color:var(--red)}
 .extra .m{margin-top:7px;font-size:13px;line-height:1.8;color:var(--ink2)}
@@ -170,7 +158,6 @@ img{max-width:100%;display:block}
 .opbar .op:active{background:rgba(59,42,24,.07)}
 .opbar .op:active .gi,.opbar .op:active{color:var(--red)}
 .opbar .op:active .gi svg{stroke:var(--red)}
-
 #cardsPage,#setPage,#laiGaoPage,#picsPage,#actsPage,#musicPage,#ripplesPage,#recordsPage{position:fixed;inset:0;z-index:250;height:100vh;height:100dvh;background-color:var(--paper);background-size:cover;background-position:center;background-repeat:no-repeat;display:none;flex-direction:column}
 #cardsPage.on,#setPage.on,#laiGaoPage.on,#picsPage.on,#actsPage.on,#musicPage.on,#ripplesPage.on,#recordsPage.on{display:flex}
 .sheet-hd{flex:0 0 auto;padding:calc(env(safe-area-inset-top) + 12px) 16px 10px;border-bottom:3px double var(--ink);text-align:center;position:relative}
@@ -250,8 +237,6 @@ img{max-width:100%;display:block}
 .rec-add-file{display:block;width:100%;margin-top:8px;padding:10px;border:1px dashed var(--rule);font-size:13px;letter-spacing:.14em;color:var(--ink2);text-align:center;cursor:pointer}
 .rec-add-file:active{background:rgba(59,42,24,.06)}
 .rec-add-file.ok{color:var(--red);border-color:var(--red)}
-
-/* 回應表单 */
 .reply-tabs{display:flex;border-bottom:1px solid var(--rule);margin-bottom:12px}
 .reply-tab{flex:1 1 0;text-align:center;font-size:13px;letter-spacing:.2em;padding:10px 0;color:var(--ink3);position:relative;cursor:pointer}
 .reply-tab.on{color:var(--red)}
@@ -272,8 +257,6 @@ img{max-width:100%;display:block}
 .reply-pic-cell{position:relative;aspect-ratio:1/1;border:1px solid var(--rule);overflow:hidden;background:rgba(255,250,238,.35)}
 .reply-pic-cell img{width:100%;height:100%;object-fit:cover;display:block}
 .reply-pic-cell .x{position:absolute;top:2px;right:2px;width:20px;height:20px;border-radius:50%;background:rgba(59,42,24,.7);color:var(--paper);font-size:13px;line-height:20px;text-align:center;border:0;padding:0}
-
-/* 队列 */
 .mp .queue{flex:0 0 auto;font-size:11px;color:var(--ink3);letter-spacing:.06em;font-family:var(--geo);cursor:pointer;padding:2px 4px}
 .mp .queue:active{color:var(--red)}
 .queue-layer{position:fixed;inset:0;z-index:430;display:none;align-items:center;justify-content:center;background:rgba(20,14,8,.55)}
@@ -288,8 +271,6 @@ img{max-width:100%;display:block}
 .queue-item .t{font-size:15px;color:var(--ink);line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .queue-item .a{margin-top:3px;font-size:11px;color:var(--ink3);letter-spacing:.08em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .queue-item .n{float:right;font-family:var(--geo);font-size:11px;color:var(--ink3)}
-
-/* 档案 / 设置 */
 .blk{margin-bottom:22px}
 .blk h3{font-size:12px;font-weight:400;letter-spacing:.24em;color:var(--red);border-bottom:1px solid var(--rule2);padding-bottom:6px;margin-bottom:11px}
 .blk p.tip{font-size:12px;line-height:1.9;color:var(--ink2);margin-bottom:11px}
@@ -512,11 +493,7 @@ img{max-width:100%;display:block}
 </nav>
 
 <div id="laiGaoPage">
-  <div class="sheet-hd">
-    <button class="back" id="lgBack">‹ 回頭版</button>
-    <h2>來 稿</h2>
-    <div class="sub">CONTRIBUTIONS</div>
-  </div>
+  <div class="sheet-hd"><button class="back" id="lgBack">‹ 回頭版</button><h2>來 稿</h2><div class="sub">CONTRIBUTIONS</div></div>
   <div class="sheet-bd" style="padding-top:6px">
     <div class="toc">
       <button class="tocrow" data-into="cardsPage"><span class="nm">電 文 匣</span><span class="dash"></span><span class="en">WORDS · <i id="lgCardsN">0</i></span><span class="pg">一</span></button>
@@ -716,7 +693,6 @@ img{max-width:100%;display:block}
   </div>
 </div>
 
-<!-- 畫帖添加预览/进度 -->
 <div class="mask-layer" id="pvLayer">
   <div class="preview-box">
     <div class="preview-hd" id="pvTitle">確 認 添 加</div>
@@ -725,7 +701,6 @@ img{max-width:100%;display:block}
   </div>
 </div>
 
-<!-- 畫帖选择器 -->
 <div class="pick-layer" id="pickLayer">
   <div class="pick-box">
     <div class="pick-hd">畫 帖<button class="x" id="pickClose">×</button></div>
@@ -733,7 +708,6 @@ img{max-width:100%;display:block}
   </div>
 </div>
 
-<!-- 涟漪选择器 -->
 <div class="rip-layer" id="ripLayer">
   <div class="rip-box">
     <div class="rip-hd">漣 漪<button class="x" id="ripClose">×</button></div>
@@ -741,7 +715,6 @@ img{max-width:100%;display:block}
   </div>
 </div>
 
-<!-- 唱片选择器 -->
 <div class="rec-layer" id="recLayer">
   <div class="rec-box">
     <div class="rec-hd">唱 片<button class="x" id="recClose">×</button></div>
@@ -749,7 +722,6 @@ img{max-width:100%;display:block}
   </div>
 </div>
 
-<!-- 唱片添加弹层 -->
 <div class="mask-layer" id="recAddLayer">
   <div class="preview-box">
     <div class="preview-hd">添 加 唱 片</div>
@@ -762,7 +734,6 @@ img{max-width:100%;display:block}
   </div>
 </div>
 
-<!-- 祂点歌弹窗 -->
 <div class="mask-layer" id="recInviteLayer">
   <div class="preview-box">
     <div class="preview-hd" id="recInviteTitle">祂 想 聽</div>
@@ -776,7 +747,6 @@ img{max-width:100%;display:block}
   </div>
 </div>
 
-<!-- 回應弹层 -->
 <div class="mask-layer" id="replyLayer">
   <div class="preview-box">
     <div class="preview-hd">回 應<button class="x" id="replyClose" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);font-size:18px;color:var(--ink3);padding:4px 8px;border:0;background:none">×</button></div>
@@ -785,28 +755,17 @@ img{max-width:100%;display:block}
         <div class="reply-tab on" data-rt="option">選 項</div>
         <div class="reply-tab" data-rt="pic">選 圖</div>
       </div>
-
       <div id="replyPaneOption">
-        <div class="reply-row">
-          <label>問題</label>
-          <textarea id="replyQ" rows="2" placeholder="寫下你要問祂的問題…"></textarea>
-        </div>
+        <div class="reply-row"><label>問題</label><textarea id="replyQ" rows="2" placeholder="寫下你要問祂的問題…"></textarea></div>
         <div class="reply-img-row">
           <div class="lab">附圖（可不傳，單張）</div>
           <div class="reply-img-add" id="replyAddPic">點此選一張圖</div>
           <div class="reply-img-grid" id="replyPicGrid"></div>
         </div>
-        <div class="reply-row" style="border-bottom:0">
-          <label>選項</label>
-          <textarea id="replyOpts" rows="4" placeholder="一行一個選項…&#10;例：&#10;火鍋&#10;燒烤&#10;隨便"></textarea>
-        </div>
+        <div class="reply-row" style="border-bottom:0"><label>選項</label><textarea id="replyOpts" rows="4" placeholder="一行一個選項…&#10;例：&#10;火鍋&#10;燒烤&#10;隨便"></textarea></div>
       </div>
-
       <div id="replyPanePic" style="display:none">
-        <div class="reply-row">
-          <label>問題</label>
-          <textarea id="replyQPic" rows="2" placeholder="寫下你要問祂的問題…"></textarea>
-        </div>
+        <div class="reply-row"><label>問題</label><textarea id="replyQPic" rows="2" placeholder="寫下你要問祂的問題…"></textarea></div>
         <div class="reply-img-row" style="border-bottom:0">
           <div class="lab">圖片（2~6 張）</div>
           <div class="reply-img-add" id="replyAddPics">點此添加圖片</div>
@@ -814,13 +773,10 @@ img{max-width:100%;display:block}
         </div>
       </div>
     </div>
-    <div class="preview-ft">
-      <button class="ok" id="replyOk">發 出</button>
-    </div>
+    <div class="preview-ft"><button class="ok" id="replyOk">發 出</button></div>
   </div>
 </div>
 
-<!-- 队列弹层 -->
 <div class="queue-layer" id="queueLayer">
   <div class="queue-box">
     <div class="queue-hd">
@@ -832,7 +788,6 @@ img{max-width:100%;display:block}
   </div>
 </div>
 
-<!-- 迷你播放器 -->
 <div class="mp" id="miniPlayer">
   <div class="top">
     <div class="tinfo">
@@ -1029,8 +984,6 @@ function updateListenBar(){
     bar.classList.add('on');
   }else{ bar.classList.remove('on'); }
 }
-
-/* 获取称呼 */
 function nameOf(who){
   var p=S.profile();
   if(who==='him') return p.him.call||'祂';
@@ -1066,7 +1019,6 @@ function renderFlow(){
         cls='item reply '+m.who+(lead?' lead':'');
         var nn=nameOf(m.who);
         if(m.who==='me'){
-          // 你问
           bodyHtml='<div class="rp-q"><span class="rp-name">'+esc(nn)+'：</span>'+esc(m.question||'')+'</div>';
           if(m.pic){ bodyHtml+='<img class="rp-pic" src="'+m.pic+'" data-img="'+m.id+'-p" alt="">'; }
           if(m.replyKind==='pic' && m.pics && m.pics.length){
@@ -1083,7 +1035,6 @@ function renderFlow(){
             bodyHtml+='</div>';
           }
         }else{
-          // 祂答
           bodyHtml='<div class="rp-q"><span class="rp-name">'+esc(nn)+'：</span></div>';
           if(m.replyKind==='pic' && m.answerPic){
             bodyHtml+='<img class="rp-pick-img" src="'+m.answerPic+'" data-img="'+m.id+'-a" alt="">';
@@ -1173,7 +1124,6 @@ function resolveWait(id){
   for(var i=0;i<ms.length;i++){ if(ms[i].id===id){ idx=i; break; } }
   if(idx<0) return;
 
-  // 如果是「回應」的等待
   var waitMsg=ms[idx];
   if(waitMsg && waitMsg._reply){
     var rd=waitMsg._reply;
@@ -1939,7 +1889,6 @@ document.getElementById('recAddOk').addEventListener('click',function(){
   renderRecords(); toast('已存入 1 首');
 });
 
-/* 唱片选择器 */
 function openRecLayer(){
   var all=S.records();
   var box=document.getElementById('recPickList');
@@ -1981,7 +1930,6 @@ document.getElementById('recLayer').addEventListener('click',function(e){ if(e.t
 
 /* ===================== 迷你播放器 + 队列 ===================== */
 var MP={ audio:null, current:null, mode:'seq', together:false, queue:[], history:[] };
-
 function recModeIcon(mode){
   var s='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">';
   if(mode==='seq'){ s+='<path d="M4 7h10M4 12h10M4 17h10"/><path d="M17 8l3 4-3 4"/>'; }
@@ -2022,24 +1970,16 @@ function mpRenderTime(){
     document.getElementById('mpTime').textContent=fmtTime(cur)+' / '+fmtTime(dur);
   }else{ document.getElementById('mpTime').textContent='00:00 / 00:00'; }
 }
-/* 入队：如果当前没歌在放 → 立即播；否则进队列 */
 function enqueueRecord(rec, together){
   if(!rec || !rec.audio){ toast('這首歌沒有音頻'); return; }
-  if(!MP.audio || !MP.current){
-    playRecord(rec, together);
-    return;
-  }
-  // 已有在放
+  if(!MP.audio || !MP.current){ playRecord(rec, together); return; }
   MP.queue.push({rec:rec, together:!!together});
-  mpRenderInfo();
-  toast('已加入隊列');
-  // 如果一起听状态被新加入的覆盖（比如先自己听，再邀请），把 together 标记升上去
+  mpRenderInfo(); toast('已加入隊列');
   if(together && !MP.together){ MP.together=true; updateListenBar(); }
 }
 function playRecord(rec, together){
   if(!rec || !rec.audio){ toast('這首歌沒有音頻'); return; }
   if(MP.audio){ try{ MP.audio.pause(); }catch(e){} }
-  // 把当前这首放进历史
   if(MP.current) MP.history.push(MP.current);
   var a=new Audio();
   a.src=rec.audio; a.preload='auto';
@@ -2056,7 +1996,6 @@ function playRecord(rec, together){
   updateListenBar();
 }
 function mpOnEnded(){
-  // 队列有 → 播下一个
   if(MP.queue.length){
     var next=MP.queue.shift();
     playRecord(next.rec, next.together);
@@ -2095,9 +2034,7 @@ document.getElementById('mpPrev').addEventListener('click',function(){
   if(MP.history.length){
     var prev=MP.history.pop();
     var cur=MP.current;
-    // 把当前插回队列头部
     MP.queue.unshift({rec:cur, together:MP.together});
-    // 播放历史
     var keepHistory=MP.history.slice();
     if(MP.audio){ try{ MP.audio.pause(); }catch(e){} }
     var a=new Audio(); a.src=prev.audio; a.preload='auto';
@@ -2113,7 +2050,6 @@ document.getElementById('mpPrev').addEventListener('click',function(){
     mpRenderInfo(); mpRenderPlay(); mpRenderTime();
     return;
   }
-  // 没有历史 → 列表上一首
   var all=S.records(); if(!all.length||!MP.current) return;
   var idx=-1;
   for(var j=0;j<all.length;j++){ if(all[j].id===MP.current.id){ idx=j; break; } }
@@ -2177,8 +2113,6 @@ document.getElementById('mpNext').addEventListener('click',function(){
   },{passive:true});
   mp.addEventListener('touchend',function(){ dragging=false; },{passive:true});
 })();
-
-/* 队列弹层 */
 document.getElementById('mpQueue').addEventListener('click',function(){
   renderQueue();
   document.getElementById('queueLayer').classList.add('on');
@@ -2208,7 +2142,6 @@ document.getElementById('queueList').addEventListener('click',function(e){
   var i=parseInt(cell.getAttribute('data-qi'),10);
   var item=MP.queue[i];
   if(!item) return;
-  // 从队列移除前面的（留在队列里但不播），把这首移到队首播
   MP.queue.splice(i,1);
   document.getElementById('queueLayer').classList.remove('on');
   if(MP.audio){ try{ MP.audio.pause(); }catch(e){} }
