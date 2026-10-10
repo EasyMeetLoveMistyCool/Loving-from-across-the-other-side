@@ -461,7 +461,7 @@ img{max-width:100%;display:block}
 .sw-row .sw.on{background:var(--red)}
 .sw-row .sw.on::after{transform:translateX(20px)}
 
-/* ===== 通话小窗 ===== */
+/* ===== 通话小窗（问题1/2/5/6/8 修改后） ===== */
 .call{position:fixed;z-index:426;width:70vw;max-width:320px;
   background:var(--paper);border:2px solid var(--ink);
   box-shadow:0 8px 30px rgba(20,14,8,.35);
@@ -469,15 +469,15 @@ img{max-width:100%;display:block}
   align-items:center;gap:12px;
   left:15vw;top:30vh}
 .call.on{display:flex}
-.call.mini{width:64vw;max-width:280px;left:auto;right:4vw;top:auto;
+/* 问题5/6：小窗状态改为横向两行布局，整块可点还原 */
+.call.mini{width:78vw;max-width:340px;left:auto;right:4vw;top:auto;
   bottom:calc(var(--navh) + env(safe-area-inset-bottom) + 90px);
-  padding:10px 12px 10px;gap:6px}
+  padding:8px 10px;gap:0;cursor:pointer}
 .call .call-mini-btn{position:absolute;right:8px;top:8px;font-size:11px;
   letter-spacing:.1em;color:var(--ink3);padding:2px 4px;border:0;background:none}
 .call .call-mini-btn:active{color:var(--red)}
 .call .call-ava-wrap{position:relative;width:90px;height:90px;display:flex;
   align-items:center;justify-content:center}
-.call.mini .call-ava-wrap{width:44px;height:44px}
 .call .call-ava{position:relative;z-index:3;width:72px;height:72px;
   border:2px solid var(--rule);outline:1px solid var(--rule2);outline-offset:2px;
   background:rgba(255,250,238,.35);overflow:hidden;border-radius:50%;
@@ -489,17 +489,9 @@ img{max-width:100%;display:block}
   0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(156,74,50,.35)}
   50%{transform:scale(1.06);box-shadow:0 0 0 8px rgba(156,74,50,0)}
 }
-.call.mini .call-ava{width:40px;height:40px;font-size:18px}
-.call .wave{position:absolute;left:50%;top:50%;width:72px;height:72px;
-  border:1.4px solid rgba(156,74,50,.38);border-radius:50%;
-  transform:translate(-50%,-50%) scale(1);
-  animation:waveOut 2.4s linear infinite;opacity:0;pointer-events:none}
-.call .wave.w2{animation-delay:.8s}
-.call .wave.w3{animation-delay:1.6s}
-@keyframes waveOut{
-  0%{transform:translate(-50%,-50%) scale(.9);opacity:.75}
-  100%{transform:translate(-50%,-50%) scale(1.9);opacity:0}
-}
+/* 问题2：去掉呼吸波纹圈（原来 .wave 的动画圈） */
+.call .wave{display:none}
+.call.mini .call-ava{width:38px;height:38px;font-size:16px}
 .call .call-name{font-size:16px;letter-spacing:.12em;color:var(--ink);
   text-align:center;line-height:1.4}
 .call .call-name .nn{color:var(--red)}
@@ -520,8 +512,6 @@ img{max-width:100%;display:block}
   0%,100%{transform:scaleY(.5);opacity:.6}
   50%{transform:scaleY(1);opacity:1}
 }
-.call.mini .call-wave-bar{height:14px}
-.call.mini .call-wave-bar span{width:2px}
 .call .call-dot{display:inline-block;width:7px;height:7px;border-radius:50%;
   background:var(--green);margin-right:6px;
   animation:cpDot 1s ease-in-out infinite}
@@ -538,15 +528,113 @@ img{max-width:100%;display:block}
 .call .call-btns .cb.reject:active{background:#823d29}
 .call .call-btns .cb.hangup{color:var(--red);border-color:var(--red)}
 .call .call-btns .cb.hangup:active{background:rgba(156,74,50,.12)}
-.call.mini .call-name{font-size:13px;display:flex;align-items:center;justify-content:center}
-.call.mini .call-status{font-size:11px}
+/* 问题6：小窗两行布局 —— 第一行：头像(跨两行) + 称呼 + 计时 + 绿点 + 音波条；第二行：其余；右侧叉(跨两行)居中 */
+.call.mini{display:none}
+.call.mini.on{display:grid;grid-template-columns:38px 1fr 30px;grid-template-rows:auto auto;column-gap:8px;row-gap:2px;align-items:center}
+.call.mini .call-mini-btn{display:none}
+.call.mini .call-ava-wrap{grid-column:1;grid-row:1 / span 2;width:38px;height:38px;justify-self:center}
+.call.mini .call-name{grid-column:2;grid-row:1;display:flex;align-items:center;justify-content:flex-start;gap:6px;font-size:13px;text-align:left}
+.call.mini .call-wave-bar{grid-column:2;grid-row:1;justify-content:flex-end;height:12px;margin:0}
+.call.mini .call-wave-bar span{width:2px}
+.call.mini .call-status{grid-column:2;grid-row:2;font-size:11px;text-align:left;display:flex;align-items:center;line-height:1.2}
 .call.mini .call-btns{display:none}
-.call.mini .call-x{font-size:16px;color:var(--ink3);position:absolute;
-  right:8px;top:50%;transform:translateY(-50%);padding:0 4px}
+.call.mini .call-x{grid-column:3;grid-row:1 / span 2;align-self:center;justify-self:center;font-size:16px;color:var(--ink3);position:static;transform:none;padding:0 4px}
 .call.mini .call-x:active{color:var(--red)}
 
 #toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom) + 24px);transform:translateX(-50%) translateY(14px);z-index:600;opacity:0;pointer-events:none;background:var(--ink);color:var(--paper);font-size:13px;letter-spacing:.14em;padding:11px 20px;border-radius:2px;max-width:82vw;text-align:center;line-height:1.6;transition:opacity .28s ease,transform .28s ease;box-shadow:0 6px 22px rgba(20,14,8,.34)}
 #toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ===== 引用块（设计4 · 方案B 电报回执式） ===== */
+.item .quote-block{margin-bottom:9px;padding:0 0 8px 0;border-bottom:1px dashed var(--rule2)}
+.item .quote-block .q-tag{font-size:11px;letter-spacing:.28em;color:var(--red);line-height:1.4;font-family:var(--geo)}
+.item .quote-block .q-tag .q-who{font-family:var(--serif);letter-spacing:.2em}
+.item .quote-block .q-tag .q-tm{letter-spacing:.08em;color:var(--ink3);font-size:10px}
+.item .quote-block .q-text{margin-top:5px;font-size:13px;line-height:1.7;color:var(--ink2);font-style:italic;padding-left:10px;border-left:2px solid var(--rule3);white-space:pre-wrap;word-break:break-word}
+.item.me .quote-block .q-text{text-align:left}
+.item .quote-block .q-text.q-pic{color:var(--ink3);font-style:normal;letter-spacing:.1em}
+/* ===== 引用挂条（输入区上方，待发送） ===== */
+.quote-pend{display:none;align-items:center;gap:8px;margin:0 0 6px 0;padding:6px 10px;border-left:2px solid var(--red);background:rgba(156,74,50,.06);font-size:12px;color:var(--ink2);letter-spacing:.06em}
+.quote-pend.on{display:flex}
+.quote-pend .qp-txt{flex:1 1 auto;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-style:italic}
+.quote-pend .qp-x{flex:0 0 auto;font-size:16px;color:var(--ink3);padding:0 4px;line-height:1}
+.quote-pend .qp-x:active{color:var(--red)}
+/* ===== 消息点击菜单（设计4） ===== */
+.msg-menu-layer{position:fixed;inset:0;z-index:450;display:none;align-items:center;justify-content:center;background:rgba(20,14,8,.5)}
+.msg-menu-layer.on{display:flex}
+.msg-menu-box{width:64vw;max-width:300px;background:var(--paper);border:2px solid var(--ink);box-shadow:0 8px 30px rgba(20,14,8,.35);display:flex;flex-direction:column}
+.msg-menu-box .mm-it{display:block;width:100%;text-align:center;padding:15px;font-size:15px;letter-spacing:.24em;color:var(--ink);border-bottom:1px solid var(--rule2)}
+.msg-menu-box .mm-it:last-child{border-bottom:0}
+.msg-menu-box .mm-it:active{background:rgba(59,42,24,.07);color:var(--red)}
+.msg-menu-box .mm-it.danger{color:var(--red)}
+.msg-menu-box .mm-it.cancel{color:var(--ink3);font-size:13px;letter-spacing:.18em}
+/* ===== 归档模式（设计1） ===== */
+.item .arch-ck{display:none;flex:0 0 auto;margin-right:9px;align-self:flex-start;padding-top:2px}
+.item .arch-ck input{-webkit-appearance:none;appearance:none;width:18px;height:18px;border:1px solid var(--rule);border-radius:2px;position:relative;background:rgba(255,250,238,.4)}
+.item .arch-ck input:checked{border-color:var(--red);background:var(--red)}
+.item .arch-ck input:checked::after{content:"";position:absolute;left:5px;top:1px;width:4px;height:9px;border:solid var(--paper);border-width:0 2px 2px 0;transform:rotate(45deg)}
+#flow.archiving .item{display:flex;flex-wrap:wrap;align-items:flex-start}
+#flow.archiving .item .arch-ck{display:block}
+#flow.archiving .item .col{flex:1 1 auto;min-width:0}
+#flow.archiving .item .body{flex:1 1 100%;margin-left:27px}
+#flow.archiving .item.act .body{margin-left:27px}
+#flow.archiving .item.me .body{text-align:right;margin-left:0;margin-right:27px}
+.arch-head{display:none;flex:0 0 auto;align-items:center;gap:10px;padding:8px 16px;border-bottom:3px double var(--ink);background:transparent}
+.arch-head.on{display:flex}
+.arch-head .ah-back{flex:0 0 auto;font-size:13px;letter-spacing:.16em;color:var(--ink2);padding:6px 8px}
+.arch-head .ah-back:active{color:var(--red)}
+.arch-head .ah-title{flex:1 1 auto;text-align:center;font-size:14px;letter-spacing:.28em;margin-right:-.28em;color:var(--red)}
+.arch-head .ah-spacer{flex:0 0 auto;width:60px}
+.arch-bar{flex:0 0 auto;display:none;align-items:center;gap:12px;padding:10px 14px calc(env(safe-area-inset-bottom) + 10px);border-top:3px double var(--red);background:rgba(156,74,50,.05)}
+.arch-bar.on{display:flex}
+.arch-bar .selall{display:flex;align-items:center;gap:6px;font-size:12px;letter-spacing:.1em}
+.arch-bar .selall input{-webkit-appearance:none;appearance:none;width:17px;height:17px;border:1px solid var(--rule);border-radius:2px;position:relative}
+.arch-bar .selall input:checked{border-color:var(--red);background:var(--red)}
+.arch-bar .selall input:checked::after{content:"";position:absolute;left:5px;top:1px;width:4px;height:9px;border:solid var(--paper);border-width:0 2px 2px 0;transform:rotate(45deg)}
+.arch-bar .n{flex:1 1 auto;font-size:11px;color:var(--ink2);font-family:var(--geo)}
+.arch-bar .do{font-size:13px;letter-spacing:.18em;color:var(--red);border:1px solid var(--red);border-radius:2px;padding:7px 15px}
+.arch-bar .do:active{background:rgba(156,74,50,.14)}
+/* ===== 归档日期选择 + 进度（设计1） ===== */
+.arch-date-layer{position:fixed;inset:0;z-index:470;display:none;align-items:center;justify-content:center;background:rgba(20,14,8,.55)}
+.arch-date-layer.on{display:flex}
+.arch-date-box{width:80vw;max-width:360px;background:var(--paper);border:2px solid var(--ink);box-shadow:0 8px 30px rgba(20,14,8,.35);display:flex;flex-direction:column}
+.arch-date-hd{padding:12px 14px;border-bottom:1px solid var(--rule2);font-size:12px;letter-spacing:.24em;color:var(--red);text-align:center}
+.arch-date-bd{padding:16px;text-align:center}
+.arch-date-bd label{display:block;font-size:12px;color:var(--ink2);letter-spacing:.14em;margin-bottom:10px}
+.arch-date-bd input[type=date]{font-size:17px;font-family:var(--geo);text-align:center;border:1px solid var(--rule);border-radius:2px;padding:9px 10px;background:rgba(255,250,238,.4);color:var(--ink);width:100%}
+.arch-date-ft{padding:10px 14px;border-top:1px solid var(--rule2);display:flex;gap:10px}
+.arch-date-ft button{flex:1 1 0;font-size:13px;letter-spacing:.18em;padding:10px;border:1px solid var(--rule);border-radius:2px;color:var(--ink2)}
+.arch-date-ft button.ok{color:var(--red);border-color:var(--red)}
+.arch-date-ft button:active{background:rgba(59,42,24,.06)}
+.arch-date-ft button.ok:active{background:rgba(156,74,50,.10)}
+/* 全屏锁定进度 */
+.arch-lock{position:fixed;inset:0;z-index:480;display:none;align-items:center;justify-content:center;background:rgba(20,14,8,.7);flex-direction:column}
+.arch-lock.on{display:flex}
+.arch-lock .al-box{width:78vw;max-width:340px;background:var(--paper);border:2px solid var(--ink);padding:22px 20px;text-align:center}
+.arch-lock .al-t{font-size:13px;letter-spacing:.22em;color:var(--red);margin-bottom:16px}
+.arch-lock .al-bar{height:6px;background:rgba(59,42,24,.14);position:relative;overflow:hidden}
+.arch-lock .al-fill{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--red);transition:width .18s ease}
+.arch-lock .al-p{font-family:var(--geo);font-size:11px;color:var(--ink3);margin-top:10px;letter-spacing:.1em}
+/* ===== 归档查看页（设计2） ===== */
+#archivePage{position:fixed;inset:0;z-index:250;height:100vh;height:100dvh;background-color:var(--paper);background-size:cover;background-position:center;background-repeat:no-repeat;display:none;flex-direction:column}
+#archivePage.on{display:flex}
+#archViewPage{position:fixed;inset:0;z-index:252;height:100vh;height:100dvh;background-color:var(--paper);background-size:cover;background-position:center;background-repeat:no-repeat;display:none;flex-direction:column}
+#archViewPage.on{display:flex}
+#archViewFlow{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 16px calc(env(safe-area-inset-bottom) + 24px);overscroll-behavior:contain}
+#archViewFlow .item .body{user-select:text;-webkit-user-select:text}
+.arch-dayitem{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:15px 2px;border-bottom:1px dashed var(--rule2)}
+.arch-dayitem .ad-date{font-size:16px;letter-spacing:.12em;color:var(--ink);font-family:var(--geo)}
+.arch-dayitem .ad-iss{font-size:11px;letter-spacing:.14em;color:var(--red);min-width:52px}
+.arch-dayitem .ad-dash{flex:1 1 auto;height:0;border-top:1px dotted var(--rule);align-self:center}
+.arch-dayitem .ad-n{font-size:10px;color:var(--ink3);font-family:var(--geo)}
+.arch-dayitem .ad-tm{font-size:10px;color:var(--ink3);font-family:var(--geo);margin-left:8px}
+.arch-dayitem:active .ad-date{color:var(--red)}
+/* ===== 通话簿（设计3） ===== */
+#callsPage{position:fixed;inset:0;z-index:250;height:100vh;height:100dvh;background-color:var(--paper);background-size:cover;background-position:center;background-repeat:no-repeat;display:none;flex-direction:column}
+#callsPage.on{display:flex}
+.call-log-item{display:flex;align-items:center;gap:10px;padding:13px 2px;border-bottom:1px solid var(--rule2)}
+.call-log-item .cl-tm{flex:0 0 auto;font-family:var(--geo);font-size:11px;color:var(--ink3);min-width:56px}
+.call-log-item .cl-ico{flex:0 0 auto;font-size:14px;color:var(--red);width:20px;text-align:center}
+.call-log-item .cl-tx{flex:1 1 auto;min-width:0;font-size:14px;line-height:1.6;color:var(--ink);white-space:pre-wrap;word-break:break-word}
 </style>
 </head>
 <body>
@@ -571,8 +659,8 @@ img{max-width:100%;display:block}
   </div>
   <div class="names">
     <div class="pair">
-      <div class="col left"><span>易</span><span class="mid">·</span><span>遇</span></div>
-      <div class="col right"><span>夏</span><span>雾</span><span>凉</span></div>
+      <div class="col left" id="coverNameHim"><span></span></div>
+      <div class="col right" id="coverNameMe"><span></span></div>
       <div class="seal"><div class="t">彼岸<br>相爱</div></div>
     </div>
   </div>
@@ -619,7 +707,19 @@ img{max-width:100%;display:block}
 
   <div class="listen-bar" id="listenBar"></div>
 
+  <div class="arch-head" id="archHead">
+    <button class="ah-back" id="archExit">‹ 退出</button>
+    <div class="ah-title">歸 檔</div>
+    <div class="ah-spacer"></div>
+  </div>
+
   <div id="flow"></div>
+
+  <div class="arch-bar" id="archBar">
+    <label class="selall"><input type="checkbox" id="archSelAll"><span>全選</span></label>
+    <span class="n" id="archN">已選 0 條</span>
+    <button class="do" id="archDo">自 動 歸 檔</button>
+  </div>
 
   <div class="opbar" id="opbar">
     <button class="op" data-op="photo">
@@ -650,6 +750,10 @@ img{max-width:100%;display:block}
 
   <footer class="press">
     <div class="press-cn" id="pressCn">此 岸 去 信</div>
+    <div class="quote-pend" id="quotePend">
+      <span class="qp-txt" id="quotePendTxt"></span>
+      <button class="qp-x" id="quotePendX">×</button>
+    </div>
     <div class="press-row">
       <textarea id="inp" rows="2" placeholder="落笔，即是渡海。"></textarea>
       <button class="stampbtn" id="send">送 出</button>
@@ -713,8 +817,18 @@ img{max-width:100%;display:block}
         <span class="en">RECORDS · <i id="lgRecN">0</i></span>
         <span class="pg">四</span>
       </button>
+      <button class="tocrow" data-into="archivePage">
+        <span class="nm">歸 檔</span><span class="dash"></span>
+        <span class="en">ARCHIVE · <i id="lgArchN">0</i></span>
+        <span class="pg">五</span>
+      </button>
+      <button class="tocrow" data-into="callsPage">
+        <span class="nm">通 話 簿</span><span class="dash"></span>
+        <span class="en">CALLS · <i id="lgCallN">0</i></span>
+        <span class="pg">六</span>
+      </button>
     </div>
-    <div class="empty" style="padding-top:26px">四間屋子，陸續開張。</div>
+    <div class="empty" style="padding-top:26px">六間屋子，陸續開張。</div>
   </div>
 </div>
 
@@ -874,6 +988,39 @@ img{max-width:100%;display:block}
   </div>
 </div>
 
+<div id="archivePage">
+  <div class="sheet-hd">
+    <button class="back" id="archiveBack">‹ 來 稿</button>
+    <h2>歸 檔</h2>
+    <div class="sub">ARCHIVE</div>
+  </div>
+  <div class="sheet-bd">
+    <div class="cntbar" id="archCntBar">共 0 期</div>
+    <div id="archDayList"></div>
+  </div>
+</div>
+
+<div id="archViewPage">
+  <div class="sheet-hd">
+    <button class="back" id="archViewBack">‹ 歸 檔</button>
+    <h2 id="archViewTitle">某 日</h2>
+    <div class="sub" id="archViewSub"></div>
+  </div>
+  <div id="archViewFlow"></div>
+</div>
+
+<div id="callsPage">
+  <div class="sheet-hd">
+    <button class="back" id="callsBack">‹ 來 稿</button>
+    <h2>通 話 簿</h2>
+    <div class="sub">CALLS</div>
+  </div>
+  <div class="sheet-bd">
+    <div class="cntbar" id="callsCntBar">共 0 通</div>
+    <div id="callsList"></div>
+  </div>
+</div>
+
 <div id="actsPage"><div class="sheet-hd"><button class="back" data-back="1">‹ 來 稿</button><h2>往 來 簿</h2><div class="sub">MOMENTS</div></div>
   <div class="sheet-bd"><div class="empty">這間屋子還沒開張。</div></div></div>
 <div id="musicPage"><div class="sheet-hd"><button class="back" data-back="1">‹ 來 稿</button><h2>唱 片 架</h2><div class="sub">RECORDS</div></div>
@@ -950,6 +1097,18 @@ img{max-width:100%;display:block}
       <div class="ratio-num"><label>比例</label><input id="ripRatio" type="number" inputmode="numeric" min="0" max="100" value="10"><span class="u">%</span></div>
     </div>
     <div class="blk">
+      <h3>祂 引 用</h3>
+      <p class="tip">祂回复时，有多大几率引用你先前的消息再回话。</p>
+      <div class="ratio-row" id="ratioRowQuote">
+        <button class="rb" data-v="0">从不用</button>
+        <button class="rb" data-v="10">偶尔</button>
+        <button class="rb" data-v="50">一半</button>
+        <button class="rb" data-v="80">经常</button>
+        <button class="rb" data-v="100">总是</button>
+      </div>
+      <div class="ratio-num"><label>比例</label><input id="quoteRatio" type="number" inputmode="numeric" min="0" max="100" value="10"><span class="u">%</span></div>
+    </div>
+    <div class="blk">
       <h3>祂 點 歌</h3>
       <p class="tip">祂回复时，有多大几率点一首歌，邀请你一起听。</p>
       <div class="ratio-row" id="ratioRowRec">
@@ -968,10 +1127,10 @@ img{max-width:100%;display:block}
         <button class="rb" data-v="0">从不接</button>
         <button class="rb" data-v="10">偶尔</button>
         <button class="rb" data-v="50">一半</button>
-        <button class="rb" data-v="90">经常</button>
+        <button class="rb" data-v="70">经常</button>
         <button class="rb" data-v="100">总是</button>
       </div>
-      <div class="ratio-num"><label>概率</label><input id="answerRatio" type="number" inputmode="numeric" min="0" max="100" value="90"><span class="u">%</span></div>
+      <div class="ratio-num"><label>概率</label><input id="answerRatio" type="number" inputmode="numeric" min="0" max="100" value="70"><span class="u">%</span></div>
     </div>
     <div class="blk">
       <h3>祂 掛 電</h3>
@@ -1212,6 +1371,36 @@ img{max-width:100%;display:block}
   <button class="call-x" id="callX" style="display:none">×</button>
 </div>
 
+<div class="msg-menu-layer" id="msgMenuLayer">
+  <div class="msg-menu-box">
+    <button class="mm-it" id="mmQuote">引 用</button>
+    <button class="mm-it danger" id="mmDelete">刪 除</button>
+    <button class="mm-it cancel" id="mmCancel">取 消</button>
+  </div>
+</div>
+
+<div class="arch-date-layer" id="archDateLayer">
+  <div class="arch-date-box">
+    <div class="arch-date-hd">選 擇 歸 檔 日 期</div>
+    <div class="arch-date-bd">
+      <label>歸 檔 到 哪 一 天</label>
+      <input type="date" id="archDateInput">
+    </div>
+    <div class="arch-date-ft">
+      <button id="archDateCancel">取 消</button>
+      <button class="ok" id="archDateOk">確 認 歸 檔</button>
+    </div>
+  </div>
+</div>
+
+<div class="arch-lock" id="archLock">
+  <div class="al-box">
+    <div class="al-t">正 在 歸 檔</div>
+    <div class="al-bar"><div class="al-fill" id="archLockFill"></div></div>
+    <div class="al-p" id="archLockP">0 / 0</div>
+  </div>
+</div>
+
 <div class="img-view" id="imgView"><img id="imgViewSrc" src="" alt=""></div>
 
 <div id="toast"></div>
@@ -1222,11 +1411,12 @@ img{max-width:100%;display:block}
 /* ===================== 存储层 ===================== */
 var FILES={
   meta:'meta.json', cards:'cards.json', chat:'chat.json', set:'settings.json',
-  profile:'profile.json', pics:'pics.json', ripples:'ripples.json', records:'records.json'
+  profile:'profile.json', pics:'pics.json', ripples:'ripples.json', records:'records.json',
+  archive:'archive.json'
 };
 var Store={
   dir:null,
-  cache:{meta:null,cards:null,chat:null,set:null,profile:null,pics:null,ripples:null,records:null},
+  cache:{meta:null,cards:null,chat:null,set:null,profile:null,pics:null,ripples:null,records:null,archive:null},
   timers:{},
 
   async init(){
@@ -1236,8 +1426,8 @@ var Store={
       chat:function(){return {v:1,msgs:[]};},
       set:function(){return {v:1,
         dMin:15,dMax:30,
-        picRatio:10,ripRatio:10,recRatio:10,
-        answerRatio:90,
+        picRatio:10,ripRatio:10,recRatio:10,quoteRatio:10,
+        answerRatio:70,
         callHangMin:2,callHangMax:5,
         callInRatio:10,
         recMode:'seq',
@@ -1247,7 +1437,8 @@ var Store={
       profile:function(){return {v:1,him:{name:'',call:'',avatar:''},me:{name:'',call:'',avatar:''},bg:'',bgMask:60};},
       pics:function(){return {v:1,pics:[]};},
       ripples:function(){return {v:1,mine:[],hers:[]};},
-      records:function(){return {v:1,records:[]};}
+      records:function(){return {v:1,records:[]};},
+      archive:function(){return {v:1,issues:[]};}
     };
     var root=await navigator.storage.getDirectory();
     this.dir=await root.getDirectoryHandle('bian',{create:true});
@@ -1284,7 +1475,9 @@ var Store={
     if(typeof st.picRatio!=='number') st.picRatio=10;
     if(typeof st.ripRatio!=='number') st.ripRatio=10;
     if(typeof st.recRatio!=='number') st.recRatio=10;
-    if(typeof st.answerRatio!=='number') st.answerRatio=90;
+    if(typeof st.quoteRatio!=='number') st.quoteRatio=10;
+    if(typeof st.answerRatio!=='number') st.answerRatio=70;
+    if(st.answerRatio===90 && st._answeredFixed!==true){ st.answerRatio=70; st._answeredFixed=true; }
     if(typeof st.callHangMin!=='number') st.callHangMin=2;
     if(typeof st.callHangMax!=='number') st.callHangMax=5;
     if(typeof st.callInRatio!=='number') st.callInRatio=10;
@@ -1300,6 +1493,7 @@ var Store={
     var rp=this.cache.ripples;
     if(!rp || !Array.isArray(rp.mine) || !Array.isArray(rp.hers)) this.cache.ripples={v:1,mine:[],hers:[]};
     if(!this.cache.records || !Array.isArray(this.cache.records.records)) this.cache.records={v:1,records:[]};
+    if(!this.cache.archive || !Array.isArray(this.cache.archive.issues)) this.cache.archive={v:1,issues:[]};
     for(var k2 in FILES){
       if(!this.cache[k2] || typeof this.cache[k2]!=='object'){
         this.cache[k2]=DEFS[k2]();
@@ -1348,13 +1542,14 @@ var Store={
 function _cards(){ if(!Store.cache.cards||!Array.isArray(Store.cache.cards.cards)) Store.cache.cards={v:1,cards:[]}; return Store.cache.cards.cards; }
 function _msgs(){ if(!Store.cache.chat||!Array.isArray(Store.cache.chat.msgs)) Store.cache.chat={v:1,msgs:[]}; return Store.cache.chat.msgs; }
 function _set(){
-  var d={v:1,dMin:15,dMax:30,picRatio:10,ripRatio:10,recRatio:10,answerRatio:90,callHangMin:2,callHangMax:5,callInRatio:10,recMode:'seq',testMode:false,companion:{active:false,thing:'',freq:'normal',startAt:0,customThings:[]}};
+  var d={v:1,dMin:15,dMax:30,picRatio:10,ripRatio:10,recRatio:10,quoteRatio:10,answerRatio:70,callHangMin:2,callHangMax:5,callInRatio:10,recMode:'seq',testMode:false,companion:{active:false,thing:'',freq:'normal',startAt:0,customThings:[]}};
   if(!Store.cache.set||typeof Store.cache.set!=='object') Store.cache.set=d;
   var s=Store.cache.set;
   if(typeof s.picRatio!=='number') s.picRatio=10;
   if(typeof s.ripRatio!=='number') s.ripRatio=10;
   if(typeof s.recRatio!=='number') s.recRatio=10;
-  if(typeof s.answerRatio!=='number') s.answerRatio=90;
+  if(typeof s.quoteRatio!=='number') s.quoteRatio=10;
+  if(typeof s.answerRatio!=='number') s.answerRatio=70;
   if(typeof s.callHangMin!=='number') s.callHangMin=2;
   if(typeof s.callHangMax!=='number') s.callHangMax=5;
   if(typeof s.callInRatio!=='number') s.callInRatio=10;
@@ -1388,7 +1583,14 @@ function _ripples(){
   return r;
 }
 function _records(){ if(!Store.cache.records||!Array.isArray(Store.cache.records.records)) Store.cache.records={v:1,records:[]}; return Store.cache.records.records; }
-var S={ cards:_cards, msgs:_msgs, set:_set, profile:_profile, pics:_pics, ripples:_ripples, records:_records, pendings:{} };
+function _archive(){
+  var a=Store.cache.archive;
+  if(!a||typeof a!=='object') a={v:1,issues:[]};
+  if(!Array.isArray(a.issues)) a.issues=[];
+  Store.cache.archive=a;
+  return a;
+}
+var S={ cards:_cards, msgs:_msgs, set:_set, profile:_profile, pics:_pics, ripples:_ripples, records:_records, archive:_archive, pendings:{} };
 
 function uid(p){ return p+'_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,7); }
 function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
@@ -1410,6 +1612,11 @@ function fmtDur(sec){
   if(h>0) return h+' 小时 '+m+' 分';
   if(m>0) return m+' 分 '+s+' 秒';
   return s+' 秒';
+}
+function shortText(t,n){
+  t=String(t||'').replace(/\s+/g,' ').trim();
+  if(t.length>n) t=t.slice(0,n)+'…';
+  return t;
 }
 
 var SEASON={
@@ -1455,6 +1662,13 @@ function ensureIssue(){
 function todayPublished(){ return issueList().indexOf(dayKey(Date.now()))>=0; }
 function issueNo(){ var arr=issueList(), k=dayKey(Date.now()), i=arr.indexOf(k); return (i>=0)?i+1:arr.length+1; }
 function issueTotal(){ return issueList().length; }
+function issueNoForDate(dk){
+  var arr=issueList(), i=arr.indexOf(dk);
+  if(i>=0) return i+1;
+  var n=0;
+  for(var j=0;j<arr.length;j++){ if(arr[j]<dk) n++; }
+  return n+1;
+}
 
 function renderMasthead(){
   var now=Date.now(), d=new Date(now);
@@ -1473,6 +1687,25 @@ function renderMasthead(){
   if(p.me.avatar){ mAva.innerHTML='<img src="'+p.me.avatar+'" alt="">'; }
   else { mAva.textContent='我'; }
   document.getElementById('mhNameMe').textContent=p.me.call||'';
+  renderCoverNames();
+}
+
+function renderCoverNames(){
+  var p=S.profile();
+  var himName=(p.him.name||p.him.call||'易遇').trim();
+  var meName=(p.me.name||p.me.call||'夏雾凉').trim();
+  var colHim=document.getElementById('coverNameHim');
+  var colMe=document.getElementById('coverNameMe');
+  if(colHim){
+    var h='';
+    for(var i=0;i<himName.length;i++){ h+='<span>'+esc(himName[i])+'</span>'; }
+    colHim.innerHTML=h;
+  }
+  if(colMe){
+    var m='';
+    for(var j=0;j<meName.length;j++){ m+='<span>'+esc(meName[j])+'</span>'; }
+    colMe.innerHTML=m;
+  }
 }
 
 function updateListenBar(){
@@ -1488,6 +1721,18 @@ function updateListenBar(){
 }
 
 /* ===================== 消息流 ===================== */
+var ARCH={ on:false, picked:{} };
+
+function quoteBlockHtml(m, callHim, callMe){
+  if(!m.quote) return '';
+  var who = (m.quote.from==='him') ? callHim : callMe;
+  var side = (m.quote.from==='him') ? '彼岸' : '此岸';
+  var qt;
+  if(m.quote.pic){ qt='［ 一張畫帖 ］'; return '<div class="quote-block"><div class="q-tag">◆ 引 自 <span class="q-who">'+esc(who)+'</span> · '+side+' · <span class="q-tm">'+hhmm(m.quote.at)+'</span></div><div class="q-text q-pic">'+qt+'</div></div>'; }
+  qt=shortText(m.quote.text||'',60);
+  return '<div class="quote-block"><div class="q-tag">◆ 引 自 <span class="q-who">'+esc(who)+'</span> · '+side+' · <span class="q-tm">'+hhmm(m.quote.at)+'</span></div><div class="q-text">「'+esc(qt)+'」</div></div>';
+}
+
 function renderFlow(){
   var box=document.getElementById('flow');
   var ms=S.msgs();
@@ -1497,6 +1742,7 @@ function renderFlow(){
   var p=S.profile();
   var callMe = p.me.call || '我';
   var callHim = p.him.call || '祂';
+  var maxIdx=0;
 
   for(var i=0;i<ms.length;i++){
     var m=ms[i], dk=dayKey(m.at), lead=(dk!==prevDay);
@@ -1510,6 +1756,7 @@ function renderFlow(){
         cls+=' reply';
         var rpName = (m.who==='him') ? callHim : callMe;
         var rpBody='';
+        rpBody+=quoteBlockHtml(m, callHim, callMe);
         if(m.who==='me'){
           rpBody += '<div class="rp-q">'+esc(rpName)+'：'+esc(m.question||'')+'</div>';
           if(m.replyKind==='option'){
@@ -1541,7 +1788,8 @@ function renderFlow(){
         var colR=(m.who==='him')
           ? '<span class="nm">◆ '+nmR+'</span><span class="dash"></span><span class="tm">'+hhmm(m.at)+'</span>'
           : '<span class="tm">'+hhmm(m.at)+'</span><span class="dash"></span><span class="nm">'+nmR+' ◆</span>';
-        html+='<article class="'+cls+'" data-id="'+m.id+'"><div class="col">'+colR+'</div><div class="body">'+rpBody+'</div></article>';
+        maxIdx++;
+        html+='<article class="'+cls+'" data-id="'+m.id+'" data-mi="'+maxIdx+'"><label class="arch-ck"><input type="checkbox" data-arch="'+m.id+'"'+(ARCH.picked[m.id]?' checked':'')+'></label><div class="col">'+colR+'</div><div class="body">'+rpBody+'</div></article>';
         continue;
       }
 
@@ -1551,20 +1799,21 @@ function renderFlow(){
         : '<span class="tm">'+hhmm(m.at)+'</span><span class="dash"></span><span class="nm">'+nm+' ◆</span>';
       var bodyHtml;
       if(m.kind==='pic' && m.pic){
-        bodyHtml='<img src="'+m.pic+'" data-img="'+m.id+'" alt="">';
+        bodyHtml=quoteBlockHtml(m, callHim, callMe)+'<img src="'+m.pic+'" data-img="'+m.id+'" alt="">';
       }else if(m.kind==='act'){
-        bodyHtml='<span class="sep">〜〜〜〜〜〜〜〜〜〜</span>'+esc(m.text||'')+'<span class="sep">〜〜〜〜〜〜〜〜〜〜</span>';
+        bodyHtml=quoteBlockHtml(m, callHim, callMe)+'<span class="sep">〜〜〜〜〜〜〜〜〜〜</span>'+esc(m.text||'')+'<span class="sep">〜〜〜〜〜〜〜〜〜〜</span>';
         cls='item act'+(lead?' lead':'');
       }else if(m.kind==='song'){
-        bodyHtml='♫ '+esc(m.title||'')+(m.artist?' — '+esc(m.artist):'');
+        bodyHtml=quoteBlockHtml(m, callHim, callMe)+'♫ '+esc(m.title||'')+(m.artist?' — '+esc(m.artist):'');
         cls='item act'+(lead?' lead':'');
       }else if(m.kind==='calllog'){
         bodyHtml='<span class="sep">〜〜〜〜〜〜〜〜〜〜</span>'+esc(m.text||'')+'<span class="sep">〜〜〜〜〜〜〜〜〜〜</span>';
         cls='item act'+(lead?' lead':'');
       }else{
-        bodyHtml=esc(m.text||'');
+        bodyHtml=quoteBlockHtml(m, callHim, callMe)+esc(m.text||'');
       }
-      html+='<article class="'+cls+'" data-id="'+m.id+'"><div class="col">'+col+'</div><div class="body">'+bodyHtml+'</div></article>';
+      maxIdx++;
+      html+='<article class="'+cls+'" data-id="'+m.id+'" data-mi="'+maxIdx+'"><label class="arch-ck"><input type="checkbox" data-arch="'+m.id+'"'+(ARCH.picked[m.id]?' checked':'')+'></label><div class="col">'+col+'</div><div class="body">'+bodyHtml+'</div></article>';
     }else if(m.who==='wait'){
       var wcls='item wait'+(groupOpen?' group':'');
       html+='<article class="'+wcls+'" data-id="'+m.id+'"><div class="col"><span class="nm">◆ 譯電中</span><span class="dash"></span><span class="tm">'+hhmm(m.at)+'</span></div><div class="body">▍正在译电<span class="blink">…</span></div></article>';
@@ -1575,6 +1824,8 @@ function renderFlow(){
   if(!ms.length){ html+='<div class="empty">本报创刊，尚无电讯。<br>写下第一句，交给对岸。</div>'; }
   html+='<div class="colophon">— 信 到 此 處 —</div>';
   box.innerHTML=html;
+  box.classList.toggle('archiving', !!ARCH.on);
+  updateArchN();
 }
 window.__goCards=function(){ openCards(); };
 
@@ -1588,8 +1839,18 @@ function nearBottom(){
   return (box.scrollHeight - box.scrollTop - box.clientHeight) < 60;
 }
 document.getElementById('flow').addEventListener('click',function(e){
-  var img=e.target;
-  if(img && img.tagName==='IMG' && img.getAttribute('data-img')){ openImgView(img.src); }
+  var t=e.target;
+  if(t && t.tagName==='INPUT'){ return; }
+  if(t && t.tagName==='IMG' && t.getAttribute('data-img')){ openImgView(t.src); return; }
+  if(ARCH.on){ return; }
+  var art=t.closest?t.closest('.item[data-id]'):null;
+  if(!art) return;
+  var id=art.getAttribute('data-id');
+  openMsgMenu(id);
+});
+document.getElementById('flow').addEventListener('change',function(e){
+  var id=e.target.getAttribute&&e.target.getAttribute('data-arch');
+  if(id){ ARCH.picked[id]=e.target.checked; updateArchN(); }
 });
 
 function delayMs(){ var s=S.set();
@@ -1599,35 +1860,73 @@ function delayMs(){ var s=S.set();
 }
 function randGap(){ return (3+Math.random()*5)*1000; }
 
+var pendingQuote=null;
+function setPendingQuote(q){
+  pendingQuote=q;
+  var bar=document.getElementById('quotePend');
+  var txt=document.getElementById('quotePendTxt');
+  if(!bar||!txt) return;
+  if(!q){ bar.classList.remove('on'); txt.textContent=''; return; }
+  var p=S.profile();
+  var who=(q.from==='him')?(p.him.call||'祂'):(p.me.call||'我');
+  var body=q.pic?'［ 一張畫帖 ］':shortText(q.text||'',40);
+  txt.textContent='引自 '+who+'：'+body;
+  bar.classList.add('on');
+}
+
 function sendMine(text){
   text=String(text||'').replace(/\s+$/,''); if(!text) return;
   var now=Date.now(); ensureIssue(); renderMasthead();
   var ms=S.msgs();
-  ms.push({id:uid('m'),who:'me',text:text,at:now});
+  var msg={id:uid('m'),who:'me',text:text,at:now};
+  if(pendingQuote){ msg.quote=pendingQuote; }
+  ms.push(msg);
   var w={id:uid('w'),who:'wait',at:now,dueAt:now+delayMs()};
   ms.push(w); Store.touch('chat'); Store.flush();
+  setPendingQuote(null);
   renderFlow(); toBottom(true); armWait(w);
 }
 function sendMinePic(dataUrl){
   var now=Date.now(); ensureIssue(); renderMasthead();
   var ms=S.msgs();
-  ms.push({id:uid('m'),who:'me',kind:'pic',pic:dataUrl,at:now});
+  var msg={id:uid('m'),who:'me',kind:'pic',pic:dataUrl,at:now};
+  if(pendingQuote){ msg.quote=pendingQuote; }
+  ms.push(msg);
   var w={id:uid('w'),who:'wait',at:now,dueAt:now+delayMs()};
   ms.push(w); Store.touch('chat'); Store.flush();
+  setPendingQuote(null);
   renderFlow(); toBottom(true); armWait(w);
 }
 function sendMineAct(text){
   var now=Date.now(); ensureIssue(); renderMasthead();
   var ms=S.msgs();
-  ms.push({id:uid('m'),who:'me',kind:'act',text:text,at:now});
+  var msg={id:uid('m'),who:'me',kind:'act',text:text,at:now};
+  if(pendingQuote){ msg.quote=pendingQuote; }
+  ms.push(msg);
   var w={id:uid('w'),who:'wait',at:now,dueAt:now+delayMs()};
   ms.push(w); Store.touch('chat'); Store.flush();
+  setPendingQuote(null);
   renderFlow(); toBottom(true); armWait(w);
 }
 function armWait(w){
   var left=w.dueAt-Date.now(); if(left<0) left=0;
   clearTimeout(S.pendings[w.id]);
   S.pendings[w.id]=setTimeout(function(){ resolveWait(w.id); }, left+60);
+}
+
+function pickQuoteTarget(ms){
+  var cand=[];
+  for(var i=0;i<ms.length;i++){
+    var mm=ms[i];
+    if(mm.who==='me' && (mm.text||mm.kind==='pic')) cand.push(mm);
+  }
+  if(!cand.length) return null;
+  var last=cand.slice(-10);
+  var pick=last[Math.floor(Math.random()*last.length)];
+  var q={from:'me', at:pick.at};
+  if(pick.kind==='pic'){ q.pic=true; }
+  else{ q.text=pick.text||''; }
+  return q;
 }
 
 function resolveWait(id){
@@ -1639,23 +1938,31 @@ function resolveWait(id){
 
   if(w && w._reply){
     var rk=w._reply.replyKind;
+    var rMsg;
     if(rk==='option'){
       var opts=w._reply.options||[];
       if(!opts.length){
-        ms[idx]={id:uid('x'),who:'extra',text:'祂没有选项可选。',at:Date.now()};
+        rMsg={id:uid('x'),who:'extra',text:'祂没有选项可选。',at:Date.now()};
       }else{
         var ans=opts[Math.floor(Math.random()*opts.length)];
-        ms[idx]={id:uid('m'),who:'him',kind:'reply',replyKind:'option',answer:ans,at:Date.now()};
+        rMsg={id:uid('m'),who:'him',kind:'reply',replyKind:'option',answer:ans,at:Date.now()};
       }
     }else{
       var pics=w._reply.pics||[];
       if(!pics.length){
-        ms[idx]={id:uid('x'),who:'extra',text:'祂没有图可选。',at:Date.now()};
+        rMsg={id:uid('x'),who:'extra',text:'祂没有图可选。',at:Date.now()};
       }else{
         var ansPic=pics[Math.floor(Math.random()*pics.length)];
-        ms[idx]={id:uid('m'),who:'him',kind:'reply',replyKind:'pic',answerPic:ansPic,at:Date.now()};
+        rMsg={id:uid('m'),who:'him',kind:'reply',replyKind:'pic',answerPic:ansPic,at:Date.now()};
       }
     }
+    if(rMsg.who==='him'){
+      if(Math.random()*100 < (S.set().quoteRatio|0)){
+        var qt=pickQuoteTarget(ms);
+        if(qt) rMsg.quote=qt;
+      }
+    }
+    ms[idx]=rMsg;
     renderMasthead(); Store.touch('chat'); Store.flush();
     renderFlow(); toBottom(true);
     return;
@@ -1671,6 +1978,7 @@ function resolveWait(id){
   var picR=Math.max(0,Math.min(100, S.set().picRatio|0));
   var ripR=Math.max(0,Math.min(100, S.set().ripRatio|0));
   var recR=Math.max(0,Math.min(100, S.set().recRatio|0));
+  var quoteR=Math.max(0,Math.min(100, S.set().quoteRatio|0));
   var n=1+Math.floor(Math.random()*3);
   var batch=[];
   for(var q=0;q<n;q++){
@@ -1689,11 +1997,16 @@ function resolveWait(id){
     }
   }
   ensureIssue();
+  var quoteForFirst=null;
+  if(Math.random()*100 < quoteR){ quoteForFirst=pickQuoteTarget(ms); }
   var first=batch[0];
-  if(first.kind==='pic'){ ms[idx]={id:uid('m'),who:'him',kind:'pic',pic:first.pic,at:Date.now()}; }
-  else if(first.kind==='act'){ ms[idx]={id:uid('m'),who:'him',kind:'act',text:first.text,at:Date.now()}; }
-  else if(first.kind==='song'){ ms[idx]={id:uid('m'),who:'him',kind:'song',title:first.rec.title,artist:first.rec.artist,at:Date.now()}; }
-  else{ ms[idx]={id:uid('m'),who:'him',text:first.text,at:Date.now()}; }
+  var firstMsg;
+  if(first.kind==='pic'){ firstMsg={id:uid('m'),who:'him',kind:'pic',pic:first.pic,at:Date.now()}; }
+  else if(first.kind==='act'){ firstMsg={id:uid('m'),who:'him',kind:'act',text:first.text,at:Date.now()}; }
+  else if(first.kind==='song'){ firstMsg={id:uid('m'),who:'him',kind:'song',title:first.rec.title,artist:first.rec.artist,at:Date.now()}; }
+  else{ firstMsg={id:uid('m'),who:'him',text:first.text,at:Date.now()}; }
+  if(quoteForFirst) firstMsg.quote=quoteForFirst;
+  ms[idx]=firstMsg;
   if(n>1){ ms.push({id:uid('w'),who:'wait',at:Date.now(),dueAt:Date.now(),_silent:true}); }
   renderMasthead(); Store.touch('chat'); Store.flush();
   renderFlow(); toBottom(true);
@@ -1725,7 +2038,6 @@ function resolveWait(id){
       }, randGap());
     })();
   }
-  // 检查是否触发祂来电
   if(Math.random()*100 < (S.set().callInRatio|0)){ maybeIncomingCall(); }
 }
 function rearmAll(){
@@ -1735,6 +2047,301 @@ function rearmAll(){
 function preloadPics(){
   var all=S.pics();
   for(var i=0;i<all.length;i++){ var img=new Image(); img.src=all[i].data; }
+}
+
+/* ===================== 消息点击菜单 ===================== */
+var msgMenuId=null;
+function openMsgMenu(id){
+  var ms=S.msgs(), m=null;
+  for(var i=0;i<ms.length;i++){ if(ms[i].id===id){ m=ms[i]; break; } }
+  if(!m) return;
+  if(m.who!=='me' && m.who!=='him') return;
+  msgMenuId=id;
+  document.getElementById('msgMenuLayer').classList.add('on');
+}
+function closeMsgMenu(){
+  msgMenuId=null;
+  document.getElementById('msgMenuLayer').classList.remove('on');
+}
+document.getElementById('mmCancel').addEventListener('click',closeMsgMenu);
+document.getElementById('msgMenuLayer').addEventListener('click',function(e){
+  if(e.target===this) closeMsgMenu();
+});
+document.getElementById('mmQuote').addEventListener('click',function(){
+  var id=msgMenuId; closeMsgMenu();
+  if(!id) return;
+  var ms=S.msgs(), m=null;
+  for(var i=0;i<ms.length;i++){ if(ms[i].id===id){ m=ms[i]; break; } }
+  if(!m) return;
+  var q={from:m.who, at:m.at};
+  if(m.kind==='pic'){ q.pic=true; }
+  else if(m.kind==='act'){ q.text=m.text||''; }
+  else if(m.kind==='song'){ q.text='♫ '+(m.title||''); }
+  else if(m.kind==='calllog'){ q.text=m.text||''; }
+  else { q.text=m.text||''; }
+  setPendingQuote(q);
+  document.getElementById('inp').focus();
+});
+document.getElementById('mmDelete').addEventListener('click',function(){
+  var id=msgMenuId; closeMsgMenu();
+  if(!id) return;
+  var ms=S.msgs(), idx=-1;
+  for(var i=0;i<ms.length;i++){ if(ms[i].id===id){ idx=i; break; } }
+  if(idx<0) return;
+  ms.splice(idx,1);
+  Store.touch('chat'); Store.flush();
+  renderFlow();
+  toast('已刪除');
+});
+document.getElementById('quotePendX').addEventListener('click',function(){ setPendingQuote(null); });
+
+/* ===================== 归档（设计1） ===================== */
+function updateArchN(){
+  var n=0;
+  for(var k in ARCH.picked) if(ARCH.picked[k]) n++;
+  var el=document.getElementById('archN');
+  if(el) el.textContent='已選 '+n+' 條';
+  var sa=document.getElementById('archSelAll');
+  if(sa){
+    var ms=S.msgs(), vis=[], allOn=true, any=false;
+    for(var i=0;i<ms.length;i++){
+      if(ms[i].who==='me'||ms[i].who==='him'){ vis.push(ms[i]); any=true; }
+    }
+    if(!any) allOn=false;
+    for(var j=0;j<vis.length;j++){ if(!ARCH.picked[vis[j].id]){ allOn=false; break; } }
+    sa.checked=allOn && any;
+  }
+}
+function enterArchiveMode(){
+  ARCH.on=true; ARCH.picked={};
+  document.getElementById('archHead').classList.add('on');
+  document.getElementById('archBar').classList.add('on');
+  if(opOpen) toggleOp();
+  renderFlow();
+}
+function exitArchiveMode(){
+  ARCH.on=false; ARCH.picked={};
+  document.getElementById('archHead').classList.remove('on');
+  document.getElementById('archBar').classList.remove('on');
+  renderFlow();
+}
+document.getElementById('archExit').addEventListener('click',exitArchiveMode);
+document.getElementById('archSelAll').addEventListener('change',function(){
+  var on=this.checked, ms=S.msgs();
+  for(var i=0;i<ms.length;i++){
+    if(ms[i].who==='me'||ms[i].who==='him'){ ARCH.picked[ms[i].id]=on; }
+  }
+  renderFlow();
+});
+document.getElementById('archDo').addEventListener('click',function(){
+  var n=0;
+  for(var k in ARCH.picked) if(ARCH.picked[k]) n++;
+  if(!n){ toast('尚未勾選'); return; }
+  openArchDate();
+});
+var archDateVal='';
+function openArchDate(){
+  var d=new Date();
+  archDateVal=d.getFullYear()+'-'+pad2(d.getMonth()+1)+'-'+pad2(d.getDate());
+  var inp=document.getElementById('archDateInput');
+  inp.value=archDateVal;
+  document.getElementById('archDateLayer').classList.add('on');
+}
+document.getElementById('archDateCancel').addEventListener('click',function(){
+  document.getElementById('archDateLayer').classList.remove('on');
+});
+document.getElementById('archDateOk').addEventListener('click',function(){
+  var v=document.getElementById('archDateInput').value||archDateVal;
+  document.getElementById('archDateLayer').classList.remove('on');
+  doArchive(v);
+});
+function doArchive(dateStr){
+  var ms=S.msgs();
+  var pickedMsgs=[];
+  for(var i=0;i<ms.length;i++){
+    if((ms[i].who==='me'||ms[i].who==='him') && ARCH.picked[ms[i].id]){
+      pickedMsgs.push(ms[i]);
+    }
+  }
+  if(!pickedMsgs.length){ toast('沒有可歸檔的內容'); return; }
+  var lock=document.getElementById('archLock');
+  var fill=document.getElementById('archLockFill');
+  var lab=document.getElementById('archLockP');
+  lock.classList.add('on');
+  fill.style.width='0%';
+  lab.textContent='0 / '+pickedMsgs.length;
+  var idx=0;
+  function step(){
+    if(idx>=pickedMsgs.length){
+      finishArchive(dateStr, pickedMsgs);
+      return;
+    }
+    idx++;
+    var pct=Math.round(idx*100/pickedMsgs.length);
+    fill.style.width=pct+'%';
+    lab.textContent=idx+' / '+pickedMsgs.length;
+    setTimeout(step, 18);
+  }
+  setTimeout(step, 30);
+}
+function finishArchive(dateStr, pickedMsgs){
+  var arc=S.archive();
+  var issue=null;
+  for(var i=0;i<arc.issues.length;i++){ if(arc.issues[i].date===dateStr){ issue=arc.issues[i]; break; } }
+  if(!issue){
+    issue={date:dateStr, no:issueNoForDate(dateStr), msgs:[], archivedAt:Date.now()};
+    arc.issues.push(issue);
+  }
+  for(var j=0;j<pickedMsgs.length;j++){ issue.msgs.push(pickedMsgs[j]); }
+  issue.msgs.sort(function(a,b){ return (a.at||0)-(b.at||0); });
+  issue.archivedAt=Date.now();
+  var ms=S.msgs();
+  var removeIds={};
+  for(var q=0;q<pickedMsgs.length;q++){ removeIds[pickedMsgs[q].id]=1; }
+  var out=[];
+  for(var r=0;r<ms.length;r++){ if(!removeIds[ms[r].id]) out.push(ms[r]); }
+  var cc=Store.cache.chat; cc.msgs=out;
+  Store.touch('chat'); Store.touch('archive'); Store.flush();
+  ARCH.on=false; ARCH.picked={};
+  document.getElementById('archHead').classList.remove('on');
+  document.getElementById('archBar').classList.remove('on');
+  document.getElementById('archLock').classList.remove('on');
+  renderFlow(); renderArchList();
+  toast('已歸檔 '+pickedMsgs.length+' 條');
+}
+
+/* ===================== 归档查看（设计2） ===================== */
+function renderArchList(){
+  var arc=S.archive();
+  var box=document.getElementById('archDayList');
+  var bar=document.getElementById('archCntBar');
+  var nEl=document.getElementById('lgArchN');
+  if(nEl) nEl.textContent=arc.issues.length;
+  if(bar) bar.innerHTML='共 '+arc.issues.length+' 期';
+  if(!arc.issues.length){
+    box.innerHTML='<div class="empty">歸檔空空如也。<br>頭版點「歸檔」把記錄存進來。</div>';
+    return;
+  }
+  var sorted=arc.issues.slice().sort(function(a,b){ return a.date<b.date?1:(a.date>b.date?-1:0); });
+  var h='';
+  for(var i=0;i<sorted.length;i++){
+    var it=sorted[i];
+    h+='<div class="arch-dayitem" data-ad="'+esc(it.date)+'">'
+      +'<span class="ad-iss">第 '+it.no+' 期</span>'
+      +'<span class="ad-date">'+esc(it.date)+'</span>'
+      +'<span class="ad-dash"></span>'
+      +'<span class="ad-n">'+it.msgs.length+' 條</span>'
+      +'<span class="ad-tm">'+hhmm(it.archivedAt||it.msgs[0]&&it.msgs[0].at||Date.now())+'</span>'
+      +'</div>';
+  }
+  box.innerHTML=h;
+}
+document.getElementById('archDayList').addEventListener('click',function(e){
+  var it=e.target.closest?e.target.closest('[data-ad]'):null;
+  if(!it) return;
+  var d=it.getAttribute('data-ad');
+  openArchView(d);
+});
+var archViewDate=null;
+function openArchView(dateStr){
+  archViewDate=dateStr;
+  var arc=S.archive();
+  var issue=null;
+  for(var i=0;i<arc.issues.length;i++){ if(arc.issues[i].date===dateStr){ issue=arc.issues[i]; break; } }
+  if(!issue) return;
+  document.getElementById('archViewTitle').textContent=dateStr;
+  document.getElementById('archViewSub').textContent='第 '+issue.no+' 期 · 共 '+issue.msgs.length+' 條';
+  renderArchView(issue);
+  closeAll();
+  document.getElementById('archViewPage').classList.add('on');
+}
+function renderArchView(issue){
+  var box=document.getElementById('archViewFlow');
+  var p=S.profile();
+  var callMe=p.me.call||'我';
+  var callHim=p.him.call||'祂';
+  var ms=issue.msgs||[];
+  var html='';
+  var prevDay=null, groupOpen=false;
+  for(var i=0;i<ms.length;i++){
+    var m=ms[i], dk=dayKey(m.at), lead=(dk!==prevDay);
+    prevDay=dk;
+    var cls='item '+m.who+(lead?' lead':'');
+    if(m.who==='him' && groupOpen) cls+=' group';
+    var nm=(m.who==='him')?'彼岸來電':'此岸去信';
+    var col=(m.who==='him')
+      ? '<span class="nm">◆ '+nm+'</span><span class="dash"></span><span class="tm">'+hhmm(m.at)+'</span>'
+      : '<span class="tm">'+hhmm(m.at)+'</span><span class="dash"></span><span class="nm">'+nm+' ◆</span>';
+    var bodyHtml='';
+    if(m.kind==='pic' && m.pic){ bodyHtml=quoteBlockHtml(m,callHim,callMe)+'<img src="'+m.pic+'" data-img="'+m.id+'" alt="">'; }
+    else if(m.kind==='act'){ bodyHtml=quoteBlockHtml(m,callHim,callMe)+'<span class="sep">〜〜〜〜〜〜〜〜〜〜</span>'+esc(m.text||'')+'<span class="sep">〜〜〜〜〜〜〜〜〜〜</span>'; cls='item act'+(lead?' lead':''); }
+    else if(m.kind==='song'){ bodyHtml=quoteBlockHtml(m,callHim,callMe)+'♫ '+esc(m.title||'')+(m.artist?' — '+esc(m.artist):''); cls='item act'+(lead?' lead':''); }
+    else if(m.kind==='calllog'){ bodyHtml='<span class="sep">〜〜〜〜〜〜〜〜〜〜</span>'+esc(m.text||'')+'<span class="sep">〜〜〜〜〜〜〜〜〜〜</span>'; cls='item act'+(lead?' lead':''); }
+    else if(m.kind==='reply'){
+      cls+=' reply';
+      var rpName=(m.who==='him')?callHim:callMe;
+      bodyHtml=quoteBlockHtml(m,callHim,callMe);
+      if(m.who==='me'){
+        bodyHtml+='<div class="rp-q">'+esc(rpName)+'：'+esc(m.question||'')+'</div>';
+        if(m.replyKind==='option'){
+          if(m.pic){ bodyHtml+='<img class="rp-pic" src="'+m.pic+'" alt="">'; }
+          var opts=m.options||[];
+          for(var j=0;j<opts.length;j++){ bodyHtml+='<div class="rp-opt"><span class="n">'+(j+1)+'.</span>'+esc(opts[j])+'</div>'; }
+        }else{
+          var pics=m.pics||[];
+          bodyHtml+='<div class="rp-imgs">';
+          for(var j2=0;j2<pics.length;j2++){ bodyHtml+='<img src="'+pics[j2]+'" alt="">'; }
+          bodyHtml+='</div>';
+        }
+      }else{
+        if(m.replyKind==='option'){ bodyHtml+='<div class="rp-q">'+esc(rpName)+'：</div><div class="rp-pick">'+esc(m.answer||'')+'</div>'; }
+        else{ bodyHtml+='<div class="rp-q">'+esc(rpName)+'：</div>'; if(m.answerPic){ bodyHtml+='<img class="rp-pick-img" src="'+m.answerPic+'" alt="">'; } }
+      }
+    }
+    else{ bodyHtml=quoteBlockHtml(m,callHim,callMe)+esc(m.text||''); }
+    html+='<article class="'+cls+'"><div class="col">'+col+'</div><div class="body">'+bodyHtml+'</div></article>';
+  }
+  if(!html) html='<div class="empty">這期沒有內容。</div>';
+  html+='<div class="colophon">— 信 到 此 處 —</div>';
+  box.innerHTML=html;
+}
+document.getElementById('archViewFlow').addEventListener('click',function(e){
+  var t=e.target;
+  if(t && t.tagName==='IMG' && t.getAttribute('data-img')){ openImgView(t.src); }
+});
+document.getElementById('archViewBack').addEventListener('click',function(){
+  document.getElementById('archViewPage').classList.remove('on');
+  openArchivePage();
+});
+
+/* ===================== 通话簿（设计3） ===================== */
+function renderCalls(){
+  var ms=S.msgs();
+  var p=S.profile();
+  var nn=p.him.call||'祂';
+  var list=[];
+  for(var i=0;i<ms.length;i++){
+    if(ms[i].who==='me' && ms[i].kind==='calllog'){ list.push(ms[i]); }
+    else if(ms[i].who==='him' && ms[i].kind==='calllog'){ list.push(ms[i]); }
+  }
+  var nEl=document.getElementById('lgCallN');
+  if(nEl) nEl.textContent=list.length;
+  var bar=document.getElementById('callsCntBar');
+  if(bar) bar.innerHTML='共 '+list.length+' 通';
+  var box=document.getElementById('callsList');
+  if(!list.length){
+    box.innerHTML='<div class="empty">還沒有通話記錄。<br>在頭版點「通話」打給'+esc(nn)+'。</div>';
+    return;
+  }
+  var sorted=list.slice().sort(function(a,b){ return (b.at||0)-(a.at||0); });
+  var h='';
+  for(var j=0;j<sorted.length;j++){
+    var it=sorted[j];
+    var ico='☏';
+    var tx=String(it.text||'').replace(/\n/g,'　');
+    h+='<div class="call-log-item"><span class="cl-tm">'+hhmm(it.at)+'</span><span class="cl-ico">'+ico+'</span><span class="cl-tx">'+esc(tx)+'</span></div>';
+  }
+  box.innerHTML=h;
 }
   /* ===================== 電文匣 ===================== */
 var picking=false, picked={};
@@ -2738,10 +3345,12 @@ document.getElementById('replyOk').addEventListener('click',function(){
   var mineMsg={id:uid('m'),who:'me',kind:'reply',replyKind:replyTab,question:q,at:now};
   if(replyTab==='option'){ mineMsg.options=opts; if(pic) mineMsg.pic=pic; }
   else{ mineMsg.pics=pics; }
+  if(pendingQuote){ mineMsg.quote=pendingQuote; }
   ms.push(mineMsg);
   var w={id:uid('w'),who:'wait',at:now,dueAt:now+delayMs(),_reply:{replyKind:replyTab, options:opts||null, pics:pics||null}};
   ms.push(w);
   Store.touch('chat'); Store.flush();
+  setPendingQuote(null);
   renderFlow(); toBottom(true);
   closeReplyLayer();
   if(opOpen) toggleOp();
@@ -2750,14 +3359,14 @@ document.getElementById('replyOk').addEventListener('click',function(){
 
 /* ===================== 通话 ===================== */
 var CALL={
-  active:false,      // 是否在通话中
-  state:'',          // dialing / incoming / connecting / talking
-  startAt:0,         // 通话开始时间（talking 时才有）
-  mini:false,        // 是否缩小
-  timer:null,        // 计时器
-  hangupTimer:null,  // 祂挂断的定时器
-  connectTimer:null, // 拨号/接通的定时器
-  direction:''       // 'out'（我打给祂）/ 'in'（祂打给我）
+  active:false,
+  state:'',
+  startAt:0,
+  mini:false,
+  timer:null,
+  hangupTimer:null,
+  connectTimer:null,
+  direction:''
 };
 
 function callRender(){
@@ -2793,18 +3402,17 @@ function callRender(){
     document.getElementById('callHangup').addEventListener('click',function(){ callEnd('me-hangup'); });
   }
 
-  // 缩小状态
   if(CALL.mini){
     win.classList.add('mini');
     document.getElementById('callMiniBtn').style.display='none';
     document.getElementById('callX').style.display='block';
-    // 缩小态的内容
     if(CALL.state==='talking'){
       document.getElementById('callStatus').innerHTML='<span class="call-dot"></span>'+fmtTime((Date.now()-CALL.startAt)/1000);
     }
   }else{
     win.classList.remove('mini');
     document.getElementById('callMiniBtn').style.display='block';
+    document.getElementById('callMiniBtn').textContent='縮小';
     document.getElementById('callX').style.display='none';
   }
   win.classList.add('on');
@@ -2818,7 +3426,6 @@ function callStartOut(){
   var connectIn = (15+Math.random()*15)*1000;
   CALL.connectTimer=setTimeout(function(){
     if(!CALL.active || CALL.state!=='dialing') return;
-    // 按接听概率判断
     var prob=S.set().answerRatio|0;
     if(Math.random()*100 < prob){
       CALL.state='talking';
@@ -2827,7 +3434,6 @@ function callStartOut(){
       scheduleHangupByHim();
       callRender();
     }else{
-      // 没接
       callEnd('no-answer');
     }
   }, connectIn);
@@ -2870,7 +3476,7 @@ function startCallTick(){
 function scheduleHangupByHim(){
   var s=S.set();
   var mn=Math.max(0,s.callHangMin|0), mx=Math.max(0,s.callHangMax|0);
-  if(mn===0 && mx===0) return;  // 不挂
+  if(mn===0 && mx===0) return;
   if(mn>mx){ var t=mn; mn=mx; mx=t; }
   var dur=(mn+Math.random()*(mx-mn))*60*1000;
   if(CALL.hangupTimer) clearTimeout(CALL.hangupTimer);
@@ -2897,7 +3503,6 @@ function callEnd(reason){
     pushCallLog('（'+nn+' 來電 · 已拒絕）');
   }else if(reason==='him-hangup'){
     pushCallLog('和 '+nn+' 通話 '+fmtDur(durSec)+'\n（祂掛斷了）');
-    // 祂挂断前发一句
     var ms=S.msgs();
     var cards=S.cards();
     var rp=S.ripples();
@@ -2914,7 +3519,6 @@ function callEnd(reason){
   }else if(reason==='me-hangup'){
     pushCallLog('和 '+nn+' 通話 '+fmtDur(durSec));
   }else if(reason==='me-hangup-early'){
-    // 拨号/接通中挂断，不记录
   }
   Store.touch('chat'); Store.flush();
 
@@ -2932,10 +3536,8 @@ function pushCallLog(text){
 
 function maybeIncomingCall(){
   if(CALL.active) return;
-  // 只在聊天页 / 头版 / 不锁屏时才触发
   if(document.visibilityState!=='visible') return;
   callIncoming();
-  // 聊天里加一条 "（XX 来电）"
   var p=S.profile();
   var nn=p.him.call||'祂';
   var ms=S.msgs();
@@ -2944,18 +3546,26 @@ function maybeIncomingCall(){
   renderFlow(); toBottom(true);
 }
 
-// 通话小窗按钮
-document.getElementById('callMiniBtn').addEventListener('click',function(){
-  CALL.mini=true; callRender();
+document.getElementById('callMiniBtn').addEventListener('click',function(e){
+  e.stopPropagation();
+  if(CALL.mini){ CALL.mini=false; }
+  else { CALL.mini=true; }
+  callRender();
 });
-document.getElementById('callX').addEventListener('click',function(){
-  // 缩小态的叉 = 挂断
+document.getElementById('callWin').addEventListener('click',function(e){
+  if(!CALL.mini) return;
+  if(e.target.closest && e.target.closest('button')) return;
+  CALL.mini=false;
+  callRender();
+});
+document.getElementById('callX').addEventListener('click',function(e){
+  e.stopPropagation();
+  if(CALL.mini){ CALL.mini=false; callRender(); return; }
   if(CALL.state==='talking' || CALL.state==='connecting') callEnd('me-hangup');
   else if(CALL.state==='incoming') callEnd('me-reject');
   else if(CALL.state==='dialing') callEnd('me-hangup-early');
 });
 
-// 拖动通话小窗
 (function(){
   var win=document.getElementById('callWin');
   var dragging=false, sx=0, sy=0, sl=0, st=0;
@@ -3005,6 +3615,7 @@ opbar.addEventListener('click',function(e){
   if(k==='reply'){ openReplyLayer(); return; }
   if(k==='stay'){ openCpLayer(); return; }
   if(k==='video'){ if(!CALL.active) callStartOut(); return; }
+  if(k==='arch'){ enterArchiveMode(); return; }
   if(OPS[k]) toast(OPS[k]+'：正在開發');
 });
 function openPickLayer(){
@@ -3160,7 +3771,7 @@ function applyBackground(){
     paper.style.backgroundImage='linear-gradient('+mask+','+mask+'),url('+p.bg+')';
     paper.style.backgroundSize='cover'; paper.style.backgroundPosition='center'; paper.style.backgroundRepeat='no-repeat';
   }else{ paper.style.backgroundImage=''; paper.style.backgroundSize=''; paper.style.backgroundPosition=''; paper.style.backgroundRepeat=''; }
-  var subIds=['secMail','secSupp','secClip','secSpecial','laiGaoPage','cardsPage','picsPage','ripplesPage','recordsPage','setPage','musicPage','actsPage'];
+  var subIds=['secMail','secSupp','secClip','secSpecial','laiGaoPage','cardsPage','picsPage','ripplesPage','recordsPage','setPage','musicPage','actsPage','archivePage','archViewPage','callsPage'];
   for(var i=0;i<subIds.length;i++){
     var el=document.getElementById(subIds[i]); if(!el) continue;
     if(p.bg){
@@ -3226,6 +3837,7 @@ function renderRatio(){
   }
   setRow('ratioRowPic','picRatio', S.set().picRatio|0);
   setRow('ratioRowRip','ripRatio', S.set().ripRatio|0);
+  setRow('ratioRowQuote','quoteRatio', S.set().quoteRatio|0);
   setRow('ratioRowRec','recRatio', S.set().recRatio|0);
   setRow('ratioRowAnswer','answerRatio', S.set().answerRatio|0);
   setRow('ratioRowCallIn','callInRatio', S.set().callInRatio|0);
@@ -3248,6 +3860,7 @@ function bindRatio(){
   }
   bindOne('ratioRowPic','picRatio','picRatio');
   bindOne('ratioRowRip','ripRatio','ripRatio');
+  bindOne('ratioRowQuote','quoteRatio','quoteRatio');
   bindOne('ratioRowRec','recRatio','recRatio');
   bindOne('ratioRowAnswer','answerRatio','answerRatio');
   bindOne('ratioRowCallIn','callInRatio','callInRatio');
@@ -3276,7 +3889,7 @@ function renderSet(){
   document.getElementById('dMin').value=s.dMin;
   document.getElementById('dMax').value=s.dMax;
   document.getElementById('storeTip').textContent =
-    '存储：本机 OPFS（/bian/）。\n電文 '+S.cards().length+' 份 · 畫帖 '+S.pics().length+' 张 · 漣漪 '+(S.ripples().mine.length+S.ripples().hers.length)+' 個 · 唱片 '+S.records().length+' 首 · 已出刊 '+issueTotal()+' 期\n'
+    '存储：本机 OPFS（/bian/）。\n電文 '+S.cards().length+' 份 · 畫帖 '+S.pics().length+' 张 · 漣漪 '+(S.ripples().mine.length+S.ripples().hers.length)+' 個 · 唱片 '+S.records().length+' 首 · 已出刊 '+issueTotal()+' 期 · 歸檔 '+S.archive().issues.length+' 期\n'
     +'电讯 '+S.msgs().length+' 条（彼岸 '+countWho('him')+' · 此岸 '+countWho('me')+'）';
   renderProfile(); renderBackground(); renderRatio(); renderCallHang();
 }
@@ -3538,7 +4151,7 @@ Array.prototype.forEach.call(document.querySelectorAll('#navbar .nb'),function(b
 });
 
 /* ===================== 页面切换 ===================== */
-var PAGES=['laiGaoPage','cardsPage','picsPage','ripplesPage','recordsPage','actsPage','musicPage','setPage'];
+var PAGES=['laiGaoPage','cardsPage','picsPage','ripplesPage','recordsPage','actsPage','musicPage','setPage','archivePage','archViewPage','callsPage'];
 function closeAll(){ PAGES.forEach(function(p){ document.getElementById(p).classList.remove('on'); }); }
 function openLaiGao(){
   closeAll();
@@ -3546,6 +4159,10 @@ function openLaiGao(){
   document.getElementById('lgPicsN').textContent=S.pics().length;
   document.getElementById('lgRipN').textContent=(S.ripples().mine.length+S.ripples().hers.length);
   document.getElementById('lgRecN').textContent=S.records().length;
+  document.getElementById('lgArchN').textContent=S.archive().issues.length;
+  var callN=0; var ms=S.msgs();
+  for(var i=0;i<ms.length;i++){ if(ms[i].kind==='calllog') callN++; }
+  document.getElementById('lgCallN').textContent=callN;
   document.getElementById('laiGaoPage').classList.add('on');
 }
 function openCards(){ closeAll(); kw=''; var si=document.getElementById('cardSearch'); if(si) si.value=''; document.getElementById('cardsPage').classList.add('on'); renderCards(); }
@@ -3560,6 +4177,8 @@ function openRipples(){
 }
 function openRecords(){ closeAll(); recSetPicking(false); document.getElementById('recordsPage').classList.add('on'); renderRecords(); }
 function openSet(){ closeAll(); document.getElementById('setPage').classList.add('on'); renderSet(); renderTestSw(); }
+function openArchivePage(){ closeAll(); document.getElementById('archivePage').classList.add('on'); renderArchList(); }
+function openCallsPage(){ closeAll(); document.getElementById('callsPage').classList.add('on'); renderCalls(); }
 
 document.getElementById('navCards').addEventListener('click',openLaiGao);
 document.getElementById('navSet').addEventListener('click',openSet);
@@ -3571,6 +4190,8 @@ Array.prototype.forEach.call(document.querySelectorAll('.tocrow'),function(b){
     if(t==='picsPage'){ openPics(); return; }
     if(t==='ripplesPage'){ openRipples(); return; }
     if(t==='recordsPage'){ openRecords(); return; }
+    if(t==='archivePage'){ openArchivePage(); return; }
+    if(t==='callsPage'){ openCallsPage(); return; }
     var nm=b.querySelector('.nm');
     toast((nm?nm.textContent.replace(/\s/g,''):'此版')+'：正在開發');
   });
@@ -3580,6 +4201,8 @@ document.getElementById('cardsBack').addEventListener('click',function(){ setPic
 document.getElementById('picsBack').addEventListener('click',function(){ picSetPicking(false); openLaiGao(); });
 document.getElementById('ripplesBack').addEventListener('click',function(){ ripPicking=false; openLaiGao(); });
 document.getElementById('recordsBack').addEventListener('click',function(){ recSetPicking(false); openLaiGao(); });
+document.getElementById('archiveBack').addEventListener('click',openLaiGao);
+document.getElementById('callsBack').addEventListener('click',openLaiGao);
 document.getElementById('setBack').addEventListener('click',closeAll);
   /* ===================== 输入 ===================== */
 var inp=document.getElementById('inp');
@@ -3635,7 +4258,6 @@ Store.init().then(function(){
   applyBackground();
   preloadPics();
 
-  // 恢复相伴
   var cpSet=S.set().companion;
   if(cpSet && cpSet.active){
     CP.active=true;
@@ -3647,16 +4269,22 @@ Store.init().then(function(){
     CP.tick=setInterval(cpTick, 1000);
   }
 
+  renderCoverNames();
   renderMasthead(); renderFlow(); renderSet(); renderCards(); renderPics(); renderRipples(); renderRecords(); renderProfile(); renderBackground(); renderRatio(); renderCallHang();
   renderCompanion();
   renderTestSw();
+  renderArchList();
+  renderCalls();
   mpRenderMode();
   mpRenderPlay();
 }).catch(function(e){
   alert('存储出错：'+(e&&e.name)+' / '+(e&&e.message));
+  renderCoverNames();
   renderMasthead(); renderFlow(); renderSet(); renderCards(); renderPics(); renderRipples(); renderRecords(); renderProfile(); renderBackground(); renderRatio(); renderCallHang();
   renderCompanion();
   renderTestSw();
+  renderArchList();
+  renderCalls();
 });
 })();
 </script>
