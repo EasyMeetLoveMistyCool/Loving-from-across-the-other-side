@@ -400,7 +400,7 @@ img{max-width:100%;display:block}
 .img-view.on{display:flex}
 .img-view img{max-width:92vw;max-height:82vh;width:auto;height:auto;border:1px solid rgba(255,250,238,.4)}
 
-/* ===== 列表编辑态 ===== */
+/* ===== 列表编辑态样式（问题3） ===== */
 .carditem .edit{flex:0 0 auto;font-size:11px;letter-spacing:.1em;color:var(--ink3);padding:3px 2px}
 .carditem .edit:active{color:var(--red)}
 .carditem .save{flex:0 0 auto;font-size:11px;letter-spacing:.1em;color:var(--paper);background:var(--red);border:1px solid var(--red);border-radius:2px;padding:3px 9px}
@@ -427,7 +427,7 @@ img{max-width:100%;display:block}
 .bulk-edit-ft button.ok{color:var(--red);border-color:var(--red)}
 .bulk-edit-ft button:active{background:rgba(59,42,24,.06)}
 
-/* ===== 归档查看页：头版报头 / 秘聞报头 ===== */
+/* ===== 归档查看页：头版报头 / 秘聞报头（问题1） ===== */
 .arch-masthead{flex:0 0 auto;padding:calc(env(safe-area-inset-top) + 12px) 16px 10px;text-align:center;border-bottom:3px double var(--ink);position:relative;background:transparent}
 .arch-masthead .am-en{font-family:var(--geo);font-size:10px;letter-spacing:.5em;margin-right:-.5em;color:var(--ink2)}
 .arch-masthead .am-cn{font-size:24px;letter-spacing:.28em;margin-right:-.28em;line-height:1.35;margin-top:2px;color:var(--ink)}
@@ -454,7 +454,7 @@ img{max-width:100%;display:block}
 .arch-view-secret .sheet-hd .back{color:rgba(46,32,56,.7)}
 #archViewPage.arch-view-secret{background-color:#ece0f0}
 
-/* ===== 秘聞页内的悬浮层紫色主题 ===== */
+/* ===== 秘聞页内的悬浮层紫色主题（问题2） ===== */
 .cp-secret #callWin,.cp-secret .call{background:#ece0f0;border-color:#2e2038;box-shadow:0 8px 30px rgba(46,32,56,.35)}
 .cp-secret #callWin .call-name,.cp-secret .call .call-name{color:#2e2038}
 .cp-secret #callWin .call-status,.cp-secret .call .call-status{color:rgba(46,32,56,.68)}
@@ -526,13 +526,6 @@ img{max-width:100%;display:block}
 .cp-secret #recAddLayer .rec-add-row input{color:#2e2038}
 .cp-secret #recAddLayer .rec-add-file{border-color:rgba(122,74,140,.5);color:rgba(46,32,56,.7)}
 .cp-secret #recAddLayer .rec-add-file.ok{color:#7a4a8c;border-color:#7a4a8c}
-
-/* ===== 画帖懒加载占位 ===== */
-.pic-cell.lazy{background:rgba(59,42,24,.06)}
-.pic-cell.lazy img{opacity:0;transition:opacity .25s ease}
-.pic-cell.lazy.loaded img{opacity:1}
-.pic-cell .lazy-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--ink3);font-size:12px;letter-spacing:.1em;pointer-events:none}
-.pic-cell.loaded .lazy-ph{display:none}
   .pick-layer{position:fixed;inset:0;z-index:420;display:none;align-items:center;justify-content:center;background:rgba(20,14,8,.55)}
 .pick-layer.on{display:flex}
 .pick-box{width:86vw;max-width:420px;max-height:76vh;background:var(--paper);border:2px solid var(--ink);display:flex;flex-direction:column;box-shadow:0 8px 30px rgba(20,14,8,.35)}
@@ -1759,6 +1752,7 @@ img{max-width:100%;display:block}
       <button class="tl" id="btnDedup">剔重</button>
       <button class="tl" id="btnImport">收電</button>
       <button class="tl" id="btnExport">發報</button>
+      <button class="tl" id="btnBulkEdit">編輯</button>
       <button class="tl danger" id="btnBulk">銷 燬</button>
     </div>
     <div class="cntbar" id="cntBar">共 0 份</div>
@@ -2177,6 +2171,16 @@ img{max-width:100%;display:block}
       <div class="fld"><label>我 的 簽 名</label><div class="r"><input id="signMe" type="text" placeholder="寫你的簽名" style="width:100%"></div></div>
     </div>
     <div class="blk blk-secret">
+      <h3>秘 聞 · 背 景</h3>
+      <div class="bg-preview" id="secretBgPreview"><span class="ph">點此上傳秘聞背景</span></div>
+      <div class="bg-mask-row">
+        <label>蒙版</label>
+        <input type="range" id="secretBgMask" min="0" max="100" value="60">
+        <span class="val" id="secretBgMaskVal">60%</span>
+      </div>
+      <div class="btnline"><button id="secretBgClear">移 除 秘 聞 背 景</button></div>
+    </div>
+    <div class="blk blk-secret">
       <h3>秘 聞 · 頭 像</h3>
       <div class="prof-row">
         <div class="prof-ava" id="secretAvaHim"><span>祂</span></div>
@@ -2187,16 +2191,6 @@ img{max-width:100%;display:block}
       <h3>秘 聞 · 稱 呼</h3>
       <div class="fld"><label>祂 的 稱 呼</label><div class="r"><input id="secretCallHim" type="text" placeholder="寫祂在秘聞裡的稱呼" style="width:100%"></div></div>
       <div class="fld"><label>我 的 稱 呼</label><div class="r"><input id="secretCallMe" type="text" placeholder="寫你在秘聞裡的稱呼" style="width:100%"></div></div>
-    </div>
-    <div class="blk blk-secret">
-      <h3>秘 聞 · 背 景</h3>
-      <div class="bg-preview" id="secretBgPreview"><span class="ph">點此上傳秘聞背景</span></div>
-      <div class="bg-mask-row">
-        <label>蒙版</label>
-        <input type="range" id="secretBgMask" min="0" max="100" value="60">
-        <span class="val" id="secretBgMaskVal">60%</span>
-      </div>
-      <div class="btnline"><button id="secretBgClear">移 除 秘 聞 背 景</button></div>
     </div>
     <div class="blk">
       <h3>漂 流 背 景</h3>
@@ -3911,7 +3905,7 @@ function sendMine(text){
   if(pendingQuote){ msg.quote=pendingQuote; }
   ms.push(msg); tryClipMine(msg);
   var w={id:uid('w'),who:'wait',at:now,dueAt:now+delayMs()};
-  ms.push(w); Store.touch('chat');
+  ms.push(w); Store.touch('chat'); Store.flush();
   setPendingQuote(null);
   renderFlow(); toBottom(true); armWait(w);
 }
@@ -3922,7 +3916,7 @@ function sendMinePic(dataUrl){
   if(pendingQuote){ msg.quote=pendingQuote; }
   ms.push(msg);
   var w={id:uid('w'),who:'wait',at:now,dueAt:now+delayMs()};
-  ms.push(w); Store.touch('chat');
+  ms.push(w); Store.touch('chat'); Store.flush();
   setPendingQuote(null);
   renderFlow(); toBottom(true); armWait(w);
 }
@@ -3933,7 +3927,7 @@ function sendMineAct(text){
   if(pendingQuote){ msg.quote=pendingQuote; }
   ms.push(msg);
   var w={id:uid('w'),who:'wait',at:now,dueAt:now+delayMs()};
-  ms.push(w); Store.touch('chat');
+  ms.push(w); Store.touch('chat'); Store.flush();
   setPendingQuote(null);
   renderFlow(); toBottom(true); armWait(w);
 }
@@ -3949,7 +3943,7 @@ function tryClipMine(msg){
   var c=S.clips();
   for(var i=0;i<c.length;i++){ if(c[i].srcId===msg.id) return; }
   c.push({id:uid('clip'), text:msg.text, srcId:msg.id, at:msg.at, clippedAt:Date.now()});
-  Store.touch('clips');
+  Store.touch('clips'); Store.flush();
 }
 function pickQuoteTarget(ms){
   var cand=[];
@@ -4458,7 +4452,6 @@ function openArchView(dateStr){
       +'<div class="am-cn">彼 岸 日 報</div>'
       +'<div class="am-meta">第 '+noText+' 期 · '+weekCN(d2.getTime())+' · <b>'+seasonText(d2.getTime())+'</b> · <b>'+weatherText(d2.getTime())+'</b></div>'
       +'<div class="am-sub">'+d2.getFullYear()+'年'+(d2.getMonth()+1)+'月'+d2.getDate()+'日 · 邮资：'+priceText(d2.getTime())+'</div>';
-    page.style.backgroundImage='';
     applyBackground();
   }
   renderArchView(issue, archTab);
@@ -4527,7 +4520,6 @@ document.getElementById('archViewBack').addEventListener('click',function(){
   document.getElementById('archViewPage').classList.remove('on');
   document.getElementById('archViewPage').classList.remove('arch-view-secret');
   document.getElementById('archViewPage').style.backgroundImage='';
-  document.getElementById('archViewMasthead').style.display='none';
   openArchivePage();
 });
 
@@ -4919,7 +4911,9 @@ function renderMailView(m){
   if(m.pic){ h+='<div class="lt-pic"><img src="'+m.pic+'" data-mimg="1" alt=""></div>'; }
   h+='<div class="lt-sign">'+esc(signName1)+'</div>';
   h+='<div class="lt-date">'+mingGuoDate(m.at)+'</div>';
-  h+=mailArriveLine(m);
+  if(m.status==='waiting' && m.from==='me' && m.dueAt){
+    h+='<div class="mail-arrive">約 <b>'+hhmm(m.dueAt)+'</b> 到 · 還有 <b>'+fmtLeft(m.dueAt-Date.now())+'</b></div>';
+  }
   h+='</div>';
   if(m.myReply){
     var toName2 = nameHim();
@@ -4957,11 +4951,6 @@ function renderMailView(m){
   var rpBtn=document.getElementById('mailViewReply');
   if(rpBtn) rpBtn.addEventListener('click',function(){ document.getElementById('mailViewLayer').classList.remove('on'); stopMailTick(); openMailWrite('reply', m.id); });
 }
-function mailArriveLine(m){
-  if(m.status!=='waiting' || !m.dueAt) return '';
-  if(m.from==='him' && !m.myReply) return '';
-  return '<div class="mail-arrive">約 <b>'+hhmm(m.dueAt)+'</b> 到 · 還有 <b>'+fmtLeft(m.dueAt-Date.now())+'</b></div>';
-}
 function refreshMailViewCountdown(){
   if(!document.getElementById('mailViewLayer').classList.contains('on')) return;
   var id=document.getElementById('mailViewBody').getAttribute('data-mid');
@@ -4969,7 +4958,7 @@ function refreshMailViewCountdown(){
   var arr=S.mail(), m=null;
   for(var i=0;i<arr.mails.length;i++){ if(arr.mails[i].id===id){ m=arr.mails[i]; break; } }
   if(!m) return;
-  if(m.status==='waiting' && m.dueAt && !(m.from==='him' && !m.myReply)){
+  if(m.status==='waiting' && m.from==='me' && m.dueAt){
     var el=document.querySelector('#mailViewBody .mail-arrive');
     if(el){ el.innerHTML='約 <b>'+hhmm(m.dueAt)+'</b> 到 · 還有 <b>'+fmtLeft(m.dueAt-Date.now())+'</b>'; }
   }
@@ -7068,6 +7057,7 @@ var secretOpOpen=false;
 function toggleSecretOp(){ secretOpOpen=!secretOpOpen; document.getElementById('secretOpbar').classList.toggle('on',secretOpOpen); document.getElementById('secretPressCn').classList.toggle('on',secretOpOpen); }
 document.getElementById('secretPressCn').addEventListener('click',toggleSecretOp);
 
+/* 秘聞悬浮层紫色主题：进入秘聞时给 body 加 class，离开时移除 */
 function setSecretTheme(on){
   if(on){ document.body.classList.add('cp-secret'); }
   else{ document.body.classList.remove('cp-secret'); }
@@ -7157,7 +7147,7 @@ function secretSendMine(text){
   if(secretPendingQuote){ secretPendingQuote=null; var bar=document.getElementById('secretPend'); if(bar) bar.classList.remove('on'); }
   var w={id:uid('sw'),who:'wait',at:now,dueAt:now+secretDelayMs()};
   ms.push(w);
-  Store.touch('secret');
+  Store.touch('secret'); Store.flush();
   renderSecretFlow(); secretToBottom(true);
   armSecretWait(w);
 }
@@ -7167,7 +7157,7 @@ function secretSendMinePic(dataUrl){
   ms.push({id:uid('sm'),who:'me',kind:'pic',pic:dataUrl,at:now});
   var w={id:uid('sw'),who:'wait',at:now,dueAt:now+secretDelayMs()};
   ms.push(w);
-  Store.touch('secret');
+  Store.touch('secret'); Store.flush();
   renderSecretFlow(); secretToBottom(true);
   armSecretWait(w);
 }
@@ -7177,7 +7167,7 @@ function secretSendMineAct(text){
   ms.push({id:uid('sm'),who:'me',kind:'act',text:text,at:now});
   var w={id:uid('sw'),who:'wait',at:now,dueAt:now+secretDelayMs()};
   ms.push(w);
-  Store.touch('secret');
+  Store.touch('secret'); Store.flush();
   renderSecretFlow(); secretToBottom(true);
   armSecretWait(w);
 }
@@ -7252,7 +7242,7 @@ function resolveSecretWait(id){
       ms.splice(idx+1,0,{id:uid('sw'),who:'wait',at:Date.now(),dueAt:Date.now(),_silent:true});
     }
   }
-  Store.touch('secret');
+  Store.touch('secret'); Store.flush();
   renderSecretFlow(); secretToBottom(true);
   if(batch.length>1){
     var kk=1;
@@ -7269,7 +7259,7 @@ function resolveSecretWait(id){
           }
         }
         if(kk+1<batch.length){ ms2.push({id:uid('sw'),who:'wait',at:Date.now(),dueAt:Date.now(),_silent:true}); }
-        Store.touch('secret');
+        Store.touch('secret'); Store.flush();
         var wasBottom=secretNearBottom();
         renderSecretFlow(); if(wasBottom) secretToBottom(true);
         kk++; if(kk<batch.length) step();
@@ -7773,7 +7763,7 @@ function visibleCards(){
   return out;
 }
 
-/* 行内编辑状态 */
+/* ===== 行内编辑状态（问题1） ===== */
 var inlineEdit={ kind:'', id:'', side:'' };
 var inlineDirty=false;
 
@@ -7839,7 +7829,7 @@ function forceRerender(kind){
 }
 function isEditing(kind,id){ return inlineEdit.kind===kind && inlineEdit.id===id; }
 
-/* 批量编辑 */
+/* ===== 批量编辑（问题1） ===== */
 var bulkEditCtx={ kind:'', side:'', ids:[] };
 function openBulkEdit(kind, side, ids, title){
   if(!ids.length){ toast('尚未勾選'); return; }
@@ -8143,39 +8133,8 @@ function toast(msg){
   toastT=setTimeout(function(){ el.classList.remove('on'); },2200);
 }
 
-/* 畫帖：增量更新 + 懒加载 */
 var picPicking=false, picPicked={};
 var pvFiles=[], pvBusy=false;
-var picLazyObserver=null;
-
-function picCellHtml(it){
-  return '<div class="pic-cell lazy" data-pic="'+it.id+'"><span class="lazy-ph">…</span><label class="ck"><input type="checkbox" data-pck="'+it.id+'"'+(picPicked[it.id]?' checked':'')+'></label></div>';
-}
-function ensurePicObserver(){
-  if(picLazyObserver) return;
-  if(typeof IntersectionObserver==='undefined') return;
-  picLazyObserver=new IntersectionObserver(function(entries){
-    for(var i=0;i<entries.length;i++){
-      var en=entries[i];
-      if(!en.isIntersecting) continue;
-      var cell=en.target;
-      if(cell.classList.contains('loaded')) continue;
-      loadPicCell(cell);
-      picLazyObserver.unobserve(cell);
-    }
-  },{root:null,rootMargin:'300px 0px'});
-}
-function loadPicCell(cell){
-  var id=cell.getAttribute('data-pic');
-  if(!id) return;
-  var all=S.pics(); var data='';
-  for(var i=0;i<all.length;i++){ if(all[i].id===id){ data=all[i].data; break; } }
-  if(!data){ cell.classList.add('loaded'); return; }
-  var img=cell.querySelector('img');
-  if(!img){ img=document.createElement('img'); img.alt=''; cell.insertBefore(img,cell.firstChild); }
-  img.src=data;
-  cell.classList.add('loaded');
-}
 function renderPics(){
   var all=S.pics();
   document.getElementById('picCntBar').innerHTML='共 '+all.length+' 张';
@@ -8184,41 +8143,13 @@ function renderPics(){
   grid.classList.toggle('picking',picPicking);
   document.getElementById('picBulk').classList.toggle('on',picPicking);
   document.getElementById('picBulkBar').classList.toggle('on',picPicking);
-
-  var tile=document.getElementById('picAddTile');
-  if(!tile){
-    tile=document.createElement('div');
-    tile.className='add-tile'; tile.id='picAddTile';
-    tile.innerHTML='<span class="plus">＋</span><span>添加圖片</span>';
-    tile.addEventListener('click',addPicFlow);
-    grid.insertBefore(tile,grid.firstChild);
-  }
-  var dataAttr={};
-  for(var d=0;d<all.length;d++){ dataAttr[all[d].id]=1; }
-  var existing={};
-  var cells=grid.querySelectorAll('.pic-cell');
-  for(var c=0;c<cells.length;c++){
-    var cid=cells[c].getAttribute('data-pic');
-    if(cid && !dataAttr[cid]){ cells[c].parentNode.removeChild(cells[c]); }
-    else if(cid){ existing[cid]=cells[c]; }
-  }
-  var anchor=tile.nextSibling;
+  var h='<div class="add-tile" id="picAddTile"><span class="plus">＋</span><span>添加圖片</span></div>';
   for(var i=0;i<all.length;i++){
     var it=all[i];
-    if(existing[it.id]) continue;
-    var wrap=document.createElement('div');
-    wrap.innerHTML=picCellHtml(it);
-    var cell=wrap.firstChild;
-    grid.insertBefore(cell, anchor);
-    anchor=cell.nextSibling;
-    if(picLazyObserver){ picLazyObserver.observe(cell); }
-    else{ loadPicCell(cell); }
+    h+='<div class="pic-cell" data-pic="'+it.id+'"><img src="'+it.data+'" alt=""><label class="ck"><input type="checkbox" data-pck="'+it.id+'"'+(picPicked[it.id]?' checked':'')+'></label></div>';
   }
-  var chk=grid.querySelectorAll('[data-pck]');
-  for(var x=0;x<chk.length;x++){
-    var kid=chk[x].getAttribute('data-pck');
-    chk[x].checked=!!picPicked[kid];
-  }
+  grid.innerHTML=h;
+  var tile=document.getElementById('picAddTile'); if(tile){ tile.addEventListener('click',addPicFlow); }
   updatePicBulkN();
 }
 function updatePicBulkN(){
@@ -8230,14 +8161,10 @@ function updatePicBulkN(){
 }
 document.getElementById('picGrid').addEventListener('click',function(e){
   if(e.target.tagName==='INPUT') return;
-  if(e.target.closest && e.target.closest('#picAddTile')) return;
   var cell=e.target.closest?e.target.closest('.pic-cell'):null; if(!cell) return;
   var id=cell.getAttribute('data-pic');
   if(picPicking){ picPicked[id]=!picPicked[id]; renderPics(); }
-  else{
-    loadPicCell(cell);
-    var p=S.pics(); for(var i=0;i<p.length;i++){ if(p[i].id===id){ openImgView(p[i].data); break; } }
-  }
+  else{ var p=S.pics(); for(var i=0;i<p.length;i++){ if(p[i].id===id){ openImgView(p[i].data); break; } } }
 });
 document.getElementById('picGrid').addEventListener('change',function(e){
   var id=e.target.getAttribute&&e.target.getAttribute('data-pck');
@@ -9082,14 +9009,7 @@ var inp=document.getElementById('inp');
 function autosize(){ inp.style.height='auto'; inp.style.height=Math.min(inp.scrollHeight,118)+'px'; }
 inp.addEventListener('input',autosize);
 inp.addEventListener('keydown',function(e){ if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); doSend(); } });
-function doSend(){
-  var t=inp.value;
-  if(!String(t).trim()) return;
-  inp.value='';
-  autosize();
-  if(opOpen) toggleOp();
-  try{ sendMine(t); }catch(e){ toast('發送失敗，請重試'); }
-}
+function doSend(){ var t=inp.value; if(!String(t).trim()) return; sendMine(t); inp.value=''; autosize(); if(opOpen) toggleOp(); }
 document.getElementById('send').addEventListener('click',doSend);
 function kb(){
   var vv=window.visualViewport; if(!vv) return;
@@ -9139,7 +9059,7 @@ Store.init().then(function(){
   rearmAll(); rearmMails(); rearmSecretAll();
   maybeHimJournalDaily();
   applyBackground();
-  ensurePicObserver();
+  preloadPics();
   var cpSet=S.set().companion;
   if(cpSet && cpSet.active){
     CP.active=true; CP.thing=cpSet.thing||''; CP.freq=cpSet.freq||'normal'; CP.startAt=cpSet.startAt||Date.now();
