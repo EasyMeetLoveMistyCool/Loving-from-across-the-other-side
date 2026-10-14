@@ -3946,7 +3946,9 @@ function tryClipMine(msg){
   if(!msg || msg.who!=='me' || msg.kind || !msg.text) return;
   var r=Math.max(0,Math.min(100, S.set().clipRatio|0));
   if(Math.random()*100 >= r) return;
-  var c=S.clips();
+  var cc=S.clips();
+  if(!Array.isArray(cc.clips)) cc.clips=[];
+  var c=cc.clips;
   for(var i=0;i<c.length;i++){ if(c[i].srcId===msg.id) return; }
   c.push({id:uid('clip'), text:msg.text, srcId:msg.id, at:msg.at, clippedAt:Date.now()});
   Store.touch('clips'); Store.flush();
@@ -9086,14 +9088,15 @@ inp.addEventListener('keydown',function(e){ if(e.key==='Enter'&&!e.shiftKey){ e.
 function doSend(){
   var t=inp.value;
   if(!String(t).trim()) return;
+  inp.value='';
+  autosize();
   try{
     sendMine(t);
-    inp.value='';
-    autosize();
-    if(opOpen) toggleOp();
   }catch(err){
-    alert('发送出错：\n'+(err&&err.name)+' / '+(err&&err.message)+'\n\n'+(err&&err.stack||''));
+    console.warn('发送出错', err);
+    toast('发送出错，请重试');
   }
+  if(opOpen) toggleOp();
 }
 document.getElementById('send').addEventListener('click',doSend);
 function kb(){
