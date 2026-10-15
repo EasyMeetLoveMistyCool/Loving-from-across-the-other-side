@@ -1105,6 +1105,8 @@ img{max-width:100%;display:block}
 .drift-post .dp-ava img{width:100%;height:100%;object-fit:cover;display:block}
 .drift-post .dp-who{flex:1 1 auto;min-width:0;font-size:13px;letter-spacing:.1em;color:var(--red)}
 .drift-post .dp-tm{flex:0 0 auto;font-family:var(--geo);font-size:10px;color:var(--ink3)}
+.drift-post .dp-del{flex:0 0 auto;font-size:11px;color:var(--red);padding:2px 4px;background:none;border:0}
+.drift-post .dp-del:active{color:var(--ink)}
 .drift-post .dp-body{margin-top:8px;font-size:15px;line-height:1.85;color:var(--ink);white-space:pre-wrap;word-break:break-word;user-select:text;-webkit-user-select:text}
 .drift-post .dp-pics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:8px}
 .drift-post .dp-pics img{width:100%;aspect-ratio:1/1;object-fit:cover;border:1px solid var(--rule);outline:1px solid var(--rule2);outline-offset:2px;cursor:pointer}
@@ -1358,6 +1360,39 @@ img{max-width:100%;display:block}
 .arch-tab.on::after{content:"";position:absolute;left:20%;right:20%;bottom:-1px;height:2px;background:var(--red)}
 
 .blk-secret h3{color:#7a4a8c}
+.blk-secret .ratio-row .rb.on{color:#7a4a8c;border-color:#7a4a8c;background:rgba(122,74,140,.1)}
+.blk-secret .rhythm-row .rh-cd .rb.on,.blk-secret .rhythm-row .rh-lim .rb.on{color:#7a4a8c;border-color:#7a4a8c;background:rgba(122,74,140,.1)}
+
+/* ===== 错误日志弹窗 / 自检弹窗（新增） ===== */
+.diag-layer{position:fixed;inset:0;z-index:490;display:none;align-items:center;justify-content:center;background:rgba(20,14,8,.55)}
+.diag-layer.on{display:flex}
+.diag-box{width:90vw;max-width:440px;max-height:82vh;background:var(--paper);border:2px solid var(--ink);display:flex;flex-direction:column;box-shadow:0 8px 30px rgba(20,14,8,.35)}
+.diag-hd{padding:12px 14px;border-bottom:1px solid var(--rule2);font-size:12px;letter-spacing:.24em;color:var(--red);text-align:center;position:relative}
+.diag-hd .x{position:absolute;right:8px;top:50%;transform:translateY(-50%);font-size:18px;color:var(--ink3);padding:4px 8px;border:0;background:none}
+.diag-bd{flex:1 1 auto;min-height:0;overflow-y:auto;padding:12px 14px}
+.diag-bd .diag-empty{text-align:center;padding:28px 10px;color:var(--ink3);font-size:13px;line-height:1.9}
+.diag-err-item{border-bottom:1px solid var(--rule2);padding:10px 0}
+.diag-err-item .de-top{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+.diag-err-item .de-type{font-size:11px;letter-spacing:.14em;color:var(--red)}
+.diag-err-item .de-time{font-family:var(--geo);font-size:10px;color:var(--ink3)}
+.diag-err-item .de-msg{margin-top:5px;font-size:13px;line-height:1.7;color:var(--ink);word-break:break-word;white-space:pre-wrap}
+.diag-err-item .de-src{margin-top:4px;font-family:var(--geo);font-size:10px;color:var(--ink3);word-break:break-all}
+.diag-err-item .de-stack{margin-top:6px;font-family:var(--geo);font-size:10px;line-height:1.5;color:var(--ink2);background:rgba(59,42,24,.05);padding:6px 8px;white-space:pre-wrap;word-break:break-word;max-height:160px;overflow-y:auto}
+.diag-ft{padding:10px 14px;border-top:1px solid var(--rule2);display:flex;gap:10px}
+.diag-ft button{flex:1 1 0;font-size:13px;letter-spacing:.18em;padding:10px;border:1px solid var(--rule);border-radius:2px;color:var(--ink2);background:none}
+.diag-ft button.ok{color:var(--red);border-color:var(--red)}
+.diag-ft button:active{background:rgba(59,42,24,.06)}
+.diag-ft button.ok:active{background:rgba(156,74,50,.10)}
+
+.diag-chk{border-bottom:1px solid var(--rule2);padding:9px 0}
+.diag-chk .dc-top{display:flex;align-items:center;gap:8px}
+.diag-chk .dc-mark{flex:0 0 auto;width:18px;font-size:14px;text-align:center}
+.diag-chk .dc-mark.ok{color:var(--green)}
+.diag-chk .dc-mark.warn{color:#c08a2e}
+.diag-chk .dc-mark.err{color:var(--red)}
+.diag-chk .dc-name{flex:1 1 auto;font-size:13px;color:var(--ink);word-break:break-word}
+.diag-chk .dc-note{margin-top:4px;font-size:11px;line-height:1.6;color:var(--ink3);word-break:break-word;padding-left:26px}
+  .blk-secret h3{color:#7a4a8c}
 .blk-secret .ratio-row .rb.on{color:#7a4a8c;border-color:#7a4a8c;background:rgba(122,74,140,.1)}
 .blk-secret .rhythm-row .rh-cd .rb.on,.blk-secret .rhythm-row .rh-lim .rb.on{color:#7a4a8c;border-color:#7a4a8c;background:rgba(122,74,140,.1)}
 </style>
@@ -2678,6 +2713,12 @@ img{max-width:100%;display:block}
       <div class="btnline"><button id="clearTestAlbumBtn">清 空 測 試 收 藏</button></div>
     </div>
     <div class="blk">
+      <h3>檢 測</h3>
+      <p class="tip">查看網站在運行中記錄的錯誤，或對整個網站做一次全面自檢。</p>
+      <div class="btnline"><button id="btnErrLog">查 看 錯 誤 日 志</button></div>
+      <div class="btnline"><button id="btnSelfTest">自 檢</button></div>
+    </div>
+    <div class="blk">
       <h3>關 於</h3>
       <p class="tip">本站为一人一世界的私人版面。<br>字卡由你亲手写，不预设、不联网、不接任何外部服务。<br>所有内容仅存于本机 OPFS 存储。</p>
     </div>
@@ -3085,6 +3126,28 @@ img{max-width:100%;display:block}
   </div>
 </div>
 
+<div class="diag-layer" id="errLayer">
+  <div class="diag-box">
+    <div class="diag-hd">錯 誤 日 志<button class="x" id="errClose">×</button></div>
+    <div class="diag-bd" id="errBody"></div>
+    <div class="diag-ft">
+      <button id="errClear">清 空 日 志</button>
+      <button class="ok" id="errCopy">複 製 全 部</button>
+    </div>
+  </div>
+</div>
+
+<div class="diag-layer" id="selfTestLayer">
+  <div class="diag-box">
+    <div class="diag-hd">網 站 自 檢<button class="x" id="selfTestClose">×</button></div>
+    <div class="diag-bd" id="selfTestBody"></div>
+    <div class="diag-ft">
+      <button id="selfTestRun">重 新 自 檢</button>
+      <button class="ok" id="selfTestCopy">複 製 結 果</button>
+    </div>
+  </div>
+</div>
+
 <div id="toast"></div>
 <script>
 (function(){
@@ -3096,12 +3159,13 @@ var FILES={
   archive:'archive.json', clips:'clips.json', companion:'companion.json',
   mail:'mail.json', tides:'tides.json', drift:'drift.json', diary:'diary.json',
   album:'album.json', journal:'journal.json', guestbook:'guestbook.json',
-  whispers:'whispers.json', intimates:'intimates.json', secret:'secret.json'
+  whispers:'whispers.json', intimates:'intimates.json', secret:'secret.json',
+  errors:'errors.json'
 };
 var Store={
   dir:null,
   backupDir:null,
-  cache:{meta:null,cards:null,chat:null,set:null,profile:null,pics:null,ripples:null,records:null,archive:null,clips:null,companion:null,mail:null,tides:null,drift:null,diary:null,album:null,journal:null,guestbook:null,whispers:null,intimates:null,secret:null},
+  cache:{meta:null,cards:null,chat:null,set:null,profile:null,pics:null,ripples:null,records:null,archive:null,clips:null,companion:null,mail:null,tides:null,drift:null,diary:null,album:null,journal:null,guestbook:null,whispers:null,intimates:null,secret:null,errors:null},
   timers:{},
 
   async init(){
@@ -3160,7 +3224,8 @@ var Store={
       guestbook:function(){return {v:1,msgs:[]};},
       whispers:function(){return {v:1,cards:[]};},
       intimates:function(){return {v:1,mine:[],hers:[]};},
-      secret:function(){return {v:1,msgs:[],meta:{firstDay:'',openDay:''},archives:[]};}
+      secret:function(){return {v:1,msgs:[],meta:{firstDay:'',openDay:''},archives:[]};},
+      errors:function(){return {v:1,items:[]};}
     };
     var root=await navigator.storage.getDirectory();
     this.dir=await root.getDirectoryHandle('bian',{create:true});
@@ -3301,6 +3366,10 @@ var Store={
     if(typeof sec.meta.openDay!=='string') sec.meta.openDay='';
     if(!Array.isArray(sec.archives)) sec.archives=[];
     this.cache.secret=sec;
+    var er=this.cache.errors;
+    if(!er || typeof er!=='object') er={v:1,items:[]};
+    if(!Array.isArray(er.items)) er.items=[];
+    this.cache.errors=er;
     for(var k2 in FILES){
       if(!this.cache[k2] || typeof this.cache[k2]!=='object'){
         this.cache[k2]=DEFS[k2]();
@@ -3548,7 +3617,14 @@ function _intimates(){
   Store.cache.intimates=i;
   return i;
 }
-var S={ cards:_cards, msgs:_msgs, set:_set, profile:_profile, pics:_pics, ripples:_ripples, records:_records, archive:_archive, clips:_clips, companion:_companion, mail:_mail, tides:_tides, drift:_drift, diary:_diary, album:_album, journal:_journal, guestbook:_guestbook, whispers:_whispers, intimates:_intimates, secretMsgs:_secretMsgs, secretMeta:_secretMeta, secretArchives:_secretArchives, pendings:{} };
+function _errors(){
+  var e=Store.cache.errors;
+  if(!e||typeof e!=='object') e={v:1,items:[]};
+  if(!Array.isArray(e.items)) e.items=[];
+  Store.cache.errors=e;
+  return e;
+}
+var S={ cards:_cards, msgs:_msgs, set:_set, profile:_profile, pics:_pics, ripples:_ripples, records:_records, archive:_archive, clips:_clips, companion:_companion, mail:_mail, tides:_tides, drift:_drift, diary:_diary, album:_album, journal:_journal, guestbook:_guestbook, whispers:_whispers, intimates:_intimates, secretMsgs:_secretMsgs, secretMeta:_secretMeta, secretArchives:_secretArchives, errors:_errors, pendings:{} };
 
 function uid(p){ return p+'_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,7); }
 function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
@@ -3674,6 +3750,50 @@ function sprinkleEmoji(text){
   }
   return out;
 }
+
+/* ===== 全局错误捕获 + 写 OPFS ===== */
+var __errCapturing=false;
+function recordError(type, message, source, line, col, stack){
+  try{
+    if(__errCapturing) return;
+    __errCapturing=true;
+    var e=_errors();
+    e.items.push({
+      id: uid('err'),
+      time: Date.now(),
+      type: type||'error',
+      message: String(message||'').slice(0,2000),
+      source: String(source||'').slice(0,500),
+      line: (typeof line==='number')?line:0,
+      col: (typeof col==='number')?col:0,
+      stack: String(stack||'').slice(0,4000)
+    });
+    if(e.items.length>50){ e.items = e.items.slice(e.items.length-50); }
+    Store.touch('errors');
+    setTimeout(function(){ try{ Store.writeNow('errors', e); }catch(x){} __errCapturing=false; }, 0);
+  }catch(x){ __errCapturing=false; }
+}
+function setupErrorCapture(){
+  window.addEventListener('error', function(ev){
+    try{
+      var msg = ev.message || (ev.error && ev.error.message) || 'Error';
+      var src = ev.filename || '';
+      var ln = ev.lineno || 0;
+      var cl = ev.colno || 0;
+      var st = ev.error && ev.error.stack ? ev.error.stack : '';
+      recordError('error', msg, src, ln, cl, st);
+    }catch(x){}
+  });
+  window.addEventListener('unhandledrejection', function(ev){
+    try{
+      var r = ev.reason;
+      var msg = (r && (r.message || r.toString)) ? (r.message || String(r)) : String(r);
+      var st = r && r.stack ? r.stack : '';
+      recordError('rejection', msg, '', 0, 0, st);
+    }catch(x){}
+  });
+}
+setupErrorCapture();
   var SEASON={
   spring:['彼岸入春','彼岸也回暖了','对岸的春天来了','彼岸开春','彼岸正是春天','彼岸春意渐浓'],
   summer:['彼岸入夏','对岸的夏天来了','彼岸蝉鸣了','彼岸正是夏天','彼岸暑气正盛','彼岸夏意浓'],
@@ -4063,7 +4183,17 @@ function maybeHimJournalDaily(){
   }
 }
 
+/* 封面还没进入时，不触发祂的主动行为（问题1） */
+function coverStillOn(){
+  var cv=document.getElementById('cover');
+  if(!cv) return false;
+  if(cv.style.display==='none') return false;
+  if(cv.classList.contains('out')) return false;
+  return true;
+}
+
 function tryHimActiveOnce(){
+  if(coverStillOn()) return;
   var pool=[];
   if(rlCheck('call'))       pool.push({key:'call',       run:maybeIncomingCall});
   if(rlCheck('cp'))         pool.push({key:'cp',         run:maybeInviteCompanion});
@@ -4335,7 +4465,7 @@ function renderArchList(){
   var box=document.getElementById('archDayList');
   var bar=document.getElementById('archCntBar');
   var nEl=document.getElementById('lgArchN');
-  if(nEl) nEl.textContent=arc.issues.length;
+  if(nEl) nEl.textContent=(arc.issues.length + S.secretArchives().length);
   var tabs=document.querySelectorAll('#archTabs .arch-tab');
   for(var t=0;t<tabs.length;t++){ tabs[t].classList.toggle('on', tabs[t].getAttribute('data-at')===archTab); }
   var list = (archTab==='paper') ? arc.issues : S.secretArchives();
@@ -4868,6 +4998,7 @@ function buildSnapShot(){
 }
 function maybeHimMail(force){
   if(!force && document.visibilityState!=='visible') return;
+  if(!force && coverStillOn()) return;
   if(!force && !rlCheck('mail')) return;
   var now=Date.now();
   var m={id:uid('mail'),from:'him',to:'me',body:buildHimLetterText(),pic:'',at:now,status:'waiting',replyBody:'',replyPic:'',replyAt:0,dueAt:now+mailDelayMs(),test:!!force};
@@ -4921,7 +5052,6 @@ function renderMailView(m){
   if(m.pic){ h+='<div class="lt-pic"><img src="'+m.pic+'" data-mimg="1" alt=""></div>'; }
   h+='<div class="lt-sign">'+esc(signName1)+'</div>';
   h+='<div class="lt-date">'+mingGuoDate(m.at)+'</div>';
-  h+=mailArriveLine(m);
   h+='</div>';
   if(m.myReply){
     var toName2 = nameHim();
@@ -4932,6 +5062,7 @@ function renderMailView(m){
     if(m.myReplyPic){ h+='<div class="lt-pic"><img src="'+m.myReplyPic+'" data-mimg="1" alt=""></div>'; }
     h+='<div class="lt-sign">'+esc(signName2)+'</div>';
     h+='<div class="lt-date">'+mingGuoDate(m.myReplyAt||m.at)+'</div>';
+    h+=mailArriveLine(m);
     h+='</div>';
   }
   if(m.status==='done' && m.replyBody){
@@ -4947,7 +5078,8 @@ function renderMailView(m){
   }else if(m.status==='waiting'){
     if(m.from==='him' && !m.myReply){
       h+='<div class="empty" style="padding:20px 0">信已到，等你回覆。</div>';
-    }else{
+    }else if(m.from==='me'){
+      h+=mailArriveLine(m);
       h+='<div class="empty" style="padding:20px 0">信在路上，還沒到。</div>';
     }
   }
@@ -5024,6 +5156,240 @@ document.getElementById('btnResetSettings').addEventListener('click',function(){
     toast('已恢復默認設置，正在重新載入…');
     setTimeout(function(){ location.reload(); }, 600);
   }).catch(function(e){ toast('恢復失敗：'+(e&&e.message||e)); });
+});
+
+/* ===== 错误日志弹窗 + 自检弹窗（需求1） ===== */
+function openErrLayer(){
+  var body=document.getElementById('errBody');
+  var e=_errors();
+  var items=(e.items||[]).slice().sort(function(a,b){ return (b.time||0)-(a.time||0); });
+  if(!items.length){
+    body.innerHTML='<div class="diag-empty">暫無錯誤記錄。<br>一切安好。</div>';
+  }else{
+    var h='';
+    for(var i=0;i<items.length;i++){
+      var it=items[i];
+      var dt=new Date(it.time||Date.now());
+      var tm=dt.getFullYear()+'-'+pad2(dt.getMonth()+1)+'-'+pad2(dt.getDate())+' '+pad2(dt.getHours())+':'+pad2(dt.getMinutes())+':'+pad2(dt.getSeconds());
+      h+='<div class="diag-err-item">';
+      h+='<div class="de-top"><span class="de-type">'+esc(it.type||'error')+'</span><span class="de-time">'+esc(tm)+'</span></div>';
+      h+='<div class="de-msg">'+esc(it.message||'')+'</div>';
+      if(it.source){ h+='<div class="de-src">'+esc(it.source)+(it.line?(' : '+it.line+(it.col?(':'+it.col):'')):'')+'</div>'; }
+      if(it.stack){ h+='<div class="de-stack">'+esc(it.stack)+'</div>'; }
+      h+='</div>';
+    }
+    body.innerHTML=h;
+  }
+  document.getElementById('errLayer').classList.add('on');
+}
+document.getElementById('btnErrLog').addEventListener('click',openErrLayer);
+document.getElementById('errClose').addEventListener('click',function(){ document.getElementById('errLayer').classList.remove('on'); });
+document.getElementById('errLayer').addEventListener('click',function(e){ if(e.target===this) this.classList.remove('on'); });
+document.getElementById('errClear').addEventListener('click',function(){
+  if(!confirm('確定清空錯誤日誌？')) return;
+  var e=_errors(); e.items=[];
+  Store.touch('errors'); Store.writeNow('errors', e);
+  openErrLayer(); toast('已清空錯誤日誌');
+});
+document.getElementById('errCopy').addEventListener('click',function(){
+  var e=_errors();
+  var items=(e.items||[]).slice().sort(function(a,b){ return (b.time||0)-(a.time||0); });
+  if(!items.length){ toast('沒有可複製的錯誤'); return; }
+  var txt='';
+  for(var i=0;i<items.length;i++){
+    var it=items[i];
+    var dt=new Date(it.time||Date.now());
+    var tm=dt.getFullYear()+'-'+pad2(dt.getMonth()+1)+'-'+pad2(dt.getDate())+' '+pad2(dt.getHours())+':'+pad2(dt.getMinutes())+':'+pad2(dt.getSeconds());
+    txt+='['+tm+'] '+(it.type||'error')+'\n'+(it.message||'')+'\n';
+    if(it.source){ txt+=(it.source)+(it.line?(' : '+it.line+(it.col?(':'+it.col):'')):'')+'\n'; }
+    if(it.stack){ txt+=it.stack+'\n'; }
+    txt+='\n';
+  }
+  copyText(txt);
+});
+function copyText(t){
+  try{
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(t).then(function(){ toast('已複製'); },function(){ fallbackCopy(t); });
+    }else{ fallbackCopy(t); }
+  }catch(e){ fallbackCopy(t); }
+}
+function fallbackCopy(t){
+  try{
+    var ta=document.createElement('textarea');
+    ta.value=t; ta.style.cssText='position:fixed;left:-9999px;top:0;opacity:0';
+    document.body.appendChild(ta); ta.focus(); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta);
+    toast('已複製');
+  }catch(e){ toast('複製失敗'); }
+}
+
+var selfTestRunning=false;
+function runSelfTest(){
+  if(selfTestRunning) return;
+  selfTestRunning=true;
+  var res=[];
+  function add(level,name,note){ res.push({level:level,name:name,note:note||''}); }
+
+  /* 1. OPFS 存储 */
+  try{
+    if(Store.dir){ add('ok','OPFS 目錄','已就緒'); }
+    else{ add('err','OPFS 目錄','未初始化'); }
+  }catch(e){ add('err','OPFS 目錄',String(e&&e.message||e)); }
+
+  /* 2. 各 JSON 文件 */
+  var missing=[], badStructure=[];
+  for(var k in FILES){
+    var obj=Store.cache[k];
+    if(!obj || typeof obj!=='object'){ missing.push(FILES[k]); }
+    else if(typeof obj.v!=='number' && k!=='secret'){ /* secret 也应有 v */
+      badStructure.push(FILES[k]);
+    }
+  }
+  if(missing.length){ add('err','檔案齊全','缺少：'+missing.join('、')); }
+  else{ add('ok','檔案齊全',Object.keys(FILES).length+' 個檔案均在'); }
+  if(badStructure.length){ add('warn','版本欄位','以下缺 v：'+badStructure.join('、')); }
+  else{ add('ok','版本欄位','均含 v 欄位'); }
+
+  /* 3. 数据完整性 */
+  var arrChecks=[
+    ['字卡', S.cards()],
+    ['聊天', S.msgs()],
+    ['畫帖', S.pics()],
+    ['唱片', S.records()],
+    ['郵筒', S.mail().mails],
+    ['漂流', S.drift().posts],
+    ['日誌', S.diary().items],
+    ['留言板', S.guestbook().msgs],
+    ['私語匣', S.whispers()],
+    ['剪報', S.clips().clips],
+    ['相伴', S.companion().sessions],
+    ['秘聞', S.secretMsgs()],
+    ['錯誤日誌', S.errors().items]
+  ];
+  var badArr=[];
+  for(var a=0;a<arrChecks.length;a++){
+    if(!Array.isArray(arrChecks[a][1])){ badArr.push(arrChecks[a][0]); }
+  }
+  if(badArr.length){ add('err','資料完整性','非陣列：'+badArr.join('、')); }
+  else{ add('ok','資料完整性','各清單均為陣列'); }
+
+  /* 4. 引用有效性（相冊 refs） */
+  var al=S.album();
+  var picIds={}; var pics=S.pics();
+  for(var pi=0;pi<pics.length;pi++) picIds[pics[pi].id]=1;
+  var badRef=0;
+  for(var ri=0;ri<al.refs.length;ri++){
+    var ref=al.refs[ri];
+    if(ref.kind==='pics'){ if(!picIds[ref.id]) badRef++; }
+    else if(ref.kind==='upload'){ if(!ref.data) badRef++; }
+    else if(ref.kind==='chat'){ if(!ref.data) badRef++; }
+  }
+  if(badRef){ add('warn','相冊引用','有 '+badRef+' 條無效引用'); }
+  else{ add('ok','相冊引用','引用有效'); }
+
+  /* 5. 时间字段 */
+  var ms=S.msgs(), badTime=0;
+  for(var mi=0;mi<ms.length;mi++){
+    if(ms[mi].who!=='extra' && (typeof ms[mi].at!=='number' || ms[mi].at<=0)) badTime++;
+    if(ms[mi].who==='wait' && (typeof ms[mi].dueAt!=='number')) badTime++;
+  }
+  if(badTime){ add('warn','聊天時間欄位','有 '+badTime+' 條異常'); }
+  else{ add('ok','聊天時間欄位','正常'); }
+
+  /* 6. 设置范围 */
+  var s=S.set();
+  var badSet=[];
+  var ratioKeys=['picRatio','ripRatio','recRatio','quoteRatio','clipRatio','cpInviteRatio','diaryRatio','gbRatio','albumRatio','driftPostRatio','driftCommentRatio','driftReplyCommentRatio','driftCommentPicRatio','answerRatio','callInRatio','mailInRatio','mailSnapRatio','mailPicRatio','secretHimOpenRatio','secretInviteRatio','secretQuoteRatio'];
+  for(var si=0;si<ratioKeys.length;si++){
+    var v=s[ratioKeys[si]];
+    if(typeof v!=='number' || v<0 || v>100) badSet.push(ratioKeys[si]);
+  }
+  if(badSet.length){ add('warn','設置範圍','越界：'+badSet.join('、')); }
+  else{ add('ok','設置範圍','均在 0~100'); }
+  if(typeof s.dMin==='number' && typeof s.dMax==='number' && s.dMin>s.dMax){ add('warn','譯電時延','最快大於最慢'); }
+  else if(typeof s.mailMin==='number' && typeof s.mailMax==='number' && s.mailMin>s.mailMax){ add('warn','郵筒時延','最快大於最慢'); }
+  else{ add('ok','時延範圍','正常'); }
+
+  /* 7. 存储用量 */
+  try{
+    if(navigator.storage && navigator.storage.estimate){
+      navigator.storage.estimate().then(function(est){
+        var used=est.usage||0, quota=est.quota||0;
+        var usedMB=(used/1048576).toFixed(2);
+        var note=(quota? ('已用 '+usedMB+' MB / 配額 '+(quota/1048576).toFixed(0)+' MB') : ('已用 '+usedMB+' MB'));
+        add('ok','存儲用量',note);
+        renderSelfTest(res);
+      },function(){
+        add('warn','存儲用量','無法讀取');
+        renderSelfTest(res);
+      });
+      return;
+    }else{
+      add('warn','存儲用量','瀏覽器不支援');
+    }
+  }catch(e){ add('warn','存儲用量',String(e&&e.message||e)); }
+
+  /* 8. DOM 关键元素 */
+  var needIds=['paper','flow','inp','send','navbar','cover','secretPage','secretFlow','setPage'];
+  var missDom=[];
+  for(var d=0;d<needIds.length;d++){ if(!document.getElementById(needIds[d])) missDom.push(needIds[d]); }
+  if(missDom.length){ add('err','關鍵元素','缺少：'+missDom.join('、')); }
+  else{ add('ok','關鍵元素','完整'); }
+
+  /* 9. 待處理任務 */
+  var pendKeys=Object.keys(S.pendings||{});
+  if(pendKeys.length){ add('warn','待處理譯電','有 '+pendKeys.length+' 條等待中'); }
+  else{ add('ok','待處理譯電','無'); }
+
+  renderSelfTest(res);
+}
+function renderSelfTest(res){
+  selfTestRunning=false;
+  var body=document.getElementById('selfTestBody');
+  if(!body) return;
+  var okN=0,warnN=0,errN=0;
+  var h='';
+  for(var i=0;i<res.length;i++){
+    var it=res[i];
+    var mark='•', cls='';
+    if(it.level==='ok'){ mark='✓'; cls='ok'; okN++; }
+    else if(it.level==='warn'){ mark='!'; cls='warn'; warnN++; }
+    else if(it.level==='err'){ mark='✗'; cls='err'; errN++; }
+    h+='<div class="diag-chk"><div class="dc-top"><span class="dc-mark '+cls+'">'+mark+'</span><span class="dc-name">'+esc(it.name)+'</span></div>';
+    if(it.note){ h+='<div class="dc-note">'+esc(it.note)+'</div>'; }
+    h+='</div>';
+  }
+  h='<div class="diag-chk"><div class="dc-top"><span class="dc-mark ok">✓</span><span class="dc-name">自檢完成：正常 '+okN+' 項 · 警告 '+warnN+' 項 · 錯誤 '+errN+' 項</span></div></div>'+h;
+  body.innerHTML=h;
+}
+document.getElementById('btnSelfTest').addEventListener('click',function(){
+  var body=document.getElementById('selfTestBody');
+  body.innerHTML='<div class="diag-empty">正在自檢…</div>';
+  document.getElementById('selfTestLayer').classList.add('on');
+  selfTestRunning=false;
+  setTimeout(function(){ runSelfTest(); }, 40);
+});
+document.getElementById('selfTestRun').addEventListener('click',function(){
+  var body=document.getElementById('selfTestBody');
+  body.innerHTML='<div class="diag-empty">正在自檢…</div>';
+  selfTestRunning=false;
+  setTimeout(function(){ runSelfTest(); }, 40);
+});
+document.getElementById('selfTestClose').addEventListener('click',function(){ document.getElementById('selfTestLayer').classList.remove('on'); });
+document.getElementById('selfTestLayer').addEventListener('click',function(e){ if(e.target===this) this.classList.remove('on'); });
+document.getElementById('selfTestCopy').addEventListener('click',function(){
+  var body=document.getElementById('selfTestBody');
+  var items=body.querySelectorAll('.diag-chk');
+  if(!items.length){ toast('沒有可複製的結果'); return; }
+  var txt='';
+  for(var i=0;i<items.length;i++){
+    var name=items[i].querySelector('.dc-name');
+    var note=items[i].querySelector('.dc-note');
+    var mark=items[i].querySelector('.dc-mark');
+    txt+=(mark?mark.textContent:'•')+' '+(name?name.textContent:'')+(note?(' — '+note.textContent):'')+'\n';
+  }
+  copyText(txt);
 });
   var tideTab='tide';
 var calYM={ y:new Date().getFullYear(), m:new Date().getMonth() };
@@ -5630,6 +5996,7 @@ document.getElementById('driftWriteSend').addEventListener('click',function(){
   scheduleHimComment(p.id);
 });
 function maybeHimDriftPost(forceTest){
+  if(!forceTest && coverStillOn()) return;
   var cards=S.cards();
   if(!cards.length && !S.pics().length) return;
   var n=5+Math.floor(Math.random()*16); if(n>20) n=20;
@@ -5700,6 +6067,7 @@ function scheduleHimComment(postId){
   clearTimeout(driftCommentTimers[postId]);
   var delay=(1+Math.random()*2)*3600*1000;
   driftCommentTimers[postId]=setTimeout(function(){
+    if(coverStillOn()) return;
     if(!rlCheck('driftComment')) return;
     if(Math.random()*100 >= (S.set().driftCommentRatio|0)) return;
     maybeHimDriftComment(postId);
@@ -5711,6 +6079,7 @@ function scheduleHimReplyComment(postId){
   clearTimeout(driftReplyCommentTimers[postId]);
   var delay=(1+Math.random()*2)*3600*1000;
   driftReplyCommentTimers[postId]=setTimeout(function(){
+    if(coverStillOn()) return;
     if(!rlCheck('driftReplyComment')) return;
     if(Math.random()*100 >= (S.set().driftReplyCommentRatio|0)) return;
     maybeHimDriftComment(postId);
@@ -5779,6 +6148,7 @@ document.getElementById('diarySave').addEventListener('click',function(){
   renderDiary(); toast('已存入');
 });
 function maybeHimDiary(){
+  if(coverStillOn()) return;
   var cards=S.cards(); if(!cards.length) return;
   var n=8+Math.floor(Math.random()*8); if(n>15) n=15;
   var picked=[];
@@ -5887,6 +6257,7 @@ document.getElementById('albumClearBtn').addEventListener('click',function(){
   Store.touch('album'); Store.flush(); renderAlbum(); toast('已清空');
 });
 function maybeHimAlbum(forceTest){
+  if(!forceTest && coverStillOn()) return;
   var all=albumCollectAll();
   var takenId={};
   for(var t=0;t<all.length;t++){ takenId[all[t].kind+':'+all[t].id]=1; }
@@ -6100,6 +6471,7 @@ document.getElementById('gbSend').addEventListener('click',function(){
   renderGuestbook(); toast('已留言');
 });
 function maybeHimGuestbook(){
+  if(coverStillOn()) return;
   var cards=S.cards(); if(!cards.length) return;
   var n=3+Math.floor(Math.random()*3); var parts=[];
   for(var i=0;i<n;i++){ parts.push(addPunct(cards[Math.floor(Math.random()*cards.length)].text)); }
@@ -7150,6 +7522,18 @@ function secretDelayMs(){
   if(a>b){ var t=a; a=b; b=t; }
   return (a+Math.random()*(b-a))*1000;
 }
+/* 秘闻里我发的纯文字也剪报（跟头版一样，走 clipRatio） */
+function tryClipSecret(msg){
+  if(!msg || msg.who!=='me' || msg.kind || !msg.text) return;
+  var r=Math.max(0,Math.min(100, S.set().clipRatio|0));
+  if(Math.random()*100 >= r) return;
+  var cc=S.clips();
+  if(!Array.isArray(cc.clips)) cc.clips=[];
+  var c=cc.clips;
+  for(var i=0;i<c.length;i++){ if(c[i].srcId===msg.id) return; }
+  c.push({id:uid('clip'), text:msg.text, srcId:msg.id, at:msg.at, clippedAt:Date.now(), from:'secret'});
+  Store.touch('clips'); Store.flush();
+}
 function secretSendMine(text){
   text=String(text||'').replace(/\s+$/,''); if(!text) return;
   var now=Date.now();
@@ -7157,6 +7541,7 @@ function secretSendMine(text){
   var msg={id:uid('sm'),who:'me',text:text,at:now};
   if(secretPendingQuote){ msg.quote=secretPendingQuote; }
   ms.push(msg);
+  tryClipSecret(msg);
   if(secretPendingQuote){ secretPendingQuote=null; var bar=document.getElementById('secretPend'); if(bar) bar.classList.remove('on'); }
   var w={id:uid('sw'),who:'wait',at:now,dueAt:now+secretDelayMs()};
   ms.push(w);
@@ -7312,6 +7697,8 @@ var SECRET_INVITE_MAINS=[
 var SECRET_INVITE_YES=['好','去','進 去','聽 祂 說'];
 var SECRET_INVITE_NO=['不 了','不 去','以 後 再 說'];
 function showSecretInvite(fromWho){
+  /* 封面还没进入时，不弹秘闻邀请（问题1） */
+  if(coverStillOn()) return;
   var main=SECRET_INVITE_MAINS[Math.floor(Math.random()*SECRET_INVITE_MAINS.length)];
   var yesBtn=SECRET_INVITE_YES[Math.floor(Math.random()*SECRET_INVITE_YES.length)];
   var noBtn=SECRET_INVITE_NO[Math.floor(Math.random()*SECRET_INVITE_NO.length)];
@@ -7619,6 +8006,7 @@ document.getElementById('secretInp').addEventListener('keydown',function(e){
 
 /* 祂主动在秘聞开口 */
 function secretHimOpenOnce(){
+  if(coverStillOn()) return;
   if(!document.getElementById('secretPage').classList.contains('on')) return;
   if(!rlCheck('secretOpen')) return;
   var s=S.set();
@@ -7643,6 +8031,7 @@ function startSecretHeartbeat(){
 
 /* 祂邀请我去秘聞 */
 function maybeSecretInvite(){
+  if(coverStillOn()) return;
   if(document.visibilityState!=='visible') return;
   if(document.getElementById('secretPage').classList.contains('on')) return;
   var meta=S.secretMeta();
@@ -7700,7 +8089,7 @@ function openLaiGao(){
   document.getElementById('lgRipN').textContent=(S.ripples().mine.length+S.ripples().hers.length);
   document.getElementById('lgIntimatesN').textContent=(S.intimates().mine.length+S.intimates().hers.length);
   document.getElementById('lgRecN').textContent=S.records().length;
-  document.getElementById('lgArchN').textContent=S.archive().issues.length;
+  document.getElementById('lgArchN').textContent=(S.archive().issues.length + S.secretArchives().length);
   document.getElementById('lgClipN').textContent=S.clips().clips.length;
   var callN=0; var ms=S.msgs();
   for(var i=0;i<ms.length;i++){ if(ms[i].kind==='calllog') callN++; }
@@ -8835,6 +9224,7 @@ document.getElementById('queueList').addEventListener('click',function(e){
 })();
 var pendingInvite=null;
 function askInvite(rec){
+  if(coverStillOn()) return;
   pendingInvite=rec; var nn=callHim();
   document.getElementById('recInviteTitle').textContent=nn+' 想 聽';
   document.getElementById('recInviteSong').textContent=rec.title||'';
@@ -8846,6 +9236,7 @@ document.getElementById('recInviteYes').addEventListener('click',function(){ var
 
 var pendingCpInvite=null;
 function maybeInviteCompanion(){
+  if(coverStillOn()) return;
   if(CP.active) return;
   if(document.visibilityState!=='visible') return;
   var s=S.set();
@@ -9049,6 +9440,7 @@ function callEnd(reason){
 }
 function pushCallLog(text){ var ms=S.msgs(); ms.push({id:uid('m'),who:'me',kind:'calllog',text:text,at:Date.now()}); }
 function maybeIncomingCall(){
+  if(coverStillOn()) return;
   if(CALL.active) return;
   if(document.visibilityState!=='visible') return;
   if(!rlCheck('call')) return;
@@ -9118,10 +9510,12 @@ document.getElementById('btnReload').addEventListener('click',function(){ locati
 var cover=document.getElementById('cover');
 function enter(){
   if(cover.classList.contains('out')) return;
+  /* 问题3：先立刻渲染主界面内容，让内容和封面淡出同时进行，更丝滑 */
+  renderMasthead(); renderFlow(); toBottom(false); updateListenBar();
   cover.classList.add('out');
   document.getElementById('paper').classList.add('on');
   showNav(true);
-  setTimeout(function(){ cover.style.display='none'; renderMasthead(); renderFlow(); toBottom(false); updateListenBar(); },470);
+  setTimeout(function(){ cover.style.display='none'; },470);
 }
 document.getElementById('enter').addEventListener('click',function(e){ e.stopPropagation(); enter(); });
 cover.addEventListener('click',enter);
