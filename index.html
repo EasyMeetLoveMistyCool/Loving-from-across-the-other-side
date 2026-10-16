@@ -886,6 +886,7 @@ img{max-width:100%;display:block}
 .secret-msg-menu-box .smm-it.danger{color:#7a4a8c}
 .secret-msg-menu-box .smm-it.cancel{color:rgba(46,32,56,.5);font-size:13px;letter-spacing:.18em}
 
+/* 下面这块（秘闻邀请弹窗）将被删除——见新版，本段此处原样保留，稍后在“删除”清单里去掉 */
 .secret-invite-layer{position:fixed;inset:0;z-index:470;display:none;align-items:center;justify-content:center;background:rgba(20,14,8,.55)}
 .secret-invite-layer.on{display:flex}
 .secret-invite-box{width:82vw;max-width:400px;background:#ece0f0;border:2px solid #2e2038;box-shadow:0 8px 30px rgba(20,14,8,.4);display:flex;flex-direction:column}
@@ -1296,18 +1297,6 @@ img{max-width:100%;display:block}
 .secret-msg-menu-box .smm-it.danger{color:#7a4a8c}
 .secret-msg-menu-box .smm-it.cancel{color:rgba(46,32,56,.5);font-size:13px;letter-spacing:.18em}
 
-.secret-invite-layer{position:fixed;inset:0;z-index:470;display:none;align-items:center;justify-content:center;background:rgba(20,14,8,.55)}
-.secret-invite-layer.on{display:flex}
-.secret-invite-box{width:82vw;max-width:400px;background:#ece0f0;border:2px solid #2e2038;box-shadow:0 8px 30px rgba(20,14,8,.4);display:flex;flex-direction:column}
-.secret-invite-hd{padding:14px;border-bottom:1px solid rgba(122,74,140,.25);font-size:12px;letter-spacing:.24em;color:#7a4a8c;text-align:center}
-.secret-invite-bd{padding:26px 20px;text-align:center}
-.secret-invite-main{font-size:16px;line-height:1.9;color:#2e2038;letter-spacing:.08em}
-.secret-invite-ft{padding:10px 14px;border-top:1px solid rgba(122,74,140,.25);display:flex;gap:10px}
-.secret-invite-ft button{flex:1 1 0;font-size:13px;letter-spacing:.18em;padding:11px;border:1px solid rgba(122,74,140,.5);border-radius:2px;color:rgba(46,32,56,.7);background:none}
-.secret-invite-ft button.ok{color:#7a4a8c;border-color:#7a4a8c}
-.secret-invite-ft button:active{background:rgba(122,74,140,.12)}
-.secret-invite-ft button.ok:active{background:rgba(122,74,140,.18)}
-
 .secret-pick-layer{position:fixed;inset:0;z-index:420;display:none;align-items:center;justify-content:center;background:rgba(20,14,8,.55)}
 .secret-pick-layer.on{display:flex}
 .secret-pick-box{width:86vw;max-width:420px;max-height:76vh;background:#ece0f0;border:2px solid #2e2038;display:flex;flex-direction:column;box-shadow:0 8px 30px rgba(20,14,8,.35)}
@@ -1392,9 +1381,11 @@ img{max-width:100%;display:block}
 .diag-chk .dc-mark.err{color:var(--red)}
 .diag-chk .dc-name{flex:1 1 auto;font-size:13px;color:var(--ink);word-break:break-word}
 .diag-chk .dc-note{margin-top:4px;font-size:11px;line-height:1.6;color:var(--ink3);word-break:break-word;padding-left:26px}
-  .blk-secret h3{color:#7a4a8c}
-.blk-secret .ratio-row .rb.on{color:#7a4a8c;border-color:#7a4a8c;background:rgba(122,74,140,.1)}
-.blk-secret .rhythm-row .rh-cd .rb.on,.blk-secret .rhythm-row .rh-lim .rb.on{color:#7a4a8c;border-color:#7a4a8c;background:rgba(122,74,140,.1)}
+
+.diag-prog{padding:22px 16px}
+.diag-prog .dp-label{font-size:12px;letter-spacing:.16em;color:var(--ink2);text-align:center;margin-bottom:12px;font-family:var(--geo)}
+.diag-prog .dp-bar{height:6px;background:rgba(59,42,24,.14);position:relative;overflow:hidden}
+.diag-prog .dp-fill{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--red);transition:width .16s ease}
 </style>
 </head>
 <body>
@@ -2139,19 +2130,6 @@ img{max-width:100%;display:block}
   </div>
 </div>
 
-<div class="secret-invite-layer" id="secretInviteLayer">
-  <div class="secret-invite-box">
-    <div class="secret-invite-hd" id="secretInviteHd">祂 想 邀 你 進 秘 報</div>
-    <div class="secret-invite-bd">
-      <div class="secret-invite-main" id="secretInviteMain">易遇 想 和 你 到 秘聞 聊 聊</div>
-    </div>
-    <div class="secret-invite-ft">
-      <button id="secretInviteNo">不 了</button>
-      <button class="ok" id="secretInviteYes">好</button>
-    </div>
-  </div>
-</div>
-
 <div class="secret-pick-layer" id="secretPickLayer">
   <div class="secret-pick-box">
     <div class="secret-pick-hd">畫 帖<button class="x" id="secretPickClose">×</button></div>
@@ -2671,29 +2649,6 @@ img{max-width:100%;display:block}
         </div>
       </div>
     </div>
-    <div class="blk blk-secret">
-      <h3>秘 聞 · 邀 請</h3>
-      <p class="tip">祂在頭版邀請你去秘聞的几率与节奏。</p>
-      <div class="fld"><label>概率</label><div class="r"><input id="secretInviteRatio" type="number" inputmode="numeric" min="0" max="100" value="30"><span class="u">%</span></div></div>
-      <div class="rhythm-row" data-rk="secretInvite">
-        <span class="rh-name">最短间隔</span>
-        <div class="rh-cd" data-cd="secretInvite">
-          <button class="rb" data-v="0">不冷却</button>
-          <button class="rb" data-v="1">1时</button>
-          <button class="rb" data-v="3">3时</button>
-          <button class="rb" data-v="6">6时</button>
-          <button class="rb" data-v="12">12时</button>
-          <button class="rb" data-v="24">24时</button>
-        </div>
-        <span class="rh-lab">每天最多</span>
-        <div class="rh-lim" data-lim="secretInvite">
-          <button class="rb" data-v="999">不限</button>
-          <button class="rb" data-v="1">1次</button>
-          <button class="rb" data-v="2">2次</button>
-          <button class="rb" data-v="3">3次</button>
-        </div>
-      </div>
-    </div>
     <div class="blk">
       <h3>測 試</h3>
       <p class="tip">開啓後，相伴的說話間隔縮到秒級，方便看效果。<br>「測試寫信」開啓後，郵筒延遲縮到 3~8 秒。</p>
@@ -3188,7 +3143,6 @@ var Store={
         secretNMin:3,secretNMax:5,
         secretQuoteRatio:10,
         secretHimOpenRatio:30,
-        secretInviteRatio:30,
         recMode:'seq',
         testMode:false,
         testMail:false,
@@ -3203,8 +3157,7 @@ var Store={
           driftPost:{cd:12,limit:2,lastAt:0,countDay:'',count:0},
           driftComment:{cd:6,limit:3,lastAt:0,countDay:'',count:0},
           driftReplyComment:{cd:6,limit:3,lastAt:0,countDay:'',count:0},
-          secretOpen:{cd:6,limit:999,lastAt:0,countDay:'',count:0},
-          secretInvite:{cd:6,limit:999,lastAt:0,countDay:'',count:0}
+          secretOpen:{cd:6,limit:999,lastAt:0,countDay:'',count:0}
         },
         himJournal:{lastDay:''}
       };},
@@ -3270,7 +3223,7 @@ var Store={
     if(typeof prof.secretCallHim!=='string') prof.secretCallHim='';
     if(typeof prof.secretCallMe!=='string') prof.secretCallMe='';
     var st=this.cache.set;
-    var numKeys=['picRatio','ripRatio','recRatio','quoteRatio','clipRatio','cpInviteRatio','diaryRatio','gbRatio','albumRatio','driftPostRatio','driftCommentRatio','driftReplyCommentRatio','driftCommentPicRatio','secretRatioCards','secretRatioWhispers','secretRatioPics','secretRatioIntim','secretDMin','secretDMax','secretNMin','secretNMax','secretQuoteRatio','secretHimOpenRatio','secretInviteRatio'];
+    var numKeys=['picRatio','ripRatio','recRatio','quoteRatio','clipRatio','cpInviteRatio','diaryRatio','gbRatio','albumRatio','driftPostRatio','driftCommentRatio','driftReplyCommentRatio','driftCommentPicRatio','secretRatioCards','secretRatioWhispers','secretRatioPics','secretRatioIntim','secretDMin','secretDMax','secretNMin','secretNMax','secretQuoteRatio','secretHimOpenRatio'];
     for(var nk=0;nk<numKeys.length;nk++){ if(typeof st[numKeys[nk]]!=='number') st[numKeys[nk]]=(nk<13?10:30); }
     if(typeof st.secretRatioCards!=='number') st.secretRatioCards=30;
     if(typeof st.secretRatioWhispers!=='number') st.secretRatioWhispers=30;
@@ -3282,7 +3235,6 @@ var Store={
     if(typeof st.secretNMax!=='number') st.secretNMax=5;
     if(typeof st.secretQuoteRatio!=='number') st.secretQuoteRatio=10;
     if(typeof st.secretHimOpenRatio!=='number') st.secretHimOpenRatio=30;
-    if(typeof st.secretInviteRatio!=='number') st.secretInviteRatio=30;
     if(typeof st.driftCommentPicRatio!=='number') st.driftCommentPicRatio=30;
     if(typeof st.answerRatio!=='number') st.answerRatio=70;
     if(st.answerRatio===90 && st._answeredFixed!==true){ st.answerRatio=70; st._answeredFixed=true; }
@@ -3303,7 +3255,7 @@ var Store={
     if(typeof st.companion.freq!=='string') st.companion.freq='normal';
     if(typeof st.companion.startAt!=='number') st.companion.startAt=0;
     if(!Array.isArray(st.companion.customThings)) st.companion.customThings=[];
-    var _def={mail:{cd:12,limit:2},call:{cd:6,limit:0},cp:{cd:4,limit:0},diary:{cd:12,limit:1},gb:{cd:6,limit:3},album:{cd:12,limit:1},driftPost:{cd:12,limit:2},driftComment:{cd:6,limit:3},driftReplyComment:{cd:6,limit:3},secretOpen:{cd:6,limit:999},secretInvite:{cd:6,limit:999}};
+    var _def={mail:{cd:12,limit:2},call:{cd:6,limit:0},cp:{cd:4,limit:0},diary:{cd:12,limit:1},gb:{cd:6,limit:3},album:{cd:12,limit:1},driftPost:{cd:12,limit:2},driftComment:{cd:6,limit:3},driftReplyComment:{cd:6,limit:3},secretOpen:{cd:6,limit:999}};
     if(!st.rateLimits || typeof st.rateLimits!=='object'){
       st.rateLimits={};
       for(var rk0 in _def){ st.rateLimits[rk0]={cd:_def[rk0].cd,limit:_def[rk0].limit,lastAt:0,countDay:'',count:0}; }
@@ -3320,11 +3272,13 @@ var Store={
       }
       try{ delete st.rateLimits.driftIn; }catch(e){}
       try{ delete st.rateLimits.driftReply; }catch(e){}
+      try{ delete st.rateLimits.secretInvite; }catch(e){}
     }
     if(!st.himJournal || typeof st.himJournal!=='object') st.himJournal={lastDay:''};
     if(typeof st.himJournal.lastDay!=='string') st.himJournal.lastDay='';
     try{ delete st.driftInRatio; }catch(e){}
     try{ delete st.driftReplyRatio; }catch(e){}
+    try{ delete st.secretInviteRatio; }catch(e){}
     if(!this.cache.pics || !Array.isArray(this.cache.pics.pics)) this.cache.pics={v:1,pics:[]};
     var rp=this.cache.ripples;
     if(!rp || !Array.isArray(rp.mine) || !Array.isArray(rp.hers)) this.cache.ripples={v:1,mine:[],hers:[]};
@@ -3467,10 +3421,10 @@ function _secretMsgs(){ if(!Store.cache.secret||!Array.isArray(Store.cache.secre
 function _secretMeta(){ var s=Store.cache.secret; if(!s) s=Store.cache.secret={v:1,msgs:[],meta:{firstDay:'',openDay:''},archives:[]}; if(!s.meta||typeof s.meta!=='object') s.meta={firstDay:'',openDay:''}; if(typeof s.meta.firstDay!=='string') s.meta.firstDay=''; if(typeof s.meta.openDay!=='string') s.meta.openDay=''; if(!Array.isArray(s.archives)) s.archives=[]; return s.meta; }
 function _secretArchives(){ var s=Store.cache.secret; if(!s) s=Store.cache.secret={v:1,msgs:[],meta:{firstDay:'',openDay:''},archives:[]}; if(!Array.isArray(s.archives)) s.archives=[]; return s.archives; }
 function _set(){
-  var d={v:1,dMin:15,dMax:30,picRatio:10,ripRatio:10,recRatio:10,quoteRatio:10,clipRatio:10,cpInviteRatio:10,diaryRatio:10,gbRatio:10,albumRatio:10,driftPostRatio:10,driftCommentRatio:10,driftReplyCommentRatio:10,driftCommentPicRatio:30,answerRatio:70,callHangMin:2,callHangMax:5,callInRatio:10,mailMin:5,mailMax:8,mailInRatio:10,mailSnapRatio:10,mailPicRatio:20,secretRatioCards:30,secretRatioWhispers:30,secretRatioPics:5,secretRatioIntim:3,secretDMin:15,secretDMax:30,secretNMin:3,secretNMax:5,secretQuoteRatio:10,secretHimOpenRatio:30,secretInviteRatio:30,recMode:'seq',testMode:false,testMail:false,companion:{active:false,thing:'',freq:'normal',startAt:0,customThings:[]},rateLimits:{mail:{cd:12,limit:2,lastAt:0,countDay:'',count:0},call:{cd:6,limit:0,lastAt:0,countDay:'',count:0},cp:{cd:4,limit:0,lastAt:0,countDay:'',count:0},diary:{cd:12,limit:1,lastAt:0,countDay:'',count:0},gb:{cd:6,limit:3,lastAt:0,countDay:'',count:0},album:{cd:12,limit:1,lastAt:0,countDay:'',count:0},driftPost:{cd:12,limit:2,lastAt:0,countDay:'',count:0},driftComment:{cd:6,limit:3,lastAt:0,countDay:'',count:0},driftReplyComment:{cd:6,limit:3,lastAt:0,countDay:'',count:0},secretOpen:{cd:6,limit:999,lastAt:0,countDay:'',count:0},secretInvite:{cd:6,limit:999,lastAt:0,countDay:'',count:0}},himJournal:{lastDay:''}};
+  var d={v:1,dMin:15,dMax:30,picRatio:10,ripRatio:10,recRatio:10,quoteRatio:10,clipRatio:10,cpInviteRatio:10,diaryRatio:10,gbRatio:10,albumRatio:10,driftPostRatio:10,driftCommentRatio:10,driftReplyCommentRatio:10,driftCommentPicRatio:30,answerRatio:70,callHangMin:2,callHangMax:5,callInRatio:10,mailMin:5,mailMax:8,mailInRatio:10,mailSnapRatio:10,mailPicRatio:20,secretRatioCards:30,secretRatioWhispers:30,secretRatioPics:5,secretRatioIntim:3,secretDMin:15,secretDMax:30,secretNMin:3,secretNMax:5,secretQuoteRatio:10,secretHimOpenRatio:30,recMode:'seq',testMode:false,testMail:false,companion:{active:false,thing:'',freq:'normal',startAt:0,customThings:[]},rateLimits:{mail:{cd:12,limit:2,lastAt:0,countDay:'',count:0},call:{cd:6,limit:0,lastAt:0,countDay:'',count:0},cp:{cd:4,limit:0,lastAt:0,countDay:'',count:0},diary:{cd:12,limit:1,lastAt:0,countDay:'',count:0},gb:{cd:6,limit:3,lastAt:0,countDay:'',count:0},album:{cd:12,limit:1,lastAt:0,countDay:'',count:0},driftPost:{cd:12,limit:2,lastAt:0,countDay:'',count:0},driftComment:{cd:6,limit:3,lastAt:0,countDay:'',count:0},driftReplyComment:{cd:6,limit:3,lastAt:0,countDay:'',count:0},secretOpen:{cd:6,limit:999,lastAt:0,countDay:'',count:0}},himJournal:{lastDay:''}};
   if(!Store.cache.set||typeof Store.cache.set!=='object') Store.cache.set=d;
   var s=Store.cache.set;
-  var numKeys=['picRatio','ripRatio','recRatio','quoteRatio','clipRatio','cpInviteRatio','diaryRatio','gbRatio','albumRatio','driftPostRatio','driftCommentRatio','driftReplyCommentRatio','driftCommentPicRatio','secretRatioCards','secretRatioWhispers','secretRatioPics','secretRatioIntim','secretDMin','secretDMax','secretNMin','secretNMax','secretQuoteRatio','secretHimOpenRatio','secretInviteRatio'];
+  var numKeys=['picRatio','ripRatio','recRatio','quoteRatio','clipRatio','cpInviteRatio','diaryRatio','gbRatio','albumRatio','driftPostRatio','driftCommentRatio','driftReplyCommentRatio','driftCommentPicRatio','secretRatioCards','secretRatioWhispers','secretRatioPics','secretRatioIntim','secretDMin','secretDMax','secretNMin','secretNMax','secretQuoteRatio','secretHimOpenRatio'];
   for(var nk=0;nk<numKeys.length;nk++){ if(typeof s[numKeys[nk]]!=='number') s[numKeys[nk]]=(nk<13?10:30); }
   if(typeof s.secretRatioCards!=='number') s.secretRatioCards=30;
   if(typeof s.secretRatioWhispers!=='number') s.secretRatioWhispers=30;
@@ -3482,7 +3436,6 @@ function _set(){
   if(typeof s.secretNMax!=='number') s.secretNMax=5;
   if(typeof s.secretQuoteRatio!=='number') s.secretQuoteRatio=10;
   if(typeof s.secretHimOpenRatio!=='number') s.secretHimOpenRatio=30;
-  if(typeof s.secretInviteRatio!=='number') s.secretInviteRatio=30;
   if(typeof s.driftCommentPicRatio!=='number') s.driftCommentPicRatio=30;
   if(typeof s.answerRatio!=='number') s.answerRatio=70;
   if(typeof s.callHangMin!=='number') s.callHangMin=2;
@@ -3502,7 +3455,7 @@ function _set(){
   if(typeof s.companion.freq!=='string') s.companion.freq='normal';
   if(typeof s.companion.startAt!=='number') s.companion.startAt=0;
   if(!Array.isArray(s.companion.customThings)) s.companion.customThings=[];
-  if(!s.rateLimits || typeof s.rateLimits!=='object') s.rateLimits={mail:{cd:12,limit:2,lastAt:0,countDay:'',count:0},call:{cd:6,limit:0,lastAt:0,countDay:'',count:0},cp:{cd:4,limit:0,lastAt:0,countDay:'',count:0},diary:{cd:12,limit:1,lastAt:0,countDay:'',count:0},gb:{cd:6,limit:3,lastAt:0,countDay:'',count:0},album:{cd:12,limit:1,lastAt:0,countDay:'',count:0},driftPost:{cd:12,limit:2,lastAt:0,countDay:'',count:0},driftComment:{cd:6,limit:3,lastAt:0,countDay:'',count:0},driftReplyComment:{cd:6,limit:3,lastAt:0,countDay:'',count:0},secretOpen:{cd:6,limit:999,lastAt:0,countDay:'',count:0},secretInvite:{cd:6,limit:999,lastAt:0,countDay:'',count:0}};
+  if(!s.rateLimits || typeof s.rateLimits!=='object') s.rateLimits={mail:{cd:12,limit:2,lastAt:0,countDay:'',count:0},call:{cd:6,limit:0,lastAt:0,countDay:'',count:0},cp:{cd:4,limit:0,lastAt:0,countDay:'',count:0},diary:{cd:12,limit:1,lastAt:0,countDay:'',count:0},gb:{cd:6,limit:3,lastAt:0,countDay:'',count:0},album:{cd:12,limit:1,lastAt:0,countDay:'',count:0},driftPost:{cd:12,limit:2,lastAt:0,countDay:'',count:0},driftComment:{cd:6,limit:3,lastAt:0,countDay:'',count:0},driftReplyComment:{cd:6,limit:3,lastAt:0,countDay:'',count:0},secretOpen:{cd:6,limit:999,lastAt:0,countDay:'',count:0}};
   if(!s.himJournal || typeof s.himJournal!=='object') s.himJournal={lastDay:''};
   return s;
 }
@@ -4183,7 +4136,7 @@ function maybeHimJournalDaily(){
   }
 }
 
-/* 封面还没进入时，不触发祂的主动行为（问题1） */
+/* 封面还没进入时，不触发祂的主动行为 */
 function coverStillOn(){
   var cv=document.getElementById('cover');
   if(!cv) return false;
@@ -4202,10 +4155,9 @@ function tryHimActiveOnce(){
   if(rlCheck('gb'))         pool.push({key:'gb',         run:maybeHimGuestbook});
   if(rlCheck('album'))      pool.push({key:'album',      run:maybeHimAlbum});
   if(rlCheck('driftPost'))  pool.push({key:'driftPost',  run:maybeHimDriftPost});
-  if(rlCheck('secretInvite')) pool.push({key:'secretInvite', run:maybeSecretInvite});
   if(!pool.length) return;
   var pick=pool[Math.floor(Math.random()*pool.length)];
-  var probKey={call:'callInRatio',cp:'cpInviteRatio',mail:'mailInRatio',diary:'diaryRatio',gb:'gbRatio',album:'albumRatio',driftPost:'driftPostRatio',secretInvite:'secretInviteRatio'}[pick.key];
+  var probKey={call:'callInRatio',cp:'cpInviteRatio',mail:'mailInRatio',diary:'diaryRatio',gb:'gbRatio',album:'albumRatio',driftPost:'driftPostRatio'}[pick.key];
   var s=S.set();
   var prob=Math.max(0,Math.min(100, s[probKey]|0));
   if(Math.random()*100 >= prob) return;
@@ -5039,6 +4991,7 @@ function openMailView(id){
   document.getElementById('mailViewLayer').classList.add('on');
   startMailTick();
 }
+/* 问题2：预计时间跟着「最后在路上、等祂回」的那封信走 */
 function renderMailView(m){
   var box=document.getElementById('mailViewBody');
   var h='';
@@ -5052,6 +5005,9 @@ function renderMailView(m){
   if(m.pic){ h+='<div class="lt-pic"><img src="'+m.pic+'" data-mimg="1" alt=""></div>'; }
   h+='<div class="lt-sign">'+esc(signName1)+'</div>';
   h+='<div class="lt-date">'+mingGuoDate(m.at)+'</div>';
+  if(m.from==='me'){
+    h+=mailArriveLine(m);
+  }
   h+='</div>';
   if(m.myReply){
     var toName2 = nameHim();
@@ -5078,8 +5034,7 @@ function renderMailView(m){
   }else if(m.status==='waiting'){
     if(m.from==='him' && !m.myReply){
       h+='<div class="empty" style="padding:20px 0">信已到，等你回覆。</div>';
-    }else if(m.from==='me'){
-      h+=mailArriveLine(m);
+    }else{
       h+='<div class="empty" style="padding:20px 0">信在路上，還沒到。</div>';
     }
   }
@@ -5158,7 +5113,7 @@ document.getElementById('btnResetSettings').addEventListener('click',function(){
   }).catch(function(e){ toast('恢復失敗：'+(e&&e.message||e)); });
 });
 
-/* ===== 错误日志弹窗 + 自检弹窗（需求1） ===== */
+/* ===== 错误日志弹窗 ===== */
 function openErrLayer(){
   var body=document.getElementById('errBody');
   var e=_errors();
@@ -5224,125 +5179,125 @@ function fallbackCopy(t){
   }catch(e){ toast('複製失敗'); }
 }
 
+/* ===== 自检（以查 bug 为核心，带进度条） ===== */
 var selfTestRunning=false;
 function runSelfTest(){
   if(selfTestRunning) return;
   selfTestRunning=true;
-  var res=[];
-  function add(level,name,note){ res.push({level:level,name:name,note:note||''}); }
+  var body=document.getElementById('selfTestBody');
+  body.innerHTML='<div class="diag-prog"><div class="dp-label" id="stLabel">正在自檢…</div><div class="dp-bar"><div class="dp-fill" id="stFill"></div></div></div>';
+  var label=document.getElementById('stLabel');
+  var fill=document.getElementById('stFill');
 
-  /* 1. OPFS 存储 */
-  try{
-    if(Store.dir){ add('ok','OPFS 目錄','已就緒'); }
-    else{ add('err','OPFS 目錄','未初始化'); }
-  }catch(e){ add('err','OPFS 目錄',String(e&&e.message||e)); }
-
-  /* 2. 各 JSON 文件 */
-  var missing=[], badStructure=[];
-  for(var k in FILES){
-    var obj=Store.cache[k];
-    if(!obj || typeof obj!=='object'){ missing.push(FILES[k]); }
-    else if(typeof obj.v!=='number' && k!=='secret'){ /* secret 也应有 v */
-      badStructure.push(FILES[k]);
-    }
-  }
-  if(missing.length){ add('err','檔案齊全','缺少：'+missing.join('、')); }
-  else{ add('ok','檔案齊全',Object.keys(FILES).length+' 個檔案均在'); }
-  if(badStructure.length){ add('warn','版本欄位','以下缺 v：'+badStructure.join('、')); }
-  else{ add('ok','版本欄位','均含 v 欄位'); }
-
-  /* 3. 数据完整性 */
-  var arrChecks=[
-    ['字卡', S.cards()],
-    ['聊天', S.msgs()],
-    ['畫帖', S.pics()],
-    ['唱片', S.records()],
-    ['郵筒', S.mail().mails],
-    ['漂流', S.drift().posts],
-    ['日誌', S.diary().items],
-    ['留言板', S.guestbook().msgs],
-    ['私語匣', S.whispers()],
-    ['剪報', S.clips().clips],
-    ['相伴', S.companion().sessions],
-    ['秘聞', S.secretMsgs()],
-    ['錯誤日誌', S.errors().items]
+  /* 每一项：{name, check} check 返回 {level, note} */
+  var checks=[
+    {name:'OPFS 存儲', check:function(){
+      if(Store.dir) return {level:'ok', note:'可讀寫'};
+      return {level:'err', note:'未初始化'};
+    }},
+    {name:'運行時錯誤', check:function(){
+      var e=_errors();
+      var errs=(e.items||[]).filter(function(x){ return x.type==='error'||x.type==='rejection'; });
+      if(errs.length) return {level:'err', note:'有 '+errs.length+' 條運行時錯誤（見錯誤日誌）'};
+      return {level:'ok', note:'無'};
+    }},
+    {name:'數據檔案齊全', check:function(){
+      var missing=[];
+      for(var k in FILES){ if(!Store.cache[k] || typeof Store.cache[k]!=='object') missing.push(FILES[k]); }
+      if(missing.length) return {level:'err', note:'缺少：'+missing.join('、')};
+      return {level:'ok', note:Object.keys(FILES).length+' 個檔案均在'};
+    }},
+    {name:'數據結構', check:function(){
+      var bad=[];
+      var arrs=[
+        ['字卡',S.cards()],['聊天',S.msgs()],['畫帖',S.pics()],['唱片',S.records()],
+        ['郵筒',S.mail().mails],['漂流',S.drift().posts],['日誌',S.diary().items],
+        ['留言板',S.guestbook().msgs],['私語匣',S.whispers()],['剪報',S.clips().clips],
+        ['相伴',S.companion().sessions],['秘聞',S.secretMsgs()],['錯誤日誌',S.errors().items]
+      ];
+      for(var i=0;i<arrs.length;i++){ if(!Array.isArray(arrs[i][1])) bad.push(arrs[i][0]); }
+      if(bad.length) return {level:'err', note:'非陣列：'+bad.join('、')};
+      return {level:'ok', note:'各清單均為陣列'};
+    }},
+    {name:'相冊引用', check:function(){
+      var al=S.album();
+      var picIds={}; var pics=S.pics();
+      for(var pi=0;pi<pics.length;pi++) picIds[pics[pi].id]=1;
+      var badRef=0;
+      for(var ri=0;ri<al.refs.length;ri++){
+        var ref=al.refs[ri];
+        if(ref.kind==='pics'){ if(!picIds[ref.id]) badRef++; }
+        else if(ref.kind==='upload'){ if(!ref.data) badRef++; }
+        else if(ref.kind==='chat'){ if(!ref.data) badRef++; }
+      }
+      if(badRef) return {level:'warn', note:'有 '+badRef+' 條無效引用'};
+      return {level:'ok', note:'引用有效'};
+    }},
+    {name:'聊天時間欄位', check:function(){
+      var ms=S.msgs(), bad=0;
+      for(var i=0;i<ms.length;i++){
+        if(ms[i].who!=='extra' && (typeof ms[i].at!=='number' || ms[i].at<=0)) bad++;
+        if(ms[i].who==='wait' && (typeof ms[i].dueAt!=='number')) bad++;
+      }
+      if(bad) return {level:'warn', note:'有 '+bad+' 條異常'};
+      return {level:'ok', note:'正常'};
+    }},
+    {name:'設置範圍', check:function(){
+      var s=S.set();
+      var bad=[];
+      var ratioKeys=['picRatio','ripRatio','recRatio','quoteRatio','clipRatio','cpInviteRatio','diaryRatio','gbRatio','albumRatio','driftPostRatio','driftCommentRatio','driftReplyCommentRatio','driftCommentPicRatio','answerRatio','callInRatio','mailInRatio','mailSnapRatio','mailPicRatio','secretHimOpenRatio','secretQuoteRatio'];
+      for(var si=0;si<ratioKeys.length;si++){
+        var v=s[ratioKeys[si]];
+        if(typeof v!=='number' || v<0 || v>100) bad.push(ratioKeys[si]);
+      }
+      if(bad.length) return {level:'warn', note:'越界：'+bad.join('、')};
+      return {level:'ok', note:'均在 0~100'};
+    }},
+    {name:'時延範圍', check:function(){
+      var s=S.set();
+      if(typeof s.dMin==='number' && typeof s.dMax==='number' && s.dMin>s.dMax) return {level:'warn', note:'譯電最快大於最慢'};
+      if(typeof s.mailMin==='number' && typeof s.mailMax==='number' && s.mailMin>s.mailMax) return {level:'warn', note:'郵筒最快大於最慢'};
+      return {level:'ok', note:'正常'};
+    }},
+    {name:'DOM 關鍵元素', check:function(){
+      var needIds=['paper','flow','inp','send','navbar','cover','secretPage','secretFlow','setPage'];
+      var miss=[];
+      for(var d=0;d<needIds.length;d++){ if(!document.getElementById(needIds[d])) miss.push(needIds[d]); }
+      if(miss.length) return {level:'err', note:'缺少：'+miss.join('、')};
+      return {level:'ok', note:'完整'};
+    }},
+    {name:'待處理譯電', check:function(){
+      var pk=Object.keys(S.pendings||{});
+      if(pk.length) return {level:'warn', note:'有 '+pk.length+' 條等待中'};
+      return {level:'ok', note:'無'};
+    }},
+    {name:'定時器', check:function(){
+      var bad=[];
+      for(var k in Store.timers){ if(!Store.timers[k]) bad.push(k); }
+      if(bad.length) return {level:'warn', note:'異常定時器：'+bad.join('、')};
+      return {level:'ok', note:'正常'};
+    }}
   ];
-  var badArr=[];
-  for(var a=0;a<arrChecks.length;a++){
-    if(!Array.isArray(arrChecks[a][1])){ badArr.push(arrChecks[a][0]); }
-  }
-  if(badArr.length){ add('err','資料完整性','非陣列：'+badArr.join('、')); }
-  else{ add('ok','資料完整性','各清單均為陣列'); }
 
-  /* 4. 引用有效性（相冊 refs） */
-  var al=S.album();
-  var picIds={}; var pics=S.pics();
-  for(var pi=0;pi<pics.length;pi++) picIds[pics[pi].id]=1;
-  var badRef=0;
-  for(var ri=0;ri<al.refs.length;ri++){
-    var ref=al.refs[ri];
-    if(ref.kind==='pics'){ if(!picIds[ref.id]) badRef++; }
-    else if(ref.kind==='upload'){ if(!ref.data) badRef++; }
-    else if(ref.kind==='chat'){ if(!ref.data) badRef++; }
-  }
-  if(badRef){ add('warn','相冊引用','有 '+badRef+' 條無效引用'); }
-  else{ add('ok','相冊引用','引用有效'); }
-
-  /* 5. 时间字段 */
-  var ms=S.msgs(), badTime=0;
-  for(var mi=0;mi<ms.length;mi++){
-    if(ms[mi].who!=='extra' && (typeof ms[mi].at!=='number' || ms[mi].at<=0)) badTime++;
-    if(ms[mi].who==='wait' && (typeof ms[mi].dueAt!=='number')) badTime++;
-  }
-  if(badTime){ add('warn','聊天時間欄位','有 '+badTime+' 條異常'); }
-  else{ add('ok','聊天時間欄位','正常'); }
-
-  /* 6. 设置范围 */
-  var s=S.set();
-  var badSet=[];
-  var ratioKeys=['picRatio','ripRatio','recRatio','quoteRatio','clipRatio','cpInviteRatio','diaryRatio','gbRatio','albumRatio','driftPostRatio','driftCommentRatio','driftReplyCommentRatio','driftCommentPicRatio','answerRatio','callInRatio','mailInRatio','mailSnapRatio','mailPicRatio','secretHimOpenRatio','secretInviteRatio','secretQuoteRatio'];
-  for(var si=0;si<ratioKeys.length;si++){
-    var v=s[ratioKeys[si]];
-    if(typeof v!=='number' || v<0 || v>100) badSet.push(ratioKeys[si]);
-  }
-  if(badSet.length){ add('warn','設置範圍','越界：'+badSet.join('、')); }
-  else{ add('ok','設置範圍','均在 0~100'); }
-  if(typeof s.dMin==='number' && typeof s.dMax==='number' && s.dMin>s.dMax){ add('warn','譯電時延','最快大於最慢'); }
-  else if(typeof s.mailMin==='number' && typeof s.mailMax==='number' && s.mailMin>s.mailMax){ add('warn','郵筒時延','最快大於最慢'); }
-  else{ add('ok','時延範圍','正常'); }
-
-  /* 7. 存储用量 */
-  try{
-    if(navigator.storage && navigator.storage.estimate){
-      navigator.storage.estimate().then(function(est){
-        var used=est.usage||0, quota=est.quota||0;
-        var usedMB=(used/1048576).toFixed(2);
-        var note=(quota? ('已用 '+usedMB+' MB / 配額 '+(quota/1048576).toFixed(0)+' MB') : ('已用 '+usedMB+' MB'));
-        add('ok','存儲用量',note);
-        renderSelfTest(res);
-      },function(){
-        add('warn','存儲用量','無法讀取');
-        renderSelfTest(res);
-      });
+  var results=[];
+  var idx=0;
+  function step(){
+    if(idx>=checks.length){
+      renderSelfTest(results);
       return;
-    }else{
-      add('warn','存儲用量','瀏覽器不支援');
     }
-  }catch(e){ add('warn','存儲用量',String(e&&e.message||e)); }
-
-  /* 8. DOM 关键元素 */
-  var needIds=['paper','flow','inp','send','navbar','cover','secretPage','secretFlow','setPage'];
-  var missDom=[];
-  for(var d=0;d<needIds.length;d++){ if(!document.getElementById(needIds[d])) missDom.push(needIds[d]); }
-  if(missDom.length){ add('err','關鍵元素','缺少：'+missDom.join('、')); }
-  else{ add('ok','關鍵元素','完整'); }
-
-  /* 9. 待處理任務 */
-  var pendKeys=Object.keys(S.pendings||{});
-  if(pendKeys.length){ add('warn','待處理譯電','有 '+pendKeys.length+' 條等待中'); }
-  else{ add('ok','待處理譯電','無'); }
-
-  renderSelfTest(res);
+    var c=checks[idx];
+    var r;
+    try{ r=c.check()||{level:'ok',note:''}; }
+    catch(err){ r={level:'err', note:String(err&&err.message||err)}; }
+    results.push({level:r.level, name:c.name, note:r.note||''});
+    idx++;
+    var pct=Math.round(idx*100/checks.length);
+    if(label) label.textContent='正在自檢… '+idx+'/'+checks.length;
+    if(fill) fill.style.width=pct+'%';
+    setTimeout(step, 60);
+  }
+  setTimeout(step, 60);
 }
 function renderSelfTest(res){
   selfTestRunning=false;
@@ -5360,7 +5315,7 @@ function renderSelfTest(res){
     if(it.note){ h+='<div class="dc-note">'+esc(it.note)+'</div>'; }
     h+='</div>';
   }
-  h='<div class="diag-chk"><div class="dc-top"><span class="dc-mark ok">✓</span><span class="dc-name">自檢完成：正常 '+okN+' 項 · 警告 '+warnN+' 項 · 錯誤 '+errN+' 項</span></div></div>'+h;
+  h='<div class="diag-chk"><div class="dc-top"><span class="dc-mark '+(errN?'err':(warnN?'warn':'ok'))+'">'+(errN?'✗':(warnN?'!':'✓'))+'</span><span class="dc-name">自檢完成：正常 '+okN+' 項 · 警告 '+warnN+' 項 · 錯誤 '+errN+' 項</span></div></div>'+h;
   body.innerHTML=h;
 }
 document.getElementById('btnSelfTest').addEventListener('click',function(){
@@ -7096,7 +7051,7 @@ function bindProfile(){
   document.getElementById('secretCallMe').addEventListener('input',function(){
     var p=S.profile(); p.secretCallMe=this.value; Store.touch('profile'); Store.flush(); renderSecretMasthead();
   });
-  ['secretRatioCards','secretRatioWhispers','secretRatioPics','secretRatioIntim','secretDMin','secretDMax','secretNMin','secretNMax','secretQuoteRatio','secretHimOpenRatio','secretInviteRatio'].forEach(function(id){
+  ['secretRatioCards','secretRatioWhispers','secretRatioPics','secretRatioIntim','secretDMin','secretDMax','secretNMin','secretNMax','secretQuoteRatio','secretHimOpenRatio'].forEach(function(id){
     var el=document.getElementById(id); if(!el) return;
     el.addEventListener('change',function(){
       var v=parseInt(this.value,10); if(isNaN(v)) v=0;
@@ -7240,7 +7195,6 @@ function renderSet(){
   document.getElementById('secretNMax').value=s.secretNMax;
   document.getElementById('secretQuoteRatio').value=s.secretQuoteRatio;
   document.getElementById('secretHimOpenRatio').value=s.secretHimOpenRatio;
-  document.getElementById('secretInviteRatio').value=s.secretInviteRatio;
   renderProfile(); renderBackground(); renderRatio(); renderCallHang(); renderMailSet(); renderTestSw();
   renderRhythm();
 }
@@ -7285,7 +7239,8 @@ function renderCompanion(){
   document.getElementById('cpAvaMe').innerHTML = p.me.avatar ? '<img src="'+p.me.avatar+'" alt="">' : '我';
   document.getElementById('cpName').textContent = p.him.call || '祂';
   document.getElementById('cpThing').textContent = CP.thing || '';
-  if(CP.active) win.classList.add('on'); else win.classList.remove('on');
+  /* 问题1补漏：封面时即使 CP.active 也不显示陪伴窗 */
+  if(CP.active && !coverStillOn()) win.classList.add('on'); else win.classList.remove('on');
   cpTick();
 }
 function startCompanion(thing, freq){
@@ -7685,69 +7640,6 @@ function closeSecretPage(){
   showNav(true);
 }
 
-/* 邀请弹窗 */
-var secretPendingInvite=null;
-var SECRET_INVITE_MAINS=[
-  '想 和 你 到 秘聞 聊 聊',
-  '想 和 你 去 秘聞 待 一 會',
-  '想 和 你 去 秘聞 說 點 別 的',
-  '想 和 你 換 個 地 方 聊',
-  '想 和 你 到 秘 報 說 幾 句'
-];
-var SECRET_INVITE_YES=['好','去','進 去','聽 祂 說'];
-var SECRET_INVITE_NO=['不 了','不 去','以 後 再 說'];
-function showSecretInvite(fromWho){
-  /* 封面还没进入时，不弹秘闻邀请（问题1） */
-  if(coverStillOn()) return;
-  var main=SECRET_INVITE_MAINS[Math.floor(Math.random()*SECRET_INVITE_MAINS.length)];
-  var yesBtn=SECRET_INVITE_YES[Math.floor(Math.random()*SECRET_INVITE_YES.length)];
-  var noBtn=SECRET_INVITE_NO[Math.floor(Math.random()*SECRET_INVITE_NO.length)];
-  var ch=callHim();
-  var hdEl=document.getElementById('secretInviteHd');
-  var mainEl=document.getElementById('secretInviteMain');
-  if(fromWho==='him'){
-    hdEl.textContent=ch+' 想 邀 你 進 秘 報';
-    mainEl.textContent=ch+' '+main;
-  }else{
-    hdEl.textContent='你 想 邀 '+ch+' 去 秘 聞';
-    mainEl.textContent='你 想 邀 '+ch+' 去 秘 聞';
-  }
-  document.getElementById('secretInviteYes').textContent=yesBtn;
-  document.getElementById('secretInviteNo').textContent=noBtn;
-  secretPendingInvite={from:fromWho};
-  document.getElementById('secretInviteLayer').classList.add('on');
-}
-document.getElementById('secretInviteNo').addEventListener('click',function(){
-  secretPendingInvite=null;
-  document.getElementById('secretInviteLayer').classList.remove('on');
-});
-document.getElementById('secretInviteYes').addEventListener('click',function(){
-  var inv=secretPendingInvite; secretPendingInvite=null;
-  document.getElementById('secretInviteLayer').classList.remove('on');
-  if(!inv) return;
-  if(inv.from==='him'){
-    var meta=S.secretMeta();
-    meta.openDay=dayKey(Date.now());
-    Store.touch('secret'); Store.flush();
-    openSecretPage();
-  }else{
-    toast('邀 請 中…');
-    var waitMs=(15+Math.random()*15)*1000;
-    setTimeout(function(){
-      var prob=S.set().answerRatio|0;
-      if(Math.random()*100 < prob){
-        var meta2=S.secretMeta();
-        meta2.openDay=dayKey(Date.now());
-        Store.touch('secret'); Store.flush();
-        toast('祂 答 應 了');
-        openSecretPage();
-      }else{
-        toast('祂 沒 答 應');
-      }
-    }, waitMs);
-  }
-});
-
 /* 秘聞歸檔模式 */
 var SECRET_ARCH={ on:false, picked:{} };
 function updateSecretArchN(){
@@ -8028,31 +7920,11 @@ function startSecretHeartbeat(){
     secretHimOpenOnce();
   }, 25*60*1000);
 }
-
-/* 祂邀请我去秘聞 */
-function maybeSecretInvite(){
-  if(coverStillOn()) return;
-  if(document.visibilityState!=='visible') return;
-  if(document.getElementById('secretPage').classList.contains('on')) return;
-  var meta=S.secretMeta();
-  if(meta.openDay===dayKey(Date.now())) return;
-  var s=S.set();
-  var prob=Math.max(0,Math.min(100, s.secretInviteRatio|0));
-  if(Math.random()*100 >= prob) return;
-  showSecretInvite('him');
-}
   var SECS=['paper','secMail','secClip','secSpecial'];
 function showNav(v){ var nv=document.getElementById('navbar'); if(v) nv.classList.add('show'); else nv.classList.remove('show'); }
 function switchSec(id){
   if(id==='secret'){
-    var meta=S.secretMeta();
-    var today=dayKey(Date.now());
-    if(meta.openDay===today){
-      openSecretPage();
-      return;
-    }
-    if(document.getElementById('secretPage').classList.contains('on')) return;
-    showSecretInvite('me');
+    openSecretPage();
     return;
   }
   if(id==='driftPage'){
@@ -8109,7 +7981,7 @@ function openRipples(){
   document.getElementById('ripplesPage').classList.add('on'); renderRipples(); showNav(false);
 }
 function openRecords(){ closeAll(); recSetPicking(false); document.getElementById('recordsPage').classList.add('on'); renderRecords(); showNav(false); }
-function openSet(){ closeAll(); document.getElementById('setPage').classList.add('on'); renderSet(); renderTestSw(); showNav(false); }
+function openSet(){ closeAll(); document.getElementById('setPage').classList.add('on'); renderSet(); renderTestSw(); renderPersistState(); showNav(false); }
 function openArchivePage(){ closeAll(); document.getElementById('archivePage').classList.add('on'); archTab='paper'; renderArchList(); showNav(false); }
 function openCallsPage(){ closeAll(); document.getElementById('callsPage').classList.add('on'); renderCalls(); showNav(false); }
 function openCompanionLogPage(){ closeAll(); document.getElementById('companionLogPage').classList.add('on'); renderCompanionLog(); showNav(false); }
@@ -9121,7 +8993,8 @@ function playRecord(rec, together){
   a.addEventListener('ended',function(){ mpOnEnded(); });
   a.play().catch(function(){ toast('播放失敗，可能格式不支持'); });
   a.loop=false;
-  document.getElementById('miniPlayer').classList.add('on');
+  /* 问题1补漏：封面时即使开始播放，也不显示播放器 */
+  if(!coverStillOn()){ document.getElementById('miniPlayer').classList.add('on'); }
   mpRenderInfo(); mpRenderMode(); mpRenderPlay(); mpRenderTime(); updateListenBar();
 }
 function mpOnEnded(){
@@ -9366,7 +9239,8 @@ function callRender(){
     document.getElementById('callX').style.display='none';
     document.getElementById('callHangMini').style.display='none';
   }
-  win.classList.add('on');
+  /* 问题1补漏：封面时不显示通话窗 */
+  if(!coverStillOn()){ win.classList.add('on'); }
 }
 function callStartOut(){
   if(CALL.active) return;
@@ -9535,9 +9409,32 @@ document.addEventListener('visibilitychange',function(){
 });
 window.addEventListener('pagehide',function(){ Store.flush(); stopHeartbeat(); });
 
+/* ===== 问题5：申请持久化 + 印务显示状态 ===== */
+function requestPersist(){
+  try{
+    if(navigator.storage && navigator.storage.persist){
+      navigator.storage.persist().then(function(granted){
+        renderPersistState();
+      },function(){ renderPersistState(); });
+    }
+  }catch(e){}
+}
+function renderPersistState(){
+  var el=document.getElementById('persistState');
+  if(!el) return;
+  try{
+    if(!navigator.storage || !navigator.storage.persisted){ el.textContent='瀏覽器不支援持久化查詢'; return; }
+    navigator.storage.persisted().then(function(p){
+      el.textContent = p ? '已持久化 ✓（不會被自動清理）' : '未持久化（可能被自動清理，建議定期導出備份）';
+      el.style.color = p ? 'var(--green)' : 'var(--red)';
+    },function(){ el.textContent='無法讀取持久化狀態'; });
+  }catch(e){ el.textContent='無法讀取持久化狀態'; }
+}
+
 bindSet(); bindProfile(); bindRatio(); bindCallHang(); bindMailSet(); bindRhythm();
 Store.init().then(function(){
   MP.mode = S.set().recMode || 'seq';
+  requestPersist();
   rearmAll(); rearmMails(); rearmSecretAll();
   maybeHimJournalDaily();
   applyBackground();
@@ -9556,7 +9453,7 @@ Store.init().then(function(){
   renderMasthead(); renderFlow(); renderSet(); renderCards(); renderWhispers(); renderPics(); renderRipples(); renderIntimates(); renderRecords(); renderProfile(); renderBackground(); renderRatio(); renderCallHang(); renderMailSet();
   renderRhythm();
   renderCompanion(); renderTestSw(); renderArchList(); renderCalls(); renderCompanionLog(); renderClips(); renderMail(); renderTides(); renderDriftTop(); renderDriftPosts(); renderDiary(); renderAlbum(); renderJournal(); renderGuestbook();
-  renderSecretMasthead(); renderSecretFlow();
+  renderSecretMasthead(); renderSecretFlow(); renderPersistState();
   mpRenderMode(); mpRenderPlay();
   startHeartbeat();
   startSecretHeartbeat();
@@ -9566,7 +9463,7 @@ Store.init().then(function(){
   renderMasthead(); renderFlow(); renderSet(); renderCards(); renderWhispers(); renderPics(); renderRipples(); renderIntimates(); renderRecords(); renderProfile(); renderBackground(); renderRatio(); renderCallHang(); renderMailSet();
   renderRhythm();
   renderCompanion(); renderTestSw(); renderArchList(); renderCalls(); renderCompanionLog(); renderClips(); renderMail(); renderTides(); renderDriftTop(); renderDriftPosts(); renderDiary(); renderAlbum(); renderJournal(); renderGuestbook();
-  renderSecretMasthead(); renderSecretFlow();
+  renderSecretMasthead(); renderSecretFlow(); renderPersistState();
 });
 })();
 </script>
